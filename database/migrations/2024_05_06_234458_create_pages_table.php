@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('slug');
+            $table->json('content');
+            $table->boolean('is_home')->nullable()->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

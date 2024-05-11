@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('schedule_days', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->boolean('show')->default(true);
+            $table->integer('order');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Concerns\Enums\Status;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,11 +14,31 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            // Información general
+            $table->string('code');
+            $table->string('status')->nullable()->default(Status::PENDING_APPROVAL->value);
+            $table->integer('register_progress')->nullable()->default(0);
+            $table->integer('current_step')->nullable()->default(0);
+
             $table->string('name');
+            $table->string('last_name');
+            $table->string('business');
+            $table->string('economy');
+            $table->string('business_description');
+            $table->string('role');
+            $table->longText('biography');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('phone');
             $table->rememberToken();
+
+            // Información de participante (Opcional)
+            $table->string('attendee_name')->nullable()->default(null);
+            $table->string('attendee_email')->nullable()->default(null);
+            $table->boolean('send_copy_of_registration')->nullable()->default(false);
+            $table->boolean('accept_terms_and_conditions')->nullable()->default(false);
+
             $table->timestamps();
         });
 

@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('speakers', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('position')->nullable()->default(null);
+            $table->string('company')->nullable()->default(null);
+            $table->longText('biography')->nullable()->default(null);
+
+            $table->json('social_networks')->nullable()->default(null);
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

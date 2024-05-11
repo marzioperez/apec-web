@@ -1,0 +1,12 @@
+@import "fonts.css";
+@import "header.css";
+@import "steps.css";
+@import "inputs.css";
+@import "buttons.css";
+@import "common.css";
+@import "auth.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind utilities;

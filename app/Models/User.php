@@ -7,38 +7,44 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
-{
-    use HasFactory, Notifiable;
+class User extends Authenticatable {
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    use HasFactory, Notifiable;
     protected $fillable = [
+        'code',
+        'status',
+        'register_progress',
+        'current_step',
+
         'name',
+        'last_name',
+        'business',
+        'economy',
+        'business_description',
+        'role',
+        'biography',
         'email',
         'password',
+        'phone',
+
+        // Información de participante (Opcional)
+        'attendee_name',
+        'attendee_email',
+        'send_copy_of_registration',
+        'accept_terms_and_conditions'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
+    protected $casts = [
+        'send_copy_of_registration' => 'boolean',
+        'accept_terms_and_conditions' => 'boolean'
+    ];
+
+    protected function casts(): array {
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',

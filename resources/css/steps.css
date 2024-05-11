@@ -1,0 +1,35 @@
+.steps ol {
+    @apply flex items-center;
+}
+
+.steps ol li {
+    @apply relative pr-8 sm:pr-20;
+}
+
+.steps ol li .line-content {
+    @apply absolute inset-0 flex items-center;
+}
+
+.steps ol li .line {
+    @apply h-0.5 w-full bg-gray-200;
+}
+
+.steps ol li .bullet {
+    @apply relative flex h-10 w-10 items-center justify-center;
+}
+
+.steps ol li .bullet .step {
+    @apply relative z-20 text-white font-semibold text-xl;
+}
+
+.steps ol li .bullet::before {
+    @apply content-[''] absolute bg-gray-300 w-full h-full z-10 rotate-45;
+}
+
+.steps ol li.active .bullet::before {
+    @apply bg-primary;
+}
+
+.steps ol li.complete .bullet::before {
+    @apply bg-primary-dark;
+}
