@@ -139,4 +139,20 @@
             </div>
         </div>
     </div>
+
+    <x-modal name="modal-status-ok">
+        <x-slot:body>
+            <div class="flex justify-center mb-3">
+                <svg width="62" height="62" viewBox="0 0 82 82" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="13" y="15" width="46" height="42" fill="white"/>
+                    <path d="M41 0C18.3563 0 0 18.3563 0 41C0 63.6437 18.3563 82 41 82C63.6437 82 82 63.6437 82 41C82 18.3563 63.6437 0 41 0ZM58.5921 19.2037L67.1104 27.722L40.5045 54.3331L32.0362 62.7963L23.5179 54.278L14.8895 45.6445L23.3528 37.1812L31.9812 45.8146L58.5921 19.2037Z" fill="#009600"/>
+                </svg>
+            </div>
+            <div class="text-center">
+                <h1 class="font-bold text-lg mb-3">Thank you for your interest in attending the APEC CEO Summit 2024.</h1>
+                <div class="mb-5">Please check your inbox, where you will receive a confirmation of your expression of interest in this event.</div>
+                <a href="{{config('app.url')}}" class="btn btn-primary">Go home</a>
+            </div>
+        </x-slot:body>
+    </x-modal>
 </div>

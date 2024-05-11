@@ -1,9 +1,11 @@
 @import "fonts.css";
-@import "header.css";
 @import "steps.css";
 @import "inputs.css";
 @import "buttons.css";
+@import "header.css";
+@import "footer.css";
 @import "common.css";
+@import "modals.css";
 @import "auth.css";
 
 @tailwind base;

@@ -3,7 +3,9 @@
 namespace App\Livewire\Auth;
 
 use App\Actions\GenerateCode;
+use App\Mail\Register;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class SignUp extends Component {
@@ -73,6 +75,9 @@ class SignUp extends Component {
             'send_copy_of_registration' => $this->send_copy_of_registration,
             'accept_terms_and_conditions' => $this->accept_terms_and_conditions
         ]);
+        Mail::to($this->email)->send(new Register());
+        $this->reset();
+        $this->dispatch('open-modal', name: 'modal-status-ok');
     }
 
     public function render() {
