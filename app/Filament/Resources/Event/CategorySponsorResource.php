@@ -17,6 +17,7 @@ class CategorySponsorResource extends Resource {
 
     protected static ?string $model = CategorySponsor::class;
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationParentItem = 'Expositores';
     protected static ?string $navigationLabel = 'Categoría de expositores';
     protected static ?string $breadcrumb = 'Categoría de expositores';
     protected static ?string $modelLabel = 'categoría';

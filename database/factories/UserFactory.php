@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Actions\GenerateCode;
+use App\Concerns\Enums\Status;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -21,14 +23,34 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
-    {
+    public function definition(): array {
+        $name = fake()->firstName();
+        $last_name = fake()->firstName();
+        $code = GenerateCode::run($name, $last_name);
+
         return [
-            'name' => fake()->name(),
+            'code' => $code,
+            'status' => fake()->randomElement([
+                Status::PENDING_APPROVAL->value,
+                Status::CONFIRMED->value,
+                Status::DECLINED->value,
+            ]),
+            'name' => $name,
+            'last_name' => $last_name,
+            'business' => fake()->company,
+            'economy' => fake()->word,
+            'business_description' => fake()->paragraph,
+            'role' => fake()->companySuffix,
+            'biography' => fake()->paragraph,
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'password' => Hash::make($code),
+            'phone' => fake()->phoneNumber,
+
+            // Información de participante (Opcional)
+            'attendee_name' => fake()->name,
+            'attendee_email' => fake()->email,
+            'send_copy_of_registration' => fake()->boolean,
+            'accept_terms_and_conditions' => fake()->boolean
         ];
     }
 

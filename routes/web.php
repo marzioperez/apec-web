@@ -7,3 +7,4 @@ Route::get('/', function () {
 });
 
 Route::get('/sign-up', \App\Livewire\Auth\SignUp::class)->name('sign-up');
+Route::get('/sign-in', \App\Livewire\Auth\SignIn::class)->name('sign-in');
