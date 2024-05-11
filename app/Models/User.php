@@ -50,4 +50,8 @@ class User extends Authenticatable {
             'password' => 'hashed',
         ];
     }
+
+    public function getFullNameAttribute() :string {
+        return html_entity_decode(trim($this->name . ' ' . $this->last_name));
+    }
 }
