@@ -27,8 +27,7 @@ class ConfirmedUserResource extends Resource
     protected static ?string $navigationGroup = 'Evento';
     protected static ?int $navigationSort = 13;
 
-    public static function form(Form $form): Form
-    {
+    public static function form(Form $form): Form {
         return $form
             ->schema([
                 //
@@ -44,13 +43,7 @@ class ConfirmedUserResource extends Resource
             ->columns([
                 TextColumn::make('full_name')->label('Nombres y Apellidos'),
                 TextColumn::make('email')->label('Email'),
-                TextColumn::make('status')->label('Estado')->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        Status::CONFIRMED->value => 'success',
-                        Status::PENDING_APPROVAL->value => 'warning',
-                        Status::DECLINED->value => 'danger',
-                        default => 'primary'
-                    }),
+                TextColumn::make('register_progress')->label('Progreso')->badge()->color('info')->suffix('%'),
             ])
             ->filters([
                 //

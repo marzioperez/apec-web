@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Concerns\Enums\Status;
+use App\Concerns\Enums\Types;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +14,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void {
         $this->call(AdminSeeder::class);
-        User::factory(50)->create();
+        User::factory()->create([
+            'type' => Types::PARTICIPANT->value,
+            'status' => Status::CONFIRMED->value,
+            'name' => 'Jon',
+            'last_name' => 'Doe',
+            'email' => 'jondoe@gmail.com',
+            'code' => '123456',
+            'password' => bcrypt('123456')
+        ]);
+        User::factory(20)->create();
     }
 }

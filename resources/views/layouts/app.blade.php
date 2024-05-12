@@ -20,6 +20,7 @@
             {{ $slot }}
         </main>
         <x-footer />
+        <x-toast />
         @livewireScripts
         @vite('resources/js/app.js')
         @stack('scripts')

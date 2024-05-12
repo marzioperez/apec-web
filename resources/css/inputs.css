@@ -2,8 +2,13 @@ input[type=text],
 input[type=date],
 input[type=time],
 input[type=number],
-input[type=email] {
+input[type=email],
+input[type=password] {
     @apply block bg-white w-full rounded-lg border-0 px-3 py-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-300 focus:outline-0 focus:ring-2 focus:ring-inset focus:ring-primary-dark sm:text-sm sm:leading-6 !important;
+}
+
+input[type=checkbox] {
+    @apply h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary !important;
 }
 
 textarea {
@@ -15,11 +20,11 @@ input:disabled {
 }
 
 label {
-    @apply block text-sm font-medium leading-6;
+    @apply block text-sm font-normal leading-6;
 }
 
 select {
-    @apply block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-400 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 !important;
+    @apply block w-full rounded-md border-0 px-3 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-0 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 !important;
 }
 
 .form-check {
@@ -33,6 +38,10 @@ select {
 
 .form-group {
     @apply sm:grid grid-cols-12 gap-3 mb-3;
+}
+
+.form-group.inline-fields {
+    @apply block gap-3 mb-5;
 }
 
 .form-group label {

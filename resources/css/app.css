@@ -6,6 +6,7 @@
 @import "footer.css";
 @import "common.css";
 @import "modals.css";
+@import "progress.css";
 @import "auth.css";
 
 @tailwind base;

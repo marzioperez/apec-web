@@ -11,27 +11,77 @@ class User extends Authenticatable {
 
     use HasFactory, Notifiable;
     protected $fillable = [
+        'type',
+
         'code',
         'status',
         'register_progress',
         'current_step',
 
+        'title',
         'name',
         'last_name',
+        'gender',
+        'document_type',
+        'document_number',
         'business',
         'economy',
         'business_description',
         'role',
+        'area',
+        'address',
+        'city',
+        'zip_code',
+        'business_phone_number',
         'biography',
         'email',
         'password',
         'phone',
 
-        // Información de participante (Opcional)
+        'date_of_issue',
+        'place_of_issue',
+        'date_of_birth',
+        'nationality',
+        'city_of_permanent_residency',
+
+        'types_of_food',
+        'require_special_assistance',
+
+        'with_companion',
+        'with_staff',
+
+        'blood_type',
+        'allergies',
+        'allergy_details',
+        'vaccines',
+        'medical_others',
+        'medical_treatment',
+        'medical_treatment_details',
+        'taking_any_medication',
+        'chemical_name',
+        'brand_trade_name',
+        'dosis',
+        'frequency',
+
+        'dr_name',
+        'dr_last_name',
+        'dr_number',
+        'dr_email',
+
+        'insurance_company',
+        'insurance_id_number',
+        'insurance_phone',
+        'insurance_other_specifications',
+
+        'badge_photo',
+
+        // Información de asistente (Opcional)
         'attendee_name',
         'attendee_email',
         'send_copy_of_registration',
-        'accept_terms_and_conditions'
+        'accept_terms_and_conditions',
+
+        'parent_id'
     ];
 
     protected $hidden = [

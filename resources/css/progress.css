@@ -1,0 +1,7 @@
+.progress {
+    @apply flex h-2.5 w-full overflow-hidden rounded-xl bg-slate-100 dark:bg-white;
+}
+
+.progress .line {
+    @apply h-full rounded-xl bg-gradient-to-br from-primary to-primary-dark transition-all;
+}

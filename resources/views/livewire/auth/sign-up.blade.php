@@ -7,88 +7,88 @@
                 @if($current_step == 1)
                     <p>Thank you for expressing your interest in attending the <b>APEC CEO Summit 2024</b>. To give you the best experience possible, we need you to complete a pre-registration.</p>
                     <div class="my-8 px-5">
-                    <h5 class="font-semibold mb-5">General information</h5>
-                    <form wire:submit.prevent="process_step_1">
-                        <div class="form-group">
-                            <label for="name">Name(s)*</label>
-                            <div class="form-field">
-                                <input type="text" id="name" name="name" wire:model="name" />
-                                @error('name') <span class="validation-error">{{ $message }}</span> @enderror
+                        <h5 class="font-semibold mb-5">General information</h5>
+                        <form wire:submit.prevent="process_step_1">
+                            <div class="form-group">
+                                <label for="name">Name(s)*</label>
+                                <div class="form-field">
+                                    <input type="text" id="name" name="name" wire:model="name" />
+                                    @error('name') <span class="validation-error">{{ $message }}</span> @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="last_name">Last Name(s)*</label>
-                            <div class="form-field">
-                                <input type="text" id="last_name" name="last_name" wire:model="last_name" />
-                                @error('last_name') <span class="validation-error">{{ $message }}</span> @enderror
+                            <div class="form-group">
+                                <label for="last_name">Last Name(s)*</label>
+                                <div class="form-field">
+                                    <input type="text" id="last_name" name="last_name" wire:model="last_name" />
+                                    @error('last_name') <span class="validation-error">{{ $message }}</span> @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="business">Business*</label>
-                            <div class="form-field">
-                                <input type="text" id="business" name="business" wire:model="business" />
-                                @error('business') <span class="validation-error">{{ $message }}</span> @enderror
+                            <div class="form-group">
+                                <label for="business">Business*</label>
+                                <div class="form-field">
+                                    <input type="text" id="business" name="business" wire:model="business" />
+                                    @error('business') <span class="validation-error">{{ $message }}</span> @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="economy">Economy*</label>
-                            <div class="form-field">
-                                <input type="text" id="economy" name="economy" wire:model="economy" />
-                                @error('economy') <span class="validation-error">{{ $message }}</span> @enderror
+                            <div class="form-group">
+                                <label for="economy">Economy*</label>
+                                <div class="form-field">
+                                    <input type="text" id="economy" name="economy" wire:model="economy" />
+                                    @error('economy') <span class="validation-error">{{ $message }}</span> @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="business_description">Business Description*</label>
-                            <div class="form-field">
-                                <input type="text" id="business_description" name="business_description" wire:model="business_description" />
-                                @error('business_description') <span class="validation-error">{{ $message }}</span> @enderror
+                            <div class="form-group">
+                                <label for="business_description">Business Description*</label>
+                                <div class="form-field">
+                                    <input type="text" id="business_description" name="business_description" wire:model="business_description" />
+                                    @error('business_description') <span class="validation-error">{{ $message }}</span> @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="role">Role*</label>
-                            <div class="form-field">
-                                <input type="text" id="role" name="role" wire:model="role" />
-                                @error('role') <span class="validation-error">{{ $message }}</span> @enderror
+                            <div class="form-group">
+                                <label for="role">Role*</label>
+                                <div class="form-field">
+                                    <input type="text" id="role" name="role" wire:model="role" />
+                                    @error('role') <span class="validation-error">{{ $message }}</span> @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="biography">Biography*</label>
-                            <div class="form-field">
-                                <textarea id="biography" name="biography" wire:model="biography"></textarea>
-                                @error('biography') <span class="validation-error">{{ $message }}</span> @enderror
+                            <div class="form-group">
+                                <label for="biography">Biography*</label>
+                                <div class="form-field">
+                                    <textarea id="biography" name="biography" wire:model="biography"></textarea>
+                                    @error('biography') <span class="validation-error">{{ $message }}</span> @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email*</label>
-                            <div class="form-field">
-                                <input type="email" id="email" name="email" wire:model="email" />
-                                @error('email') <span class="validation-error">{{ $message }}</span> @enderror
+                            <div class="form-group">
+                                <label for="email">Email*</label>
+                                <div class="form-field">
+                                    <input type="email" id="email" name="email" wire:model="email" />
+                                    @error('email') <span class="validation-error">{{ $message }}</span> @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="confirm_email">Confirm Email*</label>
-                            <div class="form-field">
-                                <input type="email" id="confirm_email" name="confirm_email" wire:model="confirm_email" />
-                                @error('confirm_email') <span class="validation-error">{{ $message }}</span> @enderror
+                            <div class="form-group">
+                                <label for="confirm_email">Confirm Email*</label>
+                                <div class="form-field">
+                                    <input type="email" id="confirm_email" name="confirm_email" wire:model="confirm_email" />
+                                    @error('confirm_email') <span class="validation-error">{{ $message }}</span> @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone_number">Phone Number*</label>
-                            <div class="form-field">
-                                <input type="text" id="phone_number" name="phone_number" wire:model="phone_number" />
-                                @error('phone_number') <span class="validation-error">{{ $message }}</span> @enderror
+                            <div class="form-group">
+                                <label for="phone_number">Phone Number*</label>
+                                <div class="form-field">
+                                    <input type="text" id="phone_number" name="phone_number" wire:model="phone_number" />
+                                    @error('phone_number') <span class="validation-error">{{ $message }}</span> @enderror
+                                </div>
                             </div>
-                        </div>
-                        <div class="sm:my-8 my-6 flex justify-center space-x-6 items-center">
-                            <a href="#" class="btn btn-primary-outline">Return</a>
-                            <button type="submit" class="btn btn-primary">Continue</button>
-                        </div>
+                            <div class="sm:my-8 my-6 flex justify-center space-x-6 items-center">
+                                <a href="#" class="btn btn-primary-outline">Return</a>
+                                <button type="submit" class="btn btn-primary">Continue</button>
+                            </div>
 
-                        <div class="flex justify-center">
-                            <p>Have you already registered? <a href="#" class="text-blue">Log in</a></p>
-                        </div>
-                    </form>
-                </div>
+                            <div class="flex justify-center">
+                                <p>Have you already registered? <a href="#" class="text-blue">Log in</a></p>
+                            </div>
+                        </form>
+                    </div>
                 @endif
 
                 @if($current_step == 2)

@@ -16,7 +16,7 @@
         <p style="font-size: 14px; margin-bottom: 30px;">Upon logging in, you will find the registration and payment form, as well as information about the Summit agenda, venue, accommodation options, and other logistical aspects to assist with your planning.</p>
 
         <div style="text-align: center; margin-bottom: 30px;">
-            <a href="{{route('sign-in')}}" style="color: #FFF; font-size: 14px; text-decoration: none; background-color: #75B42E; padding-bottom: 10px; padding-top: 10px; padding-left: 40px; padding-right: 40px; border-radius: 5px;">Log in</a>
+            <a href="{{route('login')}}" style="color: #FFF; font-size: 14px; text-decoration: none; background-color: #75B42E; padding-bottom: 10px; padding-top: 10px; padding-left: 40px; padding-right: 40px; border-radius: 5px;">Log in</a>
         </div>
 
         <p style="font-size: 14px; margin-bottom: 20px;">Should you have any questions or require additional information, please do not hesitate to contact us at <a href="mailto:registration@apecceosummit2024.com" style="color: #00A2F3;">registration@apecceosummit2024.com</a>.<br>
