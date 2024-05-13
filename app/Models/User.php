@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -90,19 +91,22 @@ class User extends Authenticatable {
         'remember_token',
     ];
 
-    protected $casts = [
-        'send_copy_of_registration' => 'boolean',
-        'accept_terms_and_conditions' => 'boolean'
-    ];
-
     protected function casts(): array {
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'send_copy_of_registration' => 'boolean',
+            'accept_terms_and_conditions' => 'boolean',
+            'with_companion' => 'boolean',
+            'with_staff' => 'boolean'
         ];
     }
 
     public function getFullNameAttribute() :string {
         return html_entity_decode(trim($this->name . ' ' . $this->last_name));
+    }
+
+    public function parent(): HasOne {
+        return $this->hasOne(User::class, 'id', 'parent_id');
     }
 }
