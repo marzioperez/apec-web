@@ -18,8 +18,7 @@ class Step1 extends Component {
         '*.unique' => 'Email already exists',
     ];
 
-    public function mount() {
-        $user = auth()->user();
+    public function mount(User $user) {
         $this->user = $user;
         $this->title = $user['title'];
         $this->name = $user['name'];
@@ -71,6 +70,7 @@ class Step1 extends Component {
         $this->validate($rules, $this->messages);
         $this->user->update([
             'register_progress' => 20,
+            'current_step' => 2,
             'title' => $this->title,
             'name' => $this->name,
             'last_name' => $this->last_name,
@@ -85,6 +85,7 @@ class Step1 extends Component {
             'city_of_permanent_residency' => $this->city_of_permanent_residency
         ]);
         $this->dispatch('update-progress', value: 20);
+        $this->dispatch('update-step', step: 2);
     }
 
     public function render() {

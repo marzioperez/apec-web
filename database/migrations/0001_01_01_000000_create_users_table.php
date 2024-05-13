@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('business')->nullable()->default(null);
             $table->string('economy')->nullable()->default(null);
             $table->longText('business_description')->nullable()->default(null);
+            $table->string('business_email')->nullable()->default(null);
             $table->string('role')->nullable()->default(null);
             $table->string('area')->nullable()->default(null);
             $table->string('address')->nullable()->default(null);

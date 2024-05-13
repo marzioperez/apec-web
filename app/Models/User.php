@@ -27,6 +27,7 @@ class User extends Authenticatable {
         'business',
         'economy',
         'business_description',
+        'business_email',
         'role',
         'area',
         'address',

@@ -37,7 +37,7 @@ select {
 }
 
 .form-group {
-    @apply sm:grid grid-cols-12 gap-3 mb-3;
+    @apply sm:grid grid-cols-12 sm:gap-12 mb-3;
 }
 
 .form-group.inline-fields {
