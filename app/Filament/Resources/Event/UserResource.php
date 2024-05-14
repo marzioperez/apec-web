@@ -85,8 +85,9 @@ class UserResource extends Resource {
     {
         return $table
             ->columns([
-                TextColumn::make('full_name')->label('Nombres y Apellidos'),
-                TextColumn::make('email')->label('Email'),
+                TextColumn::make('name')->label('Nombres')->searchable(),
+                TextColumn::make('last_name')->label('Apellidos')->searchable(),
+                TextColumn::make('email')->label('Email')->searchable(),
                 TextColumn::make('status')->label('Estado')->badge()
                     ->color(fn (string $state): string => match ($state) {
                         Status::CONFIRMED->value => 'success',

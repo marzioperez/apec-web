@@ -29,10 +29,10 @@
                             </div>
                         </div>
 
-                        @if(
-                            $user['type'] === \App\Concerns\Enums\Types::PARTICIPANT->value ||
-                            $user['type'] === \App\Concerns\Enums\Types::FREE_PASS_PARTICIPANT->value ||
-                            $user['type'] === \App\Concerns\Enums\Types::VIP->value)
+                        @if(in_array($this->user['type'], [
+                            \App\Concerns\Enums\Types::PARTICIPANT->value,
+                            \App\Concerns\Enums\Types::FREE_PASS_PARTICIPANT->value,
+                            \App\Concerns\Enums\Types::VIP->value]))
                             <div class="form-group">
                                 <label for="role">Will you attend the event with a companion?</label>
                                 <div class="form-field flex space-x-6">

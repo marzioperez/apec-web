@@ -98,7 +98,8 @@ class User extends Authenticatable {
             'send_copy_of_registration' => 'boolean',
             'accept_terms_and_conditions' => 'boolean',
             'with_companion' => 'boolean',
-            'with_staff' => 'boolean'
+            'with_staff' => 'boolean',
+            'vaccines' => 'json'
         ];
     }
 
