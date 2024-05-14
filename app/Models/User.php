@@ -75,7 +75,10 @@ class User extends Authenticatable {
         'insurance_phone',
         'insurance_other_specifications',
 
+        'badge_name',
+        'badge_last_name',
         'badge_photo',
+        'identity_document',
 
         // Información de asistente (Opcional)
         'attendee_name',

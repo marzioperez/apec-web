@@ -78,7 +78,10 @@ return new class extends Migration
             $table->string('insurance_phone')->nullable()->default(null);
             $table->string('insurance_other_specifications')->nullable()->default(null);
 
+            $table->string('badge_name')->nullable()->default(null);
+            $table->string('badge_last_name')->nullable()->default(null);
             $table->string('badge_photo')->nullable()->default(null);
+            $table->string('identity_document')->nullable()->default(null);
 
             // Información de asistente (Opcional)
             $table->string('attendee_name')->nullable()->default(null);

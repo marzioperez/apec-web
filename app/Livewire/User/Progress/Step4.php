@@ -55,6 +55,8 @@ class Step4 extends Component {
             $this->validate($rules);
         }
         $this->user->update([
+            'register_progress' => ($process ? 80 : $this->user['register_progress']),
+            'current_step' => ($process ? 5 : $this->user['current_step']),
             'blood_type' => $this->blood_type,
             'allergies' => $this->allergies === 'yes',
             'allergy_details' => $this->allergy_details,
