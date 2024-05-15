@@ -3,6 +3,7 @@
     <div class="bg-black py-10">
         <x-progress :progress="$progress" />
     </div>
+
     <div x-show="step < 1"><livewire:user.progress.step1 :user="$user" /></div>
     <div x-show="step === 2"><livewire:user.progress.step2 :user="$user" /></div>
     <div x-show="step === 3"><livewire:user.progress.step3 :user="$user" /></div>

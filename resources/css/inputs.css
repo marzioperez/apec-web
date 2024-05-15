@@ -56,8 +56,12 @@ select {
     @apply col-span-8 relative;
 }
 
+.validation-error {
+    @apply text-xs text-red-400;
+}
+
 .form-group .validation-error {
-    @apply text-xs text-red-400 absolute right-3 bottom-3 opacity-80;
+    @apply absolute right-3 bottom-3 opacity-80;
 }
 
 .form-group .validation-error.checkbox {

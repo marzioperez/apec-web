@@ -34,11 +34,20 @@
         <div @click="$refs.input.click()" class="w-full">
             <div>
                 <div x-show="!isDragging" class="flex items-center bg-white cursor-pointer shadow-lg justify-center gap-2 py-10 h-full border-2 border-dashed border-gray-400 rounded-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-6 h-6 text-gray-500">
-                        <path d="M9.25 13.25a.75.75 0 001.5 0V4.636l2.955 3.129a.75.75 0 001.09-1.03l-4.25-4.5a.75.75 0 00-1.09 0l-4.25 4.5a.75.75 0 101.09 1.03L9.25 4.636v8.614z" />
-                        <path d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z" />
-                    </svg>
-                    <p class="text-md text-gray-600">Drop here or <span class="font-semibold text-black">Browse files</span></p>
+                    @if($content)
+                        <div>
+                            {!! $content !!}
+                            <div class="flex justify-center">
+                                <button class="mx-auto mt-3 btn btn-white-outline" type="button">Browse files</button>
+                            </div>
+                        </div>
+                    @else
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-6 h-6 text-gray-500">
+                            <path d="M9.25 13.25a.75.75 0 001.5 0V4.636l2.955 3.129a.75.75 0 001.09-1.03l-4.25-4.5a.75.75 0 00-1.09 0l-4.25 4.5a.75.75 0 101.09 1.03L9.25 4.636v8.614z" />
+                            <path d="M3.5 12.75a.75.75 0 00-1.5 0v2.5A2.75 2.75 0 004.75 18h10.5A2.75 2.75 0 0018 15.25v-2.5a.75.75 0 00-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5z" />
+                        </svg>
+                        <p class="text-md text-gray-600">Drop here or <span class="font-semibold text-black">Browse files</span></p>
+                    @endif
                 </div>
                 <div x-show="isDragging" class="flex items-center bg-gray-100 justify-center gap-2 py-8 h-full">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-6 h-6 text-gray-500">
@@ -49,49 +58,51 @@
                 </div>
             </div>
             <input
-                    x-ref="input"
-                    wire:model="upload"
-                    type="file"
-                    class="hidden"
-                    x-on:livewire-upload-start="isLoading = true"
-                    x-on:livewire-upload-finish="isLoading = false"
-                    x-on:livewire-upload-error="console.log('livewire-dropzone upload error', error)"
-                    @if(! is_null($this->accept)) accept="{{ $this->accept }}" @endif
-                    @if($multiple === true) multiple @endif
+                x-ref="input"
+                wire:model="upload"
+                type="file"
+                class="hidden"
+                x-on:livewire-upload-start="isLoading = true"
+                x-on:livewire-upload-finish="isLoading = false"
+                x-on:livewire-upload-error="console.log('livewire-dropzone upload error', error)"
+                @if(! is_null($this->accept)) accept="{{ $this->accept }}" @endif
+                @if($multiple === true) multiple @endif
             >
         </div>
 
-        @if(count($files) > 0)
-            <div class="flex-wrap gap-x-10 gap-y-2 justify-start w-full mt-5">
-                @foreach($files as $file)
-                    <div class="flex items-center bg-white justify-between gap-2 border rounded border-gray-200 w-full h-auto overflow-hidden">
-                        <div class="flex items-center gap-3">
-                            @if($this->isImageMime($file['extension']))
-                                <div class="flex-none w-14 h-14">
-                                    <img src="{{ $file['temporaryUrl'] }}" class="object-fill w-full h-full" alt="{{ $file['name'] }}">
+        @if(is_array($files))
+            @if(count($files) > 0)
+                <div class="flex-wrap gap-x-10 gap-y-2 justify-start w-full mt-5">
+                    @foreach($files as $file)
+                        <div class="flex items-center bg-white justify-between gap-2 border rounded border-gray-200 w-full h-auto overflow-hidden">
+                            <div class="flex items-center gap-3">
+                                @if($this->isImageMime($file['extension']))
+                                    <div class="flex-none w-14 h-14">
+                                        <img src="{{ $file['temporaryUrl'] }}" class="object-fill w-full h-full" alt="{{ $file['name'] }}">
+                                    </div>
+                                @else
+                                    <div class="flex justify-center items-center w-14 h-14 bg-gray-100">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="w-8 h-8 text-gray-500">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                                        </svg>
+                                    </div>
+                                @endif
+                                <div class="flex flex-col items-start gap-1">
+                                    <div class="text-center text-slate-900 text-sm font-medium">{{ $file['name'] }}</div>
+                                    <div class="text-center text-gray-500 text-sm font-medium">{{ \Illuminate\Support\Number::fileSize($file['size']) }}</div>
                                 </div>
-                            @else
-                                <div class="flex justify-center items-center w-14 h-14 bg-gray-100">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="w-8 h-8 text-gray-500">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                            </div>
+                            <div class="flex items-center mr-3">
+                                <button type="button" @click="removeUpload('{{ $file['tmpFilename'] }}')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-black">
+                                        <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd" />
                                     </svg>
-                                </div>
-                            @endif
-                            <div class="flex flex-col items-start gap-1">
-                                <div class="text-center text-slate-900 text-sm font-medium">{{ $file['name'] }}</div>
-                                <div class="text-center text-gray-500 text-sm font-medium">{{ \Illuminate\Support\Number::fileSize($file['size']) }}</div>
+                                </button>
                             </div>
                         </div>
-                        <div class="flex items-center mr-3">
-                            <button type="button" @click="removeUpload('{{ $file['tmpFilename'] }}')">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-black">
-                                    <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clip-rule="evenodd" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
+                    @endforeach
+                </div>
+            @endif
         @endif
     </div>
 
@@ -112,7 +123,6 @@
                     const args = ['upload', file, () => {
                         // Upload completed
                         this.isLoading = false;
-                        _this.dispatch('upload-photo', {file: file});
                     }, (error) => {
                         // An error occurred while uploading
                         console.log('livewire-dropzone upload error', error);
@@ -123,7 +133,6 @@
 
                     // Upload file(s)
                     multiple ? _this.uploadMultiple(...args) : _this.upload(...args)
-                    console.log("ola 1");
                 },
                 onDragenter() {
                     this.isDragging = true

@@ -44,6 +44,30 @@ return [
             'throw' => false,
         ],
 
+        'web' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/web'),
+            'url' => env('APP_URL').'/storage/web',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'badges' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/badges'),
+            'url' => env('APP_URL').'/storage/badges',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        'ids' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/ids'),
+            'url' => env('APP_URL').'/storage/ids',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

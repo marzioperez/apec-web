@@ -21,3 +21,7 @@
 .btn-gray {
     @apply bg-[#5D5D5D] text-white hover:bg-gray-800;
 }
+
+.btn-white-outline {
+    @apply border bg-white border-black text-black hover:bg-black hover:text-white;
+}

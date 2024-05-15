@@ -3,33 +3,68 @@
 namespace App\Livewire\User\Progress;
 
 use App\Models\User;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
 use Livewire\Component;
-use Livewire\WithFileUploads;
 
 class Step5 extends Component {
 
-    use WithFileUploads;
-
     public $badge_name, $badge_last_name, $badge_photo, $identity_document;
+    public $cover;
     public User $user;
 
+    protected $messages = [
+        '*.required' => 'Required field'
+    ];
+
+    protected $rules = [
+        'badge_name' => 'required',
+        'badge_last_name' => 'required',
+        'badge_photo' => 'required',
+        'identity_document' => 'required',
+    ];
 
     public function mount(User $user) {
         $this->user = $user;
-        $this->badge_name = $user['badge_name'];
-        $this->badge_last_name = $user['badge_last_name'];
-        $this->badge_photo = $user['badge_photo'];
-        $this->identity_document = $user['identity_document'];
+        $this->badge_name = $user['badge_name'] ?? $user['name'];
+        $this->badge_last_name = $user['badge_last_name'] ?? $user['last_name'];
+
+
+        $cover = asset('img/default-badge.png');
+        if ($user['badge_photo']) {
+            $cover = Storage::url($user['badge_photo']);
+        }
+        $this->cover = $cover;
     }
 
     public function process() {
-        dd($this->badge_photo[0]);
+        $this->validate();
+        $this->user->update([
+            'badge_name' => $this->badge_name,
+            'badge_last_name' => $this->badge_last_name
+        ]);
+
+        if ($this->badge_photo) {
+            foreach ($this->badge_photo as $photo) {
+                $put_photo = Storage::putFile('public/badges', new File($photo['path']));
+                $set_photo = str_replace('public/', '', $put_photo);
+                $this->user->update(['badge_photo' => $set_photo]);
+            }
+        }
+        if ($this->identity_document) {
+            foreach ($this->identity_document as $item) {
+                $put_id = Storage::putFile('public/ids', new File($item['path']));
+                $set_id = str_replace('public/', '', $put_id);
+                $this->user->update(['identity_document' => 'ids/' . $set_id]);
+            }
+        }
+        $this->dispatch('open-modal', name: 'modal-status-ok');
     }
 
-    #[On('upload-photo')]
-    public function uploadPhoto() {
-        dd($this->badge_photo);
+    #[On('update-photo')]
+    public function updatePhoto($files) {
+        $this->dispatch('set-cover', cover: $files[0]['temporaryUrl']);
     }
 
     public function render() {
