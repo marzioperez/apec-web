@@ -24,7 +24,7 @@ class SignIn extends Component {
         if (auth()->attempt([
             'email' => $this->email,
             'password' => $this->password,
-            'status' => Status::CONFIRMED->value
+            'status' => [Status::CONFIRMED->value, Status::PENDING_APPROVAL_DATA]
         ], $this->remember_me)) {
             $this->redirect(route('progress'));
         } else {

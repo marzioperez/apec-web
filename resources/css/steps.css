@@ -1,9 +1,13 @@
 .steps ol {
-    @apply flex items-center;
+    @apply flex items-center justify-center;
 }
 
 .steps ol li {
-    @apply relative pr-8 sm:pr-20;
+    @apply relative pr-7 sm:pr-20;
+}
+
+.steps ol li:last-child {
+    @apply pr-0;
 }
 
 .steps ol li .line-content {
