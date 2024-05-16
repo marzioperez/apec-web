@@ -3,10 +3,15 @@
 namespace App\Filament\Resources\Event;
 
 use App\Concerns\Enums\Status;
+use App\Concerns\Enums\Titles;
 use App\Filament\Resources\Event\ConfirmedUserResource\Pages;
 use App\Filament\Resources\Event\ConfirmedUserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Tabs;
+use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -30,7 +35,23 @@ class ConfirmedUserResource extends Resource
     public static function form(Form $form): Form {
         return $form
             ->schema([
-                //
+                Tabs::make()->tabs([
+                    Tab::make('Información general')->schema([
+                        Grid::make([
+                            'default' => 1,
+                            'sm' => 3,
+                            'xl' => 12,
+                            '2xl' => 12
+                        ])->schema([
+                            Select::make('title')->label('Título')->options([
+                                Titles::MR->value => Titles::MR->value,
+                                Titles::MRS->value => Titles::MRS->value,
+                                Titles::MS->value => Titles::MS->value,
+                                Titles::DR->value => Titles::DR->value
+                            ])->columnSpan(2)
+                        ])
+                    ])
+                ])->columnSpanFull()
             ]);
     }
 
@@ -41,7 +62,8 @@ class ConfirmedUserResource extends Resource
                 $query->where('status', Status::CONFIRMED->value)
             )
             ->columns([
-                TextColumn::make('full_name')->label('Nombres y Apellidos'),
+                TextColumn::make('name')->label('Nombres')->searchable(),
+                TextColumn::make('last_name')->label('Apellidos')->searchable(),
                 TextColumn::make('email')->label('Email'),
                 TextColumn::make('register_progress')->label('Progreso')->badge()->color('info')->suffix('%'),
             ])
@@ -49,7 +71,11 @@ class ConfirmedUserResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

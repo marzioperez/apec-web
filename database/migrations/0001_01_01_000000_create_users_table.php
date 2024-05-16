@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('type')->nullable()->default(Types::PARTICIPANT->value);
 
             // Información general
-            $table->string('code');
             $table->string('status')->nullable()->default(Status::PENDING_APPROVAL->value);
             $table->integer('register_progress')->nullable()->default(0);
             $table->integer('current_step')->nullable()->default(0);

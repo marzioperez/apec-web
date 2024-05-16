@@ -294,10 +294,7 @@
                                 <div style="height: 100%; text-align: center; border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px; text-align: center; padding-top: 15px; padding-bottom: 5px;">
                                     <img src="{{asset('img/logo.png')}}" style="width: 140px;" alt="{{config('app.name')}}"/>
                                 </div>
-                                <div style="height: 100%; border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px; text-align: center; padding-top: 10px; padding-bottom: 20px;">
-                                    <img src="{{asset('img/header-email.png')}}" style="width: 100%;" alt="{{config('app.name')}}"/>
-                                </div>
-                                <div class="v-col-padding" style="height: 100%; padding: 0px 44px 44px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;">
+                                <div class="v-col-padding" style="height: 100%; border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;">
                                     <!--<![endif]-->
 
                                     <table id="u_content_heading_38" style="font-family:'Inter', sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">

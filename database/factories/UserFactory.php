@@ -24,27 +24,24 @@ class UserFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition(): array {
-        $name = fake()->firstName();
-        $last_name = fake()->firstName();
-        $code = GenerateCode::run($name, $last_name);
+        $phone = fake()->phoneNumber;
 
         return [
-            'code' => $code,
             'status' => fake()->randomElement([
                 Status::PENDING_APPROVAL->value,
                 Status::CONFIRMED->value,
                 Status::DECLINED->value,
             ]),
-            'name' => $name,
-            'last_name' => $last_name,
+            'name' => fake()->firstName(),
+            'last_name' => fake()->firstName(),
             'business' => fake()->company,
             'economy' => fake()->word,
             'business_description' => fake()->paragraph,
             'role' => fake()->companySuffix,
             'biography' => fake()->paragraph,
             'email' => fake()->unique()->safeEmail(),
-            'password' => Hash::make($code),
-            'phone' => fake()->phoneNumber,
+            'password' => Hash::make($phone),
+            'phone' => $phone,
 
             // Información de participante (Opcional)
             'attendee_name' => fake()->name,

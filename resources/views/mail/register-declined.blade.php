@@ -1,7 +1,11 @@
 @extends('layouts.mail')
 @section('content')
 
-    <div style="text-align: left;">
+    <div style="height: 100%; border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px; text-align: center; padding-top: 10px; padding-bottom: 20px;">
+        <img src="{{asset('img/header-email-3.png')}}" style="width: 100%;" alt="{{config('app.name')}}"/>
+    </div>
+
+    <div style="text-align: left; padding: 0 44px 44px;">
         <p style="font-size: 14px; margin-bottom: 10px;">Dear {{$user['name']}},</p>
 
         <p style="font-size: 14px;">We extend our sincere gratitude for your interest in participating in the APEC CEO Summit 2024. The overwhelming response we received from individuals worldwide underscores the profound enthusiasm and dedication within our community.<br>

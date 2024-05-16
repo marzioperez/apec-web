@@ -21,6 +21,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Mail;
 
 class UserResource extends Resource {
@@ -60,7 +61,7 @@ class UserResource extends Resource {
 
                         ])
                     ]),
-                    Tab::make('Información de participante')->schema([
+                    Tab::make('Información de asistente')->schema([
                         Grid::make([
                             'default' => 1,
                             'sm' => 3,
@@ -84,6 +85,13 @@ class UserResource extends Resource {
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn(Builder $query) =>
+                $query->whereIn('status', [
+                    Status::DECLINED->value,
+                    Status::CONFIRMED->value,
+                    Status::PENDING_APPROVAL->value
+                ])
+            )
             ->columns([
                 TextColumn::make('name')->label('Nombres')->searchable(),
                 TextColumn::make('last_name')->label('Apellidos')->searchable(),

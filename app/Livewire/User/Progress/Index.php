@@ -12,7 +12,7 @@ class Index extends Component {
     public User $user;
 
     public function mount () {
-        $this->user  = auth()->user();
+        $this->user = auth()->user();
         $this->progress = auth()->user()->register_progress;
         $this->current_step = auth()->user()->current_step;
     }

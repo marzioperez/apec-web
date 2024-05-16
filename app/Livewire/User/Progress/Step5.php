@@ -2,8 +2,11 @@
 
 namespace App\Livewire\User\Progress;
 
+use App\Concerns\Enums\Status;
+use App\Mail\CompleteRegister;
 use App\Models\User;
 use Illuminate\Http\File;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -41,6 +44,8 @@ class Step5 extends Component {
     public function process() {
         $this->validate();
         $this->user->update([
+            'status' => Status::PENDING_APPROVAL_DATA->value,
+            'register_progress' => 100,
             'badge_name' => $this->badge_name,
             'badge_last_name' => $this->badge_last_name
         ]);
@@ -59,6 +64,10 @@ class Step5 extends Component {
                 $this->user->update(['identity_document' => 'ids/' . $set_id]);
             }
         }
+        if ($this->user['status'] === Status::CONFIRMED) {
+            Mail::to($this->user['email'])->send(new CompleteRegister());
+        }
+        $this->dispatch('update-progress', value: 100);
         $this->dispatch('open-modal', name: 'modal-status-ok');
     }
 

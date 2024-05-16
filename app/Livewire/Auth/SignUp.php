@@ -57,9 +57,8 @@ class SignUp extends Component {
 
         $this->validate($rules, $messages);
 
-        $code = GenerateCode::run($this->name, $this->last_name);
+        // $code = GenerateCode::run($this->name, $this->last_name);
         User::create([
-            'code' => $code,
             'name' => $this->name,
             'last_name' => $this->last_name,
             'business' => $this->business,
@@ -69,7 +68,7 @@ class SignUp extends Component {
             'biography' => $this->biography,
             'phone' => $this->phone_number,
             'email' => $this->email,
-            'password' => bcrypt($code),
+            'password' => bcrypt($this->phone_number),
             'attendee_name' => $this->attendee_name,
             'attendee_email' => $this->attendee_email,
             'send_copy_of_registration' => $this->send_copy_of_registration,

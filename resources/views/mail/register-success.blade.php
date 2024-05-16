@@ -1,7 +1,11 @@
 @extends('layouts.mail')
 @section('content')
 
-    <div style="text-align: left;">
+    <div style="height: 100%; border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px; text-align: center; padding-top: 10px; padding-bottom: 20px;">
+        <img src="{{asset('img/header-email-1.png')}}" style="width: 100%;" alt="{{config('app.name')}}"/>
+    </div>
+
+    <div style="text-align: left; padding: 0 44px 44px;">
         <p style="font-size: 14px; margin-bottom: 10px;">Dear {{$user['name']}},</p>
 
         <p style="font-size: 14px;">We are delighted to inform you that, following your expression of interest, you have been accepted to attend the APEC CEO Summit 2024.<br>
@@ -11,7 +15,7 @@
         <p style="font-size: 14px; margin-bottom: 20px">To proceed with your registration, please log in using the following credentials:</p>
 
         <p style="font-size: 14px;"><b>Email:</b> {{$user['email']}}<br>
-        <b>Password:</b> {{$user['code']}}</p>
+        <b>Password:</b> {{$user['phone']}}</p>
 
         <p style="font-size: 14px; margin-bottom: 30px;">Upon logging in, you will find the registration and payment form, as well as information about the Summit agenda, venue, accommodation options, and other logistical aspects to assist with your planning.</p>
 
