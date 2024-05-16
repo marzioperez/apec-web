@@ -18,5 +18,17 @@ class AdminSeeder extends Seeder
             'email' => "marzioperez@gmail.com",
             'password' => Hash::make("47804233")
         ]);
+
+        Admin::create([
+            'name' => "Alexis Sanchez",
+            'email' => "sanchezzelaya.casz@gmail.com",
+            'password' => Hash::make("123456")
+        ]);
+
+        Admin::create([
+            'name' => "Eder Novaro",
+            'email' => "enovaro@comexperu.org.pe",
+            'password' => Hash::make("eder2024")
+        ]);
     }
 }

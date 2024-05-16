@@ -141,13 +141,64 @@ class CompletedUserResource extends Resource
                                     'AB-' => 'AB-'
                                 ])->columnSpan(3),
                             Toggle::make('allergies')->inline(false)->label('Alergias')->required()->columnSpan(2),
-                            Textarea::make('allergy_details')->label('Detalle')->required()->columnSpan(12),
-                            TextInput::make('city')->label('Ciudad')->required()->columnSpan(3),
-                            TextInput::make('zip_code')->label('Código ZIP')->required()->columnSpan(2),
-                            TextInput::make('business_phone_number')->label('Teléfono de empresa')->required()->columnSpan(3),
-                            TextInput::make('business_email')->label('Email de empresa')->required()->columnSpan(4),
-                            TextInput::make('attendee_name')->label('Nombre de asistente')->required()->columnSpan(6),
-                            TextInput::make('attendee_email')->label('Email de asistente')->required()->columnSpan(6),
+                            Textarea::make('allergy_details')->label('Detalle')->required()->columnSpanFull(),
+                            Forms\Components\CheckboxList::make('vaccines')->label('Vacunas')->columnSpanFull()
+                                ->options([
+                                    'COVID-19' => 'COVID-19',
+                                    'Hepatitis A' => 'Hepatitis A',
+                                    'Hepatitis B' => 'Hepatitis B',
+                                    'Yellow fever' => 'Yellow fever',
+                                ]),
+                            Textarea::make('medical_others')->label('Otros')->required()->columnSpanFull(),
+                            Toggle::make('medical_treatment')->inline(false)->label('Tratamiento médico')->required()->columnSpan(3),
+                            Textarea::make('medical_treatment_details')->label('Detalle')->columnSpanFull(),
+                            TextInput::make('taking_any_medication')->label('Toma alguna medicación')->columnSpanFull(),
+                            TextInput::make('chemical_name')->label('Nombre químico')->columnSpan(3),
+                            TextInput::make('brand_trade_name')->label('Marca')->columnSpan(3),
+                            TextInput::make('dosis')->label('Dosis')->columnSpan(3),
+                            TextInput::make('frequency')->label('Frecuencia')->columnSpan(3),
+
+                            Forms\Components\Section::make('Información de doctor')->compact()->schema([
+                                Grid::make([
+                                    'default' => 1,
+                                    'sm' => 3,
+                                    'xl' => 12,
+                                    '2xl' => 12
+                                ])->schema([
+                                    TextInput::make('dr_name')->label('Nombre')->columnSpan(6),
+                                    TextInput::make('dr_last_name')->label('Apellidos')->columnSpan(6),
+                                    TextInput::make('dr_number')->label('Teléfono')->columnSpan(6),
+                                    TextInput::make('dr_email')->label('Email')->columnSpan(6),
+                                ])
+                            ]),
+
+                            Forms\Components\Section::make('Información de seguros internacionales')->compact()->schema([
+                                Grid::make([
+                                    'default' => 1,
+                                    'sm' => 3,
+                                    'xl' => 12,
+                                    '2xl' => 12
+                                ])->schema([
+                                    TextInput::make('insurance_company')->label('Empresa')->columnSpan(4),
+                                    TextInput::make('insurance_id_number')->label('Número ID')->columnSpan(4),
+                                    TextInput::make('insurance_phone')->label('Teléfono')->columnSpan(4),
+                                    TextInput::make('insurance_other_specifications')->label('Otra especificaciones')->columnSpanFull(),
+                                ])
+                            ])
+
+                        ])
+                    ]),
+                    Tab::make('Información de badge')->schema([
+                        Grid::make([
+                            'default' => 1,
+                            'sm' => 3,
+                            'xl' => 12,
+                            '2xl' => 12
+                        ])->schema([
+                            TextInput::make('badge_name')->label('Nombre')->required()->columnSpan(6),
+                            TextInput::make('badge_last_name')->label('Apellidos')->required()->columnSpan(6),
+                            Forms\Components\FileUpload::make('badge_photo')->label('Foto')->disk('badges')->required()->image()->downloadable()->columnSpanFull(),
+                            Forms\Components\FileUpload::make('identity_document')->label('Documento de identidad')->disabled('ids')->required()->downloadable()->columnSpanFull(),
                         ])
                     ]),
                 ])->columnSpanFull()
