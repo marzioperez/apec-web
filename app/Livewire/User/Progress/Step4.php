@@ -13,6 +13,7 @@ class Step4 extends Component {
     public $insurance_company, $insurance_id_number, $insurance_phone, $insurance_other_specifications;
     public $dr_name, $dr_last_name, $dr_number, $dr_email;
     public User $user;
+    public $quantity = 5, $current = 4, $complete = 3;
 
     protected $messages = [
         '*.*.required' => 'Required field',
@@ -20,8 +21,12 @@ class Step4 extends Component {
         '*.*.unique' => 'Email already exists',
     ];
 
-    public function mount(User $user) {
+    public function mount(User $user, $quantity = 5, $current = 4, $complete = 3) {
         $this->user = $user;
+        $this->quantity = $quantity;
+        $this->current = $current;
+        $this->complete = $complete;
+
         $this->blood_type = $user['blood_type'];
         $this->allergies = ($user['allergies'] ? 'yes' : 'no');
         $this->allergy_details = $user['allergy_details'];
@@ -49,7 +54,9 @@ class Step4 extends Component {
 
     public function save($process) {
         $current_step = $this->user['current_step'];
+
         $step = $this->user['current_step'];
+        $result = 100 / $this->quantity;
         $progress = $this->user['register_progress'];
         if ($process) {
             $rules = [
@@ -57,12 +64,9 @@ class Step4 extends Component {
             ];
             $this->validate($rules);
 
-            if ($this->user['current_step'] > 4) {
-                $step = $this->user['current_step'];
-                $progress = $this->user['register_progress'];
-            } else {
-                $step = 5;
-                $progress = 80;
+            if ($current_step == $this->current) {
+                $progress = $progress + $result;
+                $step = $step + 1;
             }
         }
 
@@ -94,10 +98,10 @@ class Step4 extends Component {
         ]);
         if ($process) {
             // Actualizamos la barra de progreso solo si el usuario se encuentra en el paso 3
-            if ($current_step === 4) {
-                $this->dispatch('update-progress', value: 80);
+            if ($current_step === $this->current) {
+                $this->dispatch('update-progress', value: $progress);
             }
-            $this->dispatch('update-step', step: 5);
+            $this->dispatch('update-step', step: $step);
         }
         else {
             $this->toast('It has been saved. Your profile will be updated shortly.');

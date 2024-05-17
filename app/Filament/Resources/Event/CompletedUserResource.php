@@ -197,8 +197,8 @@ class CompletedUserResource extends Resource
                         ])->schema([
                             TextInput::make('badge_name')->label('Nombre')->required()->columnSpan(6),
                             TextInput::make('badge_last_name')->label('Apellidos')->required()->columnSpan(6),
-                            Forms\Components\FileUpload::make('badge_photo')->label('Foto')->disk('badges')->required()->image()->downloadable()->columnSpanFull(),
-                            Forms\Components\FileUpload::make('identity_document')->label('Documento de identidad')->disabled('ids')->required()->downloadable()->columnSpanFull(),
+                            Forms\Components\FileUpload::make('badge_photo')->label('Foto')->required()->disk('badges')->downloadable()->openable()->columnSpanFull(),
+                            Forms\Components\FileUpload::make('identity_document')->label('Documento de identidad')->required()->downloadable()->openable()->columnSpanFull(),
                         ])
                     ]),
                 ])->columnSpanFull()

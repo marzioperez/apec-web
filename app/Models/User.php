@@ -86,6 +86,12 @@ class User extends Authenticatable {
         'send_copy_of_registration',
         'accept_terms_and_conditions',
 
+        // QR
+        'qr',
+
+        'observation',
+        'amount',
+
         'parent_id'
     ];
 

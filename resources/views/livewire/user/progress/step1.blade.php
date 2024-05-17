@@ -1,10 +1,6 @@
-<div class="bg-white sm:py-10 py-10 relative bg-fixed bg-no-repeat bg-contain bg-left-bottom"
-     style="background-image: url('{{asset("img/bg-sign-up-step-2.png")}}')"
-    x-data="{
-        lock_fields: {{!$lock_fields}}
-    }">
+<div class="bg-white sm:py-10 py-10 relative bg-fixed bg-no-repeat bg-contain bg-left-bottom" style="background-image: url('{{asset("img/bg-sign-up-step-2.png")}}')">
 
-    <x-steps :quantity="5" :current="1" :complete="0" :back_step="true" />
+    <x-steps :quantity="$quantity" :current="$current" :complete="0" :back_step="true" />
 
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         <div class="py-10 flex justify-center">
@@ -30,7 +26,7 @@
                         <div class="form-group">
                             <label for="name">Name(s)*</label>
                             <div class="form-field">
-                                <input type="text" id="name" name="name" wire:model="name" :disabled="lock_fields" />
+                                <input type="text" id="name" name="name" wire:model="name" />
                                 @error('name') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>

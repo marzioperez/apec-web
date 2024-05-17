@@ -3,6 +3,7 @@
 namespace App\Livewire\Auth;
 
 use App\Concerns\Enums\Status;
+use App\Concerns\Enums\Types;
 use Livewire\Component;
 
 class SignIn extends Component {
@@ -26,7 +27,15 @@ class SignIn extends Component {
             'password' => $this->password,
             'status' => [Status::CONFIRMED->value, Status::PENDING_APPROVAL_DATA]
         ], $this->remember_me)) {
-            $this->redirect(route('progress'));
+            if (in_array(auth()->user()->type, [
+                Types::STAFF->value,
+                Types::COMPANION->value,
+                Types::FREE_PASS_COMPANION->value
+            ])) {
+                $this->redirect(route('guest-progress'));
+            } else {
+                $this->redirect(route('progress'));
+            }
         } else {
             $this->dispatch('open-modal', name: 'modal-status-error');
         }

@@ -7,7 +7,7 @@
     class="bg-white sm:py-10 py-10 relative bg-fixed bg-no-repeat bg-contain bg-left-bottom"
     style="background-image: url('{{asset("img/bg-sign-up-step-4.png")}}')">
 
-    <x-steps :quantity="5" :current="3" :complete="2" :back_step="true" />
+    <x-steps :quantity="$quantity" :current="$current" :complete="$complete" :back_step="true" />
 
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         <div class="py-10 flex justify-center">

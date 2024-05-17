@@ -88,6 +88,10 @@ return new class extends Migration
             $table->boolean('send_copy_of_registration')->nullable()->default(false);
             $table->boolean('accept_terms_and_conditions')->nullable()->default(false);
 
+            $table->string('qr')->nullable()->default(null);
+            $table->longText('observation')->nullable()->default(null);
+            $table->double('amount', 8, 2)->nullable()->default(3500);
+
             // ID del participante que invita
             $table->unsignedInteger('parent_id')->nullable()->default(null);
             $table->timestamp('email_verified_at')->nullable();

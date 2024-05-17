@@ -16,6 +16,7 @@ class Step3 extends Component {
     public $with_companion = 'no', $with_staff = 'no';
     public $current_user_step;
     public User $user;
+    public $quantity = 5, $current = 3, $complete = 2;
 
     public $companion = [
         'name',
@@ -37,8 +38,12 @@ class Step3 extends Component {
         '*.*.unique' => 'Email already exists',
     ];
 
-    public function mount(User $user) {
+    public function mount(User $user, $quantity = 5, $current = 3, $complete = 2) {
         $this->user = $user;
+        $this->quantity = $quantity;
+        $this->current = $current;
+        $this->complete = $complete;
+
         $this->current_user_step = $user['current_step'];
         $this->types_of_food = $user['types_of_food'];
         $this->require_special_assistance = $user['require_special_assistance'];
@@ -74,16 +79,16 @@ class Step3 extends Component {
         $current_step = $this->user['current_step'];
 
         $step = $this->user['current_step'];
+        $result = 100 / $this->quantity;
         $progress = $this->user['register_progress'];
+
         if ($process) {
-            if ($this->user['current_step'] > 3) {
-                $step = $this->user['current_step'];
-                $progress = $this->user['register_progress'];
-            } else {
-                $step = 4;
-                $progress = 60;
+            if ($current_step === $this->current) {
+                $progress = $progress + $result;
+                $step = $step + 1;
             }
         }
+
         $this->user->update([
             'types_of_food' => $this->types_of_food,
             'require_special_assistance' => $this->require_special_assistance,
@@ -172,31 +177,27 @@ class Step3 extends Component {
                 // Enviamos el correo solo si el usuario ha marcado que desea ir con acompañante
                 if ($this->with_companion === 'yes') {
                     // Y se encuentra en el paso 3 actualmente
-                    if ($this->user['current_step'] === 3) {
+                    if ($current_step === $this->current) {
                         Mail::to($companion['email'])->send(new InviteCompanion($companion));
                     }
                 }
                 // Enviamos el correo solo si el usuario ha marcado que desea ir con staff
                 if ($this->with_staff === 'yes') {
                     // Y se encuentra en el paso 3 actualmente
-                    if ($this->user['current_step'] === 3) {
+                    if ($current_step === $this->current) {
                         Mail::to($staff['email'])->send(new InviteCompanion($staff));
                     }
                 }
             }
             // Actualizamos la barra de progreso solo si el usuario se encuentra en el paso 3
-            if ($current_step === 3) {
-                $this->dispatch('update-progress', value: 60);
+            if ($current_step === $this->current) {
+                $this->dispatch('update-progress', value: $progress);
             }
-            $this->dispatch('update-step', step: 4);
-            $this->dispatch('update-user-step', step: 4);
+            $this->dispatch('update-step', step: $step);
+            $this->dispatch('update-user-step', step: $step);
         } else {
             $this->toast('It has been saved. Your profile will be updated shortly.');
         }
-    }
-
-    public function save_invites() {
-
     }
 
     public function render() {

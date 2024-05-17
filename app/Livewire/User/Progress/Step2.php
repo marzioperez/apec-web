@@ -10,14 +10,19 @@ class Step2 extends Component {
     public $business, $role, $area, $address, $city, $zip_code, $phone, $email, $economy;
     public $attendee_name, $attendee_email;
     public User $user;
+    public $quantity = 5, $current = 2, $complete = 1;
 
     protected $messages = [
         '*.required' => 'Required field',
         '*.email' => 'Incorrect email format'
     ];
 
-    public function mount(User $user) {
+    public function mount(User $user, $quantity = 5, $current = 2, $complete = 1) {
         $this->user = $user;
+        $this->quantity = $quantity;
+        $this->current = $current;
+        $this->complete = $complete;
+
         $this->business = $user['business'];
         $this->role = $user['role'];
         $this->area = $user['area'];
@@ -63,8 +68,14 @@ class Step2 extends Component {
         $this->validate($rules, $this->messages);
 
         $current_step = $this->user['current_step'];
+        $result = 100 / $this->quantity;
+        $progress = $this->user['register_progress'];
+        if ($current_step == 2) {
+            $progress = $progress + $result;
+        }
+
         $this->user->update([
-            'register_progress' => ($this->user['current_step'] > 3 ? $this->user['register_progress'] : 40),
+            'register_progress' => $progress,
             'current_step' => ($this->user['current_step'] > 3 ? $this->user['current_step'] : 3),
             'business' => $this->business,
             'role' => $this->role,
@@ -81,7 +92,7 @@ class Step2 extends Component {
 
         // Actualizamos la barra de progreso solo si el usuario se encuentra en el paso 2
         if ($current_step === 2) {
-            $this->dispatch('update-progress', value: 40);
+            $this->dispatch('update-progress', value: $progress);
         }
         $this->dispatch('update-step', step: 3);
     }
