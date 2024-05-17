@@ -61,9 +61,11 @@ class Step2 extends Component {
             'economy' => 'required'
         ];
         $this->validate($rules, $this->messages);
+
+        $current_step = $this->user['current_step'];
         $this->user->update([
-            'register_progress' => 40,
-            'current_step' => 3,
+            'register_progress' => ($this->user['current_step'] > 3 ? $this->user['register_progress'] : 40),
+            'current_step' => ($this->user['current_step'] > 3 ? $this->user['current_step'] : 3),
             'business' => $this->business,
             'role' => $this->role,
             'area' => $this->area,
@@ -76,7 +78,11 @@ class Step2 extends Component {
             'attendee_name' => $this->attendee_name,
             'attendee_email' => $this->attendee_email
         ]);
-        $this->dispatch('update-progress', value: 40);
+
+        // Actualizamos la barra de progreso solo si el usuario se encuentra en el paso 2
+        if ($current_step === 2) {
+            $this->dispatch('update-progress', value: 40);
+        }
         $this->dispatch('update-step', step: 3);
     }
 

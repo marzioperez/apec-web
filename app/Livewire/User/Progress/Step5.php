@@ -14,6 +14,7 @@ use Livewire\Component;
 class Step5 extends Component {
 
     public $badge_name, $badge_last_name, $badge_photo, $identity_document;
+    public $badge_file, $identity_document_file;
     public $cover;
     public User $user;
 
@@ -33,6 +34,8 @@ class Step5 extends Component {
         $this->badge_name = $user['badge_name'] ?? $user['name'];
         $this->badge_last_name = $user['badge_last_name'] ?? $user['last_name'];
 
+        $this->badge_file = $user['badge_photo'] ? Storage::url($user['badge_photo']) : null;
+        $this->identity_document_file = $user['identity_document'] ? Storage::url($user['identity_document']) : null;
 
         $cover = asset('img/default-badge.png');
         if ($user['badge_photo']) {
@@ -43,13 +46,13 @@ class Step5 extends Component {
 
     public function process() {
         $this->validate();
+        $current_user_status = $this->user['status'];
         $this->user->update([
             'status' => Status::PENDING_APPROVAL_DATA->value,
             'register_progress' => 100,
             'badge_name' => $this->badge_name,
             'badge_last_name' => $this->badge_last_name
         ]);
-
         if ($this->badge_photo) {
             foreach ($this->badge_photo as $photo) {
                 $put_photo = Storage::putFile('public/badges', new File($photo['path']));
@@ -61,12 +64,14 @@ class Step5 extends Component {
             foreach ($this->identity_document as $item) {
                 $put_id = Storage::putFile('public/ids', new File($item['path']));
                 $set_id = str_replace('public/', '', $put_id);
-                $this->user->update(['identity_document' => 'ids/' . $set_id]);
+                $this->user->update(['identity_document' => $set_id]);
             }
         }
-        if ($this->user['status'] === Status::CONFIRMED) {
+
+        if ($current_user_status === Status::CONFIRMED->value) {
             Mail::to($this->user['email'])->send(new CompleteRegister());
         }
+
         $this->dispatch('update-progress', value: 100);
         $this->dispatch('open-modal', name: 'modal-status-ok');
     }

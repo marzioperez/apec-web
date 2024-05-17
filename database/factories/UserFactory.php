@@ -32,6 +32,7 @@ class UserFactory extends Factory
                 Status::CONFIRMED->value,
                 Status::DECLINED->value,
             ]),
+            'current_step' => 1,
             'name' => fake()->firstName(),
             'last_name' => fake()->firstName(),
             'business' => fake()->company,

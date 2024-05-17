@@ -9,6 +9,7 @@ class Step1 extends Component {
 
     public $title, $name, $last_name, $gender, $document_type, $document_number, $email, $date_of_issue;
     public $place_of_issue, $date_of_birth, $nationality, $city_of_permanent_residency;
+    public bool $lock_fields = false;
     public User $user;
 
     protected $messages = [
@@ -20,6 +21,9 @@ class Step1 extends Component {
 
     public function mount(User $user) {
         $this->user = $user;
+        if ($user['current_step'] > 1) {
+            $this->lock_fields = true;
+        }
         $this->title = $user['title'];
         $this->name = $user['name'];
         $this->last_name = $user['last_name'];
@@ -68,9 +72,11 @@ class Step1 extends Component {
             'city_of_permanent_residency' => 'required',
         ];
         $this->validate($rules, $this->messages);
+
+        $current_step = $this->user['current_step'];
         $this->user->update([
-            'register_progress' => 20,
-            'current_step' => 2,
+            'register_progress' => ($this->user['current_step'] > 2 ? $this->user['register_progress'] : 20),
+            'current_step' => ($this->user['current_step'] > 2 ? $this->user['current_step'] : 2),
             'title' => $this->title,
             'name' => $this->name,
             'last_name' => $this->last_name,
@@ -84,7 +90,11 @@ class Step1 extends Component {
             'nationality' => $this->nationality,
             'city_of_permanent_residency' => $this->city_of_permanent_residency
         ]);
-        $this->dispatch('update-progress', value: 20);
+
+        // Actualizamos la barra de progreso solo si el usuario se encuentra en el paso 1
+        if ($current_step === 1) {
+            $this->dispatch('update-progress', value: 20);
+        }
         $this->dispatch('update-step', step: 2);
     }
 

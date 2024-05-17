@@ -48,15 +48,27 @@ class Step4 extends Component {
     }
 
     public function save($process) {
+        $current_step = $this->user['current_step'];
+        $step = $this->user['current_step'];
+        $progress = $this->user['register_progress'];
         if ($process) {
             $rules = [
                 'blood_type' => 'required'
             ];
             $this->validate($rules);
+
+            if ($this->user['current_step'] > 4) {
+                $step = $this->user['current_step'];
+                $progress = $this->user['register_progress'];
+            } else {
+                $step = 5;
+                $progress = 80;
+            }
         }
+
         $this->user->update([
-            'register_progress' => ($process ? 80 : $this->user['register_progress']),
-            'current_step' => ($process ? 5 : $this->user['current_step']),
+            'register_progress' => $progress,
+            'current_step' => $step,
             'blood_type' => $this->blood_type,
             'allergies' => $this->allergies === 'yes',
             'allergy_details' => $this->allergy_details,
@@ -81,7 +93,10 @@ class Step4 extends Component {
             'insurance_other_specifications' => $this->insurance_other_specifications
         ]);
         if ($process) {
-            $this->dispatch('update-progress', value: 80);
+            // Actualizamos la barra de progreso solo si el usuario se encuentra en el paso 3
+            if ($current_step === 4) {
+                $this->dispatch('update-progress', value: 80);
+            }
             $this->dispatch('update-step', step: 5);
         }
         else {
