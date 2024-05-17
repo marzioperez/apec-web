@@ -13,6 +13,7 @@ use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
@@ -74,7 +75,8 @@ class CompletedUserResource extends Resource
                             TextInput::make('date_of_issue')->label('Lugar de emisión')->required()->columnSpan(3),
                             DatePicker::make('date_of_birth')->label('Fecha de nacimiento')->columnSpan(3),
                             TextInput::make('nationality')->label('Nacionalidad')->columnSpan(3),
-                            TextInput::make('city_of_permanent_residency')->label('Ciudad de residencia permanente')->columnSpanFull(),
+                            TextInput::make('city_of_permanent_residency')->label('Ciudad de residencia permanente')->columnSpan(8),
+                            TextInput::make('amount')->label('Monto a pagar')->columnSpan(4),
                         ])
                     ]),
                     Tab::make('Información de la empresa')->schema([
@@ -228,6 +230,32 @@ class CompletedUserResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
+                    Tables\Actions\Action::make('confirm')
+                        ->icon('heroicon-o-check-circle')
+                        ->color('success')
+                        ->label('Confirmar')
+                        ->requiresConfirmation()
+                        ->modalHeading('¿Confirmar registro?')
+                        ->modalDescription('Una vez que se confirme el registro del usuario, se le enviará un mensaje de forma automática para que ingrese a la zona de pago. Para el caso de usuarios PASS FREE se le enviará su código QR. Por favor confirme esta acción.')
+                        ->modalSubmitActionLabel('Confirmar')
+                        ->action(function (User $user):void {
+
+                        })->visible(fn(User $user): bool => $user['status'] === Status::PENDING_APPROVAL_DATA->value),
+                    Tables\Actions\Action::make('observe')
+                        ->icon('heroicon-o-eye')
+                        ->color('warning')
+                        ->label('Observar datos')
+                        ->modalHeading('Enviar observaciones')
+                        ->modalDescription('Esta acción regresará al usuario al estado de Confirmado para que ingrese con sus datos y corrija la información que se requiere subsanar. Si activas los campos de Limpiar foto o documento de identidad, estos datos se eliminarán del usuario para que vuelva a subir dicha información.')
+                        ->form([
+                            RichEditor::make('observation')->label('Observaciones')->columnSpanFull(),
+                            Toggle::make('enable_photo')->label('Limpiar datos de foto')->columnSpanFull(),
+                            Toggle::make('enable_id')->label('Limpiar datos de documento de identidad')->columnSpanFull(),
+                        ])
+                        ->modalSubmitActionLabel('Aceptar')
+                        ->action(function (User $user):void {
+
+                        })->visible(fn(User $user): bool => $user['status'] === Status::PENDING_APPROVAL_DATA->value),
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
                 ])
