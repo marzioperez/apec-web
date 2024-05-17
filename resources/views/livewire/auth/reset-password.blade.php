@@ -3,7 +3,7 @@
 
         <div class="py-10 flex justify-center">
             <div class="sm:w-[550px] w-full">
-                <h3 class="text-primary-dark font-semibold mb-6 text-2xl">Log in</h3>
+                <h3 class="text-primary-dark font-semibold mb-6 text-2xl">Recover password</h3>
                 <form wire:submit.prevent="process">
                     <div class="form-group inline-fields">
                         <label for="email" class="uppercase">Email*</label>
@@ -12,22 +12,9 @@
                             @error('email') <span class="validation-error">{{ $message }}</span> @enderror
                         </div>
                     </div>
-                    <div class="form-group inline-fields">
-                        <label for="password" class="uppercase">Password*</label>
-                        <div class="form-field">
-                            <input type="password" id="password" name="password" wire:model="password" />
-                            @error('password') <span class="validation-error">{{ $message }}</span> @enderror
-                        </div>
-                    </div>
-                    <div class="sm:grid flex items-center justify-center space-x-5 grid-cols-2 gap-3">
-                        <div class="form-check">
-                            <input type="checkbox" name="remember_me" class="form-check-input" id="remember_me" wire:model="remember_me">
-                            <label for="remember_me" class="text-gray">Remember me</label>
-                        </div>
-                        <div class="flex sm:justify-end"><a href="{{route('reset-password')}}" class="text-blue-light text-sm">Forgot your password?</a></div>
-                    </div>
                     <div class="sm:my-8 my-6 flex justify-center space-x-6 items-center">
-                        <button type="submit" class="btn btn-primary">Log in</button>
+                        <a href="{{route('login')}}" class="btn btn-primary-outline">Return</a>
+                        <button type="submit" class="btn btn-primary">Send</button>
                     </div>
                 </form>
             </div>
@@ -53,8 +40,8 @@
             </div>
             <div class="text-center">
                 <h1 class="font-bold text-lg mb-3">Your data is incorrect</h1>
-                <div class="mb-5">Please try again or recover it now if you've forgotten.</div>
-                <a href="{{route('reset-password')}}" class="btn btn-primary">Recover password</a>
+                <div class="mb-5">Please try again.</div>
+                <a href="{{config('app.url')}}" class="btn btn-primary">Go to home</a>
             </div>
         </x-slot:body>
     </x-modal>

@@ -27,6 +27,7 @@ class Header extends Component {
         auth()->logout();
         $this->is_logged_in = false;
         $this->user_name = null;
+        $this->redirect(config('app.url'));
     }
 
     public function render() {

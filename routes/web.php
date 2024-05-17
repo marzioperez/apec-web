@@ -9,6 +9,7 @@ Route::get('/', function () {
 Route::group(['middleware' => ['guest']], function () {
     Route::get('/sign-up', \App\Livewire\Auth\SignUp::class)->name('sign-up');
     Route::get('/sign-in', \App\Livewire\Auth\SignIn::class)->name('login');
+    Route::get('/reset-password', \App\Livewire\Auth\ResetPassword::class)->name('reset-password');
 });
 
 Route::group(['middleware' => 'auth'], function() {

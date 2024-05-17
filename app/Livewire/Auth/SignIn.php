@@ -40,6 +40,7 @@ class SignIn extends Component {
             $this->dispatch('open-modal', name: 'modal-status-error');
         }
     }
+
     public function render() {
         return view('livewire.auth.sign-in');
     }
