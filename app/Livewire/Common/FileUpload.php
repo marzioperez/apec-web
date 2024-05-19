@@ -26,13 +26,15 @@ class FileUpload extends Component {
     public string $error;
     public bool $multiple;
     public $content;
+    public $emitter = null;
 
-    public function mount(array $rules = [], bool $multiple = false, $content = null): void {
+    public function mount(array $rules = [], bool $multiple = false, $content = null, $emitter = null): void {
         $this->uuid = Str::uuid();
         $this->multiple = $multiple;
         $this->rules = $rules;
         $this->files = [];
         $this->content = $content;
+        $this->emitter = $emitter;
     }
 
     public function rules(): array {
@@ -81,7 +83,9 @@ class FileUpload extends Component {
     public function onFileAdded(array $file): void {
         $files = $this->multiple ? array_merge($this->files, [$file]) : [$file];
         $this->files = $files;
-        $this->dispatch("update-photo", $files);
+        if ($this->emitter) {
+            $this->dispatch("update-photo", files:$files, emitter: $this->emitter);
+        }
     }
 
     #[On('{uuid}:fileRemoved')]

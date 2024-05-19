@@ -51,13 +51,12 @@ class UserResource extends Resource {
                             TextInput::make('last_name')->label('Apellidos')->columnSpan(3)->required(),
                             TextInput::make('email')->label('Correo electrónico')->columnSpan(6)->required()
                                 ->unique('users', 'email', ignoreRecord: true),
-
                             TextInput::make('business')->label('Negocio')->columnSpan(3)->required(),
                             TextInput::make('economy')->label('Economía')->columnSpan(3)->required(),
-                            TextInput::make('business_description')->label('Descripción de negocio')->columnSpan(6)->required(),
-                            TextInput::make('role')->label('Rol')->columnSpan(8)->required(),
-                            TextInput::make('phone')->label('Teléfono')->columnSpan(4)->required(),
-                            Textarea::make('biography')->label('Negocio')->columnSpanFull()->required(),
+                            TextInput::make('role')->label('Rol')->columnSpan(3)->required(),
+                            TextInput::make('phone')->label('Teléfono')->columnSpan(3)->required(),
+                            Textarea::make('business_description')->label('Descripción de negocio')->columnSpanFull()->required(),
+                            Textarea::make('biography')->label('Biografía')->columnSpanFull()->required(),
 
                         ])
                     ]),

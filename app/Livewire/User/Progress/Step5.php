@@ -78,8 +78,10 @@ class Step5 extends Component {
     }
 
     #[On('update-photo')]
-    public function updatePhoto($files) {
-        $this->dispatch('set-cover', cover: $files[0]['temporaryUrl']);
+    public function updatePhoto($files, $emitter) {
+        if ($emitter === 'cover') {
+            $this->dispatch('set-cover', cover: $files[0]['temporaryUrl']);
+        }
     }
 
     public function render() {

@@ -89,9 +89,7 @@
                                 :content="$doc_content"
                             />
                             @error('identity_document') <span class="validation-error">{{ $message }}</span> @enderror
-                        @endif
 
-                        @if(!$badge_file)
                             <h5 class="font-semibold my-5">Upload photo*</h5>
                             @php
                                 $photo_content = '<div class="flex justify-center mb-5">';
@@ -106,9 +104,11 @@
                                 :rules="['image', 'mimes:png,jpeg', 'max:10420']"
                                 :key="'badge-photo'"
                                 :content="$photo_content"
+                                :emitter="'cover'"
                             />
+                            @error('badge_photo') <span class="validation-error">{{ $message }}</span> @enderror
                         @endif
-                        @error('badge_photo') <span class="validation-error">{{ $message }}</span> @enderror
+
                         @if(in_array($user['status'], [
                             \App\Concerns\Enums\Status::CONFIRMED->value
                         ]))

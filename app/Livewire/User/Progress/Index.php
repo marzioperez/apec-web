@@ -4,7 +4,6 @@ namespace App\Livewire\User\Progress;
 
 use App\Concerns\Enums\Types;
 use App\Models\User;
-use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Index extends Component {

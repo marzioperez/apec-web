@@ -64,9 +64,10 @@ class Step4 extends Component {
             ];
             $this->validate($rules);
 
-            if ($current_step == $this->current) {
+            $step = $this->current + 1;
+            if ($current_step === $this->current) {
                 $progress = $progress + $result;
-                $step = $step + 1;
+                $step = $current_step + 1;
             }
         }
 

@@ -1,9 +1,9 @@
 <div x-data="{
         with_companion: '{{$with_companion}}',
         with_staff: '{{$with_staff}}',
-        user_current_step: {{$current_user_step}}
+        current_user_step: {{$current_user_step}}
     }"
-     x-on:update-user-step.window="user_current_step = $event.detail.step"
+     x-on:update-user-step.window="current_user_step = $event.detail.step"
     class="bg-white sm:py-10 py-10 relative bg-fixed bg-no-repeat bg-contain bg-left-bottom"
     style="background-image: url('{{asset("img/bg-sign-up-step-4.png")}}')">
 
@@ -73,23 +73,6 @@
                             </div>
 
                             <div class="my-3" x-show="with_companion === 'yes'">
-                                @if($user['current_step'] > 3)
-                                    <div class="rounded-md bg-yellow-50 p-4 mb-6">
-                                        <div class="flex">
-                                            <div class="flex-shrink-0">
-                                                <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                    <path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-                                                </svg>
-                                            </div>
-                                            <div class="ml-3">
-                                                <h3 class="text-sm font-medium text-yellow-800">Attention</h3>
-                                                <div class="mt-2 text-sm text-yellow-700">
-                                                    <p>Al editar estos campos los usuarios y correos anteriores ya no tendrán acceso al proceso de registro</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endif
                                 <h5 class="font-semibold mb-3">Companion information</h5>
                                 <div class="form-group">
                                     <label for="companion.name">Name*</label>

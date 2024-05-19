@@ -78,9 +78,9 @@ class Step3 extends Component {
     public function save($process) {
         $current_step = $this->user['current_step'];
 
-        $step = $this->user['current_step'];
         $result = 100 / $this->quantity;
         $progress = $this->user['register_progress'];
+        $step = $current_step;
 
         if ($process) {
             if ($current_step === $this->current) {
@@ -193,8 +193,8 @@ class Step3 extends Component {
             if ($current_step === $this->current) {
                 $this->dispatch('update-progress', value: $progress);
             }
-            $this->dispatch('update-step', step: $step);
-            $this->dispatch('update-user-step', step: $step);
+            $this->dispatch('update-step', step: $this->current + 1);
+            $this->dispatch('update-user-step', step: $this->current + 1);
         } else {
             $this->toast('It has been saved. Your profile will be updated shortly.');
         }

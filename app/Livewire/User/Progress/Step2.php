@@ -76,7 +76,7 @@ class Step2 extends Component {
 
         $this->user->update([
             'register_progress' => $progress,
-            'current_step' => ($this->user['current_step'] > 3 ? $this->user['current_step'] : 3),
+            'current_step' => ($this->user['current_step'] > 2 ? $current_step : $current_step + 1),
             'business' => $this->business,
             'role' => $this->role,
             'area' => $this->area,
@@ -94,7 +94,7 @@ class Step2 extends Component {
         if ($current_step === 2) {
             $this->dispatch('update-progress', value: $progress);
         }
-        $this->dispatch('update-step', step: 3);
+        $this->dispatch('update-step', step: $this->current + 1);
     }
 
     public function render() {
