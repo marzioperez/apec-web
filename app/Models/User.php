@@ -13,6 +13,7 @@ class User extends Authenticatable {
 
     use HasFactory, Notifiable;
     protected $fillable = [
+        'code',
         'type',
 
         'status',
@@ -108,7 +109,8 @@ class User extends Authenticatable {
             'accept_terms_and_conditions' => 'boolean',
             'with_companion' => 'boolean',
             'with_staff' => 'boolean',
-            'vaccines' => 'json'
+            'vaccines' => 'json',
+            'amount' => 'decimal:2'
         ];
     }
 

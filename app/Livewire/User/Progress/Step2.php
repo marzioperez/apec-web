@@ -3,18 +3,43 @@
 namespace App\Livewire\User\Progress;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 
 class Step2 extends Component {
 
-    public $business, $role, $area, $address, $city, $zip_code, $phone, $email, $economy;
-    public $attendee_name, $attendee_email;
+    public $data  = [
+        'business' => null,
+        'role' => null,
+        'area' => null,
+        'address' => null,
+        'city' => null,
+        'zip_code' => null,
+        'phone' => null,
+        'email' => null,
+        'economy' => null,
+        'attendee_name' => null,
+        'attendee_email' => null
+    ];
+
     public User $user;
     public $quantity = 5, $current = 2, $complete = 1;
 
     protected $messages = [
-        '*.required' => 'Required field',
-        '*.email' => 'Incorrect email format'
+        'data.*.required' => 'Required field',
+        'data.*.email' => 'Incorrect email format'
+    ];
+
+    protected $rules = [
+        'data.business' => 'required',
+        'data.role' => 'required',
+        'data.area' => 'required',
+        'data.address' => 'required',
+        'data.city' => 'required',
+        'data.zip_code' => 'required',
+        'data.phone' => 'required',
+        'data.email' => 'required|email',
+        'data.economy' => 'required'
     ];
 
     public function mount(User $user, $quantity = 5, $current = 2, $complete = 1) {
@@ -23,39 +48,27 @@ class Step2 extends Component {
         $this->current = $current;
         $this->complete = $complete;
 
-        $this->business = $user['business'];
-        $this->role = $user['role'];
-        $this->area = $user['area'];
-        $this->address = $user['address'];
-        $this->city = $user['city'];
-        $this->zip_code = $user['zip_code'];
-        $this->phone = $user['business_phone_number'];
-        $this->email = $user['business_email'];
-        $this->economy = $user['economy'];
-
-        $this->attendee_name = $user['attendee_name'];
-        $this->attendee_email = $user['attendee_email'];
+        $this->data = [
+            'business' => $user['business'],
+            'role' => $user['role'],
+            'area' => $user['area'],
+            'address' => $user['address'],
+            'city' => $user['city'],
+            'zip_code' => $user['zip_code'],
+            'phone' => $user['phone'],
+            'email' => $user['email'],
+            'economy' => $user['economy']
+        ];
     }
 
     public function save() {
-        $this->user->update([
-            'business' => $this->business,
-            'role' => $this->role,
-            'area' => $this->area,
-            'address' => $this->address,
-            'city' => $this->city,
-            'zip_code' => $this->zip_code,
-            'business_phone_number' => $this->phone,
-            'business_email' => $this->email,
-            'economy' => $this->economy,
-            'attendee_name' => $this->attendee_name,
-            'attendee_email' => $this->attendee_email
-        ]);
+        $this->user->update($this->data);
         $this->toast('It has been saved. Your profile will be updated shortly.');
     }
 
     public function process() {
         $rules = [
+            'business' => 'required',
             'role' => 'required',
             'area' => 'required',
             'address' => 'required',
@@ -65,7 +78,19 @@ class Step2 extends Component {
             'email' => 'required|email',
             'economy' => 'required'
         ];
-        $this->validate($rules, $this->messages);
+
+        $messages = [
+            '*.required' => 'Required field',
+            '*.email' => 'Incorrect email format'
+        ];
+
+        $validator = Validator::make($this->data, $rules, $messages);
+
+        if ($validator->fails()) {
+            $this->toast('There are fields with errors', 'Errors', 'error');
+        }
+
+        $this->validate();
 
         $current_step = $this->user['current_step'];
         $result = 100 / $this->quantity;
@@ -74,21 +99,11 @@ class Step2 extends Component {
             $progress = $progress + $result;
         }
 
-        $this->user->update([
-            'register_progress' => $progress,
-            'current_step' => ($this->user['current_step'] > 2 ? $current_step : $current_step + 1),
-            'business' => $this->business,
-            'role' => $this->role,
-            'area' => $this->area,
-            'address' => $this->address,
-            'city' => $this->city,
-            'zip_code' => $this->zip_code,
-            'business_phone_number' => $this->phone,
-            'business_email' => $this->email,
-            'economy' => $this->economy,
-            'attendee_name' => $this->attendee_name,
-            'attendee_email' => $this->attendee_email
-        ]);
+        $to_save = $this->data;
+        $to_save['register_progress'] = $progress;
+        $to_save['current_step'] = ($this->user['current_step'] > 2 ? $current_step : $current_step + 1);
+
+        $this->user->update($to_save);
 
         // Actualizamos la barra de progreso solo si el usuario se encuentra en el paso 2
         if ($current_step === 2) {

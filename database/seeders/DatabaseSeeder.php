@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Actions\GenerateCode;
 use App\Concerns\Enums\Status;
 use App\Concerns\Enums\Types;
 use App\Models\User;
@@ -15,6 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void {
         $this->call(AdminSeeder::class);
         User::factory()->create([
+            'code' => GenerateCode::run('Jon', 'Doe'),
             'type' => Types::PARTICIPANT->value,
             'status' => Status::CONFIRMED->value,
             'name' => 'Jon',

@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('code')->nullable()->default(null);
             $table->string('type')->nullable()->default(Types::PARTICIPANT->value);
 
             // Información general
@@ -90,7 +91,7 @@ return new class extends Migration
 
             $table->string('qr')->nullable()->default(null);
             $table->longText('observation')->nullable()->default(null);
-            $table->double('amount', 8, 2)->nullable()->default(3500);
+            $table->decimal('amount')->nullable()->default(3500);
 
             // ID del participante que invita
             $table->unsignedInteger('parent_id')->nullable()->default(null);

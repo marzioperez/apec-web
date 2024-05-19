@@ -15,5 +15,12 @@ enum Types: string {
     case PASSPORT = 'Passport';
     case CE = 'C.E';
 
+    case NATIONAL = 'Nacional';
+    case FOREIGNER = 'Extranjero';
+    case INVOICE = 'Factura';
+    case TICKET = 'Boleta';
+    case CREDIT_CARD = 'Tarjeta';
+    case BANK_TRANSFER = 'Transferencia';
+
 
 }

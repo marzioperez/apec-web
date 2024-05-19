@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Actions\GenerateCode;
 use App\Concerns\Enums\Status;
+use App\Concerns\Enums\Types;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -24,17 +25,26 @@ class UserFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition(): array {
+        $name = fake()->firstName();
+        $last_name = fake()->firstName();
+        $code = GenerateCode::run($name, $last_name);
         $phone = fake()->phoneNumber;
 
         return [
+            'code' => $code,
+            'type' => fake()->randomElement([
+                Types::PARTICIPANT->value,
+                Types::FREE_PASS_PARTICIPANT->value,
+                Types::VIP->value
+            ]),
             'status' => fake()->randomElement([
                 Status::PENDING_APPROVAL->value,
                 Status::CONFIRMED->value,
                 Status::DECLINED->value,
             ]),
             'current_step' => 1,
-            'name' => fake()->firstName(),
-            'last_name' => fake()->firstName(),
+            'name' => $name,
+            'last_name' => $last_name,
             'business' => fake()->company,
             'economy' => fake()->word,
             'business_description' => fake()->paragraph,

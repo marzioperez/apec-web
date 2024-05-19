@@ -12,64 +12,64 @@
                         <div class="form-group">
                             <label for="business">Business/Organization/Ministry</label>
                             <div class="form-field">
-                                <input type="text" id="business" name="business" wire:model="business" />
-                                @error('business') <span class="validation-error">{{ $message }}</span> @enderror
+                                <input type="text" id="business" name="business" wire:model="data.business" />
+                                @error('data.business') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="role">Role*</label>
                             <div class="form-field">
-                                <input type="text" id="role" name="role" wire:model="role" />
-                                @error('role') <span class="validation-error">{{ $message }}</span> @enderror
+                                <input type="text" id="role" name="role" wire:model="data.role" />
+                                @error('data.role') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="area">Area/Department*</label>
                             <div class="form-field">
-                                <input type="text" id="area" name="area" wire:model="area" />
-                                @error('area') <span class="validation-error">{{ $message }}</span> @enderror
+                                <input type="text" id="area" name="area" wire:model="data.area" />
+                                @error('data.area') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="address">Address*</label>
                             <div class="form-field">
-                                <input type="text" id="address" name="address" wire:model="address" />
-                                @error('address') <span class="validation-error">{{ $message }}</span> @enderror
+                                <input type="text" id="address" name="address" wire:model="data.address" />
+                                @error('data.address') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="city">City*</label>
                             <div class="form-field">
-                                <input type="text" id="city" name="city" wire:model="city" />
-                                @error('city') <span class="validation-error">{{ $message }}</span> @enderror
+                                <input type="text" id="city" name="city" wire:model="data.city" />
+                                @error('data.city') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="zip_code">Zip Code*</label>
                             <div class="form-field">
-                                <input type="text" id="zip_code" name="zip_code" wire:model="zip_code" />
-                                @error('city') <span class="validation-error">{{ $message }}</span> @enderror
+                                <input type="text" id="zip_code" name="zip_code" wire:model="data.zip_code" />
+                                @error('data.city') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="phone">Business phone number*</label>
                             <div class="form-field">
-                                <input type="text" id="phone" name="phone" wire:model="phone" />
-                                @error('phone') <span class="validation-error">{{ $message }}</span> @enderror
+                                <input type="text" id="phone" name="phone" wire:model="data.phone" />
+                                @error('data.phone') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="email">Email*</label>
                             <div class="form-field">
-                                <input type="email" id="email" name="email" wire:model="email" />
-                                @error('email') <span class="validation-error">{{ $message }}</span> @enderror
+                                <input type="email" id="email" name="email" wire:model="data.email" />
+                                @error('data.email') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="economy">Economy*</label>
                             <div class="form-field">
-                                <input type="text" id="economy" name="economy" wire:model="economy" />
-                                @error('economy') <span class="validation-error">{{ $message }}</span> @enderror
+                                <input type="text" id="economy" name="economy" wire:model="data.economy" />
+                                @error('data.economy') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
 
@@ -77,15 +77,15 @@
                         <div class="form-group">
                             <label for="attendee_name">Attendee Name</label>
                             <div class="form-field">
-                                <input type="text" id="attendee_name" name="attendee_name" wire:model="attendee_name" />
-                                @error('attendee_name') <span class="validation-error">{{ $message }}</span> @enderror
+                                <input type="text" id="attendee_name" name="attendee_name" wire:model="data.attendee_name" />
+                                @error('data.attendee_name') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="attendee_email">Attendee Email</label>
                             <div class="form-field">
-                                <input type="text" id="attendee_email" name="attendee_email" wire:model="attendee_email" />
-                                @error('attendee_email') <span class="validation-error">{{ $message }}</span> @enderror
+                                <input type="text" id="attendee_email" name="attendee_email" wire:model="data.attendee_email" />
+                                @error('data.attendee_email') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="sm:my-8 my-6 flex justify-center space-x-6 items-center">
