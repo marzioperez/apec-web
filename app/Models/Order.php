@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model {
@@ -45,6 +46,7 @@ class Order extends Model {
         'payment_voucher',
 
         'amount',
+        'culqi_id',
         'status'
     ];
 
@@ -53,5 +55,9 @@ class Order extends Model {
         'accept_policy' => 'boolean',
         'amount' => 'decimal:2'
     ];
+
+    public function user(): BelongsTo {
+        return $this->belongsTo(User::class);
+    }
 
 }

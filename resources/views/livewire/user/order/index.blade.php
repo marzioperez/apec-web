@@ -3,6 +3,6 @@
         <livewire:user.order.step1 :order="$order" />
     </div>
     <div x-show="step === 2">
-        <livewire:user.order.step2 />
+        <livewire:user.order.step2 :order="$order" />
     </div>
 </div>

@@ -220,7 +220,8 @@ class CompletedUserResource extends Resource
                 $query->whereIn('status', [
                     Status::PENDING_APPROVAL_DATA->value,
                     Status::UNPAID->value,
-                    Status::SEND_TO_CHANCELLERY->value
+                    Status::SEND_TO_CHANCELLERY->value,
+                    Status::PAYMENT_REVIEW->value
                 ])
             )
             ->columns([

@@ -11,9 +11,9 @@
                     <h5 class="font-semibold mb-5">Voucher type</h5>
                     <div class="flex justify-center items-center space-x-5 mb-6">
                         <button type="button" wire:click.prevent="change_voucher_type('{{\App\Concerns\Enums\Types::NATIONAL->value}}')"
-                            class="btn {{($data['voucher_type'] === \App\Concerns\Enums\Types::NATIONAL->value ? 'btn-white-outline' : 'btn-gray')}}">National</button>
+                            class="btn {{($data['voucher_type'] === \App\Concerns\Enums\Types::NATIONAL->value ? 'btn-gray' : 'btn-white-outline')}}">National</button>
                         <button type="button" wire:click.prevent="change_voucher_type('{{\App\Concerns\Enums\Types::FOREIGNER->value}}')"
-                            class="btn {{($data['voucher_type'] === \App\Concerns\Enums\Types::FOREIGNER->value ? 'btn-white-outline' : 'btn-gray')}}">Foreigner</button>
+                            class="btn {{($data['voucher_type'] === \App\Concerns\Enums\Types::FOREIGNER->value ? 'btn-gray' : 'btn-white-outline')}}">Foreigner</button>
                     </div>
 
                     @if($data['voucher_type'] === \App\Concerns\Enums\Types::NATIONAL->value)
@@ -106,7 +106,7 @@
                         </div>
                     </div>
 
-                    <h5 class="font-semibold mt-10 mb-5">Voucher type</h5>
+                    <h5 class="font-semibold mt-10 mb-5">Total payment</h5>
                     <div class="form-group">
                         <label>Delegate Registration</label>
                         <div class="form-field">

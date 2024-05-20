@@ -31,4 +31,9 @@ return [
         ],
     ],
 
+    'culqi' => [
+        'key' => env('CULQI_PUBLIC_KEY'),
+        'secret' => env('CULQI_SECRET_KEY')
+    ],
+
 ];

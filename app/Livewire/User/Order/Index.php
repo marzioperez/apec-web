@@ -2,6 +2,7 @@
 
 namespace App\Livewire\User\Order;
 
+use App\Concerns\Enums\Status;
 use App\Models\Order;
 use Livewire\Component;
 
@@ -15,8 +16,12 @@ class Index extends Component {
         $user = auth()->user();
         if ($order) {
             if ($order['user_id'] === $user['id']) {
-                $this->order = $order;
-                $this->current_step = $order['step'];
+                if ($order['status'] === Status::UNPAID->value) {
+                    $this->order = $order;
+                    $this->current_step = $order['step'];
+                } else {
+                    $this->redirect(config('app.url'));
+                }
             } else {
                 $this->redirect(config('app.url'));
             }

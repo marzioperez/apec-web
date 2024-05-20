@@ -50,6 +50,7 @@ return new class extends Migration
             $table->string('payment_voucher')->nullable()->default(null);
 
             $table->decimal('amount')->nullable()->default(0);
+            $table->string('culqi_id')->nullable()->default(null);
             $table->string('status')->nullable()->default(Status::UNPAID->value);
 
             $table->softDeletes();
