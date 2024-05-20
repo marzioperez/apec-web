@@ -2,12 +2,17 @@
 
 namespace App\Filament\Resources\Event;
 
+use App\Actions\GenerateQrCode;
 use App\Concerns\Enums\Genders;
 use App\Concerns\Enums\Status;
 use App\Concerns\Enums\Titles;
 use App\Concerns\Enums\Types;
 use App\Filament\Resources\Event\CompletedUserResource\Pages;
 use App\Filament\Resources\Event\CompletedUserResource\RelationManagers;
+use App\Mail\CompleteDataFailed;
+use App\Mail\CompleteDataPassFree;
+use App\Mail\CompleteDataSuccess;
+use App\Models\Order;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
@@ -26,6 +31,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Mail;
 
 class CompletedUserResource extends Resource
 {
@@ -211,7 +217,11 @@ class CompletedUserResource extends Resource
     {
         return $table
             ->modifyQueryUsing(fn(Builder $query) =>
-                $query->where('status', Status::PENDING_APPROVAL_DATA->value)
+                $query->whereIn('status', [
+                    Status::PENDING_APPROVAL_DATA->value,
+                    Status::UNPAID->value,
+                    Status::SEND_TO_CHANCELLERY->value
+                ])
             )
             ->columns([
                 TextColumn::make('name')->label('Nombres')->searchable(),
@@ -240,7 +250,35 @@ class CompletedUserResource extends Resource
                         ->modalSubmitActionLabel('Confirmar')
                         ->action(function (User $user):void {
 
-                        })->visible(fn(User $user): bool => $user['status'] === Status::PENDING_APPROVAL_DATA->value),
+                            if (in_array($user['type'], [
+                                Types::PARTICIPANT->value,
+                                Types::STAFF->value,
+                                Types::COMPANION->value,
+                                Types::VIP->value
+                            ])) {
+                                $user->update(['status' => Status::UNPAID->value]);
+                                $order = Order::create([
+                                    'user_id' => $user['id'],
+                                    'token' => md5($user['code']),
+                                    'amount' => $user['amount']
+                                ]);
+                                Mail::to($user['email'])->send(new CompleteDataSuccess($order));
+                            }
+
+                            if (in_array($user['type'], [
+                                Types::FREE_PASS_PARTICIPANT->value,
+                                Types::FREE_PASS_COMPANION->value
+                            ])) {
+                                $qr = GenerateQrCode::run($user['code']);
+                                $user->update([
+                                    'status' => Status::SEND_TO_CHANCELLERY->value,
+                                    'qr' => $qr
+                                ]);
+                                Mail::to($user['email'])->send(new CompleteDataPassFree($user));
+                            }
+                        }),
+                        // Todo: Descomentar para que esta acción se oculte con ciertos estados
+                        //->visible(fn(User $user): bool => $user['status'] === Status::PENDING_APPROVAL_DATA->value)
                     Tables\Actions\Action::make('observe')
                         ->icon('heroicon-o-eye')
                         ->color('warning')
@@ -248,14 +286,26 @@ class CompletedUserResource extends Resource
                         ->modalHeading('Enviar observaciones')
                         ->modalDescription('Esta acción regresará al usuario al estado de Confirmado para que ingrese con sus datos y corrija la información que se requiere subsanar. Si activas los campos de Limpiar foto o documento de identidad, estos datos se eliminarán del usuario para que vuelva a subir dicha información.')
                         ->form([
-                            RichEditor::make('observation')->label('Observaciones')->columnSpanFull(),
+                            RichEditor::make('observation')->label('Observaciones')->required()->columnSpanFull(),
                             Toggle::make('enable_photo')->label('Limpiar datos de foto')->columnSpanFull(),
                             Toggle::make('enable_id')->label('Limpiar datos de documento de identidad')->columnSpanFull(),
                         ])
                         ->modalSubmitActionLabel('Aceptar')
-                        ->action(function (User $user):void {
-
-                        })->visible(fn(User $user): bool => $user['status'] === Status::PENDING_APPROVAL_DATA->value),
+                        ->action(function (array $data, User $user):void {
+                            if ($data['enable_photo']) {
+                                $user->update(['badge_photo' => null]);
+                            }
+                            if ($data['enable_id']) {
+                                $user->update(['identity_document' => null]);
+                            }
+                            $user->update([
+                                'status' => Status::CONFIRMED->value,
+                                'observation' => $data['observation']
+                            ]);
+                            Mail::to($user['email'])->send(new CompleteDataFailed($user, $data['observation']));
+                        }),
+                        // Todo: Descomentar para que esta acción se oculte con ciertos estados
+                        //->visible(fn(User $user): bool => $user['status'] === Status::PENDING_APPROVAL_DATA->value),
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
                 ])

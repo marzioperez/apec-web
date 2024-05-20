@@ -10,5 +10,7 @@ enum Status: string {
     case PENDING_APPROVAL = 'Pendiente de aprobación';
     case PENDING_APPROVAL_DATA = 'Pendiente de aprobación de datos';
     case UNPAID = 'Pendiente de pago';
+    case SEND_TO_CHANCELLERY = 'Enviado a cancillería';
+    case FINISHED = 'Finalizado';
 
 }

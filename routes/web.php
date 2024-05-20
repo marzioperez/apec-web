@@ -15,4 +15,6 @@ Route::group(['middleware' => ['guest']], function () {
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/progress', \App\Livewire\User\Progress\Index::class)->name('progress');
     Route::get('/guest-progress', \App\Livewire\User\Progress\Guest::class)->name('guest-progress');
+
+    Route::get('/payment/{token}', \App\Livewire\User\Order\Index::class)->name('payment');
 });

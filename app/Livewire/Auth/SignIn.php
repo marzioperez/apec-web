@@ -25,7 +25,12 @@ class SignIn extends Component {
         if (auth()->attempt([
             'email' => $this->email,
             'password' => $this->password,
-            'status' => [Status::CONFIRMED->value, Status::PENDING_APPROVAL_DATA]
+            'status' => [
+                Status::CONFIRMED->value,
+                Status::PENDING_APPROVAL_DATA->value,
+                Status::UNPAID->value,
+                Status::SEND_TO_CHANCELLERY->value
+            ]
         ], $this->remember_me)) {
             if (in_array(auth()->user()->type, [
                 Types::STAFF->value,
