@@ -2,7 +2,9 @@
 
 namespace App\Livewire\User\Order;
 
+use App\Concerns\Enums\Types;
 use App\Models\Order;
+use Illuminate\Support\Facades\Validator;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -11,26 +13,28 @@ class Step1 extends Component {
     public $data = [
         'voucher_type' => null,
         'document_type' => null,
-
-        // Datos para Factura
         'ruc' => null,
         'business_name' => null,
-
-        // Datos para Boleta
         'name' => null,
         'last_name' => null,
         'dni' => null,
-
-        // Datos para extranjero
         'client' => null,
         'document_id' => null,
-
         'physical_address' => null,
         'email_address' => null,
         'accept_policy' => null
     ];
+    public $amount;
+    public Order $order;
+
+    protected $messages = [
+        'data.*.required' => 'Required field',
+        'data.*.email' => 'Incorrect email format',
+        'data.*.accepted' => 'Accept this field',
+    ];
 
     public function mount(Order $order) {
+        $this->order = $order;
         $this->data = [
             'voucher_type' => $order['voucher_type'],
             'document_type' => $order['document_type'],
@@ -45,11 +49,78 @@ class Step1 extends Component {
             'email_address' => $order['email_address'],
             'accept_policy' => $order['accept_policy']
         ];
+        $this->amount = $order['amount'];
     }
 
-    #[On('change-voucher-type')]
     public function change_voucher_type($type) {
         $this->data['voucher_type'] = $type;
+    }
+
+    public function process() {
+        $rules = [
+            'data.physical_address' => 'required',
+            'data.email_address' => 'required',
+            'data.accept_policy' => 'accepted'
+        ];
+
+        $data_rules = [
+            'physical_address' => 'required',
+            'email_address' => 'required',
+            'accept_policy' => 'accepted'
+        ];
+
+        if ($this->data['voucher_type'] === Types::NATIONAL->value) {
+            if ($this->data['document_type'] === Types::INVOICE->value) {
+                $data_rules = array_merge($data_rules, [
+                    'ruc' => 'required',
+                    'business_name' => 'required'
+                ]);
+
+                $rules = array_merge($rules, [
+                    'data.ruc' => 'required',
+                    'data.business_name' => 'required'
+                ]);
+            }
+
+            if ($this->data['document_type'] === Types::TICKET->value) {
+                $data_rules = array_merge($data_rules, [
+                    'name' => 'required',
+                    'last_name' => 'required'
+                ]);
+
+                $rules = array_merge($rules, [
+                    'data.name' => 'required',
+                    'data.last_name' => 'required'
+                ]);
+            }
+        }
+
+        if ($this->data['voucher_type'] === Types::FOREIGNER->value) {
+            $data_rules = array_merge($data_rules, [
+                'client' => 'required',
+                'id' => 'required'
+            ]);
+
+            $rules = array_merge($rules, [
+                'data.client' => 'required',
+                'data.id' => 'required'
+            ]);
+        }
+
+
+        $validator = Validator::make($this->data, $data_rules);
+
+        if ($validator->fails()) {
+            $this->toast('There are fields with errors', 'Errors', 'error');
+        }
+
+        $this->validate($rules);
+
+        $to_save = $this->data;
+        $to_save['step'] = ($this->order['step'] > 2 ? $this->order['step'] : 2);
+        $this->order->update($to_save);
+
+        $this->dispatch('update-step', step: 2);
     }
 
     public function render() {

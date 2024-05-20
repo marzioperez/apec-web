@@ -16,25 +16,107 @@
                             class="btn {{($data['voucher_type'] === \App\Concerns\Enums\Types::FOREIGNER->value ? 'btn-white-outline' : 'btn-gray')}}">Foreigner</button>
                     </div>
 
+                    @if($data['voucher_type'] === \App\Concerns\Enums\Types::NATIONAL->value)
+                        <div class="form-group">
+                            <label for="business">Select Preferred Proof of Payment</label>
+                            <div class="form-field">
+                                <select id="document_type" name="document_type" wire:model.live="data.document_type">
+                                    <option value="">Select...</option>
+                                    <option value="{{\App\Concerns\Enums\Types::INVOICE->value}}">{{\App\Concerns\Enums\Types::INVOICE->value}}</option>
+                                    <option value="{{\App\Concerns\Enums\Types::TICKET->value}}">{{\App\Concerns\Enums\Types::TICKET->value}}</option>
+                                </select>
+                                @error('data.document_type') <span class="validation-error">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        @if($data['document_type'] === \App\Concerns\Enums\Types::INVOICE->value)
+                            <div class="form-group">
+                                <label for="data.ruc">Taxpayer Identification Number RUC*</label>
+                                <div class="form-field">
+                                    <input type="text" id="data.ruc" name="data.ruc" wire:model="data.ruc" />
+                                    @error('data.ruc') <span class="validation-error">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="data.business_name">Business name*</label>
+                                <div class="form-field">
+                                    <input type="text" id="data.business_name" name="data.business_name" wire:model="data.business_name" />
+                                    @error('data.business_name') <span class="validation-error">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                        @endif
+
+                        @if($this->data['document_type'] === \App\Concerns\Enums\Types::TICKET->value)
+                            <div class="form-group">
+                                <label for="data.name">Name(s)*</label>
+                                <div class="form-field">
+                                    <input type="text" id="data.name" name="data.name" wire:model="data.name" />
+                                    @error('data.name') <span class="validation-error">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="data.last_name">Last Name(s)*</label>
+                                <div class="form-field">
+                                    <input type="text" id="data.last_name" name="data.last_name" wire:model="data.last_name" />
+                                    @error('data.last_name') <span class="validation-error">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                        @endif
+                    @endif
+
+                    @if($data['voucher_type'] === \App\Concerns\Enums\Types::FOREIGNER->value)
+                        <div class="form-group">
+                            <label for="data.client">Client*</label>
+                            <div class="form-field">
+                                <input type="text" id="data.client" name="data.client" wire:model="data.client" />
+                                @error('data.client') <span class="validation-error">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="data.id">ID*</label>
+                            <div class="form-field">
+                                <input type="text" id="data.id" name="data.id" wire:model="data.id" />
+                                @error('data.id') <span class="validation-error">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                    @endif
+
                     <div class="form-group">
-                        <label for="business">Select Preferred Proof of Payment</label>
+                        <label for="data.physical_address">Physical Address*</label>
                         <div class="form-field">
-                            <select id="document_type" name="document_type" wire:model="data.document_type">
-                                <option value="">Select...</option>
-                                <option value="{{\App\Concerns\Enums\Types::INVOICE->value}}">{{\App\Concerns\Enums\Types::INVOICE->value}}</option>
-                                <option value="{{\App\Concerns\Enums\Types::TICKET->value}}">{{\App\Concerns\Enums\Types::TICKET->value}}</option>
-                            </select>
-                            @error('data.document_type') <span class="validation-error">{{ $message }}</span> @enderror
+                            <input type="text" id="data.physical_address" name="data.physical_address" wire:model="data.physical_address" />
+                            @error('data.physical_address') <span class="validation-error">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="data.email_address">Email Address*</label>
+                        <div class="form-field">
+                            <input type="text" id="data.email_address" name="data.email_address" wire:model="data.email_address" />
+                            @error('data.email_address') <span class="validation-error">{{ $message }}</span> @enderror
                         </div>
                     </div>
 
-                    @if($data['document_type'] === \App\Concerns\Enums\Types::INVOICE->value)
+                    <div class="form-group">
+                        <div class="col-span-4"></div>
+                        <div class="form-field">
+                            <div class="form-check">
+                                <input type="checkbox" name="data.accept_policy" class="form-check-input" id="data.accept_policy" wire:model="data.accept_policy">
+                                <label for="data.accept_policy" class="text-gray">I accept<a href="#" class="text-blue underline ml-1" target="_blank"> the Personal Data Privacy Policy</a></label>
+                            </div>
+                            @error('data.accept_policy') <span class="validation-error checkbox">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
 
-                    @endif
+                    <h5 class="font-semibold mt-10 mb-5">Voucher type</h5>
+                    <div class="form-group">
+                        <label>Delegate Registration</label>
+                        <div class="form-field">
+                            <input type="text" disabled value="${{number_format($amount)}}" />
+                        </div>
+                    </div>
 
-                    @if($data['document_type'] === \App\Concerns\Enums\Types::TICKET->value)
-
-                    @endif
+                    <div class="sm:my-8 my-6 flex justify-center space-x-6 items-center">
+                        <button type="button" class="btn btn-primary" wire:click.prevent="process">Go to pay</button>
+                    </div>
                 </div>
             </div>
         </div>

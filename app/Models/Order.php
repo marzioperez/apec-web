@@ -51,7 +51,7 @@ class Order extends Model {
     protected $casts = [
         'number' => 'integer',
         'accept_policy' => 'boolean',
-        'amount' => 'decimal'
+        'amount' => 'decimal:2'
     ];
 
 }
