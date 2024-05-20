@@ -52,17 +52,17 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="phone">Business phone number*</label>
+                            <label for="business_phone_number">Business phone number*</label>
                             <div class="form-field">
-                                <input type="text" id="phone" name="phone" wire:model="data.phone" />
-                                @error('data.phone') <span class="validation-error">{{ $message }}</span> @enderror
+                                <input type="text" id="business_phone_number" name="business_phone_number" wire:model="data.business_phone_number" />
+                                @error('data.business_phone_number') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email*</label>
+                            <label for="business_email">Email*</label>
                             <div class="form-field">
-                                <input type="email" id="email" name="email" wire:model="data.email" />
-                                @error('data.email') <span class="validation-error">{{ $message }}</span> @enderror
+                                <input type="email" id="business_email" name="business_email" wire:model="data.business_email" />
+                                @error('data.business_email') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">

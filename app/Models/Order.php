@@ -14,6 +14,7 @@ class Order extends Model {
         'user_id',
         'code',
         'token',
+        'step',
         'number',
         'voucher_type',
         'document_type',
@@ -34,6 +35,14 @@ class Order extends Model {
         'physical_address',
         'email_address',
         'accept_policy',
+
+        'payment_method',
+
+        'payment_reference_name',
+        'payment_reference_last_name',
+        'payment_reference_phone',
+        'payment_reference_email',
+        'payment_voucher',
 
         'amount',
         'status'

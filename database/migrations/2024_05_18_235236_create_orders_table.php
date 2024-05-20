@@ -1,5 +1,6 @@
 <?php
 
+use App\Concerns\Enums\PaymentMethods;
 use App\Concerns\Enums\Status;
 use App\Concerns\Enums\Types;
 use Illuminate\Database\Migrations\Migration;
@@ -18,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('code')->nullable()->default(null);
             $table->string('token')->nullable()->default(null);
+            $table->integer('step')->nullable()->default(1);
             $table->integer('number')->nullable()->default(null);
             $table->string('voucher_type')->nullable()->default(Types::NATIONAL->value);
             $table->string('document_type')->nullable()->default(Types::INVOICE->value);
@@ -38,6 +40,14 @@ return new class extends Migration
             $table->string('physical_address')->nullable()->default(null);
             $table->string('email_address')->nullable()->default(null);
             $table->boolean('accept_policy')->nullable()->default(false);
+
+            $table->string('payment_method')->nullable()->default(PaymentMethods::CREDIT_CARD->value);
+
+            $table->string('payment_reference_name')->nullable()->default(null);
+            $table->string('payment_reference_last_name')->nullable()->default(null);
+            $table->string('payment_reference_phone')->nullable()->default(null);
+            $table->string('payment_reference_email')->nullable()->default(null);
+            $table->string('payment_voucher')->nullable()->default(null);
 
             $table->decimal('amount')->nullable()->default(0);
             $table->string('status')->nullable()->default(Status::UNPAID->value);

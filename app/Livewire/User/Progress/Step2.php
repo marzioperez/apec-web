@@ -37,8 +37,8 @@ class Step2 extends Component {
         'data.address' => 'required',
         'data.city' => 'required',
         'data.zip_code' => 'required',
-        'data.phone' => 'required',
-        'data.email' => 'required|email',
+        'data.business_phone_number' => 'required',
+        'data.business_email' => 'required|email',
         'data.economy' => 'required'
     ];
 
@@ -55,8 +55,8 @@ class Step2 extends Component {
             'address' => $user['address'],
             'city' => $user['city'],
             'zip_code' => $user['zip_code'],
-            'phone' => $user['phone'],
-            'email' => $user['email'],
+            'business_phone_number' => $user['business_phone_number'],
+            'business_email' => $user['business_email'],
             'economy' => $user['economy']
         ];
     }
@@ -74,8 +74,8 @@ class Step2 extends Component {
             'address' => 'required',
             'city' => 'required',
             'zip_code' => 'required',
-            'phone' => 'required',
-            'email' => 'required|email',
+            'business_phone_number' => 'required',
+            'business_email' => 'required|email',
             'economy' => 'required'
         ];
 
