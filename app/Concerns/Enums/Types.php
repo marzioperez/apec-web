@@ -10,6 +10,7 @@ enum Types: string {
     case STAFF = 'Staff';
     case FREE_PASS_PARTICIPANT = 'Participante pase libre';
     case FREE_PASS_COMPANION = 'Acompañante pase libre';
+    case FREE_PASS_STAFF = 'Staffer pase libre';
 
     case DNI = 'National ID (Perú)';
     case PASSPORT = 'Passport';

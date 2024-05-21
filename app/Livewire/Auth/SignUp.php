@@ -4,20 +4,26 @@ namespace App\Livewire\Auth;
 
 use App\Actions\GenerateCode;
 use App\Mail\Register;
+use App\Models\Economy;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class SignUp extends Component {
 
-    // public $name, $last_name, $business, $economy, $business_description, $role, $biography, $email, $confirm_email, $phone_number;
+    // public $name, $last_name, $business, $economy, $business_description, $role, $biography, $email, $confirm_email, $phone_number, $other_economy;
     // public $send_copy_of_registration = false, $accept_terms_and_conditions = false;
     public $attendee_name, $attendee_email;
 
-    public $name = 'Marzio', $last_name = 'Perez', $business = 'Marzio SAC', $economy = 'Peruana', $business_description = 'Desarrollo de sistemas', $role = 'CE0', $biography = 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.', $email = 'marzioperez@gmail.com', $confirm_email = 'marzioperez@gmail.com', $phone_number = '981277116';
+    public $name = 'Marzio', $last_name = 'Perez', $business = 'Marzio SAC', $economy = 16, $business_description = 'Desarrollo de sistemas', $role = 'CE0', $biography = 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.', $email = 'marzioperez@gmail.com', $confirm_email = 'marzioperez@gmail.com', $phone_number = '981277116', $other_economy = '';
     public $send_copy_of_registration = false, $accept_terms_and_conditions = true;
     public $current_step = 1;
     public $complete_step = 0;
+    public $economies = [];
+
+    public function mount() {
+        $this->economies = Economy::all()->toArray();
+    }
 
     public function process_step_1 (): void {
         $messages = [
@@ -57,12 +63,14 @@ class SignUp extends Component {
 
         $this->validate($rules, $messages);
 
-        // $code = GenerateCode::run($this->name, $this->last_name);
+        $code = GenerateCode::run($this->name, $this->last_name);
         User::create([
+            'code' => $code,
             'name' => $this->name,
             'last_name' => $this->last_name,
             'business' => $this->business,
             'economy' => $this->economy,
+            'other_economy' => $this->other_economy,
             'business_description' => $this->business_description,
             'role' => $this->role,
             'biography' => $this->biography,

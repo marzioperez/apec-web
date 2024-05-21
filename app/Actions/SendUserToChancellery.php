@@ -2,14 +2,13 @@
 
 namespace App\Actions;
 
+use App\Models\User;
 use Lorisleiva\Actions\Concerns\AsAction;
 
-class SendUserToChancellery
-{
+class SendUserToChancellery {
     use AsAction;
 
-    public function handle()
-    {
-        // ...
+    public function handle(User $user) {
+
     }
 }

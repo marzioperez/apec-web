@@ -2,7 +2,7 @@
 
 namespace App\Mail;
 
-use App\Models\Order;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -13,10 +13,10 @@ use Illuminate\Queue\SerializesModels;
 class CompleteDataSuccess extends Mailable {
 
     use Queueable, SerializesModels;
-    public Order $order;
+    public User $user;
 
-    public function __construct(Order $order) {
-        $this->order = $order;
+    public function __construct(User $user) {
+        $this->user = $user;
     }
 
     public function envelope(): Envelope {
@@ -29,7 +29,7 @@ class CompleteDataSuccess extends Mailable {
     public function content(): Content {
         return new Content(
             view: 'mail.complete-data-success',
-            with: ['order' => $this->order],
+            with: ['user' => $this->user]
         );
     }
 

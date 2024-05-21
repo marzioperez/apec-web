@@ -109,7 +109,10 @@
                             @error('badge_photo') <span class="validation-error">{{ $message }}</span> @enderror
                         @endif
 
-                        @if(in_array($user['status'], [\App\Concerns\Enums\Status::CONFIRMED->value]))
+                        @if(in_array($user['status'], [
+                            \App\Concerns\Enums\Status::CONFIRMED->value,
+                            \App\Concerns\Enums\Status::PENDING_CORRECT_DATA->value
+                        ]))
                             <div class="rounded-md bg-yellow-50 p-4 mt-3">
                                 <div class="flex">
                                     <div class="flex-shrink-0">
@@ -126,7 +129,20 @@
                                 </div>
                             </div>
                             <div class="sm:my-8 my-6 flex justify-center space-x-6 items-center">
-                                <button type="submit" class="btn btn-primary">Pay now!</button>
+                                @if(in_array($user['type'], [
+                                    \App\Concerns\Enums\Types::FREE_PASS_STAFF->value,
+                                    \App\Concerns\Enums\Types::FREE_PASS_COMPANION->value,
+                                    \App\Concerns\Enums\Types::FREE_PASS_STAFF->value,
+                                ]))
+                                    <button type="submit" class="btn btn-primary">Finish!</button>
+                                @else
+                                    @if($user['status'] === \App\Concerns\Enums\Status::CONFIRMED->value)
+                                        <button type="submit" class="btn btn-primary">Pay now!</button>
+                                    @endif
+                                    @if($user['status'] === \App\Concerns\Enums\Status::PENDING_CORRECT_DATA->value)
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    @endif
+                                @endif
                             </div>
                         @endif
                     </form>
@@ -145,7 +161,7 @@
             </div>
             <div class="text-center">
                 <h1 class="font-bold text-lg mb-3">Thank you for completing your registration.</h1>
-                <div class="mb-5">Please check your inbox, we will contact you soon.</div>
+                <div class="mb-5">Our team will review your information.</div>
                 <a href="{{config('app.url')}}" class="btn btn-primary">Go home</a>
             </div>
         </x-slot:body>

@@ -53,7 +53,8 @@ class Step3 extends Component {
         $this->with_staff = ($user['with_staff'] ? 'yes' : 'no');
 
         if ($user['with_companion']) {
-            $companion = User::where('parent_id', $user['id'])->where('type', Types::COMPANION->value)->get()->first();
+            $companion_type = ($user['type'] === Types::FREE_PASS_PARTICIPANT->value ? Types::FREE_PASS_COMPANION->value : Types::COMPANION->value);
+            $companion = User::where('parent_id', $user['id'])->where('type', $companion_type)->get()->first();
             if ($companion) {
                 $this->companion = [
                     'name' => $companion['name'],
@@ -65,7 +66,8 @@ class Step3 extends Component {
         }
 
         if ($user['with_staff']) {
-            $staff = User::where('parent_id', $user['id'])->where('type', Types::STAFF->value)->get()->first();
+            $staff_type = ($user['type'] === Types::FREE_PASS_PARTICIPANT->value ? Types::FREE_PASS_STAFF->value : Types::STAFF->value);
+            $staff = User::where('parent_id', $user['id'])->where('type', $staff_type)->get()->first();
             if ($staff) {
                 $this->staff = [
                     'name' => $staff['name'],
@@ -102,8 +104,12 @@ class Step3 extends Component {
 
         $rules = [];
 
-        $companion = User::where('parent_id', $this->user['id'])->where('type', Types::COMPANION->value)->get()->first();
-        $staff = User::where('parent_id', $this->user['id'])->where('type', Types::STAFF->value)->get()->first();
+        $companion_type = ($this->user['type'] === Types::FREE_PASS_PARTICIPANT->value ? Types::FREE_PASS_COMPANION->value : Types::COMPANION->value);
+        $companion = User::where('parent_id', $this->user['id'])->where('type', $companion_type)->get()->first();
+
+        $staff_type = ($this->user['type'] === Types::FREE_PASS_PARTICIPANT->value ? Types::FREE_PASS_STAFF->value : Types::STAFF->value);
+        $staff = User::where('parent_id', $this->user['id'])->where('type', $staff_type)->get()->first();
+
         if ($this->with_companion === 'yes') {
             $rules['companion.name'] = 'required';
             $rules['companion.last_name'] = 'required';
@@ -140,13 +146,14 @@ class Step3 extends Component {
             if ($companion) {
                 $companion->update($this->companion);
             } else {
+                $companion_type = ($this->user['type'] === Types::FREE_PASS_PARTICIPANT->value ? Types::FREE_PASS_COMPANION->value : Types::COMPANION->value);
                 $companion = User::create([
                     'name' => $this->companion['name'],
                     'last_name' => $this->companion['last_name'],
                     'phone' =>  $this->companion['phone'],
                     'email' =>  $this->companion['email'],
                     'password' => bcrypt($this->companion['phone']),
-                    'type' => Types::COMPANION->value,
+                    'type' => $companion_type,
                     'parent_id' => $this->user['id'],
                     'status' => Status::CONFIRMED->value
                 ]);
@@ -157,13 +164,14 @@ class Step3 extends Component {
             if ($staff) {
                 $staff->update($this->staff);
             } else {
+                $staff_type = ($this->user['type'] === Types::FREE_PASS_PARTICIPANT->value ? Types::FREE_PASS_STAFF->value : Types::STAFF->value);
                 $staff = User::create([
                     'name' => $this->staff['name'],
                     'last_name' => $this->staff['last_name'],
                     'phone' =>  $this->staff['phone'],
                     'email' =>  $this->staff['email'],
                     'password' => bcrypt($this->staff['phone']),
-                    'type' => Types::STAFF->value,
+                    'type' => $staff_type,
                     'parent_id' => $this->user['id'],
                     'status' => Status::CONFIRMED->value
                 ]);

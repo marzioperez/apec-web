@@ -7,6 +7,7 @@ use App\Filament\Resources\Event\UserResource\Pages;
 use App\Filament\Resources\Event\UserResource\RelationManagers;
 use App\Mail\RegisterDeclined;
 use App\Mail\RegisterSuccess;
+use App\Models\Economy;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
@@ -51,10 +52,12 @@ class UserResource extends Resource {
                             TextInput::make('last_name')->label('Apellidos')->columnSpan(3)->required(),
                             TextInput::make('email')->label('Correo electrónico')->columnSpan(6)->required()
                                 ->unique('users', 'email', ignoreRecord: true),
-                            TextInput::make('business')->label('Negocio')->columnSpan(3)->required(),
-                            TextInput::make('economy')->label('Economía')->columnSpan(3)->required(),
-                            TextInput::make('role')->label('Rol')->columnSpan(3)->required(),
-                            TextInput::make('phone')->label('Teléfono')->columnSpan(3)->required(),
+                            TextInput::make('business')->label('Negocio')->columnSpan(6)->required(),
+                            Select::make('economy')->options(Economy::all()->pluck('name', 'id'))->label('Economía')->columnSpan(3)->required(),
+                            TextInput::make('other_economy')->label('Otra economía')->columnSpan(3),
+                            TextInput::make('role')->label('Rol')->columnSpan(4)->required(),
+                            TextInput::make('phone')->label('Teléfono')->columnSpan(4)->required(),
+                            TextInput::make('amount')->label('Monto a cobrar')->numeric()->columnSpan(4)->required(),
                             Textarea::make('business_description')->label('Descripción de negocio')->columnSpanFull()->required(),
                             Textarea::make('biography')->label('Biografía')->columnSpanFull()->required(),
 

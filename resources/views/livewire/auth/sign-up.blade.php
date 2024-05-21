@@ -33,10 +33,25 @@
                             <div class="form-group">
                                 <label for="economy">Economy*</label>
                                 <div class="form-field">
-                                    <input type="text" id="economy" name="economy" wire:model="economy" />
+                                    <select id="economy" name="economy" wire:model.live="economy">
+                                        <option value="">Select...</option>
+                                        @foreach($economies as $ec)
+                                            <option value="{{$ec['id']}}">{{$ec['name']}}</option>
+                                        @endforeach
+                                        <option value="other">Other</option>
+                                    </select>
                                     @error('economy') <span class="validation-error">{{ $message }}</span> @enderror
                                 </div>
                             </div>
+                            @if($economy === 'other')
+                                <div class="form-group">
+                                    <label for="other_economy">Other economy</label>
+                                    <div class="form-field">
+                                        <input type="text" id="other_economy" name="other_economy" wire:model="other_economy" />
+                                        @error('other_economy') <span class="validation-error">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                            @endif
                             <div class="form-group">
                                 <label for="business_description">Business Description*</label>
                                 <div class="form-field">
@@ -45,7 +60,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="role">Role*</label>
+                                <label for="role">Position*</label>
                                 <div class="form-field">
                                     <input type="text" id="role" name="role" wire:model="role" />
                                     @error('role') <span class="validation-error">{{ $message }}</span> @enderror
@@ -130,7 +145,7 @@
                             </div>
 
                             <div class="mt-14 mb-6 flex justify-center space-x-6 items-center">
-                                <a href="#" class="btn btn-primary-outline">Return</a>
+                                <a href="{{config('app.url')}}" class="btn btn-primary-outline">Return</a>
                                 <button type="submit" class="btn btn-primary">Continue</button>
                             </div>
                         </form>

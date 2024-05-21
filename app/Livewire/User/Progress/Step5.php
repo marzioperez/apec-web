@@ -3,6 +3,7 @@
 namespace App\Livewire\User\Progress;
 
 use App\Concerns\Enums\Status;
+use App\Concerns\Enums\Types;
 use App\Mail\CompleteDataSuccess;
 use App\Mail\CompleteRegister;
 use App\Models\Order;
@@ -53,7 +54,6 @@ class Step5 extends Component {
         $this->validate();
         $current_user_status = $this->user['status'];
         $this->user->update([
-            'status' => Status::UNPAID->value,
             'register_progress' => 100,
             'badge_name' => $this->badge_name,
             'badge_last_name' => $this->badge_last_name,
@@ -74,15 +74,35 @@ class Step5 extends Component {
             }
         }
 
-        if ($current_user_status === Status::CONFIRMED->value) {
-            $order = Order::create([
-                'user_id' => $this->user['id'],
-                'token' => md5($this->user['code']),
-                'amount' => $this->user['amount']
-            ]);
-            $this->redirect(route('payment', ['token' => $order['token']]));
+        $show_modal = false;
+        if (in_array($this->user['type'], [
+            Types::FREE_PASS_STAFF->value,
+            Types::FREE_PASS_COMPANION->value,
+            Types::FREE_PASS_STAFF->value,
+        ])) {
+            $this->user->update(['status' => Status::PENDING_APPROVAL_DATA->value]);
+            $show_modal = true;
+        } else {
+            if ($current_user_status === Status::CONFIRMED->value) {
+                $this->user->update(['status' => Status::UNPAID->value]);
+                $order = Order::create([
+                    'user_id' => $this->user['id'],
+                    'token' => md5($this->user['code']),
+                    'amount' => $this->user['amount']
+                ]);
+                $this->redirect(route('payment', ['token' => $order['token']]));
+            }
+        }
+
+        if ($current_user_status === Status::PENDING_CORRECT_DATA->value) {
+            $this->user->update(['status' => Status::PENDING_APPROVAL_DATA->value]);
+            $show_modal = true;
         }
         $this->dispatch('update-progress', value: 100);
+
+        if ($show_modal) {
+            $this->dispatch('open-modal', name: 'modal-status-ok');
+        }
     }
 
     #[On('update-photo')]
