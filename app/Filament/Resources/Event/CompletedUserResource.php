@@ -81,8 +81,7 @@ class CompletedUserResource extends Resource
                             TextInput::make('date_of_issue')->label('Lugar de emisión')->required()->columnSpan(3),
                             DatePicker::make('date_of_birth')->label('Fecha de nacimiento')->columnSpan(3),
                             TextInput::make('nationality')->label('Nacionalidad')->columnSpan(3),
-                            TextInput::make('city_of_permanent_residency')->label('Ciudad de residencia permanente')->columnSpan(8),
-                            TextInput::make('amount')->label('Monto a pagar')->columnSpan(4),
+                            TextInput::make('city_of_permanent_residency')->label('Ciudad de residencia')->columnSpanFull(),
                         ])
                     ]),
                     Tab::make('Información de la empresa')->schema([

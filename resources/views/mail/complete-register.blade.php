@@ -6,11 +6,11 @@
     </div>
 
     <div style="text-align: left; padding: 0 44px 44px;">
-        <p style="font-size: 14px;">Thank you for completing your registration for the APEC CEO Summit 2024, the premier business event in the Asia-Pacific region.</p>
+        <p style="font-size: 14px;">You have successfully submitted all the necessary information to attend the APEC CEO Summit 2024. To finalize your registration, please proceed with the payment by clicking the button below.</p>
 
-        <p style="font-size: 14px;">Our team is diligently working to ensure that the summit offers an engaging, distinctive, and insightful experience for all participants. Please be advised that your registration is currently under review.</p>
-
-        <p style="font-size: 14px;">Kindly await further communication via email, which will outline the next steps in the registration process.</p>
+        <div style="text-align: center; margin-bottom: 30px;">
+            <a href="{{route('payment', ['token' => $order['token']])}}" target="_blank" style="color: #FFF; font-size: 14px; text-decoration: none; background-color: #75B42E; padding-bottom: 10px; padding-top: 10px; padding-left: 40px; padding-right: 40px; border-radius: 5px;">Go to pay</a>
+        </div>
 
         <p style="font-size: 14px; text-align: center">For more information you can visit us on the event <a href="{{config('app.url')}}" target="_blank" style="color: #00A2F3;">website</a>.
             <br>Any questions write to us at: <a href="mailto:info@apecceosummit2024.com" style="color: #00A2F3;">info@apecceosummit2024.com</a></p>

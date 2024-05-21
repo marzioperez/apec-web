@@ -28,6 +28,7 @@ class User extends Authenticatable {
         'document_number',
         'business',
         'economy',
+        'other_economy',
         'business_description',
         'business_email',
         'role',
@@ -93,6 +94,8 @@ class User extends Authenticatable {
         'observation',
         'amount',
 
+        'lock_fields',
+
         'parent_id'
     ];
 
@@ -110,7 +113,8 @@ class User extends Authenticatable {
             'with_companion' => 'boolean',
             'with_staff' => 'boolean',
             'vaccines' => 'json',
-            'amount' => 'decimal:2'
+            'amount' => 'decimal:2',
+            'lock_fields' => 'boolean'
         ];
     }
 

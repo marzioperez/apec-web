@@ -10,12 +10,7 @@
 
         <p style="font-size: 14px;">We are delighted to inform you that your registration for the APEC CEO Summit 2024 has been successfully processed. Kindly ensure to bring your passport with you for badge collection.</p>
 
-        <p style="font-size: 14px; margin-bottom: 30px;">Attached to this email, you will find a QR code for convenient access to all event-related information.</p>
-
         <div style="text-align: center; margin-bottom: 30px;">
-            <div>
-                <img src="{{ config('app.url') . "/storage/qrs/{$user['qr']}" }}" style="border-radius: 5px; width: 150px; margin-bottom: 15px;" />
-            </div>
             <a href="{{config('app.url')}}" target="_blank" style="color: #FFF; font-size: 14px; text-decoration: none; background-color: #75B42E; padding-bottom: 10px; padding-top: 10px; padding-left: 40px; padding-right: 40px; border-radius: 5px;">Go to home</a>
         </div>
 

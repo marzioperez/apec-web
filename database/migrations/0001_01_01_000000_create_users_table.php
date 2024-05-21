@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('document_number')->nullable()->default(null);
             $table->string('business')->nullable()->default(null);
             $table->string('economy')->nullable()->default(null);
+            $table->string('other_economy')->nullable()->default(null);
             $table->longText('business_description')->nullable()->default(null);
             $table->string('business_email')->nullable()->default(null);
             $table->string('role')->nullable()->default(null);
@@ -92,6 +93,8 @@ return new class extends Migration
             $table->string('qr')->nullable()->default(null);
             $table->longText('observation')->nullable()->default(null);
             $table->decimal('amount')->nullable()->default(3500);
+
+            $table->boolean('lock_fields')->nullable()->default(false);
 
             // ID del participante que invita
             $table->unsignedInteger('parent_id')->nullable()->default(null);

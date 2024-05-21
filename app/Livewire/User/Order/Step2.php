@@ -95,15 +95,11 @@ class Step2 extends Component {
     #[On('process-card-payment')]
     public function processCardPayment($data): void {
         if ($data['status'] === 'success') {
-            $qr = GenerateQrCode::run($this->order->user['code']);
             $this->order->update([
                 'status' => Status::PAID->value,
                 'culqi_id' => $data['data']['id']
             ]);
-            $this->order->user->update([
-                'status' => Status::SEND_TO_CHANCELLERY->value,
-                'qr' => $qr
-            ]);
+            $this->order->user->update(['status' => Status::PENDING_APPROVAL_DATA->value]);
             Mail::to($this->order->user['email'])->send(new PaymentSuccess($this->order->user));
             $this->dispatch('open-modal', name: 'modal-status-ok');
         } else {

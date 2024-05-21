@@ -55,7 +55,6 @@
                                     <option value="">Select...</option>
                                     <option value="{{\App\Concerns\Enums\Types::DNI->value}}">{{\App\Concerns\Enums\Types::DNI->value}}</option>
                                     <option value="{{\App\Concerns\Enums\Types::PASSPORT->value}}">{{\App\Concerns\Enums\Types::PASSPORT->value}}</option>
-                                    <option value="{{\App\Concerns\Enums\Types::CE->value}}">{{\App\Concerns\Enums\Types::CE->value}}</option>
                                 </select>
                                 @error('data.document_type') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
@@ -103,7 +102,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="city_of_permanent_residency">City of Permanent Residency*</label>
+                            <label for="city_of_permanent_residency">City of Residency*</label>
                             <div class="form-field">
                                 <input type="text" id="city_of_permanent_residency" name="city_of_permanent_residency" wire:model="data.city_of_permanent_residency" />
                                 @error('data.city_of_permanent_residency') <span class="validation-error">{{ $message }}</span> @enderror

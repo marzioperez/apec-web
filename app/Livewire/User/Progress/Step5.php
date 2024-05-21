@@ -3,7 +3,9 @@
 namespace App\Livewire\User\Progress;
 
 use App\Concerns\Enums\Status;
+use App\Mail\CompleteDataSuccess;
 use App\Mail\CompleteRegister;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Mail;
@@ -49,10 +51,11 @@ class Step5 extends Component {
         $this->validate();
         $current_user_status = $this->user['status'];
         $this->user->update([
-            'status' => Status::PENDING_APPROVAL_DATA->value,
+            'status' => Status::UNPAID->value,
             'register_progress' => 100,
             'badge_name' => $this->badge_name,
-            'badge_last_name' => $this->badge_last_name
+            'badge_last_name' => $this->badge_last_name,
+            'lock_fields' => true
         ]);
         if ($this->badge_photo) {
             foreach ($this->badge_photo as $photo) {
@@ -70,11 +73,14 @@ class Step5 extends Component {
         }
 
         if ($current_user_status === Status::CONFIRMED->value) {
-            Mail::to($this->user['email'])->send(new CompleteRegister());
+            $order = Order::create([
+                'user_id' => $this->user['id'],
+                'token' => md5($this->user['code']),
+                'amount' => $this->user['amount']
+            ]);
+            $this->redirect(route('payment', ['token' => $order['token']]));
         }
-
         $this->dispatch('update-progress', value: 100);
-        $this->dispatch('open-modal', name: 'modal-status-ok');
     }
 
     #[On('update-photo')]
