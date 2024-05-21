@@ -85,7 +85,7 @@
         </div>
     </div>
 
-    <button type="button" class="btn btn-primary mt-3" x-bind:disabled="loading" x-on:click.prevent="processForm()">
+    <button type="button" class="btn btn-primary mt-3 mx-auto block" x-bind:disabled="loading" x-on:click.prevent="processForm()">
         <i class="fa-duotone fa-spinner-third fa-spin" x-show="loading"></i>
         <span x-show="loading">Please wait...</span>
         <span x-show="!loading">Pay now ${{number_format($amount)}}</span>

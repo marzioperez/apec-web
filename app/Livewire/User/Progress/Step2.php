@@ -2,6 +2,7 @@
 
 namespace App\Livewire\User\Progress;
 
+use App\Models\Economy;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
@@ -18,12 +19,15 @@ class Step2 extends Component {
         'phone' => null,
         'email' => null,
         'economy' => null,
+        'other_economy' => null,
         'attendee_name' => null,
         'attendee_email' => null
     ];
 
     public User $user;
     public $quantity = 5, $current = 2, $complete = 1;
+    public $economies = [];
+    public $lock_fields = false;
 
     protected $messages = [
         'data.*.required' => 'Required field',
@@ -44,9 +48,11 @@ class Step2 extends Component {
 
     public function mount(User $user, $quantity = 5, $current = 2, $complete = 1) {
         $this->user = $user;
+        $this->lock_fields = $user['lock_fields'];
         $this->quantity = $quantity;
         $this->current = $current;
         $this->complete = $complete;
+        $this->economies = Economy::all()->toArray();
 
         $this->data = [
             'business' => $user['business'],
@@ -57,7 +63,10 @@ class Step2 extends Component {
             'zip_code' => $user['zip_code'],
             'business_phone_number' => $user['business_phone_number'],
             'business_email' => $user['business_email'],
-            'economy' => $user['economy']
+            'economy' => $user['economy'],
+            'other_economy' => $user['other_economy'],
+            'attendee_name' => $user['attendee_name'],
+            'attendee_email' => $user['attendee_email']
         ];
     }
 

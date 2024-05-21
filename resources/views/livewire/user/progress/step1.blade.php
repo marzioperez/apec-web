@@ -13,7 +13,7 @@
                         <div class="form-group">
                             <label for="title">Title*</label>
                             <div class="form-field">
-                                <select id="title" name="title" wire:model="data.title">
+                                <select id="title" name="title" wire:model="data.title" :disabled="{{$lock_fields}}">
                                     <option value="">Select...</option>
                                     <option value="{{\App\Concerns\Enums\Titles::MR->value}}">{{\App\Concerns\Enums\Titles::MR->value}}</option>
                                     <option value="{{\App\Concerns\Enums\Titles::MRS->value}}">{{\App\Concerns\Enums\Titles::MRS->value}}</option>
@@ -26,21 +26,21 @@
                         <div class="form-group">
                             <label for="name">Name(s)*</label>
                             <div class="form-field">
-                                <input type="text" id="name" name="name" wire:model="data.name" />
+                                <input type="text" id="name" name="name" wire:model="data.name" :disabled="{{$lock_fields}}" />
                                 @error('data.name') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="last_name">Last Name(s)*</label>
                             <div class="form-field">
-                                <input type="text" id="last_name" name="last_name" wire:model="data.last_name" />
+                                <input type="text" id="last_name" name="last_name" wire:model="data.last_name" :disabled="{{$lock_fields}}" />
                                 @error('data.last_name') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="gender">Gender*</label>
                             <div class="form-field">
-                                <select id="gender" name="gender" wire:model="data.gender">
+                                <select id="gender" name="gender" wire:model="data.gender" :disabled="{{$lock_fields}}">
                                     <option value="">Select...</option>
                                     <option value="{{\App\Concerns\Enums\Genders::MALE->value}}">{{\App\Concerns\Enums\Genders::MALE->value}}</option>
                                     <option value="{{\App\Concerns\Enums\Genders::FEMALE->value}}">{{\App\Concerns\Enums\Genders::FEMALE->value}}</option>
@@ -51,7 +51,7 @@
                         <div class="form-group">
                             <label for="document_type">Type of Document*</label>
                             <div class="form-field">
-                                <select id="document_type" name="document_type" wire:model="data.document_type">
+                                <select id="document_type" name="document_type" wire:model="data.document_type" :disabled="{{$lock_fields}}">
                                     <option value="">Select...</option>
                                     <option value="{{\App\Concerns\Enums\Types::DNI->value}}">{{\App\Concerns\Enums\Types::DNI->value}}</option>
                                     <option value="{{\App\Concerns\Enums\Types::PASSPORT->value}}">{{\App\Concerns\Enums\Types::PASSPORT->value}}</option>
@@ -62,55 +62,59 @@
                         <div class="form-group">
                             <label for="document_number">Document Number*</label>
                             <div class="form-field">
-                                <input type="text" id="document_number" name="document_number" wire:model="data.document_number" />
+                                <input type="text" id="document_number" name="document_number" wire:model="data.document_number" :disabled="{{$lock_fields}}" />
                                 @error('data.document_number') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="email">Email*</label>
                             <div class="form-field">
-                                <input type="email" id="email" name="email" wire:model="data.email" />
+                                <input type="email" id="email" name="email" wire:model="data.email" :disabled="{{$lock_fields}}" />
                                 @error('data.email') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="date_of_issue">Date of Issue*</label>
                             <div class="form-field">
-                                <input type="date" id="date_of_issue" name="date_of_issue" wire:model="data.date_of_issue" />
+                                <input type="date" id="date_of_issue" name="date_of_issue" wire:model="data.date_of_issue" :disabled="{{$lock_fields}}" />
                                 @error('data.date_of_issue') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="place_of_issue">Place of Issue*</label>
                             <div class="form-field">
-                                <input type="text" id="place_of_issue" name="place_of_issue" wire:model="data.place_of_issue" />
+                                <input type="text" id="place_of_issue" name="place_of_issue" wire:model="data.place_of_issue" :disabled="{{$lock_fields}}" />
                                 @error('data.place_of_issue') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="date_of_birth">Date of Birth*</label>
                             <div class="form-field">
-                                <input type="date" id="date_of_birth" name="date_of_birth" wire:model="data.date_of_birth" />
+                                <input type="date" id="date_of_birth" name="date_of_birth" wire:model="data.date_of_birth" :disabled="{{$lock_fields}}" />
                                 @error('data.date_of_birth') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="nationality">Nationality*</label>
                             <div class="form-field">
-                                <input type="text" id="nationality" name="nationality" wire:model="data.nationality" />
+                                <input type="text" id="nationality" name="nationality" wire:model="data.nationality" :disabled="{{$lock_fields}}" />
                                 @error('data.nationality') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="city_of_permanent_residency">City of Residency*</label>
                             <div class="form-field">
-                                <input type="text" id="city_of_permanent_residency" name="city_of_permanent_residency" wire:model="data.city_of_permanent_residency" />
+                                <input type="text" id="city_of_permanent_residency" name="city_of_permanent_residency" wire:model="data.city_of_permanent_residency" :disabled="{{$lock_fields}}" />
                                 @error('data.city_of_permanent_residency') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="sm:my-8 my-6 flex justify-center space-x-6 items-center">
-                            <button type="button" class="btn btn-gray" wire:click.prevent="save">Save</button>
-                            <button type="submit" class="btn btn-primary">Continue</button>
+                            @if($lock_fields)
+                                <button type="button" class="btn btn-primary" x-on:click.prevent="$dispatch('update-step', {step: 2})">Continue</button>
+                            @else
+                                <button type="button" class="btn btn-gray" wire:click.prevent="save">Save</button>
+                                <button type="submit" class="btn btn-primary">Continue</button>
+                            @endif
                         </div>
                     </form>
                 </div>

@@ -10,6 +10,7 @@ class Step1 extends Component {
 
     public User $user;
     public $quantity = 5, $current = 1;
+    public bool $lock_fields = false;
 
     public $data  = [
         'title' => null,
@@ -50,6 +51,7 @@ class Step1 extends Component {
 
     public function mount(User $user, $quantity = 5, $current = 1) {
         $this->user = $user;
+        $this->lock_fields = (boolean) $user['lock_fields'];
         $this->quantity = $quantity;
         $this->current = $current;
 

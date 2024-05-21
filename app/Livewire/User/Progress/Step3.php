@@ -17,6 +17,7 @@ class Step3 extends Component {
     public $current_user_step;
     public User $user;
     public $quantity = 5, $current = 3, $complete = 2;
+    public $lock_fields = false;
 
     public $companion = [
         'name',
@@ -40,6 +41,7 @@ class Step3 extends Component {
 
     public function mount(User $user, $quantity = 5, $current = 3, $complete = 2) {
         $this->user = $user;
+        $this->lock_fields = $user['lock_fields'];
         $this->quantity = $quantity;
         $this->current = $current;
         $this->complete = $complete;

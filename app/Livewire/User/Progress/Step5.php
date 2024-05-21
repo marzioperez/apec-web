@@ -19,6 +19,7 @@ class Step5 extends Component {
     public $badge_file, $identity_document_file;
     public $cover;
     public User $user;
+    public $lock_fields = false;
     public $quantity = 5, $current = 5, $complete = 4;
 
     protected $messages = [
@@ -34,6 +35,7 @@ class Step5 extends Component {
 
     public function mount(User $user) {
         $this->user = $user;
+        $this->lock_fields = $user['lock_fields'];
         $this->badge_name = $user['badge_name'] ?? $user['name'];
         $this->badge_last_name = $user['badge_last_name'] ?? $user['last_name'];
 

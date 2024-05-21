@@ -10,87 +10,106 @@
                     <h5 class="font-semibold mb-5">Company information</h5>
                     <form wire:submit.prevent="process">
                         <div class="form-group">
-                            <label for="business">Business/Organization/Ministry</label>
+                            <label for="business">Company/Organization</label>
                             <div class="form-field">
-                                <input type="text" id="business" name="business" wire:model="data.business" />
+                                <input type="text" id="business" name="business" wire:model="data.business" :disabled="{{$lock_fields}}" />
                                 @error('data.business') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="role">Role*</label>
+                            <label for="role">Position*</label>
                             <div class="form-field">
-                                <input type="text" id="role" name="role" wire:model="data.role" />
+                                <input type="text" id="role" name="role" wire:model="data.role" :disabled="{{$lock_fields}}" />
                                 @error('data.role') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="area">Area/Department*</label>
                             <div class="form-field">
-                                <input type="text" id="area" name="area" wire:model="data.area" />
+                                <input type="text" id="area" name="area" wire:model="data.area" :disabled="{{$lock_fields}}" />
                                 @error('data.area') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="address">Address*</label>
                             <div class="form-field">
-                                <input type="text" id="address" name="address" wire:model="data.address" />
+                                <input type="text" id="address" name="address" wire:model="data.address" :disabled="{{$lock_fields}}" />
                                 @error('data.address') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="city">City*</label>
                             <div class="form-field">
-                                <input type="text" id="city" name="city" wire:model="data.city" />
+                                <input type="text" id="city" name="city" wire:model="data.city" :disabled="{{$lock_fields}}" />
                                 @error('data.city') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="zip_code">Zip Code*</label>
                             <div class="form-field">
-                                <input type="text" id="zip_code" name="zip_code" wire:model="data.zip_code" />
+                                <input type="text" id="zip_code" name="zip_code" wire:model="data.zip_code" :disabled="{{$lock_fields}}" />
                                 @error('data.city') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="business_phone_number">Business phone number*</label>
+                            <label for="business_phone_number">Telephone*</label>
                             <div class="form-field">
-                                <input type="text" id="business_phone_number" name="business_phone_number" wire:model="data.business_phone_number" />
+                                <input type="text" id="business_phone_number" name="business_phone_number" wire:model="data.business_phone_number" :disabled="{{$lock_fields}}" />
                                 @error('data.business_phone_number') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="business_email">Email*</label>
                             <div class="form-field">
-                                <input type="email" id="business_email" name="business_email" wire:model="data.business_email" />
+                                <input type="email" id="business_email" name="business_email" wire:model="data.business_email" :disabled="{{$lock_fields}}" />
                                 @error('data.business_email') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="economy">Economy*</label>
                             <div class="form-field">
-                                <input type="text" id="economy" name="economy" wire:model="data.economy" />
+                                <select id="economy" name="economy" wire:model.live="data.economy" :disabled="{{$lock_fields}}">
+                                    <option value="">Select...</option>
+                                    @foreach($economies as $economy)
+                                        <option value="{{$economy['id']}}">{{$economy['name']}}</option>
+                                    @endforeach
+                                    <option value="other">Other</option>
+                                </select>
                                 @error('data.economy') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
+                        @if($data['economy'] === 'other')
+                            <div class="form-group">
+                                <label for="other_economy">Other economy</label>
+                                <div class="form-field">
+                                    <input type="text" id="other_economy" name="other_economy" wire:model="data.other_economy" :disabled="{{$lock_fields}}" />
+                                    @error('data.other_economy') <span class="validation-error">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                        @endif
 
-                        <h5 class="font-semibold mt-10 mb-5">Attendee information</h5>
+                        <h5 class="font-semibold mt-10 mb-5">Assistant's Information</h5>
                         <div class="form-group">
-                            <label for="attendee_name">Attendee Name</label>
+                            <label for="attendee_name">Assistant's name</label>
                             <div class="form-field">
-                                <input type="text" id="attendee_name" name="attendee_name" wire:model="data.attendee_name" />
+                                <input type="text" id="attendee_name" name="attendee_name" wire:model="data.attendee_name" :disabled="{{$lock_fields}}" />
                                 @error('data.attendee_name') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="attendee_email">Attendee Email</label>
+                            <label for="attendee_email">Assistant's email</label>
                             <div class="form-field">
-                                <input type="text" id="attendee_email" name="attendee_email" wire:model="data.attendee_email" />
+                                <input type="text" id="attendee_email" name="attendee_email" wire:model="data.attendee_email" :disabled="{{$lock_fields}}" />
                                 @error('data.attendee_email') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="sm:my-8 my-6 flex justify-center space-x-6 items-center">
-                            <button type="button" class="btn btn-gray" wire:click.prevent="save">Save</button>
-                            <button type="submit" class="btn btn-primary">Continue</button>
+                            @if($lock_fields)
+                                <button type="button" class="btn btn-primary" x-on:click.prevent="$dispatch('update-step', {step: {{$current + 1}} })">Continue</button>
+                            @else
+                                <button type="button" class="btn btn-gray" wire:click.prevent="save">Save</button>
+                                <button type="submit" class="btn btn-primary">Continue</button>
+                            @endif
                         </div>
                     </form>
                 </div>

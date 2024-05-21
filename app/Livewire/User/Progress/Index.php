@@ -2,7 +2,6 @@
 
 namespace App\Livewire\User\Progress;
 
-use App\Concerns\Enums\Status;
 use App\Concerns\Enums\Types;
 use App\Models\User;
 use Livewire\Component;
@@ -21,15 +20,6 @@ class Index extends Component {
             Types::FREE_PASS_COMPANION->value
         ])) {
             $this->redirect(route('guest-progress'));
-        }
-
-        if (in_array($this->user['status'], [
-            Status::UNPAID->value,
-            Status::SEND_TO_CHANCELLERY->value,
-            Status::PAYMENT_REVIEW->value,
-            Status::PENDING_APPROVAL_DATA
-        ])) {
-            $this->redirect(config('app.url'));
         }
 
         $this->progress = auth()->user()->register_progress;

@@ -20,7 +20,7 @@
                         <div class="form-group">
                             <label for="types_of_food">Types of food</label>
                             <div class="form-field">
-                                <select id="types_of_food" name="types_of_food" wire:model="types_of_food">
+                                <select id="types_of_food" name="types_of_food" wire:model="types_of_food" :disabled="{{$lock_fields}}">
                                     <option value="">Select...</option>
                                     <option value="Vegetarian">Vegetarian</option>
                                     <option value="Vegan">Vegan</option>
@@ -32,7 +32,7 @@
                         <div class="form-group">
                             <label for="require_special_assistance">Do you require any special assistance to participate?</label>
                             <div class="form-field">
-                                <textarea id="require_special_assistance" name="require_special_assistance" wire:model="require_special_assistance"></textarea>
+                                <textarea id="require_special_assistance" name="require_special_assistance" wire:model="require_special_assistance" :disabled="{{$lock_fields}}"></textarea>
                                 @error('require_special_assistance') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
@@ -59,14 +59,14 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="role">Will you attend the event with a companion?</label>
+                                <label for="role">Will you bring your spouse / accompanying person? (US$ 1,500)</label>
                                 <div class="form-field flex space-x-6">
                                     <div class="flex items-center gap-x-3">
-                                        <input id="with_companion_yes" name="with_companion" type="radio" wire:model="with_companion" value="yes" @change="with_companion = 'yes'" />
+                                        <input id="with_companion_yes" name="with_companion" type="radio" wire:model="with_companion" value="yes" @change="with_companion = 'yes'" :disabled="{{$lock_fields}}" />
                                         <label for="with_companion_yes">Yes</label>
                                     </div>
                                     <div class="flex items-center gap-x-3">
-                                        <input id="with_companion_no" name="with_companion" type="radio" wire:model="with_companion" value="no" @change="with_companion = 'no'" />
+                                        <input id="with_companion_no" name="with_companion" type="radio" wire:model="with_companion" value="no" @change="with_companion = 'no'" :disabled="{{$lock_fields}}" />
                                         <label for="with_companion_no">No</label>
                                     </div>
                                 </div>
@@ -77,43 +77,43 @@
                                 <div class="form-group">
                                     <label for="companion.name">Name*</label>
                                     <div class="form-field">
-                                        <input type="text" id="companion.name" name="name" wire:model="companion.name" />
+                                        <input type="text" id="companion.name" name="name" wire:model="companion.name" :disabled="{{$lock_fields}}" />
                                         @error('companion.name') <span class="validation-error">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="companion.last_name">Last Name(s)*</label>
                                     <div class="form-field">
-                                        <input type="text" id="companion.last_name" name="companion.last_name" wire:model="companion.last_name" />
+                                        <input type="text" id="companion.last_name" name="companion.last_name" wire:model="companion.last_name" :disabled="{{$lock_fields}}" />
                                         @error('companion.last_name') <span class="validation-error">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="companion.phone">Phone Number*</label>
                                     <div class="form-field">
-                                        <input type="text" id="companion.phone" name="companion.phone" wire:model="companion.phone" />
+                                        <input type="text" id="companion.phone" name="companion.phone" wire:model="companion.phone" :disabled="{{$lock_fields}}" />
                                         @error('companion.phone') <span class="validation-error">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="companion.email">Email Address*</label>
                                     <div class="form-field">
-                                        <input type="email" id="companion.email" name="companion.email" wire:model="companion.email" />
+                                        <input type="email" id="companion.email" name="companion.email" wire:model="companion.email" :disabled="{{$lock_fields}}" />
                                         @error('companion.email') <span class="validation-error">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="role">Will you attend the event with a staff?</label>
+                                <label for="role">Will you bring a staffer? (US$ 1,500)</label>
                                 <div class="form-field">
                                     <div class="form-field flex space-x-6">
                                         <div class="flex items-center gap-x-3">
-                                            <input id="with_staff_yes" name="with_staff" type="radio" wire:model="with_staff" value="yes" @change="with_staff = 'yes'">
+                                            <input id="with_staff_yes" name="with_staff" type="radio" wire:model="with_staff" value="yes" @change="with_staff = 'yes'" :disabled="{{$lock_fields}}">
                                             <label for="with_staff_yes">Yes</label>
                                         </div>
                                         <div class="flex items-center gap-x-3">
-                                            <input id="with_staff_no" name="with_staff" type="radio" wire:model="with_staff" value="no" @change="with_staff = 'no'">
+                                            <input id="with_staff_no" name="with_staff" type="radio" wire:model="with_staff" value="no" @change="with_staff = 'no'" :disabled="{{$lock_fields}}">
                                             <label for="with_staff_no">No</label>
                                         </div>
                                     </div>
@@ -125,28 +125,28 @@
                                 <div class="form-group">
                                     <label for="staff.name">Name*</label>
                                     <div class="form-field">
-                                        <input type="text" id="staff.name" name="name" wire:model="staff.name" />
+                                        <input type="text" id="staff.name" name="name" wire:model="staff.name" :disabled="{{$lock_fields}}" />
                                         @error('staff.name') <span class="validation-error">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="staff.last_name">Last Name(s)*</label>
                                     <div class="form-field">
-                                        <input type="text" id="staff.last_name" name="staff.last_name" wire:model="staff.last_name" />
+                                        <input type="text" id="staff.last_name" name="staff.last_name" wire:model="staff.last_name" :disabled="{{$lock_fields}}" />
                                         @error('staff.last_name') <span class="validation-error">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="staff.phone">Phone Number*</label>
                                     <div class="form-field">
-                                        <input type="text" id="staff.phone" name="staff.phone" wire:model="staff.phone" />
+                                        <input type="text" id="staff.phone" name="staff.phone" wire:model="staff.phone" :disabled="{{$lock_fields}}" />
                                         @error('staff.phone') <span class="validation-error">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="staff.email">Email Address*</label>
                                     <div class="form-field">
-                                        <input type="email" id="staff.email" name="staff.email" wire:model="staff.email" />
+                                        <input type="email" id="staff.email" name="staff.email" wire:model="staff.email" :disabled="{{$lock_fields}}" />
                                         @error('staff.email') <span class="validation-error">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
@@ -154,8 +154,12 @@
                         @endif
 
                         <div class="sm:my-8 my-6 flex justify-center space-x-6 items-center">
-                            <button type="button" class="btn btn-gray" wire:click.prevent="save(false)">Save</button>
-                            <button type="submit" class="btn btn-primary" wire:click.prevent="save(true)">Continue</button>
+                            @if($lock_fields)
+                                <button type="button" class="btn btn-primary" x-on:click.prevent="$dispatch('update-step', {step: {{$current + 1}} })">Continue</button>
+                            @else
+                                <button type="button" class="btn btn-gray" wire:click.prevent="save(false)">Save</button>
+                                <button type="submit" class="btn btn-primary" wire:click.prevent="save(true)">Continue</button>
+                            @endif
                         </div>
                     </form>
                 </div>

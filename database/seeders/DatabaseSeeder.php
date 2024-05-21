@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void {
         $this->call(AdminSeeder::class);
+        $this->call(EconomySeeder::class);
         User::factory()->create([
             'code' => GenerateCode::run('Jon', 'Doe'),
             'type' => Types::PARTICIPANT->value,

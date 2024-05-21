@@ -33,6 +33,7 @@ class Step4 extends Component {
 
     public User $user;
     public $quantity = 5, $current = 4, $complete = 3;
+    public $lock_fields = false;
 
     protected $messages = [
         'data.*.required' => 'Required field'
@@ -44,6 +45,7 @@ class Step4 extends Component {
 
     public function mount(User $user, $quantity = 5, $current = 4, $complete = 3) {
         $this->user = $user;
+        $this->lock_fields = $user['lock_fields'];
         $this->quantity = $quantity;
         $this->current = $current;
         $this->complete = $complete;
