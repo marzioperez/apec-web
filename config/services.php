@@ -36,4 +36,9 @@ return [
         'secret' => env('CULQI_SECRET_KEY')
     ],
 
+    'sge' => [
+        'url' => env('SGE_URL'),
+        'user' => env('SGE_USER'),
+        'password' => env('SGE_PASSWORD'),
+    ],
 ];
