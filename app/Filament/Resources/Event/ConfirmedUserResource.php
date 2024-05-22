@@ -23,6 +23,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -222,10 +223,19 @@ class ConfirmedUserResource extends Resource
                 TextColumn::make('name')->label('Nombres')->searchable(),
                 TextColumn::make('last_name')->label('Apellidos')->searchable(),
                 TextColumn::make('email')->label('Email'),
+                TextColumn::make('type')->label('Tipo'),
                 TextColumn::make('register_progress')->label('Progreso')->badge()->color('info')->suffix('%'),
             ])
             ->filters([
-                //
+                SelectFilter::make('type')->label('Tipo')
+                    ->multiple()
+                    ->options([
+                        Types::COMPANION->value => Types::COMPANION->value,
+                        Types::STAFF->value => Types::STAFF->value,
+                        Types::FREE_PASS_COMPANION->value => Types::FREE_PASS_COMPANION->value,
+                        Types::FREE_PASS_STAFF->value => Types::FREE_PASS_STAFF->value,
+                        Types::VIP->value => Types::VIP->value,
+                    ])
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([

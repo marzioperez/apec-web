@@ -31,6 +31,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Mail;
@@ -235,6 +236,7 @@ class CompletedUserResource extends Resource
                 TextColumn::make('name')->label('Nombres')->searchable(),
                 TextColumn::make('last_name')->label('Apellidos')->searchable(),
                 TextColumn::make('email')->label('Email'),
+                TextColumn::make('type')->label('Tipo'),
                 TextColumn::make('status')->label('Estado')->badge()
                     ->color(fn (string $state): string => match ($state) {
                         Status::CONFIRMED->value => 'success',
@@ -244,7 +246,15 @@ class CompletedUserResource extends Resource
                     }),
             ])
             ->filters([
-                //
+                SelectFilter::make('type')->label('Tipo')
+                    ->multiple()
+                    ->options([
+                        Types::COMPANION->value => Types::COMPANION->value,
+                        Types::STAFF->value => Types::STAFF->value,
+                        Types::FREE_PASS_COMPANION->value => Types::FREE_PASS_COMPANION->value,
+                        Types::FREE_PASS_STAFF->value => Types::FREE_PASS_STAFF->value,
+                        Types::VIP->value => Types::VIP->value,
+                    ])
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
