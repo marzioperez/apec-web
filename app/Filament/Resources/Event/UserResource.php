@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Event;
 
 use App\Concerns\Enums\Status;
+use App\Concerns\Enums\Types;
 use App\Filament\Resources\Event\UserResource\Pages;
 use App\Filament\Resources\Event\UserResource\RelationManagers;
 use App\Mail\RegisterDeclined;
@@ -48,18 +49,24 @@ class UserResource extends Resource {
                             'xl' => 12,
                             '2xl' => 12
                         ])->schema([
-                            TextInput::make('name')->label('Nombre')->columnSpan(3)->required(),
-                            TextInput::make('last_name')->label('Apellidos')->columnSpan(3)->required(),
+                            TextInput::make('name')->label('Nombre')->columnSpan(6)->required(),
+                            TextInput::make('last_name')->label('Apellidos')->columnSpan(6)->required(),
+                            TextInput::make('phone')->label('Teléfono')->columnSpan(6)->required(),
                             TextInput::make('email')->label('Correo electrónico')->columnSpan(6)->required()
                                 ->unique('users', 'email', ignoreRecord: true),
-                            TextInput::make('business')->label('Negocio')->columnSpan(6)->required(),
-                            Select::make('economy')->options(Economy::all()->pluck('name', 'id'))->label('Economía')->columnSpan(3)->required(),
-                            TextInput::make('other_economy')->label('Otra economía')->columnSpan(3),
-                            TextInput::make('role')->label('Rol')->columnSpan(4)->required(),
-                            TextInput::make('phone')->label('Teléfono')->columnSpan(4)->required(),
-                            TextInput::make('amount')->label('Monto a cobrar')->numeric()->columnSpan(4)->required(),
-                            Textarea::make('business_description')->label('Descripción de negocio')->columnSpanFull()->required(),
-                            Textarea::make('biography')->label('Biografía')->columnSpanFull()->required(),
+                            TextInput::make('business')->label('Negocio')->columnSpan(4),
+                            Select::make('economy')->options(Economy::all()->pluck('name', 'id'))->label('Economía')->columnSpan(4),
+                            TextInput::make('other_economy')->label('Otra economía')->columnSpan(4),
+                            TextInput::make('role')->label('Rol')->columnSpan(4),
+                            Select::make('type')->label('Tipo')->options([
+                                Types::COMPANION->value => Types::COMPANION->value,
+                                Types::STAFF->value => Types::STAFF->value,
+                                Types::FREE_PASS_COMPANION->value => Types::FREE_PASS_COMPANION->value,
+                                Types::FREE_PASS_STAFF->value => Types::FREE_PASS_STAFF->value,
+                            ])->required()->columnSpan(4),
+                            TextInput::make('amount')->label('Monto a pagar')->numeric()->columnSpan(4)->required(),
+                            Textarea::make('business_description')->label('Descripción de negocio')->columnSpanFull(),
+                            Textarea::make('biography')->label('Biografía')->columnSpanFull(),
 
                         ])
                     ]),
@@ -73,7 +80,7 @@ class UserResource extends Resource {
                             TextInput::make('attendee_name')->label('Nombre')->columnSpan(6),
                             TextInput::make('attendee_email')->label('Correo electrónico')->columnSpan(6),
                         ])
-                    ])
+                    ])->hidden()
                 ])->columnSpanFull()
             ]);
     }

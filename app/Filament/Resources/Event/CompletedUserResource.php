@@ -123,13 +123,19 @@ class CompletedUserResource extends Resource
                                     'xl' => 12,
                                     '2xl' => 12
                                 ])->schema([
-                                    TextInput::make('type')->label('Tipo')->required()->columnSpan(4)->disabled(),
+                                    Select::make('type')->label('Tipo')->options([
+                                        Types::COMPANION->value => Types::COMPANION->value,
+                                        Types::STAFF->value => Types::STAFF->value,
+                                        Types::FREE_PASS_COMPANION->value => Types::FREE_PASS_COMPANION->value,
+                                        Types::FREE_PASS_STAFF->value => Types::FREE_PASS_STAFF->value,
+                                    ])->required()->columnSpan(4)->live(),
                                     TextInput::make('name')->label('Nombre')->required()->columnSpan(4),
                                     TextInput::make('last_name')->label('Apellidos')->required()->columnSpan(4),
-                                    TextInput::make('phone')->label('Nombre')->required()->columnSpan(6),
-                                    TextInput::make('email')->label('Email')->required()->columnSpan(6)
+                                    TextInput::make('phone')->label('Nombre')->required()->columnSpan(4),
+                                    TextInput::make('email')->label('Email')->required()->columnSpan(4),
+                                    TextInput::make('amount')->label('Monto a pagar')->numeric()->required()->columnSpan(4)
                                 ])
-                            ])
+                            ])->itemLabel(fn (array $state): ?string => $state['type'] ?? null)
                     ]),
                     Tab::make('Información médica')->schema([
                         Grid::make([

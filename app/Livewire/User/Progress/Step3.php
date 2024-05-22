@@ -147,7 +147,9 @@ class Step3 extends Component {
                 $companion->update($this->companion);
             } else {
                 $companion_type = ($this->user['staff_free'] ? Types::FREE_PASS_COMPANION->value : Types::COMPANION->value);
+                $companion_code = GenerateCode::run($this->companion['name'], $this->companion['last_name']);
                 $companion = User::create([
+                    'code' => $companion_code,
                     'name' => $this->companion['name'],
                     'last_name' => $this->companion['last_name'],
                     'phone' =>  $this->companion['phone'],
@@ -166,7 +168,9 @@ class Step3 extends Component {
                 $staff->update($this->staff);
             } else {
                 $staff_type = ($this->user['staff_free'] ? Types::FREE_PASS_STAFF->value : Types::STAFF->value);
+                $staff_code = GenerateCode::run($this->staff['name'], $this->staff['last_name']);
                 $staff = User::create([
+                    'code' => $staff_code,
                     'name' => $this->staff['name'],
                     'last_name' => $this->staff['last_name'],
                     'phone' =>  $this->staff['phone'],

@@ -71,10 +71,17 @@ class ConfirmedUserResource extends Resource
                             TextInput::make('email')->label('Email')->required()
                                 ->unique('users', 'email', ignoreRecord: true)->columnSpan(3),
                             DatePicker::make('date_of_issue')->label('Fecha de emisión')->columnSpan(3),
-                            TextInput::make('date_of_issue')->label('Lugar de emisión')->required()->columnSpan(3),
+                            TextInput::make('date_of_issue')->label('Lugar de emisión')->columnSpan(3),
                             DatePicker::make('date_of_birth')->label('Fecha de nacimiento')->columnSpan(3),
                             TextInput::make('nationality')->label('Nacionalidad')->columnSpan(3),
-                            TextInput::make('city_of_permanent_residency')->label('Ciudad de residencia')->columnSpanFull(),
+                            TextInput::make('city_of_permanent_residency')->label('Ciudad de residencia')->columnSpan(4),
+                            Select::make('type')->label('Tipo')->options([
+                                Types::COMPANION->value => Types::COMPANION->value,
+                                Types::STAFF->value => Types::STAFF->value,
+                                Types::FREE_PASS_COMPANION->value => Types::FREE_PASS_COMPANION->value,
+                                Types::FREE_PASS_STAFF->value => Types::FREE_PASS_STAFF->value,
+                            ])->required()->columnSpan(4),
+                            TextInput::make('amount')->label('Monto a pagar')->numeric()->columnSpan(4)->required(),
                         ])
                     ]),
                     Tab::make('Información de la empresa')->schema([
