@@ -4,12 +4,9 @@ namespace App\Livewire\User\Progress;
 
 use App\Concerns\Enums\Status;
 use App\Concerns\Enums\Types;
-use App\Mail\CompleteDataSuccess;
-use App\Mail\CompleteRegister;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\File;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -51,13 +48,14 @@ class Step5 extends Component {
     }
 
     public function process() {
-        $this->validate();
+        if ($this->user['status'] === Status::CONFIRMED->value) {
+            $this->validate();
+        }
         $current_user_status = $this->user['status'];
         $this->user->update([
             'register_progress' => 100,
             'badge_name' => $this->badge_name,
-            'badge_last_name' => $this->badge_last_name,
-            'lock_fields' => true
+            'badge_last_name' => $this->badge_last_name
         ]);
         if ($this->badge_photo) {
             foreach ($this->badge_photo as $photo) {
@@ -91,6 +89,13 @@ class Step5 extends Component {
                     'amount' => $this->user['amount']
                 ]);
                 $this->redirect(route('payment', ['token' => $order['token']]));
+            }
+
+            if ($current_user_status === Status::UNPAID->value) {
+                $order = Order::where('user_id', $this->user['id'])->first();
+                if ($order) {
+                    $this->redirect(route('payment', ['token' => $order['token']]));
+                }
             }
         }
 

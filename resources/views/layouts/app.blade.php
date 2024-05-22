@@ -14,12 +14,14 @@
         @livewireStyles
 
     </head>
-    <body>
-        <livewire:common.header />
-        <main>
-            {{ $slot }}
-        </main>
-        <x-footer />
+    <body class="antialiased">
+        <div class="min-h-screen flex flex-col">
+            <livewire:common.header />
+            <main>
+                {{ $slot }}
+            </main>
+            <x-footer />
+        </div>
         <x-toast />
         @livewireScripts
         @vite('resources/js/app.js')

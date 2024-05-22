@@ -54,7 +54,11 @@ return new class extends Migration
             $table->longText('require_special_assistance')->nullable()->default(null);
 
             $table->boolean('with_companion')->nullable()->default(false);
+            $table->boolean('companion_free')->nullable()->default(false);
+            $table->decimal('companion_amount')->nullable()->default(1500);
             $table->boolean('with_staff')->nullable()->default(false);
+            $table->boolean('staff_free')->nullable()->default(false);
+            $table->decimal('staff_amount')->nullable()->default(1500);
 
             $table->string('blood_type')->nullable()->default(null);
             $table->boolean('allergies')->nullable()->default(false);

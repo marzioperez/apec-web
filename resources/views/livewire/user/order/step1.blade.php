@@ -115,6 +115,7 @@
                     </div>
 
                     <div class="sm:my-8 my-6 flex justify-center space-x-6 items-center">
+                        <a href="{{route('progress')}}" class="btn btn-primary-outline">Return</a>
                         <button type="button" class="btn btn-primary" wire:click.prevent="process">Go to pay</button>
                     </div>
                 </div>

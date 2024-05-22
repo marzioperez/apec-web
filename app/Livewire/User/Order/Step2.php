@@ -88,7 +88,10 @@ class Step2 extends Component {
             }
         }
 
-        $this->order->user->update(['status' => Status::PAYMENT_REVIEW->value]);
+        $this->order->user->update([
+            'status' => Status::PAYMENT_REVIEW->value,
+            'lock_fields' => true
+        ]);
         $this->dispatch('open-modal', name: 'modal-status-ok');
     }
 
@@ -99,7 +102,10 @@ class Step2 extends Component {
                 'status' => Status::PAID->value,
                 'culqi_id' => $data['data']['id']
             ]);
-            $this->order->user->update(['status' => Status::PENDING_APPROVAL_DATA->value]);
+            $this->order->user->update([
+                'status' => Status::PENDING_APPROVAL_DATA->value,
+                'lock_fields' => true
+            ]);
             Mail::to($this->order->user['email'])->send(new PaymentSuccess($this->order->user));
             $this->dispatch('open-modal', name: 'modal-status-ok');
         } else {

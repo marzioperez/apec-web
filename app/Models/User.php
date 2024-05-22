@@ -52,7 +52,11 @@ class User extends Authenticatable {
         'require_special_assistance',
 
         'with_companion',
+        'companion_free',
+        'companion_amount',
         'with_staff',
+        'staff_free',
+        'staff_amount',
 
         'blood_type',
         'allergies',

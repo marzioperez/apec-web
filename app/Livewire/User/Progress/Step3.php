@@ -146,7 +146,7 @@ class Step3 extends Component {
             if ($companion) {
                 $companion->update($this->companion);
             } else {
-                $companion_type = ($this->user['type'] === Types::FREE_PASS_PARTICIPANT->value ? Types::FREE_PASS_COMPANION->value : Types::COMPANION->value);
+                $companion_type = ($this->user['staff_free'] ? Types::FREE_PASS_COMPANION->value : Types::COMPANION->value);
                 $companion = User::create([
                     'name' => $this->companion['name'],
                     'last_name' => $this->companion['last_name'],
@@ -154,6 +154,7 @@ class Step3 extends Component {
                     'email' =>  $this->companion['email'],
                     'password' => bcrypt($this->companion['phone']),
                     'type' => $companion_type,
+                    'amount' => $this->user['companion_amount'],
                     'parent_id' => $this->user['id'],
                     'status' => Status::CONFIRMED->value
                 ]);
@@ -164,7 +165,7 @@ class Step3 extends Component {
             if ($staff) {
                 $staff->update($this->staff);
             } else {
-                $staff_type = ($this->user['type'] === Types::FREE_PASS_PARTICIPANT->value ? Types::FREE_PASS_STAFF->value : Types::STAFF->value);
+                $staff_type = ($this->user['staff_free'] ? Types::FREE_PASS_STAFF->value : Types::STAFF->value);
                 $staff = User::create([
                     'name' => $this->staff['name'],
                     'last_name' => $this->staff['last_name'],
@@ -172,6 +173,7 @@ class Step3 extends Component {
                     'email' =>  $this->staff['email'],
                     'password' => bcrypt($this->staff['phone']),
                     'type' => $staff_type,
+                    'amount' => $this->user['staff_amount'],
                     'parent_id' => $this->user['id'],
                     'status' => Status::CONFIRMED->value
                 ]);

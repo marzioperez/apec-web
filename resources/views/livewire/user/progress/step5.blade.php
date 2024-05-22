@@ -51,7 +51,8 @@
                         </div>
 
                         @if(in_array($user['status'], [
-                            \App\Concerns\Enums\Status::PENDING_APPROVAL_DATA->value
+                            \App\Concerns\Enums\Status::PENDING_APPROVAL_DATA->value,
+                            \App\Concerns\Enums\Status::UNPAID->value
                         ]))
                             <h5 class="font-semibold my-5">Identity Document</h5>
                             <div class="mt-3 flex items-center bg-white px-2 py-1 shadow justify-between gap-2 border rounded border-gray-200 w-full h-auto overflow-hidden">
@@ -111,7 +112,8 @@
 
                         @if(in_array($user['status'], [
                             \App\Concerns\Enums\Status::CONFIRMED->value,
-                            \App\Concerns\Enums\Status::PENDING_CORRECT_DATA->value
+                            \App\Concerns\Enums\Status::PENDING_CORRECT_DATA->value,
+                            \App\Concerns\Enums\Status::UNPAID->value
                         ]))
                             <div class="rounded-md bg-yellow-50 p-4 mt-3">
                                 <div class="flex">
@@ -136,7 +138,10 @@
                                 ]))
                                     <button type="submit" class="btn btn-primary">Finish!</button>
                                 @else
-                                    @if($user['status'] === \App\Concerns\Enums\Status::CONFIRMED->value)
+                                    @if(in_array($user['status'], [
+                                        \App\Concerns\Enums\Status::CONFIRMED->value,
+                                        \App\Concerns\Enums\Status::UNPAID->value
+                                    ]))
                                         <button type="submit" class="btn btn-primary">Pay now!</button>
                                     @endif
                                     @if($user['status'] === \App\Concerns\Enums\Status::PENDING_CORRECT_DATA->value)

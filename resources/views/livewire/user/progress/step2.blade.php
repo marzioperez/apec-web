@@ -10,7 +10,7 @@
                     <h5 class="font-semibold mb-5">Company information</h5>
                     <form wire:submit.prevent="process">
                         <div class="form-group">
-                            <label for="business">Company/Organization</label>
+                            <label for="business">Company/Organization*</label>
                             <div class="form-field">
                                 <input type="text" id="business" name="business" wire:model="data.business" :disabled="{{$lock_fields}}" />
                                 @error('data.business') <span class="validation-error">{{ $message }}</span> @enderror

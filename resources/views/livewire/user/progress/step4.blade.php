@@ -32,25 +32,27 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="role">Allergies</label>
+                            <label for="role">Allergies*</label>
                             <div class="form-field flex space-x-6">
                                 <div class="flex items-center gap-x-3">
-                                    <input id="allergies_yes" name="allergies" type="radio" wire:model="data.allergies" value="yes" @change="allergies = 'yes'" :disabled="{{$lock_fields}}" />
+                                    <input id="allergies_yes" name="allergies" type="radio" wire:model.live="data.allergies" value="yes" @change="allergies = 'yes'" :disabled="{{$lock_fields}}" />
                                     <label for="allergies_yes">Yes</label>
                                 </div>
                                 <div class="flex items-center gap-x-3">
-                                    <input id="allergies_no" name="allergies" type="radio" wire:model="data.allergies" value="no" @change="allergies = 'no'" :disabled="{{$lock_fields}}" />
+                                    <input id="allergies_no" name="allergies" type="radio" wire:model.live="data.allergies" value="no" @change="allergies = 'no'" :disabled="{{$lock_fields}}" />
                                     <label for="allergies_no">No</label>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="allergy_details">Details</label>
-                            <div class="form-field">
-                                <textarea id="allergy_details" name="allergy_details" wire:model="data.allergy_details" :disabled="{{$lock_fields}}"></textarea>
-                                @error('allergy_details') <span class="validation-error">{{ $message }}</span> @enderror
+                        @if($data['allergies'] === 'yes')
+                            <div class="form-group">
+                                <label for="allergy_details">Details</label>
+                                <div class="form-field">
+                                    <textarea id="allergy_details" name="allergy_details" wire:model="data.allergy_details" :disabled="{{$lock_fields}}"></textarea>
+                                    @error('allergy_details') <span class="validation-error">{{ $message }}</span> @enderror
+                                </div>
                             </div>
-                        </div>
+                        @endif
                         <div class="form-group">
                             <label for="vaccines">Vaccines</label>
                             <div class="form-field">
