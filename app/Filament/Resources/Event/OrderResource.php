@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Event;
 
+use App\Concerns\Enums\Status;
 use App\Filament\Resources\Event\OrderResource\Pages;
 use App\Filament\Resources\Event\OrderResource\RelationManagers;
 use App\Models\Order;
@@ -39,7 +40,11 @@ class OrderResource extends Resource
                 TextColumn::make('user.name')->searchable()->label('Nombre'),
                 TextColumn::make('user.last_name')->searchable()->label('Apellidos'),
                 TextColumn::make('payment_method')->searchable()->label('Método de pago'),
-                TextColumn::make('status')->searchable()->label('Estado')->badge(),
+                TextColumn::make('status')->searchable()->label('Estado')->badge()->color(fn (string $state): string => match ($state) {
+                    Status::PAID->value => 'success',
+                    Status::UNPAID->value => 'warning',
+                    default => 'primary'
+                }),
                 TextColumn::make('created_at')->date('d/m/Y H:i')->label('Fecha de registro'),
             ])
             ->filters([
