@@ -267,33 +267,33 @@ class CompletedUserResource extends Resource
                         ->modalDescription('Una vez que se confirme esta acción, el usuario recibirá su código QR de forma automática. Así como el envío de sus datos hacia Cancillería.')
                         ->modalSubmitActionLabel('Confirmar')
                         ->action(function (User $user):void {
-                            if (in_array($user['type'], [
-                                Types::PARTICIPANT->value,
-                                Types::STAFF->value,
-                                Types::COMPANION->value,
-                                Types::VIP->value
-                            ])) {
-                                $user->update(['status' => Status::SEND_TO_CHANCELLERY->value]);
-                                $qr = GenerateQrCode::run($user['code']);
-                                $user->update([
-                                    'status' => Status::SEND_TO_CHANCELLERY->value,
-                                    'qr' => $qr
-                                ]);
-                                Mail::to($user['email'])->send(new CompleteDataSuccess($user));
-                            }
-
-                            if (in_array($user['type'], [
-                                Types::FREE_PASS_PARTICIPANT->value,
-                                Types::FREE_PASS_COMPANION->value,
-                                Types::FREE_PASS_STAFF->value
-                            ])) {
-                                $qr = GenerateQrCode::run($user['code']);
-                                $user->update([
-                                    'status' => Status::SEND_TO_CHANCELLERY->value,
-                                    'qr' => $qr
-                                ]);
-                                Mail::to($user['email'])->send(new CompleteDataPassFree($user));
-                            }
+//                            if (in_array($user['type'], [
+//                                Types::PARTICIPANT->value,
+//                                Types::STAFF->value,
+//                                Types::COMPANION->value,
+//                                Types::VIP->value
+//                            ])) {
+//                                $user->update(['status' => Status::SEND_TO_CHANCELLERY->value]);
+//                                $qr = GenerateQrCode::run($user['code']);
+//                                $user->update([
+//                                    'status' => Status::SEND_TO_CHANCELLERY->value,
+//                                    'qr' => $qr
+//                                ]);
+//                                Mail::to($user['email'])->send(new CompleteDataSuccess($user));
+//                            }
+//
+//                            if (in_array($user['type'], [
+//                                Types::FREE_PASS_PARTICIPANT->value,
+//                                Types::FREE_PASS_COMPANION->value,
+//                                Types::FREE_PASS_STAFF->value
+//                            ])) {
+//                                $qr = GenerateQrCode::run($user['code']);
+//                                $user->update([
+//                                    'status' => Status::SEND_TO_CHANCELLERY->value,
+//                                    'qr' => $qr
+//                                ]);
+//                                Mail::to($user['email'])->send(new CompleteDataPassFree($user));
+//                            }
 
                             // Todo: Implementar lógica para enviar datos a Cancillería
                             SendUserToChancellery::run($user);

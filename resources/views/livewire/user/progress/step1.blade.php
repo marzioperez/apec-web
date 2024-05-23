@@ -15,10 +15,9 @@
                             <div class="form-field">
                                 <select id="title" name="title" wire:model="data.title" :disabled="{{$lock_fields}}">
                                     <option value="">Select...</option>
-                                    <option value="{{\App\Concerns\Enums\Titles::MR->value}}">{{\App\Concerns\Enums\Titles::MR->value}}</option>
-                                    <option value="{{\App\Concerns\Enums\Titles::MRS->value}}">{{\App\Concerns\Enums\Titles::MRS->value}}</option>
-                                    <option value="{{\App\Concerns\Enums\Titles::MS->value}}">{{\App\Concerns\Enums\Titles::MS->value}}</option>
-                                    <option value="{{\App\Concerns\Enums\Titles::DR->value}}">{{\App\Concerns\Enums\Titles::DR->value}}</option>
+                                    @foreach($titles as $title)
+                                        <option value="{{$title['id']}}">{{$title['name']}}</option>
+                                    @endforeach
                                 </select>
                                 @error('data.title') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
@@ -42,8 +41,9 @@
                             <div class="form-field">
                                 <select id="gender" name="gender" wire:model="data.gender" :disabled="{{$lock_fields}}">
                                     <option value="">Select...</option>
-                                    <option value="{{\App\Concerns\Enums\Genders::MALE->value}}">{{\App\Concerns\Enums\Genders::MALE->value}}</option>
-                                    <option value="{{\App\Concerns\Enums\Genders::FEMALE->value}}">{{\App\Concerns\Enums\Genders::FEMALE->value}}</option>
+                                    @foreach($genders as $gender)
+                                        <option value="{{$gender['id']}}">{{$gender['name']}}</option>
+                                    @endforeach
                                 </select>
                                 @error('data.gender') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
@@ -53,8 +53,9 @@
                             <div class="form-field">
                                 <select id="document_type" name="document_type" wire:model="data.document_type" :disabled="{{$lock_fields}}">
                                     <option value="">Select...</option>
-                                    <option value="{{\App\Concerns\Enums\Types::DNI->value}}">{{\App\Concerns\Enums\Types::DNI->value}}</option>
-                                    <option value="{{\App\Concerns\Enums\Types::PASSPORT->value}}">{{\App\Concerns\Enums\Types::PASSPORT->value}}</option>
+                                    @foreach($document_types as $document_type)
+                                        <option value="{{$document_type['id']}}">{{$document_type['name']}}</option>
+                                    @endforeach
                                 </select>
                                 @error('data.document_type') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>

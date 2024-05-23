@@ -84,7 +84,9 @@ class User extends Authenticatable {
         'badge_name',
         'badge_last_name',
         'badge_photo',
+        'badge_extension',
         'identity_document',
+        'identity_extension',
 
         // Información de asistente (Opcional)
         'attendee_name',

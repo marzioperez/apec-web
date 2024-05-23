@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('economies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('sge_code')->nullable()->default(null);
             $table->softDeletes();
             $table->timestamps();
         });

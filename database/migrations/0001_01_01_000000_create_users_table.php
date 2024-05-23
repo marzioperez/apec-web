@@ -86,7 +86,9 @@ return new class extends Migration
             $table->string('badge_name')->nullable()->default(null);
             $table->string('badge_last_name')->nullable()->default(null);
             $table->string('badge_photo')->nullable()->default(null);
+            $table->string('badge_extension')->nullable()->default(null);
             $table->string('identity_document')->nullable()->default(null);
+            $table->string('identity_extension')->nullable()->default(null);
 
             // Información de asistente (Opcional)
             $table->string('attendee_name')->nullable()->default(null);

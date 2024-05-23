@@ -2,6 +2,7 @@
 
 namespace App\Livewire\User\Progress;
 
+use App\Models\Param;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
@@ -11,6 +12,8 @@ class Step1 extends Component {
     public User $user;
     public $quantity = 5, $current = 1;
     public bool $lock_fields = false;
+
+    public array $titles, $genders, $document_types;
 
     public $data  = [
         'title' => null,
@@ -71,6 +74,21 @@ class Step1 extends Component {
         ];
 
         $this->rules['data.email'] = 'required|email|unique:users,email,' . $user['id'] . ',id';
+
+        $params = Param::all();
+        foreach ($params as $param) {
+            if ($param['group'] === 'TITLES') {
+                $this->titles[] = $param;
+            }
+
+            if ($param['group'] === 'GENDERS') {
+                $this->genders[] = $param;
+            }
+
+            if ($param['group'] === 'DOCUMENTS') {
+                $this->document_types[] = $param;
+            }
+        }
     }
 
     public function save() {

@@ -10,6 +10,9 @@ class Economy extends Model {
 
     use SoftDeletes;
 
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'name',
+        'sge_code'
+    ];
 
 }

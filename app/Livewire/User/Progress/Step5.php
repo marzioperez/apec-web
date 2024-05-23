@@ -61,14 +61,20 @@ class Step5 extends Component {
             foreach ($this->badge_photo as $photo) {
                 $put_photo = Storage::putFile('public/badges', new File($photo['path']));
                 $set_photo = str_replace('public/badges/', '', $put_photo);
-                $this->user->update(['badge_photo' => $set_photo]);
+                $this->user->update([
+                    'badge_photo' => $set_photo,
+                    'badge_extension' => $photo['extension']
+                ]);
             }
         }
         if ($this->identity_document) {
             foreach ($this->identity_document as $item) {
                 $put_id = Storage::putFile('public/ids', new File($item['path']));
                 $set_id = str_replace('public/ids/', '', $put_id);
-                $this->user->update(['identity_document' => $set_id]);
+                $this->user->update([
+                    'identity_document' => $set_id,
+                    'identity_extension' => $item['extension']
+                ]);
             }
         }
 
