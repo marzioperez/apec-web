@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('schedule_day_activities', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('type')->nullable()->default(null);
+            $table->longText('content')->nullable()->default(null);
             $table->time('start');
             $table->time('end')->nullable()->default(null);
             $table->unsignedBigInteger('schedule_day_id')->nullable()->default(null);

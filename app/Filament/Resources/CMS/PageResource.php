@@ -44,7 +44,7 @@ class PageResource extends Resource {
                     '2xl' => 12
                 ])->schema([
                     Section::make('Bloques')->compact()->schema([
-                        Builder::make('content')->blockPickerColumns(3)->label('Bloques')
+                        Builder::make('content')->blockPickerColumns(2)->label('Bloques')
                             ->blocks([
                                 Block::make('banner')->label('Banner con texto')->schema([
                                     Tabs::make()->tabs([
@@ -69,7 +69,7 @@ class PageResource extends Resource {
                                         ])
                                     ])
                                 ]),
-                                Block::make('progress')->label('Banner de progreso')->schema([
+                                Block::make('progress')->label('Barra de progreso')->schema([
                                     Grid::make([
                                         'default' => 1,
                                         'sm' => 3,
@@ -81,6 +81,94 @@ class PageResource extends Resource {
                                             ->hintIcon('heroicon-m-question-mark-circle', 'Usar #progress# para colocar el progreso del usuario.'),
                                         TextInput::make('text_button')->label('Texto de botón')->columnSpan(4),
                                         TextInput::make('url')->label('URL')->columnSpan(8)
+                                    ])
+                                ]),
+                                Block::make('block-1')->label('Bloque de texto con libro')->schema([
+                                    Tabs::make()->tabs([
+                                        Tab::make('Contenido')->schema([
+                                            Grid::make([
+                                                'default' => 1,
+                                                'sm' => 3,
+                                                'xl' => 12,
+                                                '2xl' => 12
+                                            ])->schema([
+                                                TextInput::make('title')->label('Título')->columnSpanFull(),
+                                                TextInput::make('sub_title')->label('Sub título')->columnSpanFull(),
+                                                RichEditor::make('content')->label('Contenido')->columnSpanFull(),
+                                                TextInput::make('text_button')->label('Texto de botón')->columnSpanFull(),
+                                                FileUpload::make('preview')->disk('web')->label('Imagen')->preserveFilenames()->image()->required()->columnSpanFull()
+                                            ])
+                                        ]),
+                                        Tab::make('Imágenes')->schema([
+                                            Repeater::make('images')->schema([
+                                                FileUpload::make('image')->disk('web')->label('Imagen')->preserveFilenames()->image()->required()->columnSpanFull()
+                                            ])->reorderable()->columnSpan(2),
+                                        ])
+                                    ])
+                                ]),
+                                Block::make('block-2')->label('Bloque de texto con imagen y popup')->schema([
+                                    Tabs::make()->tabs([
+                                        Tab::make('Contenido')->schema([
+                                            Grid::make([
+                                                'default' => 1,
+                                                'sm' => 3,
+                                                'xl' => 12,
+                                                '2xl' => 12
+                                            ])->schema([
+                                                TextInput::make('title')->label('Título')->columnSpanFull(),
+                                                TextInput::make('sub_title')->label('Sub título')->columnSpanFull(),
+                                                RichEditor::make('content')->label('Contenido')->columnSpanFull(),
+                                                TextInput::make('text_button')->label('Texto de botón')->columnSpanFull(),
+                                                FileUpload::make('image')->disk('web')->label('Imagen')->preserveFilenames()->image()->required()->columnSpanFull()
+                                            ])
+                                        ]),
+                                        Tab::make('Popup')->schema([
+                                            TextInput::make('pop_up_title')->label('Título')->columnSpanFull(),
+                                            RichEditor::make('pop_up_content')->label('Contenido')->columnSpanFull(),
+                                            FileUpload::make('pop_up_image')->disk('web')->label('Imagen')->preserveFilenames()->image()->required()->columnSpanFull()
+                                        ])
+                                    ])
+                                ]),
+                                Block::make('program')->label('Bloque de programa')->schema([
+                                    TextInput::make('title')->label('Título')->columnSpanFull(),
+                                ]),
+                                Block::make('speakers')->label('Bloque de expositores')->schema([
+                                    TextInput::make('title')->label('Título')->columnSpanFull(),
+                                ]),
+                                Block::make('circular-progress')->label('Círculo de progreso')->schema([
+                                    Grid::make([
+                                        'default' => 1,
+                                        'sm' => 3,
+                                        'xl' => 12,
+                                        '2xl' => 12
+                                    ])->schema([
+                                        TextInput::make('title')->label('Título')->columnSpanFull(),
+                                        TextInput::make('sub_title')->label('Sub título')->columnSpanFull(),
+                                        TextInput::make('text_button')->label('Texto de botón')->columnSpan(4),
+                                        TextInput::make('url')->label('URL')->columnSpan(8)
+                                    ])
+                                ]),
+                                Block::make('hotels')->label('Bloque de hoteles')->schema([
+                                    TextInput::make('title')->label('Título')->columnSpanFull(),
+                                ]),
+                                Block::make('sponsors')->label('Bloque de sponsors')->schema([
+                                    TextInput::make('title')->label('Título')->columnSpanFull(),
+                                ]),
+                                Block::make('news')->label('Bloque de noticias')->schema([
+                                    TextInput::make('title')->label('Título')->columnSpanFull(),
+                                ]),
+                                Block::make('block-3')->label('Bloque de textos en columnas')->schema([
+                                    Grid::make([
+                                        'default' => 1,
+                                        'sm' => 3,
+                                        'xl' => 12,
+                                        '2xl' => 12
+                                    ])->schema([
+                                        TextInput::make('title')->label('Título')->columnSpan(8),
+                                        TextInput::make('columns')->label('Columnas')->numeric()->columnSpan(4),
+                                        Repeater::make('elementos')->label('Textos')->schema([
+                                            RichEditor::make('content')->label('Contenido')->columnSpanFull(),
+                                        ])->columnSpanFull(),
                                     ])
                                 ]),
                             ])->collapsed()->cloneable(),
@@ -97,13 +185,14 @@ class PageResource extends Resource {
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')->label('Nombre'),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

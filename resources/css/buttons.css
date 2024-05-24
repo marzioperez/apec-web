@@ -25,3 +25,11 @@
 .btn-white-outline {
     @apply border bg-white border-black text-black hover:bg-black hover:text-white;
 }
+
+.btn-blue {
+    @apply bg-blue text-white hover:bg-blue-light;
+}
+
+.btn-blue-outline {
+    @apply border border-blue text-white hover:bg-blue;
+}

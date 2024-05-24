@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Actions\GenerateCode;
 use App\Concerns\Enums\Status;
 use App\Concerns\Enums\Types;
+use App\Models\Page;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -15,7 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void {
         $this->call(AdminSeeder::class);
-        // $this->call(EconomySeeder::class);
+        $this->call(ProgramSeeder::class);
         User::factory()->create([
             'code' => GenerateCode::run('Jon', 'Doe'),
             'type' => Types::PARTICIPANT->value,
@@ -25,6 +26,13 @@ class DatabaseSeeder extends Seeder
             'email' => 'jondoe@gmail.com',
             'phone' => '123456',
             'password' => bcrypt('123456')
+        ]);
+
+        Page::create([
+            'name' => 'Inicio',
+            'slug' => '/',
+            'content' => [],
+            'is_home' => true
         ]);
         User::factory(20)->create();
     }
