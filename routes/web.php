@@ -2,9 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::group(['middleware' => ['guest']], function () {
     Route::get('/sign-up', \App\Livewire\Auth\SignUp::class)->name('sign-up');
@@ -17,5 +14,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/guest-progress', \App\Livewire\User\Progress\Guest::class)->name('guest-progress');
     Route::get('/payment/{token}', \App\Livewire\User\Order\Index::class)->name('payment');
 });
+
+Route::get('/{slug?}', \App\Livewire\CMS\Page::class)->name('page');
 
 Route::post('webhook', \App\Actions\Webhook::class)->name('webhook');

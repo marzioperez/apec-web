@@ -1,0 +1,27 @@
+.slider {
+    @apply relative;
+}
+
+.slider .content {
+    @apply absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 text-center space-y-5;
+}
+
+.slider .content .logo {
+    @apply inline-block w-[220px];
+}
+
+.slider .content .inner {
+    @apply bg-black/60 text-white sm:px-8 px-4 py-4 rounded-3xl;
+}
+
+.slider .splide__pagination {
+    @apply bottom-5;
+}
+
+.slider .splide__pagination__page.is-active {
+    @apply scale-100 opacity-100;
+}
+
+.slider .splide__pagination__page {
+    @apply bg-white mx-2 h-[13px] w-[13px] rounded-none rotate-45;
+}

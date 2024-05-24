@@ -9,6 +9,9 @@
 @import "progress.css";
 @import "auth.css";
 @import "badge.css";
+@import "slider.css";
+@import "countdown.css";
+@import '@splidejs/splide/dist/css/splide.min.css';
 
 @tailwind base;
 @tailwind components;

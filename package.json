@@ -14,6 +14,8 @@
         "vite": "^5.0"
     },
     "dependencies": {
-        "@dasundev/livewire-dropzone-styles": "^1.0.7"
+        "@dasundev/livewire-dropzone-styles": "^1.0.7",
+        "@splidejs/splide": "^4.1.4",
+        "moment": "^2.30.1"
     }
 }

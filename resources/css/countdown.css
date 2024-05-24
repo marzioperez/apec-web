@@ -1,0 +1,32 @@
+.countdown {
+    @apply flex justify-center items-center relative overflow-hidden p-0;
+}
+
+.countdown .days,
+.countdown .hours,
+.countdown .minutes,
+.countdown .seconds {
+    @apply m-[6px]
+}
+
+.countdown .amount {
+    @apply inline-flex content-center justify-center items-center relative h-[52px] text-[32px];
+}
+
+.countdown .amount::after {
+    @apply content-[''] block absolute left-0 top-1/2 w-full -mt-[1px];
+}
+
+.countdown .digit,
+.countdown .digit[data-countdown-next-digit]::after {
+    @apply text-black bg-gray-100 font-bold flex justify-center items-center content-center relative w-[30px] h-[40px] rounded text-center overflow-hidden m-1;
+}
+
+.countdown .digit[data-countdown-next-digit]::after {
+    content: attr(data-countdown-next-digit);
+    @apply hidden absolute top-0 left-0;
+}
+
+.countdown .label {
+    @apply block pt-[2px] text-xs text-center uppercase;
+}
