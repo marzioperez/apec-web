@@ -20,6 +20,6 @@ class Page extends Component {
     }
 
     public function render() {
-        return view('livewire.c-m-s.page');
+        return view('livewire.c-m-s.page')->layout('layouts.app', ['class' => 'bg-black']);
     }
 }

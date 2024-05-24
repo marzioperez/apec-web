@@ -14,7 +14,7 @@
         @livewireStyles
 
     </head>
-    <body class="antialiased">
+    <body class="antialiased {{($class ?? '')}}">
         <div class="min-h-screen flex flex-col">
             <livewire:common.header />
             <main>

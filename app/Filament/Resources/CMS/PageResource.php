@@ -69,6 +69,20 @@ class PageResource extends Resource {
                                         ])
                                     ])
                                 ]),
+                                Block::make('progress')->label('Banner de progreso')->schema([
+                                    Grid::make([
+                                        'default' => 1,
+                                        'sm' => 3,
+                                        'xl' => 12,
+                                        '2xl' => 12
+                                    ])->schema([
+                                        TextInput::make('title')->label('Título')->columnSpanFull(),
+                                        TextInput::make('sub_title')->label('Sub título')->columnSpanFull()
+                                            ->hintIcon('heroicon-m-question-mark-circle', 'Usar #progress# para colocar el progreso del usuario.'),
+                                        TextInput::make('text_button')->label('Texto de botón')->columnSpan(4),
+                                        TextInput::make('url')->label('URL')->columnSpan(8)
+                                    ])
+                                ]),
                             ])->collapsed()->cloneable(),
                     ])->columnSpan(8),
                     Section::make('Ajustes')->schema([
