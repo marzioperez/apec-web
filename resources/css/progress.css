@@ -5,3 +5,22 @@
 .progress .line {
     @apply h-full rounded-xl bg-gradient-to-br from-primary to-primary-dark transition-all;
 }
+
+@property --pgPercentage {
+    syntax: '<number>';
+    inherits: false;
+    initial-value: 0;
+}
+
+div.circular-progress {
+    @apply rounded-full grid place-items-center text-white font-semibold text-2xl w-32 h-32;
+    --pgPercentage: var(--value);
+    background:
+        radial-gradient(closest-side, black 80%, transparent 0 100%, white 0),
+        conic-gradient(#009600 calc(var(--pgPercentage) * 1%), white 0);
+}
+
+div.circular-progress::before {
+    counter-reset: percentage var(--value);
+    content: counter(percentage) '%';
+}

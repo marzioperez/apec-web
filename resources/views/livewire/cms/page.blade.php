@@ -21,5 +21,11 @@
         @if($block['type'] === 'program')
             <livewire:common.program :data="$block['data']" />
         @endif
+
+        @if($block['type'] === 'circular-progress')
+            @if(auth()->check())
+                <x-blocks.circular-progress :data="$block['data']" />
+            @endif
+        @endif
     @endforeach
 </div>
