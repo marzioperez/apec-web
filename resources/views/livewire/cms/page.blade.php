@@ -27,5 +27,9 @@
                 <x-blocks.circular-progress :data="$block['data']" />
             @endif
         @endif
+
+        @if($block['type'] === 'speakers')
+            <livewire:common.speakers :data="$block['data']" />
+        @endif
     @endforeach
 </div>

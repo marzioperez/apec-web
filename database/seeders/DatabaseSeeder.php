@@ -6,6 +6,7 @@ use App\Actions\GenerateCode;
 use App\Concerns\Enums\Status;
 use App\Concerns\Enums\Types;
 use App\Models\Page;
+use App\Models\Speaker;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -35,5 +36,6 @@ class DatabaseSeeder extends Seeder
             'is_home' => true
         ]);
         User::factory(20)->create();
+        Speaker::factory(24)->create();
     }
 }

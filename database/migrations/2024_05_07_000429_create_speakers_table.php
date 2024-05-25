@@ -16,10 +16,11 @@ return new class extends Migration
             $table->string('name');
             $table->string('position')->nullable()->default(null);
             $table->string('company')->nullable()->default(null);
+            $table->text('summary')->nullable()->default(null);
             $table->longText('biography')->nullable()->default(null);
-
             $table->json('social_networks')->nullable()->default(null);
-
+            $table->string('photo')->nullable()->default(null);
+            $table->integer('order');
             $table->softDeletes();
             $table->timestamps();
         });

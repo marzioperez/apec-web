@@ -25,3 +25,19 @@
 .slider .splide__pagination__page {
     @apply bg-white mx-2 h-[13px] w-[13px] rounded-none rotate-45;
 }
+
+.slider-speakers .splide__arrow {
+    @apply bg-transparent;
+}
+
+.slider-speakers .splide__arrow svg {
+    @apply fill-white;
+}
+
+.slider-speakers .splide__arrow--prev {
+    @apply -left-1;
+}
+
+.slider-speakers .splide__arrow--next {
+    @apply -right-1;
+}

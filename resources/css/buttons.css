@@ -33,3 +33,7 @@
 .btn-blue-outline {
     @apply border border-blue text-white hover:bg-blue;
 }
+
+.btn-speaker-social {
+    @apply text-gray-300 w-[30px] h-[30px] flex items-center justify-center text-center rounded border-2 border-gray-300 hover:bg-gray-300 hover:text-black transition-all;
+}
