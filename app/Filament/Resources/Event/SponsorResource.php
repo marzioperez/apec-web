@@ -4,11 +4,20 @@ namespace App\Filament\Resources\Event;
 
 use App\Filament\Resources\Event\SponsorResource\Pages;
 use App\Filament\Resources\Event\SponsorResource\RelationManagers;
+use App\Models\CategorySponsor;
 use App\Models\Sponsor;
 use Filament\Forms;
+use Filament\Forms\Components\Builder\Block;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -27,15 +36,48 @@ class SponsorResource extends Resource {
     {
         return $form
             ->schema([
-                //
+                Section::make([
+                    Grid::make([
+                        'default' => 1,
+                        'sm' => 3,
+                        'xl' => 12,
+                        '2xl' => 12
+                    ])->schema([
+                        TextInput::make('name')->label('Nombre')->required()->columnSpan(8),
+                        Select::make('category_sponsor_id')->label('Categoría')->options(CategorySponsor::all()->pluck('name', 'id'))->columnSpan(4),
+                        RichEditor::make('description')->required()->columnSpanFull(),
+                        FileUpload::make('photo')->label('Logo')->disk('web')->required()->columnSpanFull(),
+                        \Filament\Forms\Components\Builder::make('social_networks')->label('Redes sociales')->blockPickerColumns(3)
+                            ->blocks([
+                                Block::make('facebook')->label('Facebook')->schema([
+                                    TextInput::make('url')->label('URL')->columnSpanFull(),
+                                ]),
+                                Block::make('x')->label('Twitter X')->schema([
+                                    TextInput::make('url')->label('URL')->columnSpanFull(),
+                                ]),
+                                Block::make('web')->label('Web')->schema([
+                                    TextInput::make('url')->label('URL')->columnSpanFull(),
+                                ]),
+                                Block::make('instagram')->label('Instagram')->schema([
+                                    TextInput::make('url')->label('URL')->columnSpanFull(),
+                                ]),
+                                Block::make('linkedin')->label('Linkedin')->schema([
+                                    TextInput::make('url')->label('URL')->columnSpanFull(),
+                                ]),
+                            ])->columnSpanFull(),
+                    ])
+                ])
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn(Builder $query) => $query->orderBy('order'))
+            ->reorderable('order')
             ->columns([
-                //
+                TextColumn::make('name')->label('Nombre'),
+                TextColumn::make('category.name')->label('Categoría'),
             ])
             ->filters([
                 //

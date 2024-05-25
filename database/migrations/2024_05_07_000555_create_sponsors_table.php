@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('logo')->nullable()->default(null);
             $table->longText('description')->nullable()->default(null);
             $table->json('social_networks')->nullable()->default(null);
+            $table->integer('order');
+            $table->unsignedInteger('category_sponsor_id')->nullable()->default(null);
             $table->softDeletes();
             $table->timestamps();
         });

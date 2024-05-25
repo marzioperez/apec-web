@@ -44,7 +44,7 @@ class SpeakerResource extends Resource {
                         TextInput::make('company')->label('Empresa')->required()->columnSpan(4),
                         Textarea::make('summary')->label('Resumen')->required()->columnSpanFull(),
                         RichEditor::make('biography')->required()->columnSpanFull(),
-                        FileUpload::make('photo')->disk('web')->required()->columnSpanFull(),
+                        FileUpload::make('photo')->label('Foto')->disk('web')->required()->columnSpanFull(),
                         Builder::make('social_networks')->label('Redes sociales')->blockPickerColumns(3)
                             ->blocks([
                                 Block::make('facebook')->label('Facebook')->schema([
