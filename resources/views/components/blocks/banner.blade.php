@@ -30,4 +30,5 @@
             @endif
         </div>
     </div>
+    <img src="{{asset('img/bg-banner-right.png')}}" class="absolute -bottom-1/3 right-0 w-[300px] z-[5]">
 </div>
