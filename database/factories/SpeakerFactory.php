@@ -15,7 +15,7 @@ class SpeakerFactory extends Factory {
             'company' => fake()->company,
             'summary' => fake()->paragraph(),
             'biography' => fake()->paragraphs(4, true),
-            'photo' => fake()->imageUrl(400, 400)
+            'photo' => 'speaker-default.png'
         ];
     }
 }

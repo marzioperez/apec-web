@@ -41,3 +41,15 @@
 .slider-speakers .splide__arrow--next {
     @apply -right-1;
 }
+
+.slider-sponsors .splide__pagination {
+    @apply -bottom-10 !flex;
+}
+
+.slider-sponsors .splide__pagination__page {
+    @apply bg-white mx-2 h-[13px] w-[13px] rounded-none rotate-45;
+}
+
+.slider-sponsors .splide__pagination__page.is-active {
+    @apply scale-100 opacity-100;
+}

@@ -39,7 +39,7 @@
             <div>
                 <div class="mb-3 sm:grid grid-cols-12 gap-6">
                     <div class="col-span-4 flex justify-center sm:mb-0 mb-3">
-                        <img src="{{$speaker['photo']}}" class="sm:w-[200px] w-[150px] rounded-full p-2 border-2 border-orange">
+                        <img src="{{url('storage/web/' . $speaker['photo'])}}" class="sm:w-[200px] w-[150px] rounded-full p-2 border-2 border-orange">
                     </div>
                     <div class="col-span-8">
                         <h6 class="text-orange font-semibold text-lg mb-2 sm:text-start text-center">{{$speaker['name']}}</h6>

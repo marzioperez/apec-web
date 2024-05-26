@@ -37,3 +37,11 @@
 .btn-speaker-social {
     @apply text-gray-300 w-[30px] h-[30px] flex items-center justify-center text-center rounded border-2 border-gray-300 hover:bg-gray-300 hover:text-black transition-all;
 }
+
+.btn-orange {
+    @apply bg-orange text-white hover:bg-orange-light;
+}
+
+.btn-orange-outline {
+    @apply border border-orange text-white hover:bg-orange;
+}

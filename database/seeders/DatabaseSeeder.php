@@ -11,6 +11,7 @@ use App\Models\Speaker;
 use App\Models\Sponsor;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -40,8 +41,10 @@ class DatabaseSeeder extends Seeder
             'is_home' => true
         ]);
 
+        Storage::disk('web')->put('speaker-default.png', file_get_contents(asset('img/speaker-default.png')));
         Speaker::factory(24)->create();
 
+        Storage::disk('web')->put('logo-default.png', file_get_contents(asset('img/logo-default.png')));
         $platinium = CategorySponsor::create(['name' => 'Platinum']);
         Sponsor::factory(24)->create(['category_sponsor_id' => $platinium->id]);
 
