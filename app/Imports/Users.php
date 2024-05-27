@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use App\Actions\GenerateCode;
 use App\Concerns\Enums\Status;
 use App\Mail\RegisterPassFree;
 use App\Mail\RegisterSuccess;
@@ -17,6 +18,7 @@ class Users implements WithHeadingRow, ToModel {
             $model = User::where('email', $row['email'])->first();
             if (!$model) {
                 $user = new User();
+                $user['code'] = GenerateCode::run($row['nombres'], $row['apellidos']);
                 $user['name'] = $row['nombres'];
                 $user['last_name'] = $row['apellidos'];
                 $user['business'] = $row['empresa'];
