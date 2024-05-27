@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Concerns\Enums\Status;
 use App\Mail\RegisterPassFree;
+use App\Mail\RegisterSuccess;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Concerns\ToModel;
@@ -33,7 +34,7 @@ class Users implements WithHeadingRow, ToModel {
                 $user['status'] = Status::CONFIRMED->value;
                 $user->save();
 
-                Mail::to($row['email'])->send(new RegisterPassFree($user));
+                Mail::to($row['email'])->send(new RegisterSuccess($user));
             }
         }
     }
