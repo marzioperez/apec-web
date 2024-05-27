@@ -24,17 +24,17 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminSeeder::class);
         $this->call(ProgramSeeder::class);
 
-        User::factory()->create([
-            'code' => GenerateCode::run('Jon', 'Doe'),
-            'type' => Types::PARTICIPANT->value,
-            'status' => Status::CONFIRMED->value,
-            'name' => 'Jon',
-            'last_name' => 'Doe',
-            'email' => 'jondoe@gmail.com',
-            'phone' => '123456',
-            'password' => bcrypt('123456')
-        ]);
-        User::factory(20)->create();
+//        User::factory()->create([
+//            'code' => GenerateCode::run('Jon', 'Doe'),
+//            'type' => Types::PARTICIPANT->value,
+//            'status' => Status::CONFIRMED->value,
+//            'name' => 'Jon',
+//            'last_name' => 'Doe',
+//            'email' => 'jondoe@gmail.com',
+//            'phone' => '123456',
+//            'password' => bcrypt('123456')
+//        ]);
+//        User::factory(20)->create();
 
         Page::create([
             'name' => 'Inicio',

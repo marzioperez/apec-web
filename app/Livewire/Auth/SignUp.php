@@ -11,12 +11,13 @@ use Livewire\Component;
 
 class SignUp extends Component {
 
-    // public $name, $last_name, $business, $economy, $business_description, $role, $biography, $email, $confirm_email, $phone_number, $other_economy;
-    // public $send_copy_of_registration = false, $accept_terms_and_conditions = false;
-    public $attendee_name, $attendee_email;
+    public $name, $last_name, $business, $economy, $business_description, $role, $biography, $email, $confirm_email, $phone_number, $other_economy;
+    public $send_copy_of_registration = false, $accept_terms_and_conditions = false;
 
-    public $name = 'Marzio', $last_name = 'Perez', $business = 'Marzio SAC', $economy = 16, $business_description = 'Desarrollo de sistemas', $role = 'CE0', $biography = 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.', $email = 'marzioperez@gmail.com', $confirm_email = 'marzioperez@gmail.com', $phone_number = '981277116', $other_economy = '';
-    public $send_copy_of_registration = false, $accept_terms_and_conditions = true;
+    // public $name = 'Marzio', $last_name = 'Perez', $business = 'Marzio SAC', $economy = 16, $business_description = 'Desarrollo de sistemas', $role = 'CE0', $biography = 'Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto.', $email = 'marzioperez@gmail.com', $confirm_email = 'marzioperez@gmail.com', $phone_number = '981277116', $other_economy = '';
+    // public $send_copy_of_registration = false, $accept_terms_and_conditions = true;
+
+    public $attendee_name, $attendee_email;
     public $current_step = 1;
     public $complete_step = 0;
     public $economies = [];
