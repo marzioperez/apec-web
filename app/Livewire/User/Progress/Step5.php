@@ -80,7 +80,7 @@ class Step5 extends Component {
 
         $show_modal = false;
         if (in_array($this->user['type'], [
-            Types::FREE_PASS_STAFF->value,
+            Types::FREE_PASS_PARTICIPANT->value,
             Types::FREE_PASS_COMPANION->value,
             Types::FREE_PASS_STAFF->value,
         ])) {
