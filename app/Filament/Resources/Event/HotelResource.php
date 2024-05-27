@@ -71,8 +71,10 @@ class HotelResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn(\Illuminate\Database\Eloquent\Builder $query) => $query->orderBy('order'))
+            ->reorderable('order')
             ->columns([
-                TextColumn::make('name')->label('Nombre'),
+                TextColumn::make('name')->label('Nombre')->searchable()->sortable(),
             ])
             ->filters([
                 //

@@ -28,6 +28,12 @@
             @endif
         @endif
 
+        @if($block['type'] === 'hotels')
+            @if(auth()->check())
+                <livewire:common.hotels :data="$block['data']" />
+            @endif
+        @endif
+
         @if($block['type'] === 'speakers')
             <livewire:common.speakers :data="$block['data']" />
         @endif

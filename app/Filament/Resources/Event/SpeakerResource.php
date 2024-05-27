@@ -73,8 +73,8 @@ class SpeakerResource extends Resource {
             ->modifyQueryUsing(fn(\Illuminate\Database\Eloquent\Builder $query) => $query->orderBy('order'))
             ->reorderable('order')
             ->columns([
-                TextColumn::make('name')->label('Nombre'),
-                TextColumn::make('company')->label('Empresa'),
+                TextColumn::make('name')->label('Nombre')->searchable(),
+                TextColumn::make('company')->label('Empresa')->searchable(),
             ])
             ->filters([
                 //

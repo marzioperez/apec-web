@@ -18,7 +18,7 @@
                         </div>
                         <div x-data="{ current_activity: null }">
                             @foreach($day['activities'] as $activity)
-                                <div class="w-full grid grid-cols-12 gap-5 py-5 border-white/60 border-b" x-data="{
+                                <div class="w-full sm:grid grid-cols-12 gap-5 py-5 border-white/60 border-b" x-data="{
                                     activity: {{$activity['id']}},
                                     get expanded() {
                                         return this.current_activity === this.activity
@@ -29,14 +29,21 @@
                                 }">
                                     <div class="col-span-3 flex justify-between">
                                         <div>{{ date('H:i', strtotime($activity['start'])) }} - {{ date('H:i', strtotime($activity['end'])) }} Hrs</div>
-                                        <div class="cursor-pointer pt-1" x-on:click="expanded = !expanded" :aria-expanded="expanded">
+                                        <div class="sm:block hidden cursor-pointer pt-1" x-on:click="expanded = !expanded" :aria-expanded="expanded">
                                             <svg width="8" height="12" viewBox="0 0 8 12" fill="none" aria-hidden="true" class="transition-all" :class="expanded ? 'rotate-90' : ''">
                                                 <path d="M1.70706 11.707L7.41406 6.00003L1.70706 0.293031L0.293062 1.70703L4.58606 6.00003L0.293063 10.293L1.70706 11.707Z" fill="white"/>
                                             </svg>
                                         </div>
                                     </div>
                                     <div class="col-span-9">
-                                        <div class="uppercase cursor-pointer" x-on:click="expanded = !expanded" :aria-expanded="expanded">{{$activity['title']}}</div>
+                                        <div class="uppercase cursor-pointer flex sm:space-x-0 space-x-6 items-center" x-on:click="expanded = !expanded" :aria-expanded="expanded">
+                                            <div class="sm:hidden block cursor-pointer">
+                                                <svg width="8" height="12" viewBox="0 0 8 12" fill="none" aria-hidden="true" class="transition-all" :class="expanded ? 'rotate-90' : ''">
+                                                    <path d="M1.70706 11.707L7.41406 6.00003L1.70706 0.293031L0.293062 1.70703L4.58606 6.00003L0.293063 10.293L1.70706 11.707Z" fill="white"/>
+                                                </svg>
+                                            </div>
+                                            <div>{{$activity['title']}}</div>
+                                        </div>
                                         <div class="py-3 opacity-60" x-show="expanded" x-collapse>{!! $activity['content'] !!}</div>
                                     </div>
                                 </div>

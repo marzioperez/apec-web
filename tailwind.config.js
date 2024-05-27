@@ -32,6 +32,6 @@ module.exports = {
         },
     },
     plugins: [
-
+        require('@khoohaoyit/tailwind-grid-center'),
     ],
 }
