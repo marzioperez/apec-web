@@ -1,0 +1,12 @@
+.book-prev-page,
+.book-next-page {
+    @apply absolute top-1/2 -translate-y-1/2 text-white text-xl cursor-pointer transition-all opacity-80 hover:opacity-100;
+}
+
+.book-prev-page {
+    @apply left-6;
+}
+
+.book-next-page {
+    @apply right-6;
+}

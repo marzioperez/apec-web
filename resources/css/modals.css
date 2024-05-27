@@ -29,3 +29,7 @@
 .modal-overlay {
     @apply fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity;
 }
+
+.modal.modal-book .modal-body {
+    @apply sm:max-w-[850px] w-full;
+}
