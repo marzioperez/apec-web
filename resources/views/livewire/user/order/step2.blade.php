@@ -54,7 +54,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="payment_reference_last_name">Name(s)*</label>
+                            <label for="payment_reference_last_name">Last Name(s)*</label>
                             <div class="form-field">
                                 <input type="text" id="payment_reference_last_name" name="payment_reference_last_name" wire:model="data.payment_reference_last_name" />
                                 @error('data.payment_reference_last_name') <span class="validation-error">{{ $message }}</span> @enderror
