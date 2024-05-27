@@ -119,7 +119,7 @@
                         ]))
                             <div class="sm:my-8 my-6 flex justify-center space-x-6 items-center">
                                 @if(in_array($user['type'], [
-                                    \App\Concerns\Enums\Types::FREE_PASS_STAFF->value,
+                                    \App\Concerns\Enums\Types::FREE_PASS_PARTICIPANT->value,
                                     \App\Concerns\Enums\Types::FREE_PASS_COMPANION->value,
                                     \App\Concerns\Enums\Types::FREE_PASS_STAFF->value,
                                 ]))
