@@ -100,6 +100,23 @@ class User extends Authenticatable {
         'observation',
         'amount',
 
+        'arrived_air_line',
+        'arrived_origin',
+        'arrived_flight_number',
+        'arrived_date',
+        'arrived_time',
+
+        'exit_air_line',
+        'exit_destination',
+        'exit_flight_number',
+        'exit_date',
+        'exit_time',
+
+        'hotel_name',
+        'hotel_room',
+        'hotel_price',
+        'hotel_conditions_and_payment',
+
         'lock_fields',
 
         'parent_id'

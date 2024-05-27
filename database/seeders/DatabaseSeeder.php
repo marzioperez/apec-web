@@ -6,7 +6,9 @@ use App\Actions\GenerateCode;
 use App\Concerns\Enums\Status;
 use App\Concerns\Enums\Types;
 use App\Models\CategorySponsor;
+use App\Models\Hotel;
 use App\Models\Page;
+use App\Models\Post;
 use App\Models\Speaker;
 use App\Models\Sponsor;
 use App\Models\User;
@@ -56,5 +58,8 @@ class DatabaseSeeder extends Seeder
 
         $media_partners = CategorySponsor::create(['name' => 'Media Partners']);
         Sponsor::factory(8)->create(['category_sponsor_id' => $media_partners->id]);
+
+        Hotel::factory(9)->create();
+        Post::factory(20)->create();
     }
 }

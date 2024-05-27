@@ -100,6 +100,23 @@ return new class extends Migration
             $table->longText('observation')->nullable()->default(null);
             $table->decimal('amount')->nullable()->default(3500);
 
+            $table->string('arrived_air_line')->nullable()->default(null);
+            $table->string('arrived_origin')->nullable()->default(null);
+            $table->string('arrived_flight_number')->nullable()->default(null);
+            $table->date('arrived_date')->nullable()->default(null);
+            $table->time('arrived_time')->nullable()->default(null);
+
+            $table->string('exit_air_line')->nullable()->default(null);
+            $table->string('exit_destination')->nullable()->default(null);
+            $table->string('exit_flight_number')->nullable()->default(null);
+            $table->date('exit_date')->nullable()->default(null);
+            $table->time('exit_time')->nullable()->default(null);
+
+            $table->string('hotel_name')->nullable()->default(null);
+            $table->string('hotel_room')->nullable()->default(null);
+            $table->string('hotel_price')->nullable()->default(null);
+            $table->longText('hotel_conditions_and_payment')->nullable()->default(null);
+
             $table->boolean('lock_fields')->nullable()->default(false);
 
             // ID del participante que invita
