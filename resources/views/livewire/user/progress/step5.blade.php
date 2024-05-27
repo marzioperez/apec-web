@@ -52,7 +52,8 @@
 
                         @if(in_array($user['status'], [
                             \App\Concerns\Enums\Status::PENDING_APPROVAL_DATA->value,
-                            \App\Concerns\Enums\Status::UNPAID->value
+                            \App\Concerns\Enums\Status::UNPAID->value,
+                            \App\Concerns\Enums\Status::PAYMENT_REVIEW->value
                         ]))
                             <h5 class="font-semibold my-5">Identity Document</h5>
                             <div class="mt-3 flex items-center bg-white px-2 py-1 shadow justify-between gap-2 border rounded border-gray-200 w-full h-auto overflow-hidden">
@@ -113,7 +114,8 @@
                         @if(in_array($user['status'], [
                             \App\Concerns\Enums\Status::CONFIRMED->value,
                             \App\Concerns\Enums\Status::PENDING_CORRECT_DATA->value,
-                            \App\Concerns\Enums\Status::UNPAID->value
+                            \App\Concerns\Enums\Status::UNPAID->value,
+                            \App\Concerns\Enums\Status::PAYMENT_REVIEW->value
                         ]))
                             <div class="sm:my-8 my-6 flex justify-center space-x-6 items-center">
                                 @if(in_array($user['type'], [
@@ -125,7 +127,8 @@
                                 @else
                                     @if(in_array($user['status'], [
                                         \App\Concerns\Enums\Status::CONFIRMED->value,
-                                        \App\Concerns\Enums\Status::UNPAID->value
+                                        \App\Concerns\Enums\Status::UNPAID->value,
+                                        \App\Concerns\Enums\Status::PAYMENT_REVIEW->value
                                     ]))
                                         <button type="submit" class="btn btn-primary">Pay now!</button>
                                     @endif
