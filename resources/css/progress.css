@@ -13,7 +13,7 @@
 }
 
 div.circular-progress {
-    @apply rounded-full grid place-items-center text-white font-semibold text-2xl w-32 h-32;
+    @apply rounded-full grid place-items-center text-white font-semibold text-2xl w-32 h-32 mx-auto;
     --pgPercentage: var(--value);
     background:
         radial-gradient(closest-side, black 80%, transparent 0 100%, white 0),
