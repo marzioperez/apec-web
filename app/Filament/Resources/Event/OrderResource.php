@@ -53,6 +53,22 @@ class OrderResource extends Resource
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\ViewAction::make()->label('Ver'),
+                    Tables\Actions\Action::make('confirm')
+                        ->icon('heroicon-o-check-circle')
+                        ->color('success')
+                        ->label('Confirmar')
+                        ->requiresConfirmation()
+                        ->modalHeading('¿Confirmar pago?')
+                        ->modalDescription('Una vez que se confirme esta acción, el usuario pasará al estado Pendiente de aprobación de datos.')
+                        ->modalSubmitActionLabel('Confirmar')
+                        ->action(function (Order $order):void {
+                            $order->update([
+                                'status' => Status::PAID->value
+                            ]);
+                            $order->user->update([
+                                'status' => Status::PENDING_APPROVAL_DATA->value
+                            ]);
+                        })
                 ])
             ])
             ->bulkActions([
