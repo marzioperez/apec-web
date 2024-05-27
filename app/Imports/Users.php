@@ -27,6 +27,7 @@ class Users implements WithHeadingRow, ToModel {
                 $user['password'] = bcrypt($row['telefono']);
                 $user['companion_free'] = $row['acompanante_free'] === 'Si';
                 $user['companion_amount'] = $row['monto_acompanante'];
+                $user['amount'] = $row['monto_participante'];
                 $user['staff_free'] = $row['staffer_free'] === 'Si';;
                 $user['staff_amount'] = $row['monto_staffer'];
                 $user['status'] = Status::CONFIRMED->value;
