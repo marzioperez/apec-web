@@ -2,22 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 
-class Hotel extends Model implements Sortable {
+class MenuItem extends Model implements Sortable {
 
-    use HasFactory, SoftDeletes, SortableTrait;
+    use SortableTrait;
 
     protected $fillable = [
         'name',
-        'photo',
-        'stars',
-        'description',
-        'social_networks',
+        'url',
+        'type',
+        'menu_id',
         'order'
     ];
 
@@ -27,7 +24,6 @@ class Hotel extends Model implements Sortable {
     ];
 
     protected $casts = [
-        'social_networks' => 'json',
         'order' => 'integer'
     ];
 }
