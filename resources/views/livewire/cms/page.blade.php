@@ -18,6 +18,10 @@
             <x-blocks.block-2 :data="$block['data']" />
         @endif
 
+        @if($block['type'] === 'block-3')
+            <x-blocks.block-3 :data="$block['data']" />
+       @endif
+
         @if($block['type'] === 'program')
             <livewire:common.program :data="$block['data']" />
         @endif

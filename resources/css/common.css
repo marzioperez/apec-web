@@ -9,3 +9,15 @@ body {
 .pagination nav[role="navigation"] {
     @apply space-x-3;
 }
+
+.contact-block {
+    @apply sm:col-span-8 col-span-full sm:grid grid-cols-2 gap-6 text-white;
+}
+
+.contact-block ul {
+    @apply pl-5;
+}
+
+.contact-block li {
+    @apply list-disc;
+}
