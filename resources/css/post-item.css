@@ -1,0 +1,15 @@
+.post-item {
+    @apply relative;
+}
+
+.post-item.style-1 .cover img {
+    @apply w-full rounded h-[500px] object-cover object-center;
+}
+
+.post-item.style-2 .cover img {
+    @apply rounded h-[240px] w-full object-cover object-center;
+}
+
+.post-item .title {
+    @apply absolute bottom-0 w-full px-10 py-6 text-white text-xl font-semibold bg-gradient-to-b from-transparent via-gray-800/60 via-60% to-gray-900/90;
+}

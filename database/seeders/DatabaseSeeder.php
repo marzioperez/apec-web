@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
 
         Storage::disk('web')->put('speaker-default.png', file_get_contents(asset('img/speaker-default.png')));
         Storage::disk('web')->put('logo-default.png', file_get_contents(asset('img/logo-default.png')));
-        Storage::disk('web')->put('default-image.png', file_get_contents(asset('img/logo-default.png')));
+        Storage::disk('web')->put('default-image.png', file_get_contents(asset('img/default-image.png')));
 
         Speaker::factory(24)->create();
 

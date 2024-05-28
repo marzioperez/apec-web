@@ -12,6 +12,7 @@
 @import "slider.css";
 @import "countdown.css";
 @import "book.css";
+@import "post-item.css";
 @import '@splidejs/splide/dist/css/splide.min.css';
 
 @tailwind base;

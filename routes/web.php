@@ -15,6 +15,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/payment/{token}', \App\Livewire\User\Order\Index::class)->name('payment');
 });
 
+Route::get('/post/{slug}', \App\Livewire\CMS\Post::class)->name('post');
+Route::get('/news', \App\Livewire\CMS\Blog::class)->name('news');
+
 Route::get('/{slug?}', \App\Livewire\CMS\Page::class)->name('page');
 
 Route::post('webhook', \App\Actions\Webhook::class)->name('webhook');

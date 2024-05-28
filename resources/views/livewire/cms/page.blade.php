@@ -41,5 +41,9 @@
         @if($block['type'] === 'sponsors')
             <livewire:common.sponsors :data="$block['data']" />
         @endif
+
+        @if($block['type'] === 'news')
+            <livewire:common.news :data="$block['data']" />
+        @endif
     @endforeach
 </div>
