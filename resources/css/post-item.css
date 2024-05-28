@@ -1,5 +1,5 @@
 .post-item {
-    @apply relative;
+    @apply relative block;
 }
 
 .post-item.style-1 .cover img {
