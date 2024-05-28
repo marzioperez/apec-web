@@ -155,7 +155,15 @@ class PageResource extends Resource {
                                     TextInput::make('title')->label('Título')->columnSpanFull(),
                                 ]),
                                 Block::make('news')->label('Bloque de noticias')->schema([
-                                    TextInput::make('title')->label('Título')->columnSpanFull(),
+                                    Grid::make([
+                                        'default' => 1,
+                                        'sm' => 3,
+                                        'xl' => 12,
+                                        '2xl' => 12
+                                    ])->schema([
+                                        TextInput::make('title')->label('Título')->columnSpan(8),
+                                        TextInput::make('text_button')->label('Texto de botón')->columnSpan(4)
+                                    ])
                                 ]),
                                 Block::make('block-3')->label('Bloque de textos en columnas')->schema([
                                     Grid::make([
