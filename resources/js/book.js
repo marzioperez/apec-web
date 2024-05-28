@@ -7,7 +7,6 @@ $('#logo-book').turn({
     autoCenter: true,
     display: "single",
     gradients: true,
-    acceleration: true,
     when: {
         turning: function(e, page, view) {
             var audio = document.getElementById("audio");

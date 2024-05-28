@@ -10,3 +10,7 @@
 .book-next-page {
     @apply right-6;
 }
+
+#logo-book .page {
+    @apply bg-white;
+}
