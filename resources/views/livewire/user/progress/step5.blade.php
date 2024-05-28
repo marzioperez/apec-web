@@ -127,10 +127,14 @@
                                 @else
                                     @if(in_array($user['status'], [
                                         \App\Concerns\Enums\Status::CONFIRMED->value,
-                                        \App\Concerns\Enums\Status::UNPAID->value,
-                                        \App\Concerns\Enums\Status::PAYMENT_REVIEW->value
+                                        \App\Concerns\Enums\Status::UNPAID->value
                                     ]))
                                         <button type="submit" class="btn btn-primary">Register and pay</button>
+                                    @endif
+                                    @if(in_array($user['status'], [
+                                        \App\Concerns\Enums\Status::PAYMENT_REVIEW->value
+                                    ]))
+                                        <button type="submit" class="btn btn-primary">Finish!</button>
                                     @endif
                                     @if($user['status'] === \App\Concerns\Enums\Status::PENDING_CORRECT_DATA->value)
                                         <button type="submit" class="btn btn-primary">Save</button>

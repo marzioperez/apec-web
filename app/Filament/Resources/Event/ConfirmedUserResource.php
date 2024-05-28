@@ -8,6 +8,7 @@ use App\Concerns\Enums\Titles;
 use App\Concerns\Enums\Types;
 use App\Filament\Resources\Event\ConfirmedUserResource\Pages;
 use App\Filament\Resources\Event\ConfirmedUserResource\RelationManagers;
+use App\Models\Param;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
@@ -41,6 +42,24 @@ class ConfirmedUserResource extends Resource
     protected static ?int $navigationSort = 13;
 
     public static function form(Form $form): Form {
+        $params = Param::all();
+        $titles = [];
+        $genders = [];
+        $document_types = [];
+        foreach ($params as $param) {
+            if ($param['group'] === 'TITLES') {
+                $titles[] = $param;
+            }
+
+            if ($param['group'] === 'GENDERS') {
+                $genders[] = $param;
+            }
+
+            if ($param['group'] === 'DOCUMENTS') {
+                $document_types[] = $param;
+            }
+        }
+
         return $form
             ->schema([
                 Tabs::make()->tabs([
@@ -51,12 +70,7 @@ class ConfirmedUserResource extends Resource
                             'xl' => 12,
                             '2xl' => 12
                         ])->schema([
-                            Select::make('title')->label('Título')->options([
-                                Titles::MR->value => Titles::MR->value,
-                                Titles::MRS->value => Titles::MRS->value,
-                                Titles::MS->value => Titles::MS->value,
-                                Titles::DR->value => Titles::DR->value
-                            ])->columnSpan(2),
+                            Select::make('title')->label('Título')->options(collect($titles)->pluck('name', 'id'))->columnSpan(2),
                             TextInput::make('name')->label('Nombre')->required()->columnSpan(5),
                             TextInput::make('last_name')->label('Apellidos')->required()->columnSpan(5),
                             Select::make('gender')->label('Sexo')->options([

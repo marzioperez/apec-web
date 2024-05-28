@@ -15,6 +15,7 @@ use App\Mail\CompleteDataPassFree;
 use App\Mail\CompleteDataSuccess;
 use App\Mail\PaymentSuccess;
 use App\Models\Order;
+use App\Models\Param;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
@@ -48,8 +49,24 @@ class CompletedUserResource extends Resource
     protected static ?string $navigationGroup = 'Evento';
     protected static ?int $navigationSort = 14;
 
-    public static function form(Form $form): Form
-    {
+    public static function form(Form $form): Form {
+        $params = Param::all();
+        $titles = [];
+        $genders = [];
+        $document_types = [];
+        foreach ($params as $param) {
+            if ($param['group'] === 'TITLES') {
+                $titles[] = $param;
+            }
+
+            if ($param['group'] === 'GENDERS') {
+                $genders[] = $param;
+            }
+
+            if ($param['group'] === 'DOCUMENTS') {
+                $document_types[] = $param;
+            }
+        }
         return $form
             ->schema([
                 Tabs::make()->tabs([
@@ -60,26 +77,13 @@ class CompletedUserResource extends Resource
                             'xl' => 12,
                             '2xl' => 12
                         ])->schema([
-                            Select::make('title')->label('Título')->options([
-                                Titles::MR->value => Titles::MR->value,
-                                Titles::MRS->value => Titles::MRS->value,
-                                Titles::MS->value => Titles::MS->value,
-                                Titles::DR->value => Titles::DR->value
-                            ])->columnSpan(2),
+                            Select::make('title')->label('Título')->options(collect($titles)->pluck('name', 'id'))->columnSpan(2),
                             TextInput::make('name')->label('Nombre')->required()->columnSpan(5),
                             TextInput::make('last_name')->label('Apellidos')->required()->columnSpan(5),
-                            Select::make('gender')->label('Sexo')->options([
-                                Genders::MALE->value => Genders::MALE->value,
-                                Genders::FEMALE->value => Genders::FEMALE->value
-                            ])->columnSpan(3),
-                            Select::make('document_type')->label('Tipo de documento')->options([
-                                Types::DNI->value => Types::DNI->value,
-                                Types::PASSPORT->value => Types::PASSPORT->value,
-                                Types::CE->value => Types::CE->value
-                            ])->columnSpan(3),
+                            Select::make('gender')->label('Sexo')->options(collect($genders)->pluck('name', 'id'))->columnSpan(3),
+                            Select::make('document_type')->label('Tipo de documento')->options(collect($document_types)->pluck('name', 'id'))->columnSpan(3),
                             TextInput::make('document_number')->label('Número de documento')->required()->columnSpan(3),
-                            TextInput::make('email')->label('Email')->required()
-                                ->unique('users', 'email', ignoreRecord: true)->columnSpan(3),
+                            TextInput::make('email')->label('Email')->required()->unique('users', 'email', ignoreRecord: true)->columnSpan(3),
                             DatePicker::make('date_of_issue')->label('Fecha de emisión')->columnSpan(3),
                             TextInput::make('date_of_issue')->label('Lugar de emisión')->required()->columnSpan(3),
                             DatePicker::make('date_of_birth')->label('Fecha de nacimiento')->columnSpan(3),

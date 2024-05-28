@@ -97,7 +97,7 @@ class Step5 extends Component {
                 $this->redirect(route('payment', ['token' => $order['token']]));
             }
 
-            if ($current_user_status === Status::UNPAID->value) {
+            if ($current_user_status === Status::UNPAID->value || $current_user_status === Status::PAYMENT_REVIEW->value) {
                 $order = Order::where('user_id', $this->user['id'])->first();
                 if ($order) {
                     $this->redirect(route('payment', ['token' => $order['token']]));
