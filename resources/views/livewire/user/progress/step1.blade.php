@@ -1,6 +1,6 @@
 <div class="bg-white sm:py-10 py-10 relative bg-fixed bg-no-repeat bg-contain bg-left-bottom" style="background-image: url('{{asset("img/bg-sign-up-step-2.png")}}')">
 
-    <x-steps :quantity="$quantity" :current="$current" :complete="0" :back_step="true" />
+    <x-steps :quantity="$quantity" :current="$current" :complete="0" />
 
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         <div class="py-10 flex justify-center">
@@ -49,6 +49,13 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="email">Email*</label>
+                            <div class="form-field">
+                                <input type="email" id="email" name="email" wire:model="data.email" :disabled="{{$lock_fields}}" />
+                                @error('data.email') <span class="validation-error">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="document_type">Type of Document*</label>
                             <div class="form-field">
                                 <select id="document_type" name="document_type" wire:model="data.document_type" :disabled="{{$lock_fields}}">
@@ -68,14 +75,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email*</label>
-                            <div class="form-field">
-                                <input type="email" id="email" name="email" wire:model="data.email" :disabled="{{$lock_fields}}" />
-                                @error('data.email') <span class="validation-error">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="date_of_issue">Date of Issue*</label>
+                            <label for="date_of_issue">Date of Issue (dd/mm/yyyy)*</label>
                             <div class="form-field">
                                 <input type="date" id="date_of_issue" name="date_of_issue" wire:model="data.date_of_issue" :disabled="{{$lock_fields}}" />
                                 @error('data.date_of_issue') <span class="validation-error">{{ $message }}</span> @enderror
@@ -89,7 +89,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="date_of_birth">Date of Birth*</label>
+                            <label for="date_of_birth">Date of Birth (dd/mm/yyyy)*</label>
                             <div class="form-field">
                                 <input type="date" id="date_of_birth" name="date_of_birth" wire:model="data.date_of_birth" :disabled="{{$lock_fields}}" />
                                 @error('data.date_of_birth') <span class="validation-error">{{ $message }}</span> @enderror

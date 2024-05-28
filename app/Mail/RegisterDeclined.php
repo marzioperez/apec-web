@@ -21,7 +21,7 @@ class RegisterDeclined extends Mailable {
 
     public function envelope(): Envelope {
         return new Envelope(
-            subject: 'Register declined',
+            subject: 'APEC CEO Summit 2024 - Expression of interest result',
         );
     }
 

@@ -21,7 +21,7 @@ class RegisterSuccess extends Mailable {
 
     public function envelope(): Envelope {
         return new Envelope(
-            subject: 'Register confirmed',
+            subject: 'Welcome to the APEC CEO Summit 2024!',
         );
     }
 

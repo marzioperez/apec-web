@@ -54,7 +54,10 @@
             <div class="text-center">
                 <h1 class="font-bold text-lg mb-3">Your data is incorrect</h1>
                 <div class="mb-5">Please try again or recover it now if you've forgotten.</div>
-                <a href="{{route('reset-password')}}" class="btn btn-primary">Recover password</a>
+                <div class="sm:flex justify-center sm:space-x-3">
+                    <a href="{{route('reset-password')}}" class="btn btn-primary">Recover password</a>
+                    <button type="button" x-data x-on:click="$dispatch('close-modal')" class="btn btn-primary-outline">Try again</button>
+                </div>
             </div>
         </x-slot:body>
     </x-modal>

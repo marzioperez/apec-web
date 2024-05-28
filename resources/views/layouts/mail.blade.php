@@ -156,7 +156,7 @@
             }
 
             #u_column_25 .v-col-padding {
-                padding: 0px 20px 32px !important;
+                padding: 0 0 32px !important;
             }
 
             #u_content_heading_38 .v-font-size {

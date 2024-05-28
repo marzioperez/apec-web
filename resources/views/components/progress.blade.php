@@ -9,8 +9,7 @@
         }"
      x-on:update-progress.window="currentVal = $event.detail.value"
      class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-    <h3 class="text-white font-semibold text-xl">Registration percentage</h3>
-    <p class="text-white mb-3" x-show="currentVal == 0">To ensure the best possible experience, please complete your registration.</p>
+    <h3 class="text-white font-semibold text-xl mb-3">APEC CEO Summit 2024 registration</h3>
     <p class="text-white mb-3" x-show="currentVal > 0">In progress: <span x-text="currentVal + '%'"></span></p>
     <div class="progress"
          :aria-valuenow="currentVal" :aria-valuemin="minVal" :aria-valuemax="maxVal">

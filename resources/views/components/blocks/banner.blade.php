@@ -26,7 +26,9 @@
                 <div class="my-2">{!! $data['content'] !!}</div>
             </div>
             @if($data['text_button'])
-                <a href="{{$data['url']}}" class="btn btn-secondary">{{$data['text_button']}}</a>
+                @if(auth()->guest())
+                    <a href="{{$data['url']}}" class="btn btn-secondary">{{$data['text_button']}}</a>
+                @endif
             @endif
         </div>
     </div>

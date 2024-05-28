@@ -3,9 +3,9 @@
         <x-steps :quantity="2" :current="$current_step" :complete="$complete_step" />
         <div class="py-10 flex justify-center">
             <div class="sm:w-[650px] w-full">
-                <h3 class="text-primary-dark font-semibold mb-3 text-2xl">Register</h3>
+                <h3 class="text-primary-dark font-semibold mb-3 text-2xl">Expression of interest</h3>
                 @if($current_step == 1)
-                    <p>Thank you for expressing your interest in attending the <b>APEC CEO Summit 2024</b>. To give you the best experience possible, we need you to complete a pre-registration.</p>
+                    <p>We appreciate your interest in attending the <b>APEC CEO Summit 2024</b>. In order to assess your application, we kindly request that you complete this form.</p>
                     <div class="my-8 px-5">
                         <h5 class="font-semibold mb-5">General information</h5>
                         <form wire:submit.prevent="process_step_1">
@@ -24,10 +24,17 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="business">Business*</label>
+                                <label for="business">Company/Organization*</label>
                                 <div class="form-field">
                                     <input type="text" id="business" name="business" wire:model="business" />
                                     @error('business') <span class="validation-error">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="business_description">Company/Organization description*</label>
+                                <div class="form-field">
+                                    <input type="text" id="business_description" name="business_description" wire:model="business_description" />
+                                    @error('business_description') <span class="validation-error">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="form-group">
@@ -53,13 +60,6 @@
                                 </div>
                             @endif
                             <div class="form-group">
-                                <label for="business_description">Business Description*</label>
-                                <div class="form-field">
-                                    <input type="text" id="business_description" name="business_description" wire:model="business_description" />
-                                    @error('business_description') <span class="validation-error">{{ $message }}</span> @enderror
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <label for="role">Position*</label>
                                 <div class="form-field">
                                     <input type="text" id="role" name="role" wire:model="role" />
@@ -67,7 +67,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="biography">Biography*</label>
+                                <label for="biography">Short bio*</label>
                                 <div class="form-field">
                                     <textarea id="biography" name="biography" wire:model="biography"></textarea>
                                     @error('biography') <span class="validation-error">{{ $message }}</span> @enderror
@@ -138,7 +138,7 @@
                                 <div class="form-field">
                                     <div class="form-check">
                                         <input type="checkbox" name="accept_terms_and_conditions" class="form-check-input" id="accept_terms_and_conditions" wire:model="accept_terms_and_conditions">
-                                        <label for="accept_terms_and_conditions" class="text-gray">I accept the <a href="#" class="text-blue underline" target="_blank">Terms and Conditions</a></label>
+                                        <label for="accept_terms_and_conditions" class="text-gray">I accept the <a href="#" class="text-blue underline pl-1" target="_blank">Terms and Conditions</a></label>
                                     </div>
                                     @error('accept_terms_and_conditions') <span class="validation-error checkbox">{{ $message }}</span> @enderror
                                 </div>
@@ -165,8 +165,8 @@
             </div>
             <div class="text-center">
                 <h1 class="font-bold text-lg mb-3">Thank you for your interest in attending the APEC CEO Summit 2024.</h1>
-                <div class="mb-5">Please check your inbox, where you will receive a confirmation of your expression of interest in this event.</div>
-                <a href="{{config('app.url')}}" class="btn btn-primary">Go home</a>
+                <div class="mb-5">Please check your inbox for a confirmation of your expression of interest in this event.</div>
+                <a href="{{config('app.url')}}" class="btn btn-primary">Back to home</a>
             </div>
         </x-slot:body>
     </x-modal>

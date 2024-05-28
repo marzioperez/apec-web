@@ -7,7 +7,7 @@
     class="bg-white sm:py-10 py-10 relative bg-fixed bg-no-repeat bg-contain bg-left-bottom"
     style="background-image: url('{{asset("img/bg-sign-up-step-2.png")}}')">
 
-    <x-steps :quantity="$quantity" :current="$current" :complete="$complete" :back_step="true" />
+    <x-steps :quantity="$quantity" :current="$current" :complete="$complete" />
 
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         <div class="py-10 flex justify-center">
@@ -118,6 +118,7 @@
                             \App\Concerns\Enums\Status::PAYMENT_REVIEW->value
                         ]))
                             <div class="sm:my-8 my-6 flex justify-center space-x-6 items-center">
+                                <button type="button" class="flex items-center btn btn-secondary" x-on:click.prevent="$dispatch('update-step', {step: {{$current - 1}} })">Back</button>
                                 @if(in_array($user['type'], [
                                     \App\Concerns\Enums\Types::FREE_PASS_PARTICIPANT->value,
                                     \App\Concerns\Enums\Types::FREE_PASS_COMPANION->value,
