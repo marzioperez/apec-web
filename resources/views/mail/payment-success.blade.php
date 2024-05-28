@@ -8,14 +8,20 @@
     <div style="text-align: left; padding: 0 44px 44px;">
         <p style="font-size: 14px; margin-bottom: 10px;">Dear {{$user['name']}},</p>
 
-        <p style="font-size: 14px;">We are delighted to inform you that your registration for the APEC CEO Summit 2024 has been successfully processed. Kindly ensure to bring your passport with you for badge collection.</p>
+        <p style="font-size: 14px;">We are delighted to inform you that your registration for the APEC CEO Summit 2024 has been successfully processed. Please remember to bring your passport to collect your badge before the event.</p>
+        <p style="font-size: 14px;">We will be in touch with you to share the latest updates on the event. For more information, please visit our event website.</p>
 
-        <div style="text-align: center; margin-bottom: 30px;">
-            <a href="{{config('app.url')}}" target="_blank" style="color: #FFF; font-size: 14px; text-decoration: none; background-color: #75B42E; padding-bottom: 10px; padding-top: 10px; padding-left: 40px; padding-right: 40px; border-radius: 5px;">Go to home</a>
-        </div>
+        <p style="font-size: 14px; margin-bottom: 20px;">If you have any questions, feel free to contact us at <a href="mailto:registration@apecceosummit2024.com" style="color: #00A2F3;">registration@apecceosummit2024.com</a>.</p>
 
-        <p style="font-size: 14px; text-align: center">For more information you can visit us on the event <a href="{{config('app.url')}}" target="_blank" style="color: #00A2F3;">website</a>.
-            <br>Any questions write to us at: <a href="mailto:info@apecceosummit2024.com" style="color: #00A2F3;">info@apecceosummit2024.com</a></p>
+        <p style="font-size: 14px;">Warm regards,<br>
+            The APEC CEO Summit 2024 Host Committee</p>
+
+{{--        <div style="text-align: center; margin-bottom: 30px;">--}}
+{{--            <a href="{{config('app.url')}}" target="_blank" style="color: #FFF; font-size: 14px; text-decoration: none; background-color: #75B42E; padding-bottom: 10px; padding-top: 10px; padding-left: 40px; padding-right: 40px; border-radius: 5px;">Go to home</a>--}}
+{{--        </div>--}}
+
+{{--        <p style="font-size: 14px; text-align: center">For more information you can visit us on the event <a href="{{config('app.url')}}" target="_blank" style="color: #00A2F3;">website</a>.--}}
+{{--            <br>Any questions write to us at: <a href="mailto:info@apecceosummit2024.com" style="color: #00A2F3;">info@apecceosummit2024.com</a></p>--}}
     </div>
 
 @endsection

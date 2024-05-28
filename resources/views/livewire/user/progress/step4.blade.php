@@ -119,14 +119,14 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="chemical_name">Chemical name</label>
+                                <label for="chemical_name">Active ingredient</label>
                                 <div class="form-field">
                                     <input type="text" id="chemical_name" name="chemical_name" wire:model="data.chemical_name" :disabled="{{$lock_fields}}" />
                                     @error('data.chemical_name') <span class="validation-error">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="brand_trade_name">Brand/trade name</label>
+                                <label for="brand_trade_name">Commercial name</label>
                                 <div class="form-field">
                                     <input type="text" id="city" name="brand_trade_name" wire:model="data.brand_trade_name" :disabled="{{$lock_fields}}" />
                                     @error('data.brand_trade_name') <span class="validation-error">{{ $message }}</span> @enderror
@@ -186,7 +186,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="insurance_id_number">ID number</label>
+                                <label for="insurance_id_number">Policy number</label>
                                 <div class="form-field">
                                     <input type="text" id="insurance_id_number" name="insurance_id_number" wire:model="data.insurance_id_number" :disabled="{{$lock_fields}}" />
                                     @error('data.insurance_id_number') <span class="validation-error">{{ $message }}</span> @enderror

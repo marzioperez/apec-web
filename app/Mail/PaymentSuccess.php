@@ -21,7 +21,7 @@ class PaymentSuccess extends Mailable {
 
     public function envelope(): Envelope {
         return new Envelope(
-            subject: 'Payment success',
+            subject: 'APEC CEO Summit 2024 - Registration completed',
         );
     }
 

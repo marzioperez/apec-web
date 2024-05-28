@@ -70,6 +70,14 @@ class Step1 extends Component {
         ];
 
         if ($this->data['voucher_type'] === Types::NATIONAL->value) {
+            $data_rules = array_merge($data_rules, [
+                'document_type' => 'required'
+            ]);
+
+            $rules = array_merge($rules, [
+                'data.document_type' => 'required'
+            ]);
+
             if ($this->data['document_type'] === Types::INVOICE->value) {
                 $data_rules = array_merge($data_rules, [
                     'ruc' => 'required',

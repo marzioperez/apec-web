@@ -25,14 +25,14 @@
                         <div class="form-group">
                             <label for="name">Name(s)*</label>
                             <div class="form-field">
-                                <input type="text" id="name" name="name" wire:model="data.name" :disabled="{{$lock_fields}}" />
+                                <input type="text" id="name" name="name" value="{{$user['name']}}" disabled />
                                 @error('data.name') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="last_name">Last Name(s)*</label>
                             <div class="form-field">
-                                <input type="text" id="last_name" name="last_name" wire:model="data.last_name" :disabled="{{$lock_fields}}" />
+                                <input type="text" id="last_name" name="last_name" value="{{$user['last_name']}}" disabled />
                                 @error('data.last_name') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                         <div class="form-group">
                             <label for="email">Email*</label>
                             <div class="form-field">
-                                <input type="email" id="email" name="email" wire:model="data.email" :disabled="{{$lock_fields}}" />
+                                <input type="email" id="email" name="email" value="{{$user['email']}}" disabled />
                                 @error('data.email') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>

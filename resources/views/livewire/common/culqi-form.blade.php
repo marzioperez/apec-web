@@ -44,16 +44,16 @@
         </div>
         <div class="grid grid-cols-3 gap-3">
             <div class="form-group inline-fields">
-                <label>CVV</label>
-                <input type="text" size="4" data-culqi="card[cvv]" id="card[cvv]">
-            </div>
-            <div class="form-group inline-fields">
                 <label>Exp. Date (MM/YYYY)</label>
                 <div class="flex space-x-3 items-center">
                     <input type="text" size="2" data-culqi="card[exp_month]" id="card[exp_month]">
                     <span>/</span>
                     <input type="text" size="4" data-culqi="card[exp_year]" id="card[exp_year]">
                 </div>
+            </div>
+            <div class="form-group inline-fields">
+                <label>CVV</label>
+                <input type="text" size="4" data-culqi="card[cvv]" id="card[cvv]">
             </div>
             <div class="form-group inline-fields">
                 <label>Cuotas</label>
@@ -85,11 +85,14 @@
         </div>
     </div>
 
-    <button type="button" class="btn btn-primary mt-3 mx-auto block" x-bind:disabled="loading" x-on:click.prevent="processForm()">
-        <i class="fa-duotone fa-spinner-third fa-spin" x-show="loading"></i>
-        <span x-show="loading">Please wait...</span>
-        <span x-show="!loading">Pay now ${{number_format($amount)}}</span>
-    </button>
+    <div class="sm:my-8 my-6 flex justify-center space-x-6 items-center">
+        <button type="button" class="btn btn-secondary" x-on:click.prevent="$dispatch('update-step', {step: 1 })">Back</button>
+        <button type="button" class="btn btn-primary mx-auto block" x-bind:disabled="loading" x-on:click.prevent="processForm()">
+            <i class="fa-duotone fa-spinner-third fa-spin" x-show="loading"></i>
+            <span x-show="loading">Please wait...</span>
+            <span x-show="!loading">Pay now</span>
+        </button>
+    </div>
 </div>
 @push('scripts')
     <script src="https://checkout.culqi.com/js/v4"></script>

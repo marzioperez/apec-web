@@ -13,8 +13,7 @@
         <div class="py-10 flex justify-center">
             <div class="sm:w-[650px] w-full">
                 <h3 class="text-primary-dark font-semibold mb-3 text-2xl">Register</h3>
-                <p>Información de Badge - Revisión<br>
-                    Your badge serves as your access pass to the APEC CEO Summit. Please help us in ensuring it looks great!</p>
+                <p>Your badge is your access pass to the APEC CEO Summit. Please help us make sure it looks perfect!</p>
                 <div class="my-8 px-5">
                     <h5 class="font-semibold mb-5">Badge information</h5>
                     <form wire:submit.prevent="process">
@@ -131,7 +130,7 @@
                                         \App\Concerns\Enums\Status::UNPAID->value,
                                         \App\Concerns\Enums\Status::PAYMENT_REVIEW->value
                                     ]))
-                                        <button type="submit" class="btn btn-primary">Pay now!</button>
+                                        <button type="submit" class="btn btn-primary">Register and pay</button>
                                     @endif
                                     @if($user['status'] === \App\Concerns\Enums\Status::PENDING_CORRECT_DATA->value)
                                         <button type="submit" class="btn btn-primary">Save</button>

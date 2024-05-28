@@ -20,6 +20,7 @@ enum Types: string {
     case FOREIGNER = 'Extranjero';
     case INVOICE = 'Factura';
     case TICKET = 'Boleta';
+    case NO_SELECT_PREFERRED = 'No select preferred';
     case CREDIT_CARD = 'Tarjeta';
     case BANK_TRANSFER = 'Transferencia';
 

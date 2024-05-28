@@ -18,7 +18,7 @@
                     <h5 class="font-semibold mb-5">Special requirements</h5>
                     <form wire:submit.prevent="process">
                         <div class="form-group">
-                            <label for="types_of_food">Types of food</label>
+                            <label for="types_of_food">Dietary restrictions</label>
                             <div class="form-field">
                                 <select id="types_of_food" name="types_of_food" wire:model="types_of_food" :disabled="{{$lock_fields}}">
                                     <option value="">Select...</option>

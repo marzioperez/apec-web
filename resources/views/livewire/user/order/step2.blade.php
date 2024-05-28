@@ -1,7 +1,7 @@
 <div class="bg-white sm:py-10 py-10 relative bg-fixed bg-no-repeat bg-contain bg-left-bottom"
      style="background-image: url('{{asset("img/bg-sign-up-step-2.png")}}')">
 
-    <x-steps :quantity="2" :current="2" :complete="1" :back_step="true" />
+    <x-steps :quantity="2" :current="2" :complete="1" />
 
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         <div class="py-10 flex justify-center">
@@ -93,6 +93,7 @@
                         @error('data.payment_voucher') <span class="validation-error">{{ $message }}</span> @enderror
 
                         <div class="sm:my-8 my-6 flex justify-center space-x-6 items-center">
+                            <button type="button" class="btn btn-secondary" x-on:click.prevent="$dispatch('update-step', {step: 1 })">Back</button>
                             <button type="button" class="btn btn-primary" wire:click.prevent="process">Submit</button>
                         </div>
                     @endif
@@ -110,10 +111,9 @@
                 </svg>
             </div>
             <div class="text-center">
-                <h1 class="font-bold text-lg mb-3">¡Successfully payment!</h1>
+                <h1 class="font-bold text-lg mb-3">Payment Successful!</h1>
                 <div class="mb-5">
-                    <p class="mb-2">Your payment has been successfully processed.</p>
-                    <p>With the information provided, we will now proceed with the final security validation.</p>
+                    <p class="mb-2">Your payment has been processed successfully. You will receive a confirmation email within the next few minutes. Your information will now go through a final review.</p>
                 </div>
                 <a href="{{config('app.url')}}" class="btn btn-primary">Go home</a>
             </div>
