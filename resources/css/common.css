@@ -1,3 +1,11 @@
 body {
     @apply font-space-grotesk;
 }
+
+.pagination {
+    @apply flex justify-center items-center mt-8;
+}
+
+.pagination nav[role="navigation"] {
+    @apply space-x-3;
+}
