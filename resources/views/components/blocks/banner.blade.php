@@ -1,5 +1,6 @@
 @props(['data' => null])
 <div class="slider">
+    <img src="{{asset('img/trama-1-1.png')}}" class="absolute top-1/4 sm:w-[800px] w-[300px] z-[5] opacity-40">
     <div wire:ignore x-data="{
         init() {
             new Splide(this.$refs.splide, {
@@ -32,5 +33,5 @@
             @endif
         </div>
     </div>
-    <img src="{{asset('img/bg-banner-right.png')}}" class="absolute -bottom-1/3 right-0 w-[300px] z-[5]">
+    <img src="{{asset('img/bg-banner-right.png')}}" class="absolute -bottom-1/3 right-0 w-[300px] opacity-40 z-[5]">
 </div>
