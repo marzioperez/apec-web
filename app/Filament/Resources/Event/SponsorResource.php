@@ -46,7 +46,7 @@ class SponsorResource extends Resource {
                         TextInput::make('name')->label('Nombre')->required()->columnSpan(8),
                         Select::make('category_sponsor_id')->label('Categoría')->options(CategorySponsor::all()->pluck('name', 'id'))->columnSpan(4),
                         RichEditor::make('description')->required()->columnSpanFull(),
-                        FileUpload::make('logo')->label('Logo')->disk('web')->required()->columnSpanFull(),
+                        FileUpload::make('logo')->label('Logo')->disk('web')->preserveFilenames()->required()->columnSpanFull(),
                         \Filament\Forms\Components\Builder::make('social_networks')->label('Redes sociales')->blockPickerColumns(3)
                             ->blocks([
                                 Block::make('facebook')->label('Facebook')->schema([
