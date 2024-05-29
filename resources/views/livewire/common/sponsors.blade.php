@@ -26,8 +26,8 @@
                 <div>
                     <div class="mb-3 sm:grid grid-cols-12 gap-6">
                         <div class="col-span-5 flex justify-center sm:mb-0 mb-3">
-                            <div class="w-full bg-white/20 px-6 py-3 rounded-xl">
-                                <img src="{{url('storage/web/' . $sponsor['logo'])}}" class="sm:w-full w-[150px]">
+                            <div class="w-full bg-white/30 px-6 py-6 rounded-xl cursor-pointer transition-all flex items-center">
+                                <img src="{{url('storage/web/' . $sponsor['logo'])}}" class="object-center w-full">
                             </div>
                         </div>
                         <div class="col-span-7 flex items-center">
