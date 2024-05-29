@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('url')->nullable()->default(null);
             $table->string('type');
             $table->foreign('menu_id')->references('id')->on('menus')->onDelete('cascade');
+            $table->boolean('only_logged')->default(false);
             $table->unsignedBigInteger('menu_id')->nullable()->default(null);
             $table->integer('order');
             $table->timestamps();

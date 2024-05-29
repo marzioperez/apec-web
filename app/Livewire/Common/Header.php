@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Common;
 
+use App\Models\Menu;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -9,8 +10,13 @@ class Header extends Component {
 
     public $is_logged_in = false;
     public $user_name;
+    public $menu_items = [];
 
     public function mount() {
+        $menu = Menu::with('items')->where('position', 'header')->get()->last();
+        if ($menu) {
+            $this->menu_items = $menu->items;
+        }
         if (auth()->check()) {
             $this->is_logged_in = true;
             $this->user_name = auth()->user()->full_name;

@@ -1,5 +1,5 @@
 @props(['data'])
-<div class="container mx-auto px-4 sm:px-6 lg:px-8 sm:py-14 py-6">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 sm:py-14 py-6 scroll-mt-[102px]" id="{{$data['id']}}">
     <div class="sm:grid grid-cols-12 gap-6">
         <div class="col-span-full sm:mb-0 mb-4">
             <h4 class="text-primary-dark font-semibold sm:text-2xl text-xl">{{$data['title']}}</h4>

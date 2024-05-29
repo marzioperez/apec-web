@@ -1,4 +1,4 @@
-<div>
+<div id="{{$data['id']}}" class="scroll-mt-[102px]">
     @if(count($posts) > 2)
         <div class="sm:py-10 py-5 sm:px-0 px-6">
             <div class="container mx-auto px-0 sm:px-6 lg:px-8 relative z-20 space-y-6">

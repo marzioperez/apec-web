@@ -24,5 +24,6 @@ enum Types: string {
     case CREDIT_CARD = 'Tarjeta';
     case BANK_TRANSFER = 'Transferencia';
 
-
+    case ANCHOR = 'Ancla';
+    case URL = 'URL';
 }

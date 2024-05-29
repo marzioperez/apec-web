@@ -15,6 +15,7 @@ class MenuItem extends Model implements Sortable {
         'url',
         'type',
         'menu_id',
+        'only_logged',
         'order'
     ];
 
@@ -24,6 +25,7 @@ class MenuItem extends Model implements Sortable {
     ];
 
     protected $casts = [
-        'order' => 'integer'
+        'order' => 'integer',
+        'only_logged' => 'boolean'
     ];
 }

@@ -1,4 +1,4 @@
-<div class="relative">
+<div class="relative scroll-mt-[102px]" id="{{$data['id']}}">
     <img src="{{asset('img/bg-program.png')}}" class="absolute -top-10 sm:w-[500px] w-[300px] z-[5]">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 sm:py-14 py-6 relative z-10" x-data="{category: 0}">
         <div class="sm:grid grid-cols-12 gap-x-12">

@@ -1,12 +1,41 @@
 <header>
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-12 gap-3">
-            <div class="sm:col-span-4 col-span-3">
+        <div class="mx-auto flex max-w-7xl items-center justify-between">
+            <div>
                 <a href="{{config('app.url')}}">
                     <img src="{{asset('img/logo.png')}}" alt="{{config('app.name')}}" />
                 </a>
             </div>
-            <div class="sm:col-span-8 col-span-9 flex items-center justify-end sm:space-x-6 space-x-2">
+
+            <div class="flex lg:hidden">
+                <button type="button" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="hidden lg:flex lg:gap-x-6">
+                @foreach($menu_items as $item)
+                    @php
+                        $show = true;
+                        if ($item['only_logged']) {
+                            $show = auth()->check();
+                        }
+                    @endphp
+                    @if($show)
+                        @if($item['type'] === \App\Concerns\Enums\Types::ANCHOR->value)
+                            <a href="{{config('app.url')}}#{{$item['url']}}" class="text-sm font-semibold leading-6 text-gray-900">{{$item['name']}}</a>
+                        @endif
+                        @if($item['type'] === \App\Concerns\Enums\Types::URL->value)
+                            <a href="{{$item['url']}}" class="text-sm font-semibold leading-6 text-gray-900">{{$item['name']}}</a>
+                        @endif
+                    @endif
+                @endforeach
+            </div>
+
+            <div class="hidden lg:flex items-center justify-end sm:space-x-4 space-x-2">
                 @if($is_logged_in)
                     <div class="relative" x-data="{
                     open_user_menu: false,

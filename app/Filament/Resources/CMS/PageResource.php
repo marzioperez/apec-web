@@ -67,7 +67,8 @@ class PageResource extends Resource {
                                                 FileUpload::make('image')->disk('web')->label('Imagen')->preserveFilenames()->image()->required()->columnSpanFull()
                                             ])->reorderable()->columnSpan(2),
                                         ])
-                                    ])
+                                    ]),
+                                    TextInput::make('id')->label('ID para ancla')->columnSpanFull(),
                                 ]),
                                 Block::make('progress')->label('Barra de progreso')->schema([
                                     Grid::make([
@@ -80,7 +81,8 @@ class PageResource extends Resource {
                                         TextInput::make('sub_title')->label('Sub título')->columnSpanFull()
                                             ->hintIcon('heroicon-m-question-mark-circle', 'Usar #progress# para colocar el progreso del usuario.'),
                                         TextInput::make('text_button')->label('Texto de botón')->columnSpan(4),
-                                        TextInput::make('url')->label('URL')->columnSpan(8)
+                                        TextInput::make('url')->label('URL')->columnSpan(8),
+                                        TextInput::make('id')->label('ID para ancla')->columnSpanFull()
                                     ])
                                 ]),
                                 Block::make('block-1')->label('Bloque de texto con libro')->schema([
@@ -104,7 +106,8 @@ class PageResource extends Resource {
                                                 FileUpload::make('image')->disk('web')->label('Imagen')->preserveFilenames()->image()->required()->columnSpanFull()
                                             ])->reorderable()->columnSpan(2),
                                         ])
-                                    ])
+                                    ]),
+                                    TextInput::make('id')->label('ID para ancla')->columnSpanFull(),
                                 ]),
                                 Block::make('block-2')->label('Bloque de texto con imagen y popup')->schema([
                                     Tabs::make()->tabs([
@@ -127,13 +130,16 @@ class PageResource extends Resource {
                                             RichEditor::make('pop_up_content')->label('Contenido')->columnSpanFull(),
                                             FileUpload::make('pop_up_image')->disk('web')->label('Imagen')->preserveFilenames()->image()->required()->columnSpanFull()
                                         ])
-                                    ])
+                                    ]),
+                                    TextInput::make('id')->label('ID para ancla')->columnSpanFull(),
                                 ]),
                                 Block::make('program')->label('Bloque de programa')->schema([
                                     TextInput::make('title')->label('Título')->columnSpanFull(),
+                                    TextInput::make('id')->label('ID para ancla')->columnSpanFull(),
                                 ]),
                                 Block::make('speakers')->label('Bloque de expositores')->schema([
                                     TextInput::make('title')->label('Título')->columnSpanFull(),
+                                    TextInput::make('id')->label('ID para ancla')->columnSpanFull(),
                                 ]),
                                 Block::make('circular-progress')->label('Círculo de progreso')->schema([
                                     Grid::make([
@@ -145,14 +151,17 @@ class PageResource extends Resource {
                                         TextInput::make('title')->label('Título')->columnSpanFull(),
                                         TextInput::make('sub_title')->label('Sub título')->columnSpanFull(),
                                         TextInput::make('text_button')->label('Texto de botón')->columnSpan(4),
-                                        TextInput::make('url')->label('URL')->columnSpan(8)
+                                        TextInput::make('url')->label('URL')->columnSpan(8),
+                                        TextInput::make('id')->label('ID para ancla')->columnSpanFull(),
                                     ])
                                 ]),
                                 Block::make('hotels')->label('Bloque de hoteles')->schema([
                                     TextInput::make('title')->label('Título')->columnSpanFull(),
+                                    TextInput::make('id')->label('ID para ancla')->columnSpanFull(),
                                 ]),
                                 Block::make('sponsors')->label('Bloque de sponsors')->schema([
                                     TextInput::make('title')->label('Título')->columnSpanFull(),
+                                    TextInput::make('id')->label('ID para ancla')->columnSpanFull(),
                                 ]),
                                 Block::make('news')->label('Bloque de noticias')->schema([
                                     Grid::make([
@@ -162,7 +171,8 @@ class PageResource extends Resource {
                                         '2xl' => 12
                                     ])->schema([
                                         TextInput::make('title')->label('Título')->columnSpan(8),
-                                        TextInput::make('text_button')->label('Texto de botón')->columnSpan(4)
+                                        TextInput::make('text_button')->label('Texto de botón')->columnSpan(4),
+                                        TextInput::make('id')->label('ID para ancla')->columnSpanFull(),
                                     ])
                                 ]),
                                 Block::make('block-3')->label('Bloque de textos en columnas')->schema([
@@ -177,6 +187,7 @@ class PageResource extends Resource {
                                         Repeater::make('elementos')->label('Textos')->schema([
                                             RichEditor::make('content')->label('Contenido')->columnSpanFull(),
                                         ])->columnSpanFull(),
+                                        TextInput::make('id')->label('ID para ancla')->columnSpanFull(),
                                     ])
                                 ]),
                             ])->collapsed()->cloneable(),
