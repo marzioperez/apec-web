@@ -111,14 +111,14 @@
                         <h5 class="font-semibold mb-5">Participant's information (optional)</h5>
                         <form wire:submit.prevent="process_step_2">
                             <div class="form-group">
-                                <label for="attendee_name">Attendee Name</label>
+                                <label for="attendee_name">Assistant's Name</label>
                                 <div class="form-field">
                                     <input type="text" id="attendee_name" name="attendee_name" wire:model="attendee_name" />
                                     @error('attendee_name') <span class="validation-error">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="attendee_email">Attendee Email</label>
+                                <label for="attendee_email">Assistant's Email</label>
                                 <div class="form-field">
                                     <input type="email" id="attendee_email" name="last_name" wire:model="attendee_email" />
                                     @error('attendee_email') <span class="validation-error">{{ $message }}</span> @enderror
@@ -129,7 +129,7 @@
                                 <div class="form-field">
                                     <div class="form-check">
                                         <input type="checkbox" name="send_copy_of_registration" class="form-check-input" id="send_copy_of_registration" wire:model="send_copy_of_registration">
-                                        <label for="send_copy_of_registration" class="text-gray">Send Copy of Registration</label>
+                                        <label for="send_copy_of_registration" class="text-gray">Send a copy of my registration</label>
                                     </div>
                                 </div>
                             </div>
