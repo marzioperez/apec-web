@@ -75,13 +75,16 @@
                                 </svg>
                             </div>
                         </button>
-                        <div class="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
+                        <div class="absolute right-0 z-10 mt-2.5 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
                              x-show="open_user_menu"
                              x-ref="panel"
                              x-on:click.outside="close($refs.button)"
                              :id="$id('dropdown-button')"
                              style="display: none;"
                              x-transition.origin.top.left>
+                            <a href="{{route('progress')}}" class="block px-3 py-1 text-sm leading-6" role="menuitem" tabindex="-1" id="user-menu-item-1">Register</a>
+                            <a href="{{route('hotel')}}" class="block px-3 py-1 text-sm leading-6" role="menuitem" tabindex="-1" id="user-menu-item-1">Flight and hotel</a>
+                            <a href="{{route('qr')}}" class="block px-3 py-1 text-sm leading-6" role="menuitem" tabindex="-1" id="user-menu-item-1">My QR</a>
                             <button type="button" wire:click.prevent="logout" class="block px-3 py-1 text-sm leading-6" role="menuitem" tabindex="-1" id="user-menu-item-1">Log out</button>
                         </div>
                     </div>

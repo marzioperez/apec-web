@@ -112,6 +112,12 @@ class User extends Authenticatable {
         'exit_date',
         'exit_time',
 
+        'flight_contact_number',
+        'flight_free_transportation',
+        'flight_details',
+        'flight_email_sent',
+        'flight_hotel_step',
+
         'hotel_name',
         'hotel_room',
         'hotel_price',
@@ -137,7 +143,9 @@ class User extends Authenticatable {
             'with_staff' => 'boolean',
             'vaccines' => 'json',
             'amount' => 'decimal:2',
-            'lock_fields' => 'boolean'
+            'lock_fields' => 'boolean',
+            'flight_free_transportation' => 'boolean',
+            'flight_email_sent' => 'boolean',
         ];
     }
 
