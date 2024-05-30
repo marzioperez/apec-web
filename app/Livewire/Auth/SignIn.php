@@ -29,7 +29,8 @@ class SignIn extends Component {
                 Status::CONFIRMED->value,
                 Status::PENDING_APPROVAL_DATA->value,
                 Status::UNPAID->value,
-                Status::SEND_TO_CHANCELLERY->value
+                Status::SEND_TO_CHANCELLERY->value,
+                Status::PENDING_CORRECT_DATA
             ]
         ], $this->remember_me)) {
             if (in_array(auth()->user()->type, [
