@@ -18,7 +18,7 @@
             <span class="label"></span>
             <span class="amount"></span>
         </div>
-        <div class="seconds">
+        <div class="seconds hidden">
             <span class="label"></span>
             <span class="amount"></span>
         </div>

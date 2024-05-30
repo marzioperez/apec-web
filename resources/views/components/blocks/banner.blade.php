@@ -5,7 +5,10 @@
         init() {
             new Splide(this.$refs.splide, {
                 perPage: 1,
-                arrows: false
+                arrows: false,
+                autoplay: true,
+                rewind: true,
+                interval: 3000
             }).mount()
         }
     }">
