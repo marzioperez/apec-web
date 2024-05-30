@@ -1,5 +1,5 @@
 .modal {
-    @apply fixed inset-0 z-50 w-screen overflow-y-auto;
+    @apply fixed inset-0 z-10 w-screen overflow-y-auto;
 }
 
 .modal .modal-wrapper {
