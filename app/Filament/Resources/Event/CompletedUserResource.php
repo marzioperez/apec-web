@@ -233,7 +233,8 @@ class CompletedUserResource extends Resource
                     Status::PENDING_APPROVAL_DATA->value,
                     Status::UNPAID->value,
                     Status::SEND_TO_CHANCELLERY->value,
-                    Status::PAYMENT_REVIEW->value
+                    Status::PAYMENT_REVIEW->value,
+                    Status::PENDING_CORRECT_DATA->value,
                 ])
             )
             ->columns([
