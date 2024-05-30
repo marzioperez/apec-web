@@ -59,7 +59,12 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="role">Will you bring your spouse / accompanying person? (US$ 1,500)</label>
+                                <label for="role">
+                                    Will you bring your spouse / accompanying person?
+                                    @if(!$user['companion_free'])
+                                        (US$ {{number_format($user['companion_amount'])}})
+                                    @endif
+                                </label>
                                 <div class="form-field flex space-x-6">
                                     <div class="flex items-center gap-x-3">
                                         <input id="with_companion_yes" name="with_companion" type="radio" wire:model="with_companion" value="yes" @change="with_companion = 'yes'" :disabled="{{$lock_fields}}" />
@@ -105,7 +110,12 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="role">Will you bring a staffer? (US$ 1,500)</label>
+                                <label for="role">
+                                    Will you bring a staffer?
+                                    @if(!$user['staff_free'])
+                                        (US$ {{number_format($user['staff_amount'])}})
+                                    @endif
+                                </label>
                                 <div class="form-field">
                                     <div class="form-field flex space-x-6">
                                         <div class="flex items-center gap-x-3">

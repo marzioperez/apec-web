@@ -35,7 +35,8 @@ class SignIn extends Component {
             if (in_array(auth()->user()->type, [
                 Types::STAFF->value,
                 Types::COMPANION->value,
-                Types::FREE_PASS_COMPANION->value
+                Types::FREE_PASS_COMPANION->value,
+                Types::FREE_PASS_STAFF->value
             ])) {
                 $this->redirect(route('guest-progress'));
             } else {
