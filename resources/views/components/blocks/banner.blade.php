@@ -8,7 +8,7 @@
                 arrows: false,
                 autoplay: true,
                 rewind: true,
-                interval: 3000
+                interval: 5000
             }).mount()
         }
     }">

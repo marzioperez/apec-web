@@ -94,7 +94,7 @@
                         </div>
                     </div>
                 @else
-                    <a href="{{route('sign-up')}}" class="btn btn-secondary sm:block hidden">Expression of Interest</a>
+{{--                    <a href="{{route('sign-up')}}" class="btn btn-secondary sm:block hidden">Expression of Interest</a>--}}
                     <a href="{{route('login')}}" class="btn btn-secondary-outline sm:block hidden">Login</a>
                 @endif
             </div>
