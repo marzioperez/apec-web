@@ -8,9 +8,13 @@
             <div class="col-span-4 flex justify-end">
                 <diV>
                     @if(auth()->guest())
-                        <a href="{{route('sign-up')}}" class="btn btn-secondary">Expression of interest</a>
+                        @if(request()->route()->uri !== "sign-up")
+                            <div class="flex justify-center">
+                                <a href="{{route('sign-up')}}" class="btn btn-secondary">Expression of interest</a>
+                            </div>
+                        @endif
                     @endif
-                    <div class="flex sm:justify-end justify-center space-x-3 mt-5">
+                    <div class="flex justify-center space-x-3 mt-5">
                         <a href="https://www.facebook.com/APECCEOSummits?mibextid=ZbWKwL" target="_blank" class="social-icon">
                             <i class="fa-brands fa-facebook-f"></i>
                         </a>
