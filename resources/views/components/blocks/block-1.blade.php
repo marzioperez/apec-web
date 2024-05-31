@@ -22,28 +22,4 @@
             <button type="button" class="btn btn-primary" x-on:click.prevent="$dispatch('open-modal', {name: 'modal-book'})">{{$data['text_button']}}</button>
         </div>
     </div>
-
-    <x-modal name="modal-book" bg="black" classes="modal-book">
-        <x-slot:body>
-            <button type="button" class="absolute z-30 rounded-full top-3 right-3 text-white flex items-center justify-center" x-on:click="$dispatch('close-modal')">
-                <i class="fa-light fa-xmark text-lg"></i>
-            </button>
-            <div class="relative">
-                <div id="logo-book">
-                    @foreach($data['images'] as $item)
-                        <div class="w-full">
-                            <img src="{{url('storage/web/' . $item['image'])}}" class="w-full">
-                        </div>
-                    @endforeach
-                </div>
-                <div class="book-prev-page">
-                    <i class="fa-solid fa-chevron-left"></i>
-                </div>
-                <div class="book-next-page">
-                    <i class="fa-solid fa-chevron-right"></i>
-                </div>
-                <audio id="audio" src="{{asset('audio/page-flip.mp3')}}"></audio>
-            </div>
-        </x-slot:body>
-    </x-modal>
 </div>

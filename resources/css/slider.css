@@ -15,7 +15,7 @@
 }
 
 .slider .splide__pagination {
-    @apply bottom-5;
+    @apply bottom-5 z-[11];
 }
 
 .slider .splide__pagination__page.is-active {
