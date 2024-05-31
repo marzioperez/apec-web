@@ -17,6 +17,11 @@ form.dark textarea {
     @apply bg-black text-white !important;
 }
 
+form.dark input[type=date]::-webkit-calendar-picker-indicator,
+form.dark input[type=time]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
 form.dark label {
     @apply text-white;
 }
