@@ -1,7 +1,7 @@
 @props(['date' => now()])
 <div>
     <div class="countdown"
-         data-countdown="{{$date}}T00:00:00+02:00"
+         data-countdown="{{$date}}T00:00:00"
          data-countdown-option-leadingzero="true"
          data-countdown-option-setcssproperties="true"
          data-countdown-option-separatedigits="true"

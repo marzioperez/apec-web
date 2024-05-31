@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="col-span-6 flex items-center relative">
-            <img src="{{asset('img/video-icon.png')}}" class="absolute top-1/2 -translate-y-1/2 w-16 left-1/2 -translate-x-1/2 cursor-pointer" x-on:click.prevent="$dispatch('open-modal', {name: 'modal-book'})">
+            <img src="{{asset('img/video-icon.png')}}" class="absolute top-1/2 -translate-y-1/2 w-16 left-1/2 -translate-x-1/2 cursor-pointer" x-on:click.prevent="$dispatch('open-modal', {name: 'modal-video'})">
             <img src="{{url('storage/web/' . $data['preview'])}}" class="w-full" />
         </div>
         <div class="sm:hidden flex justify-center sm:pt-0 pt-5">

@@ -17,6 +17,7 @@
     <body class="antialiased {{($class ?? '')}}">
         <div class="min-h-screen flex flex-col">
             <livewire:common.header />
+            <livewire:common.menu-mobile />
             <main>
                 {{ $slot }}
             </main>

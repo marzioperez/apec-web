@@ -101,10 +101,13 @@ class PageResource extends Resource {
                                                 FileUpload::make('preview')->disk('web')->label('Imagen')->preserveFilenames()->image()->required()->columnSpanFull()
                                             ])
                                         ]),
-                                        Tab::make('Imágenes')->schema([
+                                        Tab::make('Imágenes libro')->schema([
                                             Repeater::make('images')->schema([
                                                 FileUpload::make('image')->disk('web')->label('Imagen')->preserveFilenames()->image()->required()->columnSpanFull()
                                             ])->reorderable()->columnSpan(2),
+                                        ]),
+                                        Tab::make('Embed')->schema([
+                                            Forms\Components\Textarea::make('embed')->label('Video embed')->columnSpanFull()
                                         ])
                                     ]),
                                     TextInput::make('id')->label('ID para ancla')->columnSpanFull(),

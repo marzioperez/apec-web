@@ -74,6 +74,17 @@
                     </div>
                 </x-slot:body>
             </x-modal>
+
+            <x-modal name="modal-video" bg="black" classes="modal-book">
+                <x-slot:body>
+                    <button type="button" class="absolute z-30 rounded-full top-3 right-3 text-white flex items-center justify-center" x-on:click="$dispatch('close-modal')">
+                        <i class="fa-light fa-xmark text-lg"></i>
+                    </button>
+                    <div class="relative">
+                        {!! $block['data']['embed'] !!}
+                    </div>
+                </x-slot:body>
+            </x-modal>
         @endif
 
         @if($block['type'] === 'block-2')

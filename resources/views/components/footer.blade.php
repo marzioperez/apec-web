@@ -1,11 +1,11 @@
 <footer class="relative z-10">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="sm:grid grid-cols-12 gap-3">
-            <div class="col-span-4">
+            <div class="col-span-4 flex sm:justify-start justify-center">
                 <img src="{{asset('img/logo-color.png')}}">
             </div>
             <div class="col-span-4"></div>
-            <div class="col-span-4 flex justify-end">
+            <div class="col-span-4 flex sm:justify-end justify-center">
                 <diV>
                     @if(auth()->guest())
                         @if(request()->route()->uri !== "sign-up")

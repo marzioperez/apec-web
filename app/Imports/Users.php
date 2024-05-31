@@ -24,7 +24,7 @@ class Users implements WithHeadingRow, ToModel {
                 $user['business'] = $row['empresa'];
                 $user['role'] = $row['cargo'];
                 $user['email'] = $row['email'];
-                $user['business_email'] = $row['email_secundario'];
+                $user['attendee_email'] = $row['email_secundario'];
                 $user['phone'] = $row['telefono'];
                 $user['type'] = $row['tipo'];
                 $user['password'] = bcrypt($row['telefono']);
