@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -9,35 +10,24 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class PaymentBankTransfer extends Mailable
-{
+class PaymentBankTransfer extends Mailable {
     use Queueable, SerializesModels;
+    public User $user;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct()
-    {
-        //
+    public function __construct(User $user) {
+        $this->user = $user;
     }
 
-    /**
-     * Get the message envelope.
-     */
-    public function envelope(): Envelope
-    {
+    public function envelope(): Envelope {
         return new Envelope(
-            subject: 'Payment Bank Transfer',
+            subject: 'APEC CEO Summit 2024 - Payment pending',
         );
     }
 
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    {
+    public function content(): Content {
         return new Content(
-            view: 'view.name',
+            view: 'mail.payment-bank-transfer',
+            with: ['user' => $this->user],
         );
     }
 

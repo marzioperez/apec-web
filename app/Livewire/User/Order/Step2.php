@@ -5,6 +5,7 @@ namespace App\Livewire\User\Order;
 use App\Actions\GenerateQrCode;
 use App\Concerns\Enums\PaymentMethods;
 use App\Concerns\Enums\Status;
+use App\Mail\PaymentBankTransfer;
 use App\Mail\PaymentSuccess;
 use App\Models\Order;
 use Illuminate\Http\File;
@@ -92,6 +93,7 @@ class Step2 extends Component {
             'status' => Status::PAYMENT_REVIEW->value,
             'lock_fields' => true
         ]);
+        Mail::to($this->order->user['email'])->send(new PaymentBankTransfer($this->order->user));
         $this->dispatch('open-modal', name: 'modal-status-ok');
     }
 

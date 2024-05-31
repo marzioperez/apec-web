@@ -22,7 +22,7 @@ class InviteStaff extends Mailable {
 
     public function envelope(): Envelope {
         return new Envelope(
-            subject: 'You are invite to APEC 2024',
+            subject: 'Welcome to the APEC CEO Summit 2024!',
         );
     }
 

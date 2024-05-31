@@ -85,9 +85,15 @@
                             <a href="{{route('progress')}}" class="block px-3 py-1 text-sm leading-6" role="menuitem" tabindex="-1" id="user-menu-item-1">Register</a>
                             @if(in_array(auth()->user()->status, [
                                 \App\Concerns\Enums\Status::FINISHED->value,
-                                \App\Concerns\Enums\Status::SEND_TO_CHANCELLERY->value
+                                \App\Concerns\Enums\Status::SEND_TO_CHANCELLERY->value,
+                                \App\Concerns\Enums\Status::PENDING_APPROVAL_DATA->value,
                             ]))
                                 <a href="{{route('hotel')}}" class="block px-3 py-1 text-sm leading-6" role="menuitem" tabindex="-1" id="user-menu-item-1">Flight and hotel</a>
+                            @endif
+                            @if(in_array(auth()->user()->status, [
+                                \App\Concerns\Enums\Status::FINISHED->value,
+                                \App\Concerns\Enums\Status::SEND_TO_CHANCELLERY->value
+                            ]))
                                 <a href="{{route('qr')}}" class="block px-3 py-1 text-sm leading-6" role="menuitem" tabindex="-1" id="user-menu-item-1">My QR</a>
                             @endif
                             <button type="button" wire:click.prevent="logout" class="block px-3 py-1 text-sm leading-6" role="menuitem" tabindex="-1" id="user-menu-item-1">Log out</button>
