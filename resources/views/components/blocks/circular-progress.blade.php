@@ -5,7 +5,7 @@
         $progress = auth()->user()->register_progress;
     }
 @endphp
-<div class="container mx-auto px-4 sm:px-6 lg:px-8 relative py-5 scroll-mt-[102px]" id="{{$data['id']}}">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 relative py-5 scroll-mt-[102px] relative z-10" id="{{$data['id']}}">
     <div class="sm:grid grid-cols-12">
         <div class="col-span-8 sm:text-left text-center">
             <h3 class="text-white font-semibold text-2xl mb-3">{{$data['title']}}</h3>

@@ -258,12 +258,6 @@ class CompletedUserResource extends Resource
                 TextColumn::make('email')->label('Email'),
                 TextColumn::make('type')->label('Tipo'),
                 TextColumn::make('status')->label('Estado')->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        Status::CONFIRMED->value => 'success',
-                        Status::PENDING_APPROVAL_DATA->value => 'warning',
-                        Status::DECLINED->value => 'danger',
-                        default => 'primary'
-                    }),
             ])
             ->filters([
                 SelectFilter::make('type')->label('Tipo')

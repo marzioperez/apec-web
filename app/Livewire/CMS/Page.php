@@ -2,12 +2,14 @@
 
 namespace App\Livewire\CMS;
 
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Page extends Component {
 
     public $blocks = [];
     public \App\Models\Page $page;
+    public $hotel = null;
 
     public function mount($slug = '/') {
         $model = \App\Models\Page::where('slug', $slug)->get()->first();
@@ -17,6 +19,12 @@ class Page extends Component {
         } else {
             $this->redirect(config('app.url'));
         }
+    }
+
+    #[On('show-hotel')]
+    public function show($hotel) {
+        $this->hotel = $hotel;
+        $this->dispatch('open-modal', name: 'modal-hotel');
     }
 
     public function render() {
