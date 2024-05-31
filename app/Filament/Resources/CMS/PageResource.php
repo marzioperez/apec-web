@@ -134,8 +134,16 @@ class PageResource extends Resource {
                                     TextInput::make('id')->label('ID para ancla')->columnSpanFull(),
                                 ]),
                                 Block::make('program')->label('Bloque de programa')->schema([
-                                    TextInput::make('title')->label('Título')->columnSpanFull(),
-                                    TextInput::make('id')->label('ID para ancla')->columnSpanFull(),
+                                    Tabs::make()->tabs([
+                                        Tab::make('Contenido')->schema([
+                                            TextInput::make('title')->label('Título')->columnSpanFull(),
+                                            TextInput::make('id')->label('ID para ancla')->columnSpanFull(),
+                                        ]),
+                                        Tab::make('Archivo')->schema([
+                                            FileUpload::make('file')->label('Archivo PDF')->preserveFilenames()->disk('web')->columnSpanFull(),
+                                            TextInput::make('text_button')->label('Texto de botón')->columnSpanFull(),
+                                        ]),
+                                    ])
                                 ]),
                                 Block::make('speakers')->label('Bloque de expositores')->schema([
                                     TextInput::make('title')->label('Título')->columnSpanFull(),

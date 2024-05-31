@@ -25,3 +25,7 @@ body {
 .contact-block li {
     @apply list-disc;
 }
+
+.social-icon {
+    @apply w-[30px] h-[30px] bg-white rounded-full flex items-center justify-center;
+}
