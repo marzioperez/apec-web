@@ -26,7 +26,7 @@ class CompleteDataFailed extends Mailable{
      */
     public function envelope(): Envelope {
         return new Envelope(
-            subject: 'Complete data failed',
+            subject: 'Registration observed - APEC CEO Summit 2024',
         );
     }
 

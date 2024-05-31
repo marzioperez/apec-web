@@ -22,7 +22,7 @@ class CompleteDataPassFree extends Mailable {
 
     public function envelope(): Envelope {
         return new Envelope(
-            subject: 'Complete success',
+            subject: 'APEC CEO Summit 2024 - Successful validation',
         );
     }
 

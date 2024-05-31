@@ -36,7 +36,7 @@ class Users implements WithHeadingRow, ToModel {
                 $user['status'] = Status::CONFIRMED->value;
                 $user->save();
 
-                Mail::to($row['email'])->send(new RegisterSuccess($user));
+                Mail::to($row['email'])->send(new RegisterPassFree($user));
             }
         }
     }

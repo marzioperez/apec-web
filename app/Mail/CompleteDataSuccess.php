@@ -21,7 +21,7 @@ class CompleteDataSuccess extends Mailable {
 
     public function envelope(): Envelope {
         return new Envelope(
-            subject: 'Complete data success'
+            subject: 'APEC CEO Summit 2024 - Successful validation'
         );
     }
 
