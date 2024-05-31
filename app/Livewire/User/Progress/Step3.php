@@ -112,11 +112,19 @@ class Step3 extends Component {
 
         $rules = [];
 
-        $companion_type = ($this->user['type'] === Types::FREE_PASS_PARTICIPANT->value ? Types::FREE_PASS_COMPANION->value : Types::COMPANION->value);
-        $companion = User::where('parent_id', $this->user['id'])->where('type', $companion_type)->get()->first();
+        // $companion_type = ($this->user['type'] === Types::FREE_PASS_PARTICIPANT->value ? Types::FREE_PASS_COMPANION->value : Types::COMPANION->value);
+        $companion_type = [
+            Types::FREE_PASS_COMPANION->value,
+            Types::COMPANION->value
+        ];
+        $companion = User::where('parent_id', $this->user['id'])->whereIn('type', $companion_type)->get()->first();
 
-        $staff_type = ($this->user['type'] === Types::FREE_PASS_PARTICIPANT->value ? Types::FREE_PASS_STAFF->value : Types::STAFF->value);
-        $staff = User::where('parent_id', $this->user['id'])->where('type', $staff_type)->get()->first();
+        // $staff_type = ($this->user['type'] === Types::FREE_PASS_PARTICIPANT->value ? Types::FREE_PASS_STAFF->value : Types::STAFF->value);
+        $staff_type = [
+            Types::FREE_PASS_STAFF->value,
+            Types::STAFF->value
+        ];
+        $staff = User::where('parent_id', $this->user['id'])->whereIn('type', $staff_type)->get()->first();
 
         if ($this->with_companion === 'yes') {
             $rules['companion.name'] = 'required';
@@ -201,15 +209,17 @@ class Step3 extends Component {
                 // Enviamos el correo solo si el usuario ha marcado que desea ir con acompañante
                 if ($this->with_companion === 'yes') {
                     // Y se encuentra en el paso 3 actualmente
-                    if ($current_step === $this->current) {
+                    if (!$this->user['send_invitation_to_companion']) {
                         Mail::to($companion['email'])->send(new InviteCompanion($companion));
+                        $this->user->update(['send_invitation_to_companion' => true]);
                     }
                 }
                 // Enviamos el correo solo si el usuario ha marcado que desea ir con staff
                 if ($this->with_staff === 'yes') {
                     // Y se encuentra en el paso 3 actualmente
-                    if ($current_step === $this->current) {
+                    if (!$this->user['send_invitation_to_staff']) {
                         Mail::to($staff['email'])->send(new InviteCompanion($staff));
+                        $this->user->update(['send_invitation_to_staff' => true]);
                     }
                 }
             }

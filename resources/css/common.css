@@ -3,7 +3,7 @@ html {
 }
 
 body {
-    @apply font-space-grotesk;
+    @apply font-space-grotesk sm:text-[17px];
 }
 
 .pagination {

@@ -54,9 +54,11 @@ class User extends Authenticatable {
         'with_companion',
         'companion_free',
         'companion_amount',
+        'send_invitation_to_companion',
         'with_staff',
         'staff_free',
         'staff_amount',
+        'send_invitation_to_staff',
 
         'blood_type',
         'allergies',
@@ -148,6 +150,8 @@ class User extends Authenticatable {
             'lock_fields' => 'boolean',
             'flight_free_transportation' => 'boolean',
             'flight_email_sent' => 'boolean',
+            'send_invitation_to_staff' => 'boolean',
+            'send_invitation_to_companion' => 'boolean',
         ];
     }
 
