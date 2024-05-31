@@ -68,6 +68,65 @@
                                     </div>
                                 </div>
                             </div>
+                        @elseif($user['status'] === \App\Concerns\Enums\Status::PENDING_CORRECT_DATA->value)
+                            @if(is_null($user['identity_document']))
+                                <h5 class="font-semibold my-5">Upload identity document*</h5>
+                                @php
+                                    $doc_content = '<div class="flex justify-center items-center space-x-3 mb-5">';
+                                    $doc_content .= '<img src="'. asset('img/upload-icon.png') .'" />';
+                                    if ($user['document_type'] === \App\Concerns\Enums\Types::DNI->value) {
+                                        $doc_content .= '<img src="'. asset('img/dni-icon.png') .'" />';
+                                    }
+                                    if ($user['document_type'] === \App\Concerns\Enums\Types::PASSPORT->value) {
+                                        $doc_content .= '<img src="'. asset('img/passport-icon.png') .'" />';
+                                    }
+                                    $doc_content .= '</div>';
+                                    $doc_content .= '<p class="text-center">Choose a file or drag & drop it here.<br>';
+                                    $doc_content .= '<b>National:</b> DNI, <b>Foreigners:</b> Passport<br>';
+                                    $doc_content .= 'Only PDFs are accepted.</p>';
+                                @endphp
+                                <livewire:common.file-upload
+                                    wire:model="identity_document"
+                                    :rules="['mimes:pdf', 'max:10420']"
+                                    :key="'identity-document'"
+                                    :content="$doc_content"
+                                />
+                                @error('identity_document') <span class="validation-error">{{ $message }}</span> @enderror
+                            @else
+                                <h5 class="font-semibold my-5">Identity Document</h5>
+                                <div class="mt-3 flex items-center bg-white px-2 py-1 shadow justify-between gap-2 border rounded border-gray-200 w-full h-auto overflow-hidden">
+                                    <div class="flex items-center gap-3">
+                                        <div class="flex justify-center items-center w-14 h-14 bg-gray-100">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" class="w-8 h-8 text-gray-500">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                                            </svg>
+                                        </div>
+                                        <div class="flex flex-col items-start gap-1">
+                                            <a class="text-center text-blue-500 underline text-sm font-medium" target="_blank" href="{{$identity_document_file}}">Open</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+
+                            @if(is_null($user['badge_photo']))
+                                <h5 class="font-semibold my-5">Upload photo*</h5>
+                                @php
+                                    $photo_content = '<div class="flex justify-center mb-5">';
+                                    $photo_content .= '<img src="'. asset('img/upload-icon.png') .'" />';
+                                    $photo_content .= '</div>';
+                                    $photo_content .= '<p class="text-center">Choose a file or drag & drop it here.<br>';
+                                    $photo_content .= 'JPEG or PNG formats, 300 x 300 pixels. Background<br>';
+                                    $photo_content .= 'white. High resolution.</p>';
+                                @endphp
+                                    <livewire:common.file-upload
+                                        wire:model="badge_photo"
+                                        :rules="['image', 'mimes:png,jpeg', 'max:10420']"
+                                        :key="'badge-photo'"
+                                        :content="$photo_content"
+                                        :emitter="'cover'"
+                                    />
+                                    @error('badge_photo') <span class="validation-error">{{ $message }}</span> @enderror
+                            @endif
                         @else
                             <h5 class="font-semibold my-5">Upload identity document*</h5>
                             @php
