@@ -5,7 +5,10 @@
             <div class="col-span-full pb-5">
                 <h4 class="text-blue font-semibold text-5xl uppercase sm:text-end text-left">{{$data['title']}}</h4>
             </div>
-            <div class="col-span-full pb-5 flex justify-end space-x-3">
+            <div class="col-span-4 pb-5 flex">
+                <a href="{{url('storage/web/' . $data['file'])}}" target="_blank" class="btn btn-blue">{{$data['text_button']}}</a>
+            </div>
+            <div class="col-span-8 pb-5 flex justify-end space-x-3">
                 @foreach($categories as $c => $category)
                     <button type="button" class="btn" x-on:click.prevent="category = {{$c}}" :class="category == {{$c}} ? 'btn-blue' : 'btn-blue-outline'">{{$category['name']}}</button>
                 @endforeach
