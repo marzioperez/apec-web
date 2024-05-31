@@ -1,4 +1,4 @@
-<footer>
+<footer class="relative z-10">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="sm:grid grid-cols-12 gap-3">
             <div class="col-span-4">
