@@ -86,7 +86,7 @@ class ConfirmedUserResource extends Resource
                             TextInput::make('email')->label('Email')->required()
                                 ->unique('users', 'email', ignoreRecord: true)->columnSpan(3),
                             DatePicker::make('date_of_issue')->label('Fecha de emisión')->columnSpan(3),
-                            TextInput::make('date_of_issue')->label('Lugar de emisión')->columnSpan(3),
+                            TextInput::make('place_of_issue')->label('Lugar de emisión')->columnSpan(3),
                             DatePicker::make('date_of_birth')->label('Fecha de nacimiento')->columnSpan(3),
                             TextInput::make('nationality')->label('Nacionalidad')->columnSpan(3),
                             TextInput::make('city_of_permanent_residency')->label('Ciudad de residencia')->columnSpan(4),
@@ -219,8 +219,8 @@ class ConfirmedUserResource extends Resource
                         ])->schema([
                             TextInput::make('badge_name')->label('Nombre')->required()->columnSpan(6),
                             TextInput::make('badge_last_name')->label('Apellidos')->required()->columnSpan(6),
-                            Forms\Components\FileUpload::make('badge_photo')->label('Foto')->disk('badges')->required()->image()->downloadable()->columnSpanFull(),
-                            Forms\Components\FileUpload::make('identity_document')->label('Documento de identidad')->disabled('ids')->required()->downloadable()->columnSpanFull(),
+                            Forms\Components\FileUpload::make('badge_photo')->label('Foto')->required()->disk('badges')->downloadable()->openable()->columnSpanFull(),
+                            Forms\Components\FileUpload::make('identity_document')->disk('ids')->label('Documento de identidad')->required()->downloadable()->openable()->columnSpanFull(),
                         ])
                     ]),
                 ])->columnSpanFull()

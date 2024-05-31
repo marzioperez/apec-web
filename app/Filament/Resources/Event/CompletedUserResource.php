@@ -78,14 +78,23 @@ class CompletedUserResource extends Resource
                             '2xl' => 12
                         ])->schema([
                             Select::make('title')->label('Título')->options(collect($titles)->pluck('name', 'id'))->columnSpan(2),
-                            TextInput::make('name')->label('Nombre')->required()->columnSpan(5),
-                            TextInput::make('last_name')->label('Apellidos')->required()->columnSpan(5),
+                            TextInput::make('name')->label('Nombre')->required()->columnSpan(4),
+                            TextInput::make('last_name')->label('Apellidos')->required()->columnSpan(4),
+                            Select::make('type')->label('Tipo')->options([
+                                Types::PARTICIPANT->value => Types::PARTICIPANT->value,
+                                Types::STAFF->value => Types::STAFF->value,
+                                Types::COMPANION->value => Types::COMPANION->value,
+                                Types::FREE_PASS_PARTICIPANT->value => Types::FREE_PASS_PARTICIPANT->value,
+                                Types::FREE_PASS_STAFF->value => Types::FREE_PASS_STAFF->value,
+                                Types::FREE_PASS_COMPANION->value => Types::FREE_PASS_COMPANION->value,
+                                Types::VIP->value => Types::VIP->value
+                            ])->columnSpan(2)->live(),
                             Select::make('gender')->label('Sexo')->options(collect($genders)->pluck('name', 'id'))->columnSpan(3),
                             Select::make('document_type')->label('Tipo de documento')->options(collect($document_types)->pluck('name', 'id'))->columnSpan(3),
                             TextInput::make('document_number')->label('Número de documento')->required()->columnSpan(3),
                             TextInput::make('email')->label('Email')->required()->unique('users', 'email', ignoreRecord: true)->columnSpan(3),
                             DatePicker::make('date_of_issue')->label('Fecha de emisión')->columnSpan(3),
-                            TextInput::make('date_of_issue')->label('Lugar de emisión')->required()->columnSpan(3),
+                            TextInput::make('place_of_issue')->label('Lugar de emisión')->required()->columnSpan(3),
                             DatePicker::make('date_of_birth')->label('Fecha de nacimiento')->columnSpan(3),
                             TextInput::make('nationality')->label('Nacionalidad')->columnSpan(3),
                             TextInput::make('city_of_permanent_residency')->label('Ciudad de residencia')->columnSpanFull(),
@@ -109,7 +118,12 @@ class CompletedUserResource extends Resource
                             TextInput::make('attendee_name')->label('Nombre de asistente')->required()->columnSpan(6),
                             TextInput::make('attendee_email')->label('Email de asistente')->required()->columnSpan(6),
                         ])
-                    ]),
+                    ])->hidden(fn(Forms\Get $get) => in_array($get('type'), [
+                        Types::COMPANION->value,
+                        Types::STAFF->value,
+                        Types::FREE_PASS_STAFF->value,
+                        Types::FREE_PASS_COMPANION->value
+                    ])),
                     Tab::make('Requisitos especiales')->schema([
                         Forms\Components\Section::make([
                             Select::make('types_of_food')->label('Tipo de dieta')->options([
