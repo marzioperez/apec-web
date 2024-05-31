@@ -53,8 +53,12 @@ class Step3 extends Component {
         $this->with_staff = ($user['with_staff'] ? 'yes' : 'no');
 
         if ($user['with_companion']) {
-            $companion_type = ($user['type'] === Types::FREE_PASS_PARTICIPANT->value ? Types::FREE_PASS_COMPANION->value : Types::COMPANION->value);
-            $companion = User::where('parent_id', $user['id'])->where('type', $companion_type)->get()->first();
+            // $companion_type = ($user['type'] === Types::FREE_PASS_PARTICIPANT->value ? Types::FREE_PASS_COMPANION->value : Types::COMPANION->value);
+            $companion_type = [
+                Types::FREE_PASS_COMPANION->value,
+                Types::COMPANION->value
+            ];
+            $companion = User::where('parent_id', $user['id'])->whereIn('type', $companion_type)->get()->first();
             if ($companion) {
                 $this->companion = [
                     'name' => $companion['name'],
@@ -66,8 +70,12 @@ class Step3 extends Component {
         }
 
         if ($user['with_staff']) {
-            $staff_type = ($user['type'] === Types::FREE_PASS_PARTICIPANT->value ? Types::FREE_PASS_STAFF->value : Types::STAFF->value);
-            $staff = User::where('parent_id', $user['id'])->where('type', $staff_type)->get()->first();
+            // $staff_type = ($user['type'] === Types::FREE_PASS_PARTICIPANT->value ? Types::FREE_PASS_STAFF->value : Types::STAFF->value);
+            $staff_type = [
+                Types::FREE_PASS_STAFF->value,
+                Types::STAFF->value
+            ];
+            $staff = User::where('parent_id', $user['id'])->whereIn('type', $staff_type)->get()->first();
             if ($staff) {
                 $this->staff = [
                     'name' => $staff['name'],
