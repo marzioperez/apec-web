@@ -73,15 +73,8 @@ class ConfirmedUserResource extends Resource
                             Select::make('title')->label('Título')->options(collect($titles)->pluck('name', 'id'))->columnSpan(2),
                             TextInput::make('name')->label('Nombre')->required()->columnSpan(5),
                             TextInput::make('last_name')->label('Apellidos')->required()->columnSpan(5),
-                            Select::make('gender')->label('Sexo')->options([
-                                Genders::MALE->value => Genders::MALE->value,
-                                Genders::FEMALE->value => Genders::FEMALE->value
-                            ])->columnSpan(3),
-                            Select::make('document_type')->label('Tipo de documento')->options([
-                                Types::DNI->value => Types::DNI->value,
-                                Types::PASSPORT->value => Types::PASSPORT->value,
-                                Types::CE->value => Types::CE->value
-                            ])->columnSpan(3),
+                            Select::make('gender')->label('Sexo')->options(collect($genders)->pluck('name', 'id'))->columnSpan(3),
+                            Select::make('document_type')->label('Tipo de documento')->options(collect($document_types)->pluck('name', 'id'))->columnSpan(3),
                             TextInput::make('document_number')->label('Número de documento')->required()->columnSpan(3),
                             TextInput::make('email')->label('Email')->required()
                                 ->unique('users', 'email', ignoreRecord: true)->columnSpan(3),
@@ -162,8 +155,8 @@ class ConfirmedUserResource extends Resource
                                     'B-' => 'B-',
                                     'AB-' => 'AB-'
                                 ])->columnSpan(3),
-                            Toggle::make('allergies')->inline(false)->label('Alergias')->required()->columnSpan(2),
-                            Textarea::make('allergy_details')->label('Detalle')->required()->columnSpanFull(),
+                            Toggle::make('allergies')->inline(false)->label('Alergias')->columnSpan(2),
+                            Textarea::make('allergy_details')->label('Detalle')->columnSpanFull(),
                             Forms\Components\CheckboxList::make('vaccines')->label('Vacunas')->columnSpanFull()
                                 ->options([
                                     'COVID-19' => 'COVID-19',
@@ -171,8 +164,8 @@ class ConfirmedUserResource extends Resource
                                     'Hepatitis B' => 'Hepatitis B',
                                     'Yellow fever' => 'Yellow fever',
                                 ]),
-                            Textarea::make('medical_others')->label('Otros')->required()->columnSpanFull(),
-                            Toggle::make('medical_treatment')->inline(false)->label('Tratamiento médico')->required()->columnSpan(3),
+                            Textarea::make('medical_others')->label('Otros')->columnSpanFull(),
+                            Toggle::make('medical_treatment')->inline(false)->label('Tratamiento médico')->columnSpan(3),
                             Textarea::make('medical_treatment_details')->label('Detalle')->columnSpanFull(),
                             TextInput::make('taking_any_medication')->label('Toma alguna medicación')->columnSpanFull(),
                             TextInput::make('chemical_name')->label('Nombre químico')->columnSpan(3),

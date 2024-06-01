@@ -175,8 +175,8 @@ class CompletedUserResource extends Resource
                                     'B-' => 'B-',
                                     'AB-' => 'AB-'
                                 ])->columnSpan(3),
-                            Toggle::make('allergies')->inline(false)->label('Alergias')->required()->columnSpan(2),
-                            Textarea::make('allergy_details')->label('Detalle')->required()->columnSpanFull(),
+                            Toggle::make('allergies')->inline(false)->label('Alergias')->columnSpan(2),
+                            Textarea::make('allergy_details')->label('Detalle')->columnSpanFull(),
                             Forms\Components\CheckboxList::make('vaccines')->label('Vacunas')->columnSpanFull()
                                 ->options([
                                     'COVID-19' => 'COVID-19',
@@ -184,8 +184,8 @@ class CompletedUserResource extends Resource
                                     'Hepatitis B' => 'Hepatitis B',
                                     'Yellow fever' => 'Yellow fever',
                                 ]),
-                            Textarea::make('medical_others')->label('Otros')->required()->columnSpanFull(),
-                            Toggle::make('medical_treatment')->inline(false)->label('Tratamiento médico')->required()->columnSpan(3),
+                            Textarea::make('medical_others')->label('Otros')->columnSpanFull(),
+                            Toggle::make('medical_treatment')->inline(false)->label('Tratamiento médico')->columnSpan(3),
                             Textarea::make('medical_treatment_details')->label('Detalle')->columnSpanFull(),
                             TextInput::make('taking_any_medication')->label('Toma alguna medicación')->columnSpanFull(),
                             TextInput::make('chemical_name')->label('Nombre químico')->columnSpan(3),
