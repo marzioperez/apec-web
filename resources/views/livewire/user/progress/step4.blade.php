@@ -112,7 +112,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="taking_any_medication">Taking Any Medication</label>
+                                <label for="taking_any_medication">Under permanent medication?</label>
                                 <div class="form-field">
                                     <input type="text" id="taking_any_medication" name="taking_any_medication" wire:model="data.taking_any_medication" :disabled="{{$lock_fields}}" />
                                     @error('data.taking_any_medication') <span class="validation-error">{{ $message }}</span> @enderror

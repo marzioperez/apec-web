@@ -33,8 +33,6 @@ class Step2 extends Component {
     ];
 
     protected $rules = [
-        'data.business' => 'required',
-        'data.role' => 'required',
         'data.area' => 'required',
         'data.address' => 'required',
         'data.city' => 'required',
