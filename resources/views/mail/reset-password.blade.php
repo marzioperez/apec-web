@@ -17,11 +17,9 @@
             <a href="{{route('login')}}" style="color: #FFF; font-size: 14px; text-decoration: none; background-color: #75B42E; padding-bottom: 10px; padding-top: 10px; padding-left: 40px; padding-right: 40px; border-radius: 5px;">Log in</a>
         </div>
 
-        <p style="font-size: 14px; margin-bottom: 30px;">If you did not initiate this request, we urge you to notify us immediately by contacting the following email address: <br><a href="mailto:registration@apecceosummit2024.com" style="color: #00A2F3;">registration@apecceosummit2024.com</a>.</p>
+        <p style="font-size: 14px; margin-bottom: 30px;">If you didn’t request a password reset, please let us know immediately at: <br><a href="mailto:registration@apecceosummit2024.com" style="color: #00A2F3;">registration@apecceosummit2024.com</a>.</p>
 
-        <p style="font-size: 14px; margin-bottom: 20px;">Thank you for your continued participation in the APEC CEO Summit 2024 community.</p>
-
-        <p style="font-size: 14px;">Best regards,<br>
+        <p style="font-size: 14px;">Warm regards,<br>
             The APEC CEO Summit 2024 Host Committee</p>
     </div>
 
