@@ -12,7 +12,14 @@
 
         @vite('resources/css/app.css')
         @livewireStyles
-
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-4E60KDN9CL"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-4E60KDN9CL');
+        </script>
     </head>
     <body class="antialiased {{($class ?? '')}}">
         <div class="min-h-screen flex flex-col">
