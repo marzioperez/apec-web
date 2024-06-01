@@ -95,12 +95,12 @@
                                 </div>
                             </div>
                             <div class="sm:my-8 my-6 flex justify-center space-x-6 items-center">
-                                <a href="#" class="btn btn-primary-outline">Return</a>
+                                <a href="{{config('app.url')}}" class="btn btn-primary-outline">Return</a>
                                 <button type="submit" class="btn btn-primary">Continue</button>
                             </div>
 
                             <div class="flex justify-center">
-                                <p>Have you already registered? <a href="#" class="text-blue">Log in</a></p>
+                                <p>Have you already registered? <a href="{{route('login')}}" class="text-blue">Log in</a></p>
                             </div>
                         </form>
                     </div>
