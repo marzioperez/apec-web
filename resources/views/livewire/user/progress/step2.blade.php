@@ -12,15 +12,13 @@
                         <div class="form-group">
                             <label for="business">Company/Organization*</label>
                             <div class="form-field">
-                                <input type="text" id="business" name="business" wire:model="data.business" :disabled="{{$lock_fields}}" />
-                                @error('data.business') <span class="validation-error">{{ $message }}</span> @enderror
+                                <input type="text" id="business" name="business" value="{{$user['business']}}" disabled />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="role">Position*</label>
                             <div class="form-field">
-                                <input type="text" id="role" name="role" wire:model="data.role" :disabled="{{$lock_fields}}" />
-                                @error('data.role') <span class="validation-error">{{ $message }}</span> @enderror
+                                <input type="text" id="role" name="role" value="{{$user['role']}}" disabled />
                             </div>
                         </div>
                         <div class="form-group">

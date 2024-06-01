@@ -10,8 +10,6 @@ use Livewire\Component;
 class Step2 extends Component {
 
     public $data  = [
-        'business' => null,
-        'role' => null,
         'area' => null,
         'address' => null,
         'city' => null,
@@ -55,8 +53,6 @@ class Step2 extends Component {
         $this->economies = Economy::all()->toArray();
 
         $this->data = [
-            'business' => $user['business'],
-            'role' => $user['role'],
             'area' => $user['area'],
             'address' => $user['address'],
             'city' => $user['city'],
@@ -77,8 +73,6 @@ class Step2 extends Component {
 
     public function process() {
         $rules = [
-            'business' => 'required',
-            'role' => 'required',
             'area' => 'required',
             'address' => 'required',
             'city' => 'required',
