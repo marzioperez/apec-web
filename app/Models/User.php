@@ -126,6 +126,11 @@ class User extends Authenticatable {
         'hotel_room',
         'hotel_price',
         'hotel_conditions_and_payment',
+        'hotel_check_in_date',
+        'hotel_check_in_hour',
+        'hotel_check_out_date',
+        'hotel_check_out_hour',
+        'hotel_details',
 
         'lock_fields',
 
