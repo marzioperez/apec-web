@@ -29,6 +29,7 @@ class Step2 extends Component {
 
     protected $messages = [
         'data.*.required' => 'Required field',
+        'data.*.required_if' => 'Required field',
         'data.*.email' => 'Incorrect email format'
     ];
 
@@ -39,7 +40,8 @@ class Step2 extends Component {
         'data.zip_code' => 'required',
         'data.business_phone_number' => 'required',
         'data.business_email' => 'required|email',
-        'data.economy' => 'required'
+        'data.economy' => 'required',
+        'data.other_economy' => 'required_if:data.economy,other'
     ];
 
     public function mount(User $user, $quantity = 5, $current = 2, $complete = 1) {
@@ -77,11 +79,13 @@ class Step2 extends Component {
             'zip_code' => 'required',
             'business_phone_number' => 'required',
             'business_email' => 'required|email',
-            'economy' => 'required'
+            'economy' => 'required',
+            'other_economy' => 'required_if:economy,other',
         ];
 
         $messages = [
             '*.required' => 'Required field',
+            '*.required_if' => 'Required field',
             '*.email' => 'Incorrect email format'
         ];
 

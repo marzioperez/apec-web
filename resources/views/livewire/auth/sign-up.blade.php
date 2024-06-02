@@ -52,7 +52,7 @@
                             </div>
                             @if($economy === 'other')
                                 <div class="form-group">
-                                    <label for="other_economy">Other economy</label>
+                                    <label for="other_economy">Other economy*</label>
                                     <div class="form-field">
                                         <input type="text" id="other_economy" name="other_economy" wire:model="other_economy" />
                                         @error('other_economy') <span class="validation-error">{{ $message }}</span> @enderror

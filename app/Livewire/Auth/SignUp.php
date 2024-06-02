@@ -29,6 +29,7 @@ class SignUp extends Component {
     public function process_step_1 (): void {
         $messages = [
             '*.required' => 'Required field',
+            '*.required_if' => 'Required field',
             '*.email' => 'Incorrect email format',
             '*.unique' => 'Email already exists',
             '*.same' => 'Confirm email do not match'
@@ -39,7 +40,7 @@ class SignUp extends Component {
             'last_name' => 'required',
             'business' => 'required',
             'economy' => 'required',
-
+            'other_economy' => 'required_if:economy,other',
             'business_description' => 'required',
             'role' => 'required',
             'biography' => 'required',
