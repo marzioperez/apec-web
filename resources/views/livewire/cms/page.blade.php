@@ -30,7 +30,7 @@
 
         @if($block['type'] === 'block-2')
             <x-blocks.block-2 :data="$block['data']" />
-                <x-modal name="modal-organization" bg="black !p-0" classes="modal-book">
+                <x-modal name="modal-organization" bg="black !sm:p-0" classes="modal-book">
                     <x-slot:body>
                         <button type="button" class="absolute z-30 rounded-full top-3 right-3 text-white flex items-center justify-center" x-on:click="$dispatch('close-modal')">
                             <i class="fa-light fa-xmark text-lg"></i>
@@ -42,7 +42,7 @@
                                     <div class="text-white text-sm">{!! $block['data']['pop_up_content'] !!}</div>
                                 </div>
                             </div>
-                            <div class="col-span-5">
+                            <div class="col-span-5 sm:block hidden">
                                 <img src="{{url('storage/web/' . $block['data']['pop_up_image'])}}" class="w-full">
                             </div>
                         </div>
