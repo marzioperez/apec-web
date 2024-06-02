@@ -25,20 +25,22 @@
             <div class="divide-y divide-gray-500/10">
                 <div class="space-y-2 py-2">
                     @foreach($menu_items as $item)
-                        @php
-                            $show = true;
-                            if ($item['only_logged']) {
-                                $show = auth()->check();
-                            }
-                        @endphp
-                        @if($show)
-                            @if($item['type'] === \App\Concerns\Enums\Types::ANCHOR->value)
-                                <a href="{{config('app.url')}}#{{$item['url']}}" x-on:click="toggle_mobile()" class="text-sm font-semibold leading-6 text-gray-900">{{$item['name']}}</a>
+                        <div>
+                            @php
+                                $show = true;
+                                if ($item['only_logged']) {
+                                    $show = auth()->check();
+                                }
+                            @endphp
+                            @if($show)
+                                @if($item['type'] === \App\Concerns\Enums\Types::ANCHOR->value)
+                                    <a href="{{config('app.url')}}#{{$item['url']}}" x-on:click="toggle_mobile()" class="text-sm font-semibold leading-6 text-gray-900">{{$item['name']}}</a>
+                                @endif
+                                @if($item['type'] === \App\Concerns\Enums\Types::URL->value)
+                                    <a href="{{$item['url']}}" class="text-sm font-semibold leading-6 text-gray-900">{{$item['name']}}</a>
+                                @endif
                             @endif
-                            @if($item['type'] === \App\Concerns\Enums\Types::URL->value)
-                                <a href="{{$item['url']}}" class="text-sm font-semibold leading-6 text-gray-900">{{$item['name']}}</a>
-                            @endif
-                        @endif
+                        </div>
                     @endforeach
                 </div>
             </div>
