@@ -14,8 +14,8 @@ class Index extends Component {
     public function mount() {
         $user = auth()->user();
         if (in_array($user['status'], [
-            Status::PENDING_APPROVAL_DATA,
-            Status::UNPAID,
+            Status::PENDING_APPROVAL_DATA->value,
+            Status::UNPAID->value,
             Status::FINISHED->value,
             Status::SEND_TO_CHANCELLERY->value
         ])) {
