@@ -24,7 +24,7 @@
     <div class="progress" :aria-valuenow="currentVal" :aria-valuemin="minVal" :aria-valuemax="maxVal">
         <div class="line" :style="`width: ${calcPercentage(minVal, maxVal, currentVal)}%; transition: 1s;`"></div>
     </div>
-    <div class="flex justify-center py-3 mt-5 space-x-6">
+    <div class="sm:flex justify-center py-3 mt-5 space-x-6">
         @if($user['register_progress'] < 100)
             <a href="{{$data['url']}}" class="btn btn-primary">{{$data['text_button']}}</a>
         @else
@@ -32,7 +32,9 @@
                 \App\Concerns\Enums\Status::FINISHED->value,
                 \App\Concerns\Enums\Status::SEND_TO_CHANCELLERY->value
             ]))
-                <a href="{{route('qr')}}" class="btn btn-primary">View my QR </a>
+                <div class="flex justify-center">
+                    <a href="{{route('qr')}}" class="btn btn-primary sm:mb-0 mb-3">View my QR </a>
+                </div>
             @endif
             <a href="{{route('hotel')}}" class="btn btn-primary">Complete flight and  booking accomodation</a>
         @endif
