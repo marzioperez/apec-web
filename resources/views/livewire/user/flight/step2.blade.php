@@ -51,7 +51,7 @@
                                 </div>
 
                                 <div class="sm:my-8 my-6 flex justify-center space-x-6 items-center">
-                                    <button type="button" class="btn btn-secondary" wire:click.prevent="back">Return</button>
+                                    <button type="button" class="btn btn-secondary" wire:click="back">Return</button>
                                     <button type="submit" class="btn btn-primary">Save</button>
                                 </div>
                             </form>

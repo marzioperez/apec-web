@@ -29,7 +29,7 @@ class Index extends Component {
 
     #[On('change-step')]
     public function chage_step($step) {
-        $this->current_step = $step;
+        $this->dispatch('update-step', step: $step);
     }
 
     public function render() {
