@@ -17,15 +17,13 @@
 
                     @if($data['payment_method'] === \App\Concerns\Enums\PaymentMethods::BANK_TRANSFER->value)
                         <h5 class="font-semibold mb-5">Payment information</h5>
-                        <p class="mb-2">BANCO DE CRÉDITO DEL PERÚ<br>
-                        SWIFT code: BCPLPEPL<br>
-                        Address: Av. Las Camelias 750 San Isidro L27 Lima Perú<br>
-                        Beneficiary name: COMEXPERU - SOCIEDAD DE COMERCIO EXTERIOR DEL PERU<br>
-                        Account Nro. 193-2228297-1-59</p>
+                        <p class="mb-2"><b>Bank name:</b> BANCO DE CRÉDITO DEL PERÚ<br>
+                            <b>SWIFT code:</b> BCPLPEPL<br>
+                            <b>Address:</b> Av. Las Camelias 750 San Isidro L27 Lima Perú<br>
+                            <b>Beneficiary name:</b> COMEXPERU - SOCIEDAD DE COMERCIO EXTERIOR DEL PERU<br>
+                        <b>Account number:</b> 193-2228297-1-59</p>
 
-                        <p class="mb-2">The only commission charged by BCP for receiving transfers from abroad is UDS25.00 of the amount entered into the bank's system.</p>
-
-                        <p>Please verify the commission charge for intermediation service and/or credit from your issuing bank.</p>
+                        <p class="mb-2">Please make sure the SWIFT transfer is processed in OUR.</p>
                     @endif
 
                     <h5 class="font-semibold mt-10 mb-5">Total payment</h5>
@@ -41,8 +39,8 @@
                     @endif
 
                     @if($data['payment_method'] === \App\Concerns\Enums\PaymentMethods::BANK_TRANSFER->value)
-                        <p><b>Step 1:</b> Initiate a bank transfer to the designated bank account provided in the Payment Information section<br>
-                            <b>Step 2:</b> Once the transfer is completed, kindly upload the payment receipt or proof of the bank transaction.</p>
+                        <p><b>Step 1:</b> Instruct your bank an international wire transfer to the designated bank account provided above.<br>
+                            <b>Step 2:</b> Once the transfer is processed, kindly upload the bank transaction slip.</p>
 
                         <p class="mb-6">Please include your full name, phone number, and email for reference.</p>
 

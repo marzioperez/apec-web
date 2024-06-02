@@ -101,7 +101,7 @@
                         <div class="form-field">
                             <div class="form-check">
                                 <input type="checkbox" name="data.accept_policy" class="form-check-input" id="data.accept_policy" wire:model="data.accept_policy">
-                                <label for="data.accept_policy" class="text-gray">I accept<a href="#" class="text-blue underline ml-1" target="_blank"> the Personal Data Privacy Policy</a></label>
+                                <label for="data.accept_policy" class="text-gray">I accept<a href="{{route('page', ['slug' => 'terms-and-conditions'])}}" class="text-blue underline ml-1" target="_blank"> the Personal Data Privacy Policy</a></label>
                             </div>
                             @error('data.accept_policy') <span class="validation-error checkbox">{{ $message }}</span> @enderror
                         </div>
