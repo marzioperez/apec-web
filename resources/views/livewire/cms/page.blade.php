@@ -12,29 +12,20 @@
 
         @if($block['type'] === 'block-1')
             <x-blocks.block-1 :data="$block['data']" />
-                <x-modal name="modal-book" bg="black" classes="modal-book">
-                    <x-slot:body>
-                        <button type="button" class="absolute z-30 rounded-full top-3 right-3 text-white flex items-center justify-center" x-on:click="$dispatch('close-modal')">
-                            <i class="fa-light fa-xmark text-lg"></i>
-                        </button>
-                        <div class="relative">
-                            <div id="logo-book">
-                                @foreach($block['data']['images'] as $item)
-                                    <div class="w-full">
-                                        <img src="{{url('storage/web/' . $item['image'])}}" class="w-full">
-                                    </div>
-                                @endforeach
-                            </div>
-                            <div class="book-prev-page">
-                                <i class="fa-solid fa-chevron-left"></i>
-                            </div>
-                            <div class="book-next-page">
-                                <i class="fa-solid fa-chevron-right"></i>
-                            </div>
-                            <audio id="audio" src="{{asset('audio/page-flip.mp3')}}"></audio>
-                        </div>
-                    </x-slot:body>
-                </x-modal>
+            <x-modal name="modal-book" bg="black" classes="modal-book">
+                <x-slot:body>
+                    <button type="button" class="absolute z-30 rounded-full top-3 right-3 text-white flex items-center justify-center" x-on:click="$dispatch('close-modal')">
+                        <i class="fa-light fa-xmark text-lg"></i>
+                    </button>
+                    <div class="sm:block hidden">
+                        <x-flip-book :pages="$block['data']['images']" />
+                    </div>
+
+                    <div class="sm:hidden block">
+                        <x-mobile-flip-book :pages="$block['data']['images']" />
+                    </div>
+                </x-slot:body>
+            </x-modal>
         @endif
 
         @if($block['type'] === 'block-2')

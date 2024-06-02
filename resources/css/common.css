@@ -47,3 +47,19 @@ body {
 .custom-box-scrollbar::-webkit-scrollbar-track {
     @apply bg-white/20 rounded;
 }
+
+.custom-arrows-splide .splide__arrow {
+    @apply bg-transparent opacity-100;
+}
+
+.custom-arrows-splide .splide__arrow svg {
+    @apply fill-white;
+}
+
+.custom-arrows-splide .splide__arrow.splide__arrow--prev {
+    @apply -left-7;
+}
+
+.custom-arrows-splide .splide__arrow.splide__arrow--next {
+    @apply -right-7;
+}
