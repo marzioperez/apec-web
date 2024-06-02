@@ -14,11 +14,13 @@ use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -218,6 +220,74 @@ class ConfirmedUserResource extends Resource
                             Forms\Components\FileUpload::make('badge_photo')->label('Foto')->required()->disk('badges')->downloadable()->openable()->columnSpanFull(),
                             Forms\Components\FileUpload::make('identity_document')->disk('ids')->label('Documento de identidad')->required()->downloadable()->openable()->columnSpanFull(),
                         ])
+                    ]),
+                    Tab::make('Información de vuelo')->schema([
+                        Section::make('Información de llegada')->schema([
+                            Grid::make([
+                                'default' => 1,
+                                'sm' => 3,
+                                'xl' => 12,
+                                '2xl' => 12
+                            ])->schema([
+                                TextInput::make('arrived_air_line')->label('Línea aérea')->columnSpan(4),
+                                TextInput::make('arrived_origin')->label('Origen')->columnSpan(4),
+                                TextInput::make('arrived_flight_number')->label('Número de vuelo')->columnSpan(4),
+                                DatePicker::make('arrived_date')->label('Fecha')->columnSpan(6),
+                                TimePicker::make('arrived_time')->label('Hora')->columnSpan(6),
+                            ])
+                        ]),
+                        Section::make('Información de salida')->schema([
+                            Grid::make([
+                                'default' => 1,
+                                'sm' => 3,
+                                'xl' => 12,
+                                '2xl' => 12
+                            ])->schema([
+                                TextInput::make('exit_air_line')->label('Línea aérea')->columnSpan(4),
+                                TextInput::make('exit_destination')->label('Destino')->columnSpan(4),
+                                TextInput::make('exit_flight_number')->label('Número de vuelo')->columnSpan(4),
+                                DatePicker::make('exit_date')->label('Fecha')->columnSpan(6),
+                                TimePicker::make('exit_time')->label('Hora')->columnSpan(6),
+                            ])
+                        ]),
+                        TextInput::make('flight_contact_number')->label('Número de contacto')->columnSpanFull(),
+                        Toggle::make('flight_free_transportation')->label('¿Transporte gratuito desde el aeropuerto al hotel?')->columnSpanFull(),
+                        Textarea::make('flight_details')->label('Detalle')->columnSpanFull(),
+                    ]),
+                    Tab::make('Información de hotel')->schema([
+                        Grid::make([
+                            'default' => 1,
+                            'sm' => 3,
+                            'xl' => 12,
+                            '2xl' => 12
+                        ])->schema([
+                            TextInput::make('hotel_name')->label('Nombre')->columnSpan(8),
+                            TextInput::make('hotel_room')->label('Habitación')->columnSpan(4),
+
+                            Section::make('Información de Check-in')->schema([
+                                Grid::make([
+                                    'default' => 1,
+                                    'sm' => 3,
+                                    'xl' => 12,
+                                    '2xl' => 12
+                                ])->schema([
+                                    DatePicker::make('hotel_check_in_date')->label('Fecha')->columnSpan(6),
+                                    TimePicker::make('hotel_check_in_hour')->label('Hora')->columnSpan(6),
+                                ])
+                            ])->columnSpan(6),
+                            Section::make('Información de Check-out')->schema([
+                                Grid::make([
+                                    'default' => 1,
+                                    'sm' => 3,
+                                    'xl' => 12,
+                                    '2xl' => 12
+                                ])->schema([
+                                    DatePicker::make('hotel_check_out_date')->label('Fecha')->columnSpan(6),
+                                    TimePicker::make('hotel_check_out_hour')->label('Hora')->columnSpan(6),
+                                ])
+                            ])->columnSpan(6)
+                        ]),
+                        Textarea::make('hotel_details')->label('Detalle')->columnSpanFull(),
                     ]),
                 ])->columnSpanFull()
             ]);
