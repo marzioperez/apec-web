@@ -31,3 +31,19 @@ body {
 .social-icon {
     @apply w-[30px] h-[30px] bg-white rounded-full flex items-center justify-center;
 }
+
+.custom-box-scrollbar {
+    @apply text-white sm:h-[380px] sm:overflow-y-scroll mb-8 sm:pr-8;
+}
+
+.custom-box-scrollbar::-webkit-scrollbar {
+    @apply w-1 absolute;
+}
+
+.custom-box-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-gray-400 rounded;
+}
+
+.custom-box-scrollbar::-webkit-scrollbar-track {
+    @apply bg-white/20 rounded;
+}
