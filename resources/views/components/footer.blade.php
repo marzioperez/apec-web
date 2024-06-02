@@ -1,11 +1,11 @@
 <footer class="relative z-10">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="sm:grid grid-cols-12 gap-3">
-            <div class="col-span-4 flex sm:justify-start justify-center">
+            <div class="col-span-4 flex sm:justify-start justify-center sm:mb-0 mb-6">
                 <img src="{{asset('img/logo-color.png')}}">
             </div>
-            <div class="col-span-4 flex justify-center items-center">
-                <div class="w-full space-y-3">
+            <div class="col-span-4 flex justify-center items-center sm:mb-0 mb-6">
+                <div class="w-full space-y-6">
                     <div class="text-center">
                         <a href="{{route('faq')}}" class="btn btn-gray">FAQ</a>
                     </div>
@@ -23,7 +23,7 @@
                             </div>
                         @endif
                     @endif
-                    <div class="flex justify-center space-x-3 mt-5">
+                    <div class="flex justify-center space-x-3 sm:mt-5 mt-6">
                         <a href="https://www.facebook.com/APECCEOSummits?mibextid=ZbWKwL" target="_blank" class="social-icon">
                             <i class="fa-brands fa-facebook-f"></i>
                         </a>

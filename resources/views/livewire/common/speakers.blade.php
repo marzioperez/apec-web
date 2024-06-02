@@ -33,51 +33,6 @@
                     </div>
                 </div>
             </div>
-            <x-modal name="modal-speaker" bg="black">
-                <x-slot:body>
-                    <button type="button" class="absolute z-30 rounded-full top-3 right-3 text-white flex items-center justify-center" x-on:click="$dispatch('close-modal')">
-                        <i class="fa-light fa-xmark text-lg"></i>
-                    </button>
-                    <div>
-                        <div class="mb-3 sm:grid grid-cols-12 gap-6">
-                            <div class="col-span-4 flex justify-center sm:mb-0 mb-3">
-                                <img src="{{url('storage/web/' . $speaker['photo'])}}" class="sm:w-[200px] w-[150px] rounded-full p-2 border-2 border-orange">
-                            </div>
-                            <div class="col-span-8">
-                                <h6 class="text-orange font-semibold text-lg mb-2 sm:text-start text-center">{{$speaker['name']}}</h6>
-                                <div class="text-white line-clamp-2 text-sm mb-4 sm:text-start text-center">{!! $speaker['summary'] !!}</div>
-                                <div class="text-white font-semibold sm:text-start text-center">{{$speaker['company']}}</div>
-                                @if($speaker['social_networks'])
-                                    <div class="flex space-x-2 mt-4 sm:justify-start justify-center">
-                                        @foreach($speaker['social_networks'] as $item)
-                                            <a href="{{$item['data']['url']}}" target="_blank" class="btn-speaker-social">
-                                                @if($item['type'] === 'linkedin')
-                                                    <i class="fa-brands fa-linkedin-in"></i>
-                                                @endif
-                                                @if($item['type'] === 'facebook')
-                                                    <i class="fa-brands fa-facebook-f"></i>
-                                                @endif
-                                                @if($item['type'] === 'web')
-                                                    <i class="fa-light fa-globe"></i>
-                                                @endif
-                                                @if($item['type'] === 'instagram')
-                                                    <i class="fa-brands fa-instagram"></i>
-                                                @endif
-                                                @if($item['type'] === 'x')
-                                                    <i class="fa-brands fa-x-twitter"></i>
-                                                @endif
-                                            </a>
-                                        @endforeach
-                                    </div>
-                                @endif
-                            </div>
-                            <div class="col-span-full mt-5 text-sm text-white">
-                                {!! $speaker['biography'] !!}
-                            </div>
-                        </div>
-                    </div>
-                </x-slot:body>
-            </x-modal>
         </div>
     @endif
 </div>
