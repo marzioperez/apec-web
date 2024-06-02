@@ -19,7 +19,7 @@
          x-transition:enter-end="translate-x-0"
          x-transition:leave="transform transition ease-in-out duration-500 sm:duration-700"
          x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full"
-         class="fixed right-0 h-full z-20">
+         class="fixed right-0 h-full z-30">
         <div class="fixed h-full w-full bg-gray-800/60 left-0 -z-10" x-show="open_mobile" x-on:click="toggle_mobile()"></div>
         <div class="flow-root px-6 py-3 bg-white h-full w-[250px]">
             <div class="divide-y divide-gray-500/10">
