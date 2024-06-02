@@ -329,9 +329,9 @@
                                 <div style="text-align: center; padding-top: 30px; padding-bottom: 30px; height: 100%; border-top: 0px solid transparent;border-left: 0px solid transparent;background-color: #000000; border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;"></div>
                                 <!--<![endif]-->
 
-                                <div style="font-family:'Inter', sans-serif; color: #B6B6B6; font-size: 12px; padding: 20px;">Foreign Trade Society of Peru (COMEXPERU) | Calle Bartolome Herrera 254, Miraflores<br>
-                                    El presente correo electrónico comercial se envía conforme a lo dispuesto en la Ley No. 28493, modificada por Ley No.29246 y el D.S. 031-05-MTC - Ley Antispam Peruana y su Reglamento.<br>
-                                    Cancelar mi suscripción<br>
+                                <div style="font-family:'Inter', sans-serif; color: #B6B6B6; font-size: 12px; padding: 20px;">Foreign Trade Society of Peru (COMEXPERU) | Calle Bartolomé Herrera 254, Miraflores<br>
+                                    This commercial email is sent in accordance with Law No. 28493, amended by Law No. 29246 and D.S. 031-05-MTC - Peruvian Anti-Spam Law and its Regulation.<br>
+                                    Unsubscribe<br>
                                 </div>
                             </div>
                         </div>
