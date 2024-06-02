@@ -7,12 +7,7 @@
                     <div class="sm:mb-0 mb-6">
                         <div class="grid sm:grid-cols-3 grid-cols-2 gap-3">
                             @foreach($hotels as $hot)
-                                <div class="relative">
-                                    <img src="{{url('storage/web/' . $hot['photo'])}}" class="w-full sm:mb-0 mb-5 cursor-pointer" x-on:click.prevent="$dispatch('show-hotel', {hotel: {{json_encode($hot)}} })">
-                                    <div class="absolute bottom-0 px-2 py-2 bg-gradient-to-b from-transparent via-gray-800/60 via-60% to-gray-900/90 w-full">
-                                        <p class="text-white text-xs">{{$hot['name']}}</p>
-                                    </div>
-                                </div>
+                                <img src="{{url('storage/web/' . $hot['photo'])}}" class="w-full sm:mb-0 mb-5 cursor-pointer" x-on:click.prevent="$dispatch('show-hotel', {hotel: {{json_encode($hot)}} })">
                             @endforeach
                         </div>
                     </div>
