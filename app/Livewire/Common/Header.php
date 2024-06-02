@@ -9,7 +9,8 @@ use Livewire\Component;
 class Header extends Component {
 
     public $is_logged_in = false;
-    public $user_name;
+    public $name;
+    public $last_name;
     public $menu_items = [];
 
     public function mount() {
@@ -19,20 +20,23 @@ class Header extends Component {
         }
         if (auth()->check()) {
             $this->is_logged_in = true;
-            $this->user_name = auth()->user()->full_name;
+            $this->name = auth()->user()->name;
+            $this->last_name = auth()->user()->last_name;
         }
     }
 
     #[On('user-logged')]
     public function user_logged(): void {
         $this->is_logged_in = auth()->check();
-        $this->user_name = auth()->check() ? auth()->user()->full_name : null;
+        $this->name = auth()->check() ? auth()->user()->name : null;
+        $this->last_name = auth()->check() ? auth()->user()->last_name : null;
     }
 
     public function logout() {
         auth()->logout();
         $this->is_logged_in = false;
-        $this->user_name = null;
+        $this->name = null;
+        $this->last_name = null;
         $this->redirect(config('app.url'));
     }
 

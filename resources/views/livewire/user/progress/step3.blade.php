@@ -54,9 +54,7 @@
 
                         @if($require_special_assistance === 'yes')
                             <div class="form-group">
-                                <label for="special_assistance_details">
-                                    Details
-                                </label>
+                                <label for="special_assistance_details">Details*</label>
                                 <div class="form-field">
                                     <textarea name="special_assistance_details" wire:model="special_assistance_details" :disabled="{{$lock_fields}}"></textarea>
                                     @error('special_assistance_details') <span class="validation-error">{{ $message }}</span> @enderror
