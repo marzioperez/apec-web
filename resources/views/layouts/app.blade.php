@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/sharp-solid.css">
         <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/sharp-regular.css">
         <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.4.2/css/sharp-light.css">
-
+        <link rel="shortcut icon" href="{{asset('img/favicon.png')}}" type="image/x-icon">
         @vite('resources/css/app.css')
         @livewireStyles
         <!-- Google tag (gtag.js) -->

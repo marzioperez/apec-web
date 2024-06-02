@@ -22,6 +22,10 @@
             <x-blocks.block-3 :data="$block['data']" />
        @endif
 
+        @if($block['type'] === 'block-4')
+            <x-blocks.block-4 :data="$block['data']" :title="$page['name']" />
+        @endif
+
         @if($block['type'] === 'program')
             <livewire:common.program :data="$block['data']" />
         @endif

@@ -201,6 +201,9 @@ class PageResource extends Resource {
                                         TextInput::make('id')->label('ID para ancla')->columnSpanFull(),
                                     ])
                                 ]),
+                                Block::make('block-4')->label('Bloque de texto')->schema([
+                                    RichEditor::make('content')->label('Contenido')->columnSpanFull()
+                                ]),
                             ])->collapsed()->cloneable(),
                     ])->columnSpan(8),
                     Section::make('Ajustes')->schema([

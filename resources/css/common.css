@@ -18,11 +18,13 @@ body {
     @apply sm:col-span-8 col-span-full sm:grid grid-cols-2 gap-6 text-white;
 }
 
-.contact-block ul {
+.contact-block ul,
+.block-content ul {
     @apply pl-5;
 }
 
-.contact-block li {
+.contact-block li,
+.block-content li {
     @apply list-disc;
 }
 

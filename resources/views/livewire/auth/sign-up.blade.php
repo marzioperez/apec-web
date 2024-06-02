@@ -138,7 +138,7 @@
                                 <div class="form-field">
                                     <div class="form-check">
                                         <input type="checkbox" name="accept_terms_and_conditions" class="form-check-input" id="accept_terms_and_conditions" wire:model="accept_terms_and_conditions">
-                                        <label for="accept_terms_and_conditions" class="text-gray">I accept the <a href="#" class="text-blue underline pl-1" target="_blank">Terms and Conditions</a></label>
+                                        <label for="accept_terms_and_conditions" class="text-gray">I accept the <a href="{{route('page', ['slug' => 'terms-and-conditions'])}}" class="text-blue underline pl-1" target="_blank">Terms and Conditions</a></label>
                                     </div>
                                     @error('accept_terms_and_conditions') <span class="validation-error checkbox">{{ $message }}</span> @enderror
                                 </div>
