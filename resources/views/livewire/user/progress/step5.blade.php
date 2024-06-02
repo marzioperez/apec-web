@@ -185,7 +185,12 @@
                                     \App\Concerns\Enums\Types::FREE_PASS_COMPANION->value,
                                     \App\Concerns\Enums\Types::FREE_PASS_STAFF->value,
                                 ]))
-                                    <button type="submit" class="btn btn-primary">Finish!</button>
+                                    @if(in_array($user['status'], [
+                                        \App\Concerns\Enums\Status::CONFIRMED->value,
+                                        \App\Concerns\Enums\Status::PAYMENT_REVIEW->value
+                                   ]))
+                                        <button type="submit" class="btn btn-primary">Finish!</button>
+                                    @endif
                                 @else
                                     @if(in_array($user['status'], [
                                         \App\Concerns\Enums\Status::CONFIRMED->value,

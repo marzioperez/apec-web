@@ -4,9 +4,11 @@ namespace App\Livewire\User\Progress;
 
 use App\Concerns\Enums\Status;
 use App\Concerns\Enums\Types;
+use App\Mail\PaymentSuccess;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\File;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -107,6 +109,7 @@ class Step5 extends Component {
             Types::FREE_PASS_COMPANION->value,
             Types::FREE_PASS_STAFF->value,
         ])) {
+            Mail::to($this->user['email'])->send(new PaymentSuccess($this->user));
             $this->user->update(['status' => Status::PENDING_APPROVAL_DATA->value]);
             $show_modal = true;
         } else {
