@@ -10,7 +10,7 @@
                         <a href="{{route('faq')}}" class="btn btn-gray">FAQ</a>
                     </div>
                     <div class="text-center">
-                        <a href="https://www.apec.org/" target="_blank" class="text-gray-300 text-sm">Asia-Pacific Economic Cooperation (APEC) Forum</a>
+                        <a href="https://www.apec.org/" target="_blank" class="text-gray-300 text-sm underline">Asia-Pacific Economic Cooperation (APEC) Forum</a>
                     </div>
                 </div>
             </div>
