@@ -64,6 +64,10 @@ class Step2 extends Component {
         $this->toast('It has been saved. Your profile will be updated shortly.');
     }
 
+    public function back() {
+        $this->dispatch('change-step', step: 1);
+    }
+
     public function render() {
         return view('livewire.user.flight.step2');
     }

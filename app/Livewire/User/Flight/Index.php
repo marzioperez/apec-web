@@ -4,6 +4,7 @@ namespace App\Livewire\User\Flight;
 
 use App\Concerns\Enums\Status;
 use App\Models\User;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Index extends Component {
@@ -24,6 +25,11 @@ class Index extends Component {
         } else {
             $this->redirect(config('app.url'));
         }
+    }
+
+    #[On('change-step')]
+    public function chage_step($step) {
+        $this->current_step = $step;
     }
 
     public function render() {
