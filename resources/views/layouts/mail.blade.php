@@ -308,9 +308,24 @@
                                             </tr>
                                         </tbody>
                                     </table>
-
                                     <!--[if (!mso)&(!IE)]><!-->
                                 </div>
+
+                                <div style="text-align: center; padding: 0 40px 20px; height: 100%; border-top: 0px solid transparent;border-left: 0px solid transparent; background-color: #FFFFFF; border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;">
+                                    <a href="https://www.facebook.com/APECCEOSummits?mibextid=ZbWKwL" target="_blank" style="margin-right: 10px; text-decoration: none;">
+                                        <img src="{{asset('img/mail-fb-icon.png')}}" />
+                                    </a>
+                                    <a href="https://www.instagram.com/apec.ceosummit?igsh=Y3E1cnNpaTc2aWc5" target="_blank" style="margin-right: 10px; text-decoration: none;">
+                                        <img src="{{asset('img/mail-ig-icon.png')}}" />
+                                    </a>
+                                    <a href="https://www.linkedin.com/company/10664060" target="_blank" style="margin-right: 10px; text-decoration: none;">
+                                        <img src="{{asset('img/mail-in-icon.png')}}" />
+                                    </a>
+                                    <a href="https://x.com/APEC_CEOsummit" target="_blank" style="text-decoration: none;">
+                                        <img src="{{asset('img/mail-tw-icon.png')}}" />
+                                    </a>
+                                </div>
+
                                 <div style="text-align: center; padding-top: 30px; padding-bottom: 30px; height: 100%; border-top: 0px solid transparent;border-left: 0px solid transparent;background-color: #000000; border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;"></div>
                                 <!--<![endif]-->
 
