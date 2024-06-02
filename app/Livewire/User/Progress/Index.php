@@ -16,6 +16,7 @@ class Index extends Component {
         $this->user = auth()->user();
         if (in_array($this->user['type'], [
             Types::STAFF->value,
+            Types::STAFF_CP->value,
             Types::COMPANION->value,
             Types::FREE_PASS_COMPANION->value
         ])) {

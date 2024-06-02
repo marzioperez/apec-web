@@ -7,20 +7,20 @@
          data-countdown-option-separatedigits="true"
          data-countdown-option-nextdigits="true">
         <div class="days">
-            <span class="label"></span>
             <span class="amount"></span>
+            <span class="label"></span>
         </div>
         <div class="hours">
-            <span class="label"></span>
             <span class="amount"></span>
+            <span class="label"></span>
         </div>
         <div class="minutes">
-            <span class="label"></span>
             <span class="amount"></span>
+            <span class="label"></span>
         </div>
         <div class="seconds hidden">
-            <span class="label"></span>
             <span class="amount"></span>
+            <span class="label"></span>
         </div>
     </div>
 

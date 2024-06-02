@@ -55,7 +55,7 @@ class PageResource extends Resource {
                                                 'xl' => 12,
                                                 '2xl' => 12
                                             ])->schema([
-                                                FileUpload::make('logo')->disk('web')->label('Logo')->preserveFilenames()->image()->required()->columnSpanFull(),
+                                                FileUpload::make('logo')->deletable()->disk('web')->label('Logo')->preserveFilenames()->image()->columnSpanFull(),
                                                 DatePicker::make('counter_date')->label('Fecha cuenta regresiva')->native(false)->columnSpanFull(),
                                                 RichEditor::make('content')->label('Contenido')->columnSpanFull(),
                                                 TextInput::make('text_button')->label('Texto de botón')->columnSpan(4),
@@ -64,7 +64,7 @@ class PageResource extends Resource {
                                         ]),
                                         Tab::make('Imágenes')->schema([
                                             Repeater::make('images')->schema([
-                                                FileUpload::make('image')->disk('web')->label('Imagen')->preserveFilenames()->image()->required()->columnSpanFull()
+                                                FileUpload::make('image')->disk('web')->deletable()->label('Imagen')->preserveFilenames()->image()->required()->columnSpanFull()
                                             ])->reorderable()->columnSpan(2),
                                         ])
                                     ]),

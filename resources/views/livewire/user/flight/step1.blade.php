@@ -123,7 +123,10 @@
 
                                 <div class="sm:grid grid-cols-12 mt-9 mb-3">
                                     <div class="col-span-6 flex items-center">
-                                        <label for="flight_contact_number">Free transportation from airport to hotel?</label>
+                                        <label for="flight_contact_number">
+                                            Free transportation from airport to hotel?<br>
+                                            <div class="text-white/80 text-xs">*Transportation service starting from November 9<sup>th</sup>.</div>
+                                        </label>
                                     </div>
                                     <div class="form-field col-span-6 flex space-x-6">
                                         <div class="flex items-center gap-x-3">

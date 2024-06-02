@@ -24,7 +24,9 @@
             </div>
         </div>
         <div class="content">
-            <img src="{{url('storage/web/' . $data['logo'])}}" class="logo" />
+            @if($data['logo'])
+                <img src="{{url('storage/web/' . $data['logo'])}}" class="logo" />
+            @endif
             <div class="inner">
                 <x-countdown :date="$data['counter_date']" />
                 <div class="my-2">{!! $data['content'] !!}</div>

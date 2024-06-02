@@ -7,7 +7,8 @@ enum Types: string {
     case PARTICIPANT = 'Participante';
     case VIP = 'VIP';
     case COMPANION = 'Acompañante';
-    case STAFF = 'Staff';
+    case STAFF = 'Staffer';
+    case STAFF_CP = 'Staff';
     case FREE_PASS_PARTICIPANT = 'Participante pase libre';
     case FREE_PASS_COMPANION = 'Acompañante pase libre';
     case FREE_PASS_STAFF = 'Staff pase libre';
