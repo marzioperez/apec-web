@@ -2,16 +2,14 @@
 
 namespace App\Filament\Resources\CMS;
 
-use App\Filament\Resources\CMS\PostResource\Pages;
-use App\Filament\Resources\CMS\PostResource\RelationManagers;
-use App\Models\CategorySponsor;
-use App\Models\Post;
+use App\Filament\Resources\CMS\FequentlyAskedQuestionResource\Pages;
+use App\Filament\Resources\CMS\FequentlyAskedQuestionResource\RelationManagers;
+use App\Models\FequentlyAskedQuestion;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -22,16 +20,16 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class PostResource extends Resource
+class FequentlyAskedQuestionResource extends Resource
 {
-    protected static ?string $model = Post::class;
+    protected static ?string $model = FequentlyAskedQuestion::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationLabel = 'Noticias';
-    protected static ?string $breadcrumb = 'Noticias';
-    protected static ?string $modelLabel = 'noticia';
+    protected static ?string $navigationLabel = 'FAQ';
+    protected static ?string $breadcrumb = 'FAQ';
+    protected static ?string $modelLabel = 'pregunta frecuente';
     protected static ?string $navigationGroup = 'CMS';
-    protected static ?int $navigationSort = 22;
+    protected static ?int $navigationSort = 24;
 
     public static function form(Form $form): Form
     {
@@ -44,10 +42,8 @@ class PostResource extends Resource
                         'xl' => 12,
                         '2xl' => 12
                     ])->schema([
-                        TextInput::make('title')->label('Título')->required()->columnSpanFull(),
-                        RichEditor::make('content')->label('Contenido')->required()->columnSpanFull(),
-                        Textarea::make('summary')->label('Resumen')->columnSpanFull(),
-                        FileUpload::make('image')->label('Foto')->disk('web')->preserveFilenames()->required()->columnSpanFull(),
+                        TextInput::make('question')->label('Pregunta')->required()->columnSpanFull(),
+                        RichEditor::make('answer')->label('Respuesta')->required()->columnSpanFull()
                     ])
                 ])
             ]);
@@ -56,14 +52,17 @@ class PostResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn(\Illuminate\Database\Eloquent\Builder $query) => $query->orderBy('order'))
+            ->reorderable('order')
             ->columns([
-                TextColumn::make('title')->label('Título')
+                TextColumn::make('question')->label('Pregunta')
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -82,9 +81,9 @@ class PostResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPosts::route('/'),
-            'create' => Pages\CreatePost::route('/create'),
-            'edit' => Pages\EditPost::route('/{record}/edit'),
+            'index' => Pages\ListFequentlyAskedQuestions::route('/'),
+            'create' => Pages\CreateFequentlyAskedQuestion::route('/create'),
+            'edit' => Pages\EditFequentlyAskedQuestion::route('/{record}/edit'),
         ];
     }
 }

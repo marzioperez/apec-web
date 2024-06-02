@@ -20,6 +20,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 Route::get('/post/{slug}', \App\Livewire\CMS\Post::class)->name('post');
 Route::get('/news', \App\Livewire\CMS\Blog::class)->name('news');
+Route::get('/faq', \App\Livewire\CMS\FAQ::class)->name('faq');
 
 Route::get('/{slug?}', \App\Livewire\CMS\Page::class)->name('page');
 

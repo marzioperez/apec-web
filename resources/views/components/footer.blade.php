@@ -4,8 +4,17 @@
             <div class="col-span-4 flex sm:justify-start justify-center">
                 <img src="{{asset('img/logo-color.png')}}">
             </div>
-            <div class="col-span-4"></div>
-            <div class="col-span-4 flex sm:justify-end justify-center">
+            <div class="col-span-4 flex justify-center items-center">
+                <div class="w-full space-y-3">
+                    <div class="text-center">
+                        <a href="{{route('faq')}}" class="btn btn-gray">FAQ</a>
+                    </div>
+                    <div class="text-center">
+                        <a href="https://www.apec.org/" target="_blank" class="text-gray-300 text-sm">Asia-Pacific Economic Cooperation (APEC) Forum</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-span-4 flex sm:justify-end justify-center items-center">
                 <diV>
                     @if(auth()->guest())
                         @if(request()->route()->uri !== "sign-up")
