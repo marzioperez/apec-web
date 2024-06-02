@@ -30,12 +30,39 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="require_special_assistance">Do you require any special assistance to participate?</label>
+                            <label for="food_allergies">
+                                Food allergies<br>Examples: Crustaceous, Nuts, others.
+                            </label>
                             <div class="form-field">
-                                <textarea id="require_special_assistance" name="require_special_assistance" wire:model="require_special_assistance" :disabled="{{$lock_fields}}"></textarea>
-                                @error('require_special_assistance') <span class="validation-error">{{ $message }}</span> @enderror
+                                <input type="text" id="food_allergies" name="food_allergies" wire:model="food_allergies" :disabled="{{$lock_fields}}" />
+                                @error('food_allergies') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="require_special_assistance">Do you require any special assistance to participate?</label>
+                            <div class="form-field flex space-x-6">
+                                <div class="flex items-center gap-x-3">
+                                    <input id="require_special_assistance_yes" name="require_special_assistance" type="radio" wire:model.live="require_special_assistance" value="yes" :disabled="{{$lock_fields}}" />
+                                    <label for="require_special_assistance_yes">Yes</label>
+                                </div>
+                                <div class="flex items-center gap-x-3">
+                                    <input id="require_special_assistance_no" name="require_special_assistance" type="radio" wire:model.live="require_special_assistance" value="no" :disabled="{{$lock_fields}}" />
+                                    <label for="require_special_assistance_no">No</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        @if($require_special_assistance === 'yes')
+                            <div class="form-group">
+                                <label for="special_assistance_details">
+                                    Details
+                                </label>
+                                <div class="form-field">
+                                    <textarea name="special_assistance_details" wire:model="special_assistance_details" :disabled="{{$lock_fields}}"></textarea>
+                                    @error('special_assistance_details') <span class="validation-error">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+                        @endif
 
                         @if(in_array($this->user['type'], [
                             \App\Concerns\Enums\Types::PARTICIPANT->value,

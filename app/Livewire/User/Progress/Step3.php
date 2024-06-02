@@ -12,7 +12,7 @@ use Livewire\Component;
 
 class Step3 extends Component {
 
-    public $types_of_food, $require_special_assistance;
+    public $types_of_food, $require_special_assistance, $food_allergies, $special_assistance_details;
     public $with_companion = 'no', $with_staff = 'no';
     public $current_user_step;
     public User $user;
@@ -48,7 +48,9 @@ class Step3 extends Component {
 
         $this->current_user_step = $user['current_step'];
         $this->types_of_food = $user['types_of_food'];
-        $this->require_special_assistance = $user['require_special_assistance'];
+        $this->special_assistance_details = $user['special_assistance_details'];
+        $this->food_allergies = $user['food_allergies'];
+        $this->require_special_assistance = ($user['require_special_assistance'] ? 'yes' : 'no');
         $this->with_companion = ($user['with_companion'] ? 'yes' : 'no');
         $this->with_staff = ($user['with_staff'] ? 'yes' : 'no');
 
@@ -103,7 +105,9 @@ class Step3 extends Component {
 
         $this->user->update([
             'types_of_food' => $this->types_of_food,
-            'require_special_assistance' => $this->require_special_assistance,
+            'require_special_assistance' => $this->require_special_assistance === 'yes',
+            'food_allergies' => $this->food_allergies,
+            'special_assistance_details' => $this->special_assistance_details,
             'with_companion' => $this->with_companion === 'yes',
             'with_staff' => $this->with_staff === 'yes',
             'register_progress' => $progress,

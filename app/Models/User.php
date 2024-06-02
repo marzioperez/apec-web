@@ -50,6 +50,8 @@ class User extends Authenticatable {
 
         'types_of_food',
         'require_special_assistance',
+        'special_assistance_details',
+        'food_allergies',
 
         'with_companion',
         'companion_free',
@@ -152,6 +154,7 @@ class User extends Authenticatable {
             'flight_email_sent' => 'boolean',
             'send_invitation_to_staff' => 'boolean',
             'send_invitation_to_companion' => 'boolean',
+            'require_special_assistance' => 'boolean',
         ];
     }
 
