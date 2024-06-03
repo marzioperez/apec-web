@@ -16,9 +16,7 @@
                             }
                         }">
                             <div class="cursor-pointer pt-1 flex w-full items-center space-x-5" x-on:click="expanded = !expanded" :aria-expanded="expanded">
-                                <svg width="8" height="12" viewBox="0 0 8 12" fill="none" aria-hidden="true" class="transition-all" :class="expanded ? 'rotate-90' : ''">
-                                    <path d="M1.70706 11.707L7.41406 6.00003L1.70706 0.293031L0.293062 1.70703L4.58606 6.00003L0.293063 10.293L1.70706 11.707Z" fill="black"/>
-                                </svg>
+                                <i class="fa-solid fa-angle-right transition-all" :class="expanded ? 'rotate-90' : ''"></i>
                                 <h3 class="font-semibold">{{$faq['question']}}</h3>
                             </div>
                             <div class="py-3" x-show="expanded" x-collapse>{!! $faq['answer'] !!}</div>
