@@ -75,7 +75,7 @@
                         \App\Concerns\Enums\Types::VIP->value,
                     ]))
                         @if(in_array($user['status'], [\App\Concerns\Enums\Status::UNPAID->value]))
-                            <a href="{{route('hotel')}}" class="btn btn-primary">Complete your payment</a>
+                            <a href="{{route('progress')}}" class="btn btn-primary">Complete your payment</a>
                         @endif
                     @endif
 
