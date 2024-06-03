@@ -8,10 +8,9 @@ input[type=password] {
 }
 
 input[type="date"]  {
-    display:block;
-    -webkit-appearance: textfield;
-    -moz-appearance: textfield;
-    @apply border-gray-300;
+    -webkit-appearance: textfield !important;
+    -moz-appearance: textfield !important;
+    @apply border-gray-300 !important;
 }
 
 form.dark input[type=text],
