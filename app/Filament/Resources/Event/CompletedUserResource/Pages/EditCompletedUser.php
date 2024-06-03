@@ -9,6 +9,7 @@ use App\Filament\Resources\Event\CompletedUserResource;
 use App\Mail\CompleteDataFailed;
 use App\Mail\CompleteDataPassFree;
 use App\Mail\CompleteDataSuccess;
+use App\Models\Order;
 use App\Models\User;
 use Filament\Actions;
 use Filament\Forms\Components\RichEditor;
@@ -93,5 +94,14 @@ class EditCompletedUser extends EditRecord
                     // SendUserToChancellery::run($user);
                 })->visible(fn(User $user): bool => $user['status'] === Status::PENDING_APPROVAL_DATA->value),
         ];
+    }
+
+    protected function afterSave(): void {
+        $order = Order::where('user_id', $this->record->id)->get()->first();
+        if ($order) {
+            $order->update([
+                'amount' => $this->record->amount,
+            ]);
+        }
     }
 }
