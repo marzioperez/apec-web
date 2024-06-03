@@ -31,7 +31,7 @@
                         </div>
                         <div class="form-group">
                             <label for="food_allergies">
-                                Food allergies<br>Examples: Crustaceous, Nuts, others.
+                                Food allergies<br>Ex: Seafood, nuts, etc.
                             </label>
                             <div class="form-field">
                                 <input type="text" id="food_allergies" name="food_allergies" wire:model="food_allergies" :disabled="{{$lock_fields}}" />

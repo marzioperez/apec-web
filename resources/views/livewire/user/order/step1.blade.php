@@ -24,7 +24,6 @@
                                     <option value="">Select...</option>
                                     <option value="{{\App\Concerns\Enums\Types::INVOICE->value}}">{{\App\Concerns\Enums\Types::INVOICE->value}}</option>
                                     <option value="{{\App\Concerns\Enums\Types::TICKET->value}}">{{\App\Concerns\Enums\Types::TICKET->value}}</option>
-                                    <option value="{{\App\Concerns\Enums\Types::NO_SELECT_PREFERRED->value}}">{{\App\Concerns\Enums\Types::NO_SELECT_PREFERRED->value}}</option>
                                 </select>
                                 @error('data.document_type') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
