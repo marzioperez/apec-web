@@ -7,7 +7,7 @@ input[type=password] {
 }
 
 input[type=date]  {
-    @apply block bg-white w-full rounded-lg border px-3 py-2 text-gray-900 !important;
+    @apply inline-block bg-white w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 !important;
 }
 
 form.dark input[type=text],
