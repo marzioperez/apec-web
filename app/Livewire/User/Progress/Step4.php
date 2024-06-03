@@ -86,21 +86,6 @@ class Step4 extends Component {
         $result = 100 / $this->quantity;
         $progress = $this->user['register_progress'];
         if ($process) {
-//            $rules = [
-//                'blood_type' => 'required',
-//                'allergy_details' => 'required_if:allergies,yes',
-//            ];
-//
-//            $messages = [
-//                '*.required' => 'Required field',
-//                '*.required_if' => 'Required field',
-//            ];
-//
-//            $validator = Validator::make($this->data, $rules, $messages);
-//
-//            if ($validator->fails()) {
-//                $this->toast('There are fields with errors', 'Errors', 'error');
-//            }
 
             $this->validate();
 

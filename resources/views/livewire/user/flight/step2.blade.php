@@ -44,7 +44,7 @@
                                             <label for="hotel_check_in_date">Date*</label>
                                         </div>
                                         <div class="form-field col-span-6 relative">
-                                            <input type="date" id="hotel_check_in_date" name="hotel_check_in_date" wire:model="data.hotel_check_in_date" />
+                                            <x-input.date wire:model.live="data.hotel_check_in_date" id="hotel_check_in_date" placeholder="dd/mm/yyyy" :options="['defaultDate' => $data['hotel_check_in_date']]"/>
                                             @error('data.hotel_check_in_date') <span class="validation-error absolute right-3 -bottom-4 opacity-80">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
@@ -53,7 +53,7 @@
                                             <label for="hotel_check_in_hour">Hour*</label>
                                         </div>
                                         <div class="form-field col-span-9 relative">
-                                            <input type="time" id="hotel_check_in_hour" name="hotel_check_in_hour" wire:model="data.hotel_check_in_hour" />
+                                            <x-input.date wire:model.live="data.hotel_check_in_hour" id="hotel_check_in_hour" placeholder="--:--" :options="['defaultDate' => $data['hotel_check_in_hour'], 'noCalendar' => true, 'enableTime' => true, 'dateFormat' => 'H:i', 'altFormat' => 'H:i']"/>
                                             @error('data.hotel_check_in_hour') <span class="validation-error absolute right-3 -bottom-4 opacity-80">{{ $message }}</span> @enderror
                                         </div>
                                     </div>

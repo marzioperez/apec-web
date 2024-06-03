@@ -14,7 +14,7 @@
 @import "book.css";
 @import "post-item.css";
 @import '@splidejs/splide/dist/css/splide.min.css';
-
+@import "flatpickr/dist/flatpickr.min.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

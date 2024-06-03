@@ -95,3 +95,32 @@ select {
 .form-group .validation-error.checkbox {
     @apply relative right-0 bottom-0 opacity-100;
 }
+
+.flatpickr-current-month {
+    @apply grid grid-cols-12 gap-3 w-full relative left-0 !important;
+}
+
+.flatpickr-current-month .flatpickr-monthDropdown-months {
+    @apply w-full col-span-8 border-none text-sm py-2 !important;
+}
+
+.flatpickr-current-month .numInputWrapper {
+    @apply w-full col-span-4 !important;
+}
+
+.flatpickr-current-month .numInputWrapper input {
+    @apply w-full text-sm py-2 px-0 text-center !important;
+}
+
+.flatpickr-months .flatpickr-month {
+    @apply h-[45px] !important;
+}
+
+.flatpickr-months {
+    @apply items-center justify-center;
+}
+
+.flatpickr-months .flatpickr-prev-month,
+.flatpickr-months .flatpickr-next-month {
+    @apply relative h-auto px-2 p-0 !important;
+}

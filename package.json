@@ -19,6 +19,7 @@
         "@dasundev/livewire-dropzone-styles": "^1.0.7",
         "@ksedline/turnjs": "^0.1.0",
         "@splidejs/splide": "^4.1.4",
+        "flatpickr": "^4.6.13",
         "moment": "^2.30.1"
     }
 }
