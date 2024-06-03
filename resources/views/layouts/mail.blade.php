@@ -327,7 +327,7 @@
                                 </div>
 
                                 <div style="text-align: center; padding-bottom: 20px;">
-                                    <a href="www.apecceosummit2024.com" target="_blank" style="color: #00A2F3; font-size: 12px; font-family:'Inter', sans-serif;">www.apecceosummit2024.com</a>
+                                    <a href="https://apecceosummit2024.com" target="_blank" style="color: #00A2F3; font-size: 12px; font-family:'Inter', sans-serif;">www.apecceosummit2024.com</a>
                                 </div>
 
                                 <div style="text-align: center; padding-top: 30px; padding-bottom: 30px; height: 100%; border-top: 0px solid transparent;border-left: 0px solid transparent;background-color: #000000; border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;"></div>
