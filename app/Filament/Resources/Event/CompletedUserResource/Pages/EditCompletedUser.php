@@ -99,9 +99,9 @@ class EditCompletedUser extends EditRecord
     protected function afterSave(): void {
         $order = Order::where('user_id', $this->record->id)->get()->first();
         if ($order) {
-            $order->update([
-                'amount' => $this->record->amount,
-            ]);
+            if ($order['status'] === Status::UNPAID->value) {
+                $order->update(['amount' => $this->record->amount,]);
+            }
         }
     }
 }
