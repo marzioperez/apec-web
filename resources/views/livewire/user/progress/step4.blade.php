@@ -49,7 +49,7 @@
                                 <label for="allergy_details">Details</label>
                                 <div class="form-field">
                                     <textarea id="allergy_details" name="allergy_details" wire:model="data.allergy_details" :disabled="{{$lock_fields}}"></textarea>
-                                    @error('allergy_details') <span class="validation-error">{{ $message }}</span> @enderror
+                                    @error('data.allergy_details') <span class="validation-error">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                         @endif

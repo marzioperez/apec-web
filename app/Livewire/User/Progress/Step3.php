@@ -38,6 +38,7 @@ class Step3 extends Component {
         '*.*.required' => 'Required field',
         '*.*.email' => 'Incorrect email format',
         '*.*.unique' => 'Email already exists',
+        'required_if' => 'Required field',
     ];
 
     public function mount(User $user, $quantity = 5, $current = 3, $complete = 2) {
@@ -115,7 +116,9 @@ class Step3 extends Component {
             'current_step' => $step
         ]);
 
-        $rules = [];
+        $rules = [
+            'special_assistance_details' => 'required_if:require_special_assistance,yes'
+        ];
 
         // $companion_type = ($this->user['type'] === Types::FREE_PASS_PARTICIPANT->value ? Types::FREE_PASS_COMPANION->value : Types::COMPANION->value);
         $companion_type = [

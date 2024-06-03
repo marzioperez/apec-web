@@ -36,11 +36,13 @@ class Step4 extends Component {
     public $lock_fields = false;
 
     protected $messages = [
-        'data.*.required' => 'Required field'
+        'data.*.required' => 'Required field',
+        'data.*.required_if' => 'Required field',
     ];
 
     protected $rules = [
-        'data.blood_type' => 'required'
+        'data.blood_type' => 'required',
+        'data.allergy_details' => 'required_if:data.allergies,yes',
     ];
 
     public function mount(User $user, $quantity = 5, $current = 4, $complete = 3) {
@@ -84,19 +86,21 @@ class Step4 extends Component {
         $result = 100 / $this->quantity;
         $progress = $this->user['register_progress'];
         if ($process) {
-            $rules = [
-                'blood_type' => 'required'
-            ];
-
-            $messages = [
-                '*.required' => 'Required field'
-            ];
-
-            $validator = Validator::make($this->data, $rules, $messages);
-
-            if ($validator->fails()) {
-                $this->toast('There are fields with errors', 'Errors', 'error');
-            }
+//            $rules = [
+//                'blood_type' => 'required',
+//                'allergy_details' => 'required_if:allergies,yes',
+//            ];
+//
+//            $messages = [
+//                '*.required' => 'Required field',
+//                '*.required_if' => 'Required field',
+//            ];
+//
+//            $validator = Validator::make($this->data, $rules, $messages);
+//
+//            if ($validator->fails()) {
+//                $this->toast('There are fields with errors', 'Errors', 'error');
+//            }
 
             $this->validate();
 
