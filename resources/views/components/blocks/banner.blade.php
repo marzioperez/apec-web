@@ -38,5 +38,5 @@
             @endif
         </div>
     </div>
-    <img src="{{asset('img/bg-banner-right.png')}}" class="absolute -bottom-1/3 right-0 w-[300px] opacity-40 z-[5]">
+    <img src="{{asset('img/bg-banner-right.png')}}" class="absolute sm:block hidden -bottom-1/3 right-0 w-[300px] opacity-40 z-[5]">
 </div>

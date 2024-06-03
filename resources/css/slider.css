@@ -3,7 +3,7 @@
 }
 
 .slider .content {
-    @apply sm:absolute sm:top-1/2 sm:-translate-y-1/2 sm:left-1/2 sm:-translate-x-1/2 text-center space-y-5 z-20;
+    @apply sm:absolute relative sm:top-1/2 sm:-translate-y-1/2 sm:left-1/2 sm:-translate-x-1/2 text-center space-y-5 z-20;
 }
 
 .slider .content .logo {
