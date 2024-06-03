@@ -226,7 +226,7 @@
             <div class="text-center">
                 <h1 class="font-bold text-lg mb-3">Thank you for completing your registration.</h1>
                 <div class="mb-5">Our team will review your information.</div>
-                <a href="{{config('app.url')}}" class="btn btn-primary">Go home</a>
+                <a href="{{config('app.url')}}" class="btn btn-primary">Back home</a>
             </div>
         </x-slot:body>
     </x-modal>

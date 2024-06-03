@@ -120,7 +120,7 @@
                 <div class="mb-5">
                     <p class="mb-2">Your payment has been processed successfully. You will receive a confirmation email within the next few minutes. Your information will now go through a final review.</p>
                 </div>
-                <a href="{{config('app.url')}}" class="btn btn-primary">Go home</a>
+                <a href="{{config('app.url')}}" class="btn btn-primary">Back home</a>
             </div>
         </x-slot:body>
     </x-modal>

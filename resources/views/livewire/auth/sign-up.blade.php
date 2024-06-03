@@ -166,7 +166,7 @@
             <div class="text-center">
                 <h1 class="font-bold text-lg mb-3">Thank you for your interest in attending the APEC CEO Summit 2024.</h1>
                 <div class="mb-5">Please check your inbox for a confirmation of your expression of interest in this event.</div>
-                <a href="{{config('app.url')}}" class="btn btn-primary">Back to home</a>
+                <a href="{{config('app.url')}}" class="btn btn-primary">Back home</a>
             </div>
         </x-slot:body>
     </x-modal>

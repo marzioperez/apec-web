@@ -6,6 +6,7 @@ use App\Actions\GenerateCode;
 use App\Concerns\Enums\Status;
 use App\Concerns\Enums\Types;
 use App\Mail\InviteCompanion;
+use App\Mail\InviteStaff;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
@@ -222,7 +223,7 @@ class Step3 extends Component {
                 if ($this->with_staff === 'yes') {
                     // Y se encuentra en el paso 3 actualmente
                     if (!$this->user['send_invitation_to_staff']) {
-                        Mail::to($staff['email'])->send(new InviteCompanion($staff));
+                        Mail::to($staff['email'])->send(new InviteStaff($staff));
                         $this->user->update(['send_invitation_to_staff' => true]);
                     }
                 }
