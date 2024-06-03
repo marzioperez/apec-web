@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -10,33 +11,24 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 class Register extends Mailable {
-    use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct()
-    {
-        //
+    use Queueable, SerializesModels;
+    public User $user;
+
+    public function __construct(User $user) {
+        $this->user = $user;
     }
 
-    /**
-     * Get the message envelope.
-     */
-    public function envelope(): Envelope
-    {
+    public function envelope(): Envelope {
         return new Envelope(
             subject: 'APEC CEO Summit 2024 - Expression of interest completed!',
         );
     }
 
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    {
+    public function content(): Content {
         return new Content(
             view: 'mail.register',
+            with: ['user' => $this->user]
         );
     }
 

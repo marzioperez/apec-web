@@ -171,6 +171,10 @@ class User extends Authenticatable {
         return $this->hasOne(User::class, 'id', 'parent_id');
     }
 
+    public function rel_economy(): HasOne {
+        return $this->hasOne(Economy::class, 'id', 'economy');
+    }
+
     public function guests(): HasMany {
         return $this->hasMany(User::class, 'parent_id', 'id');
     }

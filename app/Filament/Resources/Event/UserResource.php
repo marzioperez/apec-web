@@ -60,10 +60,13 @@ class UserResource extends Resource {
                             TextInput::make('other_economy')->label('Otra economía')->columnSpan(4),
                             TextInput::make('role')->label('Rol')->columnSpan(4),
                             Select::make('type')->label('Tipo')->options([
-                                Types::COMPANION->value => Types::COMPANION->value,
+                                Types::PARTICIPANT->value => Types::PARTICIPANT->value,
                                 Types::STAFF->value => Types::STAFF->value,
-                                Types::FREE_PASS_COMPANION->value => Types::FREE_PASS_COMPANION->value,
+                                Types::COMPANION->value => Types::COMPANION->value,
+                                Types::FREE_PASS_PARTICIPANT->value => Types::FREE_PASS_PARTICIPANT->value,
                                 Types::FREE_PASS_STAFF->value => Types::FREE_PASS_STAFF->value,
+                                Types::FREE_PASS_COMPANION->value => Types::FREE_PASS_COMPANION->value,
+                                Types::VIP->value => Types::VIP->value
                             ])->required()->columnSpan(4),
                             TextInput::make('amount')->label('Monto a pagar')->numeric()->columnSpan(4)->required(),
                             Textarea::make('business_description')->label('Descripción de negocio')->columnSpanFull(),

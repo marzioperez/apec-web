@@ -86,11 +86,11 @@ class ConfirmedUserResource extends Resource
                             ])->required()->columnSpan(2),
                             Select::make('gender')->label('Sexo')->options(collect($genders)->pluck('name', 'id'))->columnSpan(3),
                             Select::make('document_type')->label('Tipo de documento')->options(collect($document_types)->pluck('name', 'id'))->columnSpan(3),
-                            TextInput::make('document_number')->label('Número de documento')->required()->columnSpan(3),
+                            TextInput::make('document_number')->label('Número de documento')->columnSpan(3),
                             TextInput::make('email')->label('Email')->required()->unique('users', 'email', ignoreRecord: true)->columnSpan(3),
-                            TextInput::make('phone')->label('Teléfono')->columnSpan(3)->required(),
+                            TextInput::make('phone')->label('Teléfono')->columnSpan(3),
                             DatePicker::make('date_of_issue')->label('Fecha de emisión')->columnSpan(3),
-                            TextInput::make('place_of_issue')->label('Lugar de emisión')->required()->columnSpan(3),
+                            TextInput::make('place_of_issue')->label('Lugar de emisión')->columnSpan(3),
                             DatePicker::make('date_of_birth')->label('Fecha de nacimiento')->columnSpan(3),
                             TextInput::make('nationality')->label('Nacionalidad')->columnSpan(3),
                             TextInput::make('city_of_permanent_residency')->label('Ciudad de residencia')->columnSpan(6),
@@ -105,15 +105,15 @@ class ConfirmedUserResource extends Resource
                             '2xl' => 12
                         ])->schema([
                             TextInput::make('business')->label('Empresa')->required()->columnSpan(4),
-                            TextInput::make('role')->label('Rol')->required()->columnSpan(4),
-                            TextInput::make('area')->label('Área')->required()->columnSpan(4),
-                            TextInput::make('address')->label('Dirección')->required()->columnSpan(12),
-                            TextInput::make('city')->label('Ciudad')->required()->columnSpan(3),
-                            TextInput::make('zip_code')->label('Código ZIP')->required()->columnSpan(2),
-                            TextInput::make('business_phone_number')->label('Teléfono de empresa')->required()->columnSpan(3),
-                            TextInput::make('business_email')->label('Email de empresa')->required()->columnSpan(4),
-                            TextInput::make('attendee_name')->label('Nombre de asistente')->required()->columnSpan(6),
-                            TextInput::make('attendee_email')->label('Email de asistente')->required()->columnSpan(6),
+                            TextInput::make('role')->label('Rol')->columnSpan(4),
+                            TextInput::make('area')->label('Área')->columnSpan(4),
+                            TextInput::make('address')->label('Dirección')->columnSpan(12),
+                            TextInput::make('city')->label('Ciudad')->columnSpan(3),
+                            TextInput::make('zip_code')->label('Código ZIP')->columnSpan(2),
+                            TextInput::make('business_phone_number')->label('Teléfono de empresa')->columnSpan(3),
+                            TextInput::make('business_email')->label('Email de empresa')->columnSpan(4),
+                            TextInput::make('attendee_name')->label('Nombre de asistente')->columnSpan(6),
+                            TextInput::make('attendee_email')->label('Email de asistente')->columnSpan(6),
                         ])
                     ]),
                     Tab::make('Requisitos especiales')->schema([
@@ -149,7 +149,7 @@ class ConfirmedUserResource extends Resource
                             'xl' => 12,
                             '2xl' => 12
                         ])->schema([
-                            Select::make('blood_type')->label('Tipo de sangre')->required()
+                            Select::make('blood_type')->label('Tipo de sangre')
                                 ->options([
                                     'A+' => 'A+',
                                     'O+' => 'O+',
@@ -215,10 +215,10 @@ class ConfirmedUserResource extends Resource
                             'xl' => 12,
                             '2xl' => 12
                         ])->schema([
-                            TextInput::make('badge_name')->label('Nombre')->required()->columnSpan(6),
-                            TextInput::make('badge_last_name')->label('Apellidos')->required()->columnSpan(6),
-                            Forms\Components\FileUpload::make('badge_photo')->label('Foto')->required()->disk('badges')->downloadable()->openable()->columnSpanFull(),
-                            Forms\Components\FileUpload::make('identity_document')->disk('ids')->label('Documento de identidad')->required()->downloadable()->openable()->columnSpanFull(),
+                            TextInput::make('badge_name')->label('Nombre')->columnSpan(6),
+                            TextInput::make('badge_last_name')->label('Apellidos')->columnSpan(6),
+                            Forms\Components\FileUpload::make('badge_photo')->label('Foto')->disk('badges')->downloadable()->openable()->columnSpanFull(),
+                            Forms\Components\FileUpload::make('identity_document')->disk('ids')->label('Documento de identidad')->downloadable()->openable()->columnSpanFull(),
                         ])
                     ]),
                     Tab::make('Información de vuelo')->schema([
