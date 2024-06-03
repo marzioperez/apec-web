@@ -156,7 +156,7 @@
                             </div>
 
                             <div class="my-3" x-show="with_staff === 'yes'">
-                                <h5 class="font-semibold mb-3">Staff information</h5>
+                                <h5 class="font-semibold mb-3">Staffer information</h5>
                                 <div class="form-group">
                                     <label for="staff.name">Name*</label>
                                     <div class="form-field">

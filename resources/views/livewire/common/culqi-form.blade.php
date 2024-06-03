@@ -117,6 +117,7 @@
             charge: {
                 totalAmount: {{$amount*100}},
                 returnUrl: "{{config('app.url')}}",
+                currency: "USD"
             },
             card: {
                 email: "{{auth()->user()->email}}",
