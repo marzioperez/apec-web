@@ -3,7 +3,7 @@
         <div class="mx-auto flex max-w-7xl items-center justify-between">
             <div>
                 <a href="{{config('app.url')}}">
-                    <img src="{{asset('img/logo.png')}}" alt="{{config('app.name')}}" />
+                    <img src="{{asset('img/logo-apec.svg')}}" class="logo" alt="{{config('app.name')}}" />
                 </a>
             </div>
 

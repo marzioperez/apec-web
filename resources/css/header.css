@@ -1,3 +1,7 @@
 header {
     @apply bg-white py-3 sticky top-0 z-50 shadow-lg;
 }
+
+header .logo {
+    @apply h-[80px];
+}

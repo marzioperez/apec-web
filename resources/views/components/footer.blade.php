@@ -2,7 +2,7 @@
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="sm:grid grid-cols-12 gap-3">
             <div class="col-span-4 flex sm:justify-start justify-center sm:mb-0 mb-6">
-                <img src="{{asset('img/logo-color.png')}}">
+                <img src="{{asset('img/logo-apec-white.svg')}}" class="h-[120px]">
             </div>
             <div class="col-span-4 flex justify-center items-center sm:mb-0 mb-6">
                 <div class="w-full">
