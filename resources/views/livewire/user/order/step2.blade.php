@@ -90,7 +90,7 @@
                         @endphp
                         <livewire:common.file-upload
                             wire:model="data.payment_voucher"
-                            :rules="['image', 'mimes:png,jpeg', 'max:10420']"
+                            :rules="['image', 'mimes:png,jpeg,pdf', 'max:10420']"
                             :key="'payment-voucher'"
                             :content="$photo_content"
                             :emitter="'cover'"
