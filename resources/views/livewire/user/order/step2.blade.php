@@ -1,5 +1,9 @@
 <div class="bg-white sm:py-10 py-10 relative bg-fixed bg-no-repeat bg-contain bg-left-bottom"
-     style="background-image: url('{{asset("img/bg-sign-up-step-2.png")}}')">
+     style="background-image: url('{{asset("img/bg-sign-up-step-2.png")}}')"
+    x-data="{
+        payment_method: '{{$data['payment_method']}}'
+    }"
+    x-on:toggle-payment-method.window="payment_method = $event.detail.method">
 
     <x-steps :quantity="2" :current="2" :complete="1" />
 
@@ -8,14 +12,12 @@
             <div class="sm:w-[650px] w-full">
                 <h3 class="text-primary-dark font-semibold mb-3 text-2xl">Payment method</h3>
                 <div class="my-8 px-5">
-                    <div class="flex justify-center items-center space-x-5 mb-6">
-                        <button type="button" wire:click.prevent="change_payment_method('{{\App\Concerns\Enums\PaymentMethods::CREDIT_CARD->value}}')"
-                                class="btn {{($data['payment_method'] === \App\Concerns\Enums\PaymentMethods::CREDIT_CARD->value ? 'btn-gray' : 'btn-white-outline')}}">Credit card</button>
-                        <button type="button" wire:click.prevent="change_payment_method('{{\App\Concerns\Enums\PaymentMethods::BANK_TRANSFER->value}}')"
-                                class="btn {{($data['payment_method'] === \App\Concerns\Enums\PaymentMethods::BANK_TRANSFER->value ? 'btn-gray' : 'btn-white-outline')}}">Bank transfer</button>
-                    </div>
+                    <div x-show="payment_method === '{{\App\Concerns\Enums\PaymentMethods::BANK_TRANSFER->value}}'">
+                        <div class="flex justify-center items-center space-x-5 mb-6">
+                            <button type="button" class="btn btn-white-outline" x-on:click="$dispatch('update-payment-method', {method: '{{\App\Concerns\Enums\PaymentMethods::CREDIT_CARD->value}}'})">Credit card</button>
+                            <button type="button" class="btn btn-gray" x-on:click="$dispatch('update-payment-method', {method: '{{\App\Concerns\Enums\PaymentMethods::BANK_TRANSFER->value}}'})">Bank transfer</button>
+                        </div>
 
-                    @if($data['payment_method'] === \App\Concerns\Enums\PaymentMethods::BANK_TRANSFER->value)
                         <h5 class="font-semibold mb-5">Payment information</h5>
                         <p class="mb-2"><b>Bank name:</b> BANCO DE CRÉDITO DEL PERÚ<br>
                             <b>SWIFT code:</b> BCPLPEPL<br>
@@ -24,21 +26,26 @@
                         <b>Account number:</b> 193-2228297-1-59</p>
 
                         <p class="mb-2">Please make sure the SWIFT transfer is processed in OUR.</p>
-                    @endif
 
-                    <h5 class="font-semibold mt-10 mb-5">Total payment</h5>
-                    <div class="form-group">
-                        <label>Delegate Registration</label>
-                        <div class="form-field">
-                            <input type="text" disabled value="${{number_format($amount)}}" />
+                        <h5 class="font-semibold mt-10 mb-5">Total payment</h5>
+                        <div class="form-group">
+                            <label>Delegate Registration</label>
+                            <div class="form-field">
+                                <input type="text" disabled value="${{number_format($amount)}}" />
+                            </div>
                         </div>
                     </div>
 
-                    @if($data['payment_method'] === \App\Concerns\Enums\PaymentMethods::CREDIT_CARD->value)
-                        <livewire:common.culqi-form :amount="$amount" />
-                    @endif
+                    <div x-show="payment_method === '{{\App\Concerns\Enums\PaymentMethods::CREDIT_CARD->value}}'">
+                        <div class="flex justify-center items-center space-x-5 mb-6">
+                            <button type="button" class="btn btn-gray" x-on:click="$dispatch('update-payment-method', {method: '{{\App\Concerns\Enums\PaymentMethods::CREDIT_CARD->value}}'})">Credit card</button>
+                            <button type="button" class="btn btn-white-outline" x-on:click="$dispatch('update-payment-method', {method: '{{\App\Concerns\Enums\PaymentMethods::BANK_TRANSFER->value}}'})">Bank transfer</button>
+                        </div>
 
-                    @if($data['payment_method'] === \App\Concerns\Enums\PaymentMethods::BANK_TRANSFER->value)
+                        <livewire:common.culqi-form :amount="$amount" />
+                    </div>
+
+                    <div x-show="payment_method === '{{\App\Concerns\Enums\PaymentMethods::BANK_TRANSFER->value}}'">
                         <p><b>Step 1:</b> Instruct your bank an international wire transfer to the designated bank account provided above.<br>
                             <b>Step 2:</b> Once the transfer is processed, kindly upload the bank transaction slip.</p>
 
@@ -94,7 +101,7 @@
                             <button type="button" class="btn btn-secondary" x-on:click.prevent="$dispatch('update-step', {step: 1 })">Back</button>
                             <button type="button" class="btn btn-primary" wire:click.prevent="process">Submit</button>
                         </div>
-                    @endif
+                    </div>
                 </div>
             </div>
         </div>

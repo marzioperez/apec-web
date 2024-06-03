@@ -42,10 +42,6 @@ class Step2 extends Component {
         $this->amount = $order['amount'];
     }
 
-    public function change_payment_method($method) {
-        $this->data['payment_method'] = $method;
-    }
-
     public function process() {
         $rules = [];
 
@@ -114,6 +110,12 @@ class Step2 extends Component {
             $this->dispatch('unloading');
             $this->dispatch('open-modal', name: 'modal-status-error');
         }
+    }
+
+    #[On('update-payment-method')]
+    public function update_payment_method($method) {
+        $this->data['payment_method'] = $method;
+        $this->dispatch('toggle-payment-method', method: $method);
     }
 
     public function render() {

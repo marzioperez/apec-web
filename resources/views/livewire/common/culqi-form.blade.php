@@ -1,75 +1,13 @@
 <div x-data="{
-    loading: false,
-    error: null,
-    init() {
-        Culqi.publicKey = '{{config('services.culqi.key')}}';
-        Culqi.settings({
-            title: '{{config('app.name')}}',
-            currency: 'USD',
-            description: 'Payment - {{config('app.name')}}',
-            amount: 6000
-        });
-
-        Culqi.options({
-            paymentMethods: {
-                tarjeta: true,
-                bancaMovil: false,
-                agente: false,
-                billetera: false,
-                cuotealo: false,
-                yape: false
-            }
-        });
-    },
-    processForm() {
-        Culqi.validationPaymentMethods();
-        let paymentTypeAvailable = Culqi.paymentOptionsAvailable;
-        this.loading = true;
-        this.error = null;
-        if (paymentTypeAvailable.token.available) {
-            paymentTypeAvailable.token.generate();
+        loading: false,
+        error: null,
+        init() {
+            Culqi.open();
         }
-    }
-}"
+    }"
     x-on:set-error.window="error = $event.detail.error; loading = false;"
     x-on:unloading.window="loading = false;">
-    <form class="px-5 py-6 bg-white shadow-lg rounded-xl">
-        <div class="form-group inline-fields">
-            <label>Email</label>
-            <input type="text" size="50" data-culqi="card[email]" id="card[email]">
-        </div>
-        <div class="form-group inline-fields">
-            <label>Card number</label>
-            <input type="text" size="20" data-culqi="card[number]" id="card[number]">
-        </div>
-        <div class="grid grid-cols-3 gap-3">
-            <div class="form-group inline-fields">
-                <label>Exp. Date (MM/YYYY)</label>
-                <div class="flex space-x-3 items-center">
-                    <input type="text" size="2" data-culqi="card[exp_month]" id="card[exp_month]">
-                    <span>/</span>
-                    <input type="text" size="4" data-culqi="card[exp_year]" id="card[exp_year]">
-                </div>
-            </div>
-            <div class="form-group inline-fields">
-                <label>CVV</label>
-                <input type="text" size="4" data-culqi="card[cvv]" id="card[cvv]">
-            </div>
-            <div class="form-group inline-fields">
-                <label>Cuotas</label>
-                <select class="!py-2.5" disabled id="card[installments]">
-                    <option value="1">Select...</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="flex items-center justify-center space-x-6">
-            <div><img src="{{asset('img/visa.svg')}}" class="h-[20px]"></div>
-            <div><img src="{{asset('img/mastercard.svg')}}" class="h-[30px]"></div>
-            <div><img src="{{asset('img/american-express.svg')}}" class="h-[30px]"></div>
-            <div><img src="{{asset('img/diners.svg')}}" class="h-[40px]"></div>
-        </div>
-    </form>
+    <div id="culqi-container" class="h-[720px]"></div>
 
     <div class="rounded-md bg-red-50 p-4 mt-3" x-show="error">
         <div class="flex">
@@ -85,25 +23,80 @@
         </div>
     </div>
 
-    <div class="sm:my-8 my-6 flex justify-center space-x-6 items-center">
-        <button type="button" class="btn btn-secondary" x-on:click.prevent="$dispatch('update-step', {step: 1 })">Back</button>
-        <button type="button" class="btn btn-primary mx-auto block" x-bind:disabled="loading" x-on:click.prevent="processForm()">
-            <i class="fa-duotone fa-spinner-third fa-spin" x-show="loading"></i>
-            <span x-show="loading">Please wait...</span>
-            <span x-show="!loading">Pay now</span>
-        </button>
-    </div>
 </div>
 @push('scripts')
-    <script src="https://checkout.culqi.com/js/v4"></script>
+    <script src="https://js.culqi.com/checkout-js"></script>
     <script>
-        function culqi() {
+        const settings = {
+            title: 'Payment - {{config('app.name')}}',
+            currency: 'USD',
+            amount: {{$amount * 100}}
+        }
+        const client = {
+            email: '{{auth()->user()->email}}',
+        }
+
+        const paymentMethods = {
+            tarjeta: true,
+            yape: false,
+            billetera: false,
+            bancaMovil: false,
+            agente: false,
+            cuotealo: false,
+        }
+
+        const options = {
+            lang: 'auto',
+            installments: false,
+            modal: false,
+            container: "#culqi-container", // Opcional - Div donde quieres cargar el checkout
+            paymentMethods: paymentMethods,
+            paymentMethodsSort: Object.keys(paymentMethods), // las opciones se ordenan según se configuren en paymentMethods
+        }
+
+        const appearance = {
+            theme: "default",
+            hiddenCulqiLogo: false,
+            hiddenBannerContent: false,
+            hiddenBanner: false,
+            hiddenToolBarAmount: false,
+            menuType: "sidebar", // sidebar / sliderTop / select
+            buttonCardPayText: "Process payment", //
+            logo: 'https://apecceosummit2024.com/img/favicon.png',
+            defaultStyle: {
+                bannerColor: "#000000",
+                buttonBackground: "#009600",
+                menuColor: "pink",
+                linksColor: "#75B42E",
+                buttonTextColor: "#FFFFFF",
+                priceColor: "#000000",
+            },
+        };
+
+        const config = {
+            settings,
+            client,
+            options,
+            appearance,
+        };
+
+        const publicKey = '{{config('services.culqi.key')}}';
+        const Culqi = new CulqiCheckout(publicKey, config);
+
+        const handleCulqiAction = () => {
             if (Culqi.token) {
                 const token_id = Culqi.token.id;
+                Culqi.close();
                 window.dispatchEvent(new CustomEvent('get-token', {detail: {token: token_id}}));
+            } else if (Culqi.order) { // ¡Objeto Order creado exitosamente!
+                Culqi.close();
+                const order = Culqi.order;
+                console.log('Se ha creado el objeto Order: ', order);
             } else {
                 window.dispatchEvent(new CustomEvent('set-error', {detail: {error: Culqi.error['user_message']}}));
             }
         }
+
+        Culqi.culqi = handleCulqiAction;
     </script>
 @endpush
