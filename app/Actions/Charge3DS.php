@@ -5,12 +5,12 @@ namespace App\Actions;
 use Culqi\Culqi;
 use Culqi\Error\CulqiException;
 use Lorisleiva\Actions\Concerns\AsAction;
-use Mockery\Exception;
 
-class Charge {
+class Charge3DS
+{
     use AsAction;
 
-    public function handle($token, $description, $amount) {
+    public function handle($data, $token, $description, $amount) {
         $culqi = new Culqi(['api_key' => config('services.culqi.secret')]);
         try {
             $charge = $culqi->Charges->create([
@@ -25,6 +25,7 @@ class Charge {
                     "last_name" => auth()->user()->last_name,
                     "phone_number" => auth()->user()->phone,
                 ),
+                "authentication_3DS" => $data
             ]);
             if (is_object($charge)) {
                 $charge->token = $token;

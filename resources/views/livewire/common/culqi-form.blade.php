@@ -1,12 +1,22 @@
 <div x-data="{
         loading: false,
         error: null,
+        culqi_token: null,
         init() {
             Culqi.open();
         }
     }"
     x-on:set-error.window="error = $event.detail.error; loading = false;"
-    x-on:unloading.window="loading = false;">
+    x-on:unloading.window="loading = false;"
+    x-on:start-3ds.window="Culqi3DS.initAuthentication($event.detail.token); culqi_token = $event.detail.token;"
+    x-on:message.window="
+        if ($event.origin === window.location.origin) {
+            const response = event.data;
+            if (response.parameters3DS) {
+                $dispatch('process-3ds', {data: response.parameters3DS, token: culqi_token});
+            }
+        }
+    ">
     <div id="culqi-container" class="h-[720px]"></div>
 
     <div class="rounded-md bg-red-50 p-4 mt-3" x-show="error">
@@ -88,7 +98,7 @@
                 const token_id = Culqi.token.id;
                 Culqi.close();
                 window.dispatchEvent(new CustomEvent('get-token', {detail: {token: token_id}}));
-            } else if (Culqi.order) { // ¡Objeto Order creado exitosamente!
+            } else if (Culqi.order) {
                 Culqi.close();
                 const order = Culqi.order;
                 console.log('Se ha creado el objeto Order: ', order);
@@ -98,5 +108,19 @@
         }
 
         Culqi.culqi = handleCulqiAction;
+    </script>
+
+    <script src="https://3ds.culqi.com"></script>
+    <script>
+        Culqi3DS.publicKey = '{{config('services.culqi.key')}}';
+        Culqi3DS.settings = {
+            charge: {
+                totalAmount: {{$amount*100}},
+                returnUrl: "{{config('app.url')}}",
+            },
+            card: {
+                email: "{{auth()->user()->email}}",
+            },
+        };
     </script>
 @endpush

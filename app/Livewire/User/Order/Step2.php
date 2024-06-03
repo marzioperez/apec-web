@@ -2,6 +2,7 @@
 
 namespace App\Livewire\User\Order;
 
+use App\Actions\Charge3DS;
 use App\Actions\GenerateQrCode;
 use App\Concerns\Enums\PaymentMethods;
 use App\Concerns\Enums\Status;
@@ -96,20 +97,33 @@ class Step2 extends Component {
     #[On('process-card-payment')]
     public function processCardPayment($data): void {
         if ($data['status'] === 'success') {
-            $this->order->update([
-                'status' => Status::PAID->value,
-                'culqi_id' => $data['data']['id']
-            ]);
-            $this->order->user->update([
-                'status' => Status::PENDING_APPROVAL_DATA->value,
-                'lock_fields' => true
-            ]);
-            Mail::to($this->order->user['email'])->send(new PaymentSuccess($this->order->user));
-            $this->dispatch('open-modal', name: 'modal-status-ok');
+            if (isset($data['data']['action_code'])) {
+                if($data['data']['action_code'] === 'REVIEW') {
+                    $this->dispatch('start-3ds', token: $data['data']['token']);
+                }
+            } else {
+                $this->order->update([
+                    'status' => Status::PAID->value,
+                    'culqi_id' => $data['data']['id']
+                ]);
+                $this->order->user->update([
+                    'status' => Status::PENDING_APPROVAL_DATA->value,
+                    'lock_fields' => true
+                ]);
+                Mail::to($this->order->user['email'])->send(new PaymentSuccess($this->order->user));
+                $this->dispatch('open-modal', name: 'modal-status-ok');
+            }
         } else {
             $this->dispatch('unloading');
             $this->dispatch('open-modal', name: 'modal-status-error');
         }
+    }
+
+    #[On('process-3ds')]
+    public function process3DS($data, $token): void {
+        $description = "Payment - " . config('app.name');
+        $charge = Charge3DS::run($data, $token, $description, round(($this->amount * 100)));
+        $this->dispatch('process-card-payment', data:$charge);
     }
 
     #[On('update-payment-method')]
