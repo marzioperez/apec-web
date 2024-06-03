@@ -62,7 +62,7 @@
                                                 </clipPath>
                                             </defs>
                                         </svg>
-                                        <span class="sm:block hidden">Hi,</span> <span class="sm:text-md text-sm">{{$name}}<br class="sm:hidden"><span class="sm:pl-2">{{$last_name}}</span></span>
+                                        <span class="sm:text-md text-sm">Hi, {{$name}}</span>
                                     </div>
                                 </div>
                                 <svg class="ml-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
