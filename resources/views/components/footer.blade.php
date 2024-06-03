@@ -5,12 +5,15 @@
                 <img src="{{asset('img/logo-color.png')}}">
             </div>
             <div class="col-span-4 flex justify-center items-center sm:mb-0 mb-6">
-                <div class="w-full space-y-6">
-                    <div class="text-center">
+                <div class="w-full">
+                    <div class="text-center mb-3">
                         <a href="{{route('faq')}}" class="btn btn-gray">FAQ</a>
                     </div>
-                    <div class="text-center">
+                    <div class="text-center mb-2">
                         <a href="https://www.apec.org/" target="_blank" class="text-gray-300 text-sm underline">Asia-Pacific Economic Cooperation (APEC) Forum</a>
+                    </div>
+                    <div class="text-center">
+                        <a href="https://apecperu.pe/2024/en/" target="_blank" class="text-gray-300 text-sm underline">APEC Peru 2024</a>
                     </div>
                 </div>
             </div>
