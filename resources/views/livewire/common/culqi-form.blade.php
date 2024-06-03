@@ -46,7 +46,7 @@
         }
 
         const options = {
-            lang: 'auto',
+            lang: 'en',
             installments: false,
             modal: false,
             container: "#culqi-container", // Opcional - Div donde quieres cargar el checkout
