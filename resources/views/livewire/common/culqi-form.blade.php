@@ -113,6 +113,16 @@
     <script src="https://3ds.culqi.com"></script>
     <script>
         Culqi3DS.publicKey = '{{config('services.culqi.key')}}';
+
+        Culqi3DS.options = {
+            showModal: true,
+            showLoading: true,
+            showIcon: true,
+            closeModalAction: function(){
+                window.location.reload();
+            },
+        };
+
         Culqi3DS.settings = {
             charge: {
                 totalAmount: {{$amount*100}},
