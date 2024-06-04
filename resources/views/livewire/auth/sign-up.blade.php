@@ -33,7 +33,7 @@
                             <div class="form-group">
                                 <label for="business_description">Company/Organization description*</label>
                                 <div class="form-field">
-                                    <input type="text" id="business_description" name="business_description" wire:model="business_description" />
+                                    <textarea id="business_description" name="business_description" wire:model="business_description"></textarea>
                                     @error('business_description') <span class="validation-error">{{ $message }}</span> @enderror
                                 </div>
                             </div>
@@ -88,9 +88,9 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="phone_number">Phone Number*</label>
+                                <label for="phone_number">Mobile*</label>
                                 <div class="form-field">
-                                    <input type="text" id="phone_number" name="phone_number" wire:model="phone_number" />
+                                    <input type="text" id="phone_number" name="phone_number" placeholder="Ex.: +51 999 999 999" wire:model="phone_number" />
                                     @error('phone_number') <span class="validation-error">{{ $message }}</span> @enderror
                                 </div>
                             </div>

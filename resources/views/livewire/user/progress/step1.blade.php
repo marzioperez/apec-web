@@ -56,6 +56,13 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="phone">Mobile*</label>
+                            <div class="form-field">
+                                <input type="text" id="phone" name="phone" wire:model="data.phone" :disabled="{{$lock_fields}}" />
+                                @error('data.phone') <span class="validation-error">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="document_type">Type of Document*</label>
                             <div class="form-field">
                                 <select id="document_type" name="document_type" wire:model="data.document_type" :disabled="{{$lock_fields}}">

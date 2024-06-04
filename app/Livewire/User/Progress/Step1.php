@@ -27,7 +27,8 @@ class Step1 extends Component {
         'place_of_issue' => null,
         'date_of_birth' => null,
         'nationality' => null,
-        'city_of_permanent_residency' => null
+        'city_of_permanent_residency' => null,
+        'phone' => null
     ];
 
     protected $messages = [
@@ -50,6 +51,7 @@ class Step1 extends Component {
         'data.date_of_birth' => 'required|date',
         'data.nationality' => 'required',
         'data.city_of_permanent_residency' => 'required',
+        'data.phone' => 'required',
     ];
 
     public function mount(User $user, $quantity = 5, $current = 1) {
@@ -70,7 +72,8 @@ class Step1 extends Component {
             'place_of_issue' => $user['place_of_issue'],
             'date_of_birth' => $user['date_of_birth'],
             'nationality' => $user['nationality'],
-            'city_of_permanent_residency' => $user['city_of_permanent_residency']
+            'city_of_permanent_residency' => $user['city_of_permanent_residency'],
+            'phone' => $user['phone'],
         ];
 
         $this->rules['data.email'] = 'required|email|unique:users,email,' . $user['id'] . ',id';
@@ -110,6 +113,7 @@ class Step1 extends Component {
             'date_of_birth' => 'required|date',
             'nationality' => 'required',
             'city_of_permanent_residency' => 'required',
+            'phone' => 'required',
         ];
 
         $messages = [

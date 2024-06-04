@@ -66,7 +66,7 @@ class SignUp extends Component {
         $this->validate($rules, $messages);
 
         $code = GenerateCode::run($this->name, $this->last_name);
-        User::create([
+        $user = User::create([
             'code' => $code,
             'name' => $this->name,
             'last_name' => $this->last_name,
@@ -84,9 +84,9 @@ class SignUp extends Component {
             'send_copy_of_registration' => $this->send_copy_of_registration,
             'accept_terms_and_conditions' => $this->accept_terms_and_conditions
         ]);
-        Mail::to($this->email)->send(new Register());
+        Mail::to($this->email)->send(new Register($user));
         if ($this->send_copy_of_registration) {
-            Mail::to($this->attendee_email)->send(new Register());
+            Mail::to($this->attendee_email)->send(new Register($user));
         }
         $this->reset();
         $this->dispatch('open-modal', name: 'modal-status-ok');

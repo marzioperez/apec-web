@@ -18,7 +18,7 @@ class Users implements WithHeadingRow, ToModel {
         if ($row['email']) {
             $model = User::where('email', $row['email'])->first();
             if (!$model) {
-                $new_password = Str::slug($row['telefono']);
+                $new_password = Str::slug($row['password']);
 
                 $user = new User();
                 $user['code'] = GenerateCode::run($row['nombres'], $row['apellidos']);
