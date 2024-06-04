@@ -95,7 +95,7 @@ class CompletedUserResource extends Resource
                             Select::make('document_type')->label('Tipo de documento')->options(collect($document_types)->pluck('name', 'id'))->columnSpan(3),
                             TextInput::make('document_number')->label('Número de documento')->required()->columnSpan(3),
                             TextInput::make('email')->label('Email')->required()->unique('users', 'email', ignoreRecord: true)->columnSpan(3),
-                            TextInput::make('phone')->label('Teléfono')->columnSpan(3)->required(),
+                            TextInput::make('phone')->label('Celular')->columnSpan(3)->required(),
                             DatePicker::make('date_of_issue')->label('Fecha de emisión')->columnSpan(3),
                             TextInput::make('place_of_issue')->label('Lugar de emisión')->required()->columnSpan(3),
                             DatePicker::make('date_of_birth')->label('Fecha de nacimiento')->columnSpan(3),

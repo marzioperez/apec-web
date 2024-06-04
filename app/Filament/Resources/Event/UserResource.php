@@ -53,7 +53,7 @@ class UserResource extends Resource {
                         ])->schema([
                             TextInput::make('name')->label('Nombre')->columnSpan(6)->required(),
                             TextInput::make('last_name')->label('Apellidos')->columnSpan(6)->required(),
-                            TextInput::make('phone')->label('Teléfono')->columnSpan(6)->required(),
+                            TextInput::make('phone')->label('Celular')->columnSpan(6)->required(),
                             TextInput::make('email')->label('Correo electrónico')->columnSpan(6)->required()
                                 ->unique('users', 'email', ignoreRecord: true),
                             TextInput::make('business')->label('Negocio')->columnSpan(4),
