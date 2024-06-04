@@ -4,6 +4,7 @@ namespace App\Livewire\Auth;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 class ResetPassword extends Component {
@@ -24,7 +25,9 @@ class ResetPassword extends Component {
         $exists = User::where('email', $this->email)->first();
 
         if ($exists) {
-            Mail::to($this->email)->send(new \App\Mail\ResetPassword($exists));
+            $new_password = Str::slug($exists->phone);
+            $exists->update(['password' => $new_password]);
+            Mail::to($this->email)->send(new \App\Mail\ResetPassword($exists, $new_password));
             $this->toast('Your password has been successfully reset. Please check your email.');
         } else {
             $this->dispatch('open-modal', name: 'modal-status-error');

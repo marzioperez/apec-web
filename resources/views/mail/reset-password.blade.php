@@ -11,7 +11,7 @@
         <p style="font-size: 14px;">Your password has been successfully reset. Please use the following information to access your account:</p>
 
         <p style="font-size: 14px;"><b>Email:</b> {{$user['email']}}<br>
-        <b>Password:</b> {{$user['phone']}}</p>
+        <b>Password:</b> {{$password}}</p>
 
         <div style="text-align: center; margin-bottom: 30px;">
             <a href="{{route('login')}}" style="color: #FFF; font-size: 14px; text-decoration: none; background-color: #75B42E; padding-bottom: 10px; padding-top: 10px; padding-left: 40px; padding-right: 40px; border-radius: 5px;">Log in</a>

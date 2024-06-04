@@ -13,9 +13,11 @@ use Illuminate\Queue\SerializesModels;
 class RegisterPassFree extends Mailable {
     use Queueable, SerializesModels;
     public User $user;
+    public string $password;
 
-    public function __construct(User $user) {
+    public function __construct(User $user, string $password) {
         $this->user = $user;
+        $this->password = $password;
     }
 
     public function envelope(): Envelope {
@@ -31,7 +33,7 @@ class RegisterPassFree extends Mailable {
     {
         return new Content(
             view: 'mail.register-pass-free',
-            with: ['user' => $this->user],
+            with: ['user' => $this->user, 'password' => $this->password],
         );
     }
 

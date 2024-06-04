@@ -11,6 +11,7 @@ use Filament\Actions;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class EditUser extends EditRecord
 {
@@ -29,8 +30,12 @@ class EditUser extends EditRecord
                 ->modalDescription('Una vez que se confirme el registro del usuario, se le enviará un mensaje de forma automática con sus datos de acceso. Por favor confirme esta acción.')
                 ->modalSubmitActionLabel('Confirmar')
                 ->action(function (User $user):void {
-                    $user->update(['status' => Status::CONFIRMED->value]);
-                    Mail::to($user['email'])->send(new RegisterSuccess($user));
+                    $new_password = Str::slug($user['phone']);
+                    $user->update([
+                        'status' => Status::CONFIRMED->value,
+                        'password' => $new_password
+                    ]);
+                    Mail::to($user['email'])->send(new RegisterSuccess($user, $new_password));
                 })->visible(fn(User $user): bool => $user['status'] === Status::PENDING_APPROVAL->value),
             Action::make('decline')
                 ->icon('heroicon-o-x-circle')

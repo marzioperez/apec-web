@@ -14,9 +14,11 @@ class ResetPassword extends Mailable {
 
     use Queueable, SerializesModels;
     public User $user;
+    public string $password;
 
-    public function __construct(User $user) {
+    public function __construct(User $user, string $password) {
         $this->user = $user;
+        $this->password = $password;
     }
 
     public function envelope(): Envelope {
@@ -28,6 +30,7 @@ class ResetPassword extends Mailable {
     public function content(): Content {
         return new Content(
             view: 'mail.reset-password',
+            with: ['user' => $this->user, 'password' => $this->password],
         );
     }
 

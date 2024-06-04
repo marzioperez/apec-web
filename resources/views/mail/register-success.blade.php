@@ -15,7 +15,7 @@
         <p style="font-size: 14px; margin-bottom: 20px">To complete your registration, please visit our website and log in using the following credentials:</p>
 
         <p style="font-size: 14px;"><b>Email:</b> {{$user['email']}}<br>
-        <b>Password:</b> {{$user['phone']}}</p>
+        <b>Password:</b> {{$password}}</p>
 
         <p style="font-size: 14px; margin-bottom: 30px;">Once logged in, you will find the registration and payment forms, as well as more details about the agenda, venue, accommodation options, and other logistic arrangements.</p>
 
