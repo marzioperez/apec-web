@@ -1,12 +1,12 @@
 @props(['data'])
 <div class="container mx-auto px-4 sm:px-6 lg:px-8 sm:py-14 py-6 scroll-mt-[102px] relative z-10" id="{{$data['id']}}">
-    <div class="sm:grid grid-cols-12 gap-6">
-        <div class="col-span-full sm:mb-0 mb-4">
+    <div class="block-1">
+        <div class="title">
             <h4 class="text-primary-dark font-semibold sm:text-2xl text-xl">{{$data['title']}}</h4>
             <h2 class="text-primary-dark font-bold sm:text-5xl text-4xl">{{$data['sub_title']}}</h2>
         </div>
 
-        <div class="col-span-6 flex items-center sm:mb-0 mb-5">
+        <div class="content">
             <div>
                 <div class="text-white mb-5">{!! $data['content'] !!}</div>
                 <div class="sm:block hidden">
@@ -14,7 +14,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-span-6 flex items-center relative">
+        <div class="media">
             {!! $data['embed'] !!}
         </div>
         <div class="sm:hidden flex justify-center sm:pt-0 pt-5">

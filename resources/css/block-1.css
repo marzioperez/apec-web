@@ -1,0 +1,25 @@
+.block-1 {
+    @apply sm:grid grid-cols-12 gap-6;
+}
+
+.block-1 .title {
+    @apply col-span-full sm:mb-0 mb-4;
+}
+
+.block-1 .content {
+    @apply col-span-6 flex items-center sm:mb-0 mb-5;
+}
+
+.block-1 .media {
+    @apply col-span-6 flex items-center relative;
+}
+
+@media only screen and (min-width: 640px) and (max-width: 949px) {
+    .block-1 .content {
+        @apply col-span-full mb-5 !important;
+    }
+
+    .block-1 .media {
+        @apply col-span-full mb-3 !important;
+    }
+}
