@@ -53,3 +53,15 @@
 .slider-sponsors .splide__pagination__page.is-active {
     @apply scale-100 opacity-100;
 }
+
+@media only screen and (min-width: 640px) and (max-width: 820px) {
+    .slider .content {
+        @apply relative sm:top-auto -translate-y-0 left-auto -translate-x-0 !important;
+    }
+}
+
+@media only screen and (min-width: 821px) and (max-width: 949px) {
+    .slider .content {
+        @apply relative sm:top-auto -translate-y-0 left-auto -translate-x-0 !important;
+    }
+}
