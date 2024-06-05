@@ -9,6 +9,6 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 class Users implements WithHeadingRow, ToModel {
 
     public function model(array $row) {
-        SendInvitation::dispatch($row);
+        SendInvitation::dispatch($row)->onQueue('apec-sqs');
     }
 }
