@@ -20,6 +20,6 @@
         "@ksedline/turnjs": "^0.1.0",
         "@splidejs/splide": "^4.1.4",
         "flatpickr": "^4.6.13",
-        "moment": "^2.30.1"
+        "pikaday": "^1.8.2"
     }
 }
