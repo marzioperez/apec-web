@@ -1,6 +1,6 @@
-<div class="bg-white sm:py-20 py-10 relative bg-fixed bg-no-repeat bg-contain bg-left-bottom" style="background-image: url('{{asset("img/bg-sign-up-step-1.png")}}')">
+<div class="bg-white sm:py-20 py-10 relative">
+    <img src="{{asset("img/bg-sign-up-step-1.png")}}" class="fixed top-0">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
-
         <div class="py-10 flex justify-center">
             <div class="sm:w-[550px] w-full">
                 <h3 class="text-primary-dark font-semibold mb-6 text-2xl">Recover password</h3>

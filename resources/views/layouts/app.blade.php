@@ -25,7 +25,7 @@
         <div class="min-h-screen flex flex-col">
             <livewire:common.header />
             <livewire:common.menu-mobile />
-            <main>
+            <main class="flex-grow">
                 {{ $slot }}
             </main>
             <x-footer />

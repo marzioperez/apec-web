@@ -3,11 +3,11 @@
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         <div class="py-10 flex justify-center">
             <div class="w-full">
-                <div class="sm:grid grid-cols-2 gap-10">
-                    <div class="sm:mb-0 mb-6">
+                <div class="sm:grid grid-cols-12 gap-10">
+                    <div class="sm:mb-0 mb-6 lg:col-span-6 col-span-full">
                         <img src="{{asset('img/flight-banner.png')}}" class="w-full" />
                     </div>
-                    <div>
+                    <div class="lg:col-span-6 col-span-full">
                         <h3 class="text-primary-dark font-semibold mb-3 text-4xl uppercase">Welcome to Peru</h3>
                         <p class="text-white mb-3">To ensure a perfect experience upon arrival in Lima, Peru, we are pleased to offer you an offer of personalized transfers and accompaniment during your stay.</p>
                         <p class="text-white">If you wish to avail of these services, please provide your flight and accommodation details.</p>
