@@ -93,12 +93,14 @@ class Step1 extends Component {
             if ($this->data['document_type'] === Types::TICKET->value) {
                 $data_rules = array_merge($data_rules, [
                     'name' => 'required',
-                    'last_name' => 'required'
+                    'last_name' => 'required',
+                    'dni' => 'required',
                 ]);
 
                 $rules = array_merge($rules, [
                     'data.name' => 'required',
-                    'data.last_name' => 'required'
+                    'data.last_name' => 'required',
+                    'data.dni' => 'required',
                 ]);
             }
         }

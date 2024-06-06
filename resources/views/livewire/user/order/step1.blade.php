@@ -60,6 +60,13 @@
                                     @error('data.last_name') <span class="validation-error">{{ $message }}</span> @enderror
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label for="data.dni">DNI*</label>
+                                <div class="form-field">
+                                    <input type="text" id="data.dni" name="data.dni" wire:model="data.dni" />
+                                    @error('data.dni') <span class="validation-error">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
                         @endif
                     @endif
 

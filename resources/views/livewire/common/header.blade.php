@@ -82,6 +82,7 @@
                                 \App\Concerns\Enums\Status::FINISHED->value,
                                 \App\Concerns\Enums\Status::SEND_TO_CHANCELLERY->value,
                                 \App\Concerns\Enums\Status::PENDING_APPROVAL_DATA->value,
+                                \App\Concerns\Enums\Status::PAYMENT_REVIEW->value,
                             ]))
                                 <a href="{{route('hotel')}}" class="block px-3 py-1 text-sm leading-6" role="menuitem" tabindex="-1" id="user-menu-item-1">Flight and hotel</a>
                             @endif

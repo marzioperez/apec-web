@@ -115,7 +115,12 @@ class ConfirmedUserResource extends Resource
                             TextInput::make('attendee_name')->label('Nombre de asistente')->columnSpan(6),
                             TextInput::make('attendee_email')->label('Email de asistente')->columnSpan(6),
                         ])
-                    ]),
+                    ])->hidden(fn(Forms\Get $get) => in_array($get('type'), [
+                        Types::COMPANION->value,
+                        Types::STAFF->value,
+                        Types::FREE_PASS_STAFF->value,
+                        Types::FREE_PASS_COMPANION->value
+                    ])),
                     Tab::make('Requisitos especiales')->schema([
                         Forms\Components\Section::make([
                             Select::make('types_of_food')->label('Tipo de dieta')->options([
