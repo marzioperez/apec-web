@@ -84,7 +84,7 @@
                         <div class="form-group">
                             <label for="date_of_issue">Date of Issue (dd/mm/yyyy)*</label>
                             <div class="form-field">
-                                <input type="date" id="date_of_issue" name="date_of_issue" wire:model="data.date_of_issue" :disabled="{{$lock_fields}}" />
+                                <x-input.date wire:model.live="data.date_of_issue" id="date_of_issue" placeholder="dd/mm/yyyy" :disabled="$lock_fields" :options="['defaultDate' => $data['date_of_issue']]"/>
                                 @error('data.date_of_issue') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
@@ -98,7 +98,7 @@
                         <div class="form-group">
                             <label for="date_of_birth">Date of Birth (dd/mm/yyyy)*</label>
                             <div class="form-field">
-                                <input type="date" id="date_of_birth" name="date_of_birth" wire:model="data.date_of_birth" :disabled="{{$lock_fields}}" />
+                                <x-input.date wire:model.live="data.date_of_birth" id="date_of_birth" placeholder="dd/mm/yyyy" :disabled="$lock_fields" :options="['defaultDate' => $data['date_of_birth']]"/>
                                 @error('data.date_of_birth') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>

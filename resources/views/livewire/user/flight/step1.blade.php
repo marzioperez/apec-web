@@ -47,7 +47,7 @@
                                             <label for="arrived_date">Date</label>
                                         </div>
                                         <div class="form-field col-span-6 relative">
-                                            <input type="date" id="arrived_date" name="arrived_date" wire:model="data.arrived_date" />
+                                            <x-input.date wire:model.live="data.arrived_date" id="arrived_date" placeholder="dd/mm/yyyy" :options="['defaultDate' => $data['arrived_date']]"/>
                                             @error('data.arrived_date') <span class="validation-error absolute right-3 -bottom-4 opacity-80">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
@@ -96,7 +96,7 @@
                                             <label for="exit_date">Date</label>
                                         </div>
                                         <div class="form-field col-span-6 relative">
-                                            <input type="date" id="exit_date" name="exit_date" wire:model="data.exit_date" />
+                                            <x-input.date wire:model.live="data.exit_date" id="exit_date" placeholder="dd/mm/yyyy" :options="['defaultDate' => $data['exit_date']]"/>
                                             @error('data.exit_date') <span class="validation-error absolute right-3 -bottom-4 opacity-80">{{ $message }}</span> @enderror
                                         </div>
                                     </div>

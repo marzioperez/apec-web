@@ -14,7 +14,7 @@
         }
     }"
     x-on:toast.window="add($event)"
-    class="fixed bottom-3 left-3 flex w-full max-w-xs flex-col space-y-4 pr-4 pb-4 sm:justify-start"
+    class="fixed z-50 bottom-3 left-3 flex w-full max-w-xs flex-col space-y-4 pr-4 pb-4 sm:justify-start"
     role="status"
     aria-live="polite"
 >

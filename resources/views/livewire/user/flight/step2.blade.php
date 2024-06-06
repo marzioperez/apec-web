@@ -68,7 +68,7 @@
                                             <label for="hotel_check_out_date">Date*</label>
                                         </div>
                                         <div class="form-field col-span-6 relative">
-                                            <input type="date" id="hotel_check_out_date" name="hotel_check_out_date" wire:model="data.hotel_check_out_date" />
+                                            <x-input.date wire:model.live="data.hotel_check_out_date" id="hotel_check_out_date" placeholder="dd/mm/yyyy" :options="['defaultDate' => $data['hotel_check_out_date']]"/>
                                             @error('data.hotel_check_out_date') <span class="validation-error absolute right-3 -bottom-4 opacity-80">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
