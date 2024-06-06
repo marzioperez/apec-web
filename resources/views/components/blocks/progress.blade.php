@@ -16,7 +16,7 @@
     }"
      class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 scroll-mt-[102px] relative z-10" id="{{$data['id']}}">
     @if(in_array($user['status'], [\App\Concerns\Enums\Status::CONFIRMED->value]))
-        <h3 class="text-white font-semibold text-2xl text-center mb-3">How to  complete you registration?</h3>
+        <h3 class="text-white font-semibold text-2xl text-center mb-5">How to  complete you registration?</h3>
     @endif
 
     @if(in_array($user['type'], [
@@ -26,7 +26,7 @@
         \App\Concerns\Enums\Types::VIP->value,
     ]))
         @if(in_array($user['status'], [\App\Concerns\Enums\Status::UNPAID->value]))
-            <h3 class="text-white font-semibold text-2xl text-center mb-3">To continue the process please complete your payment</h3>
+            <h3 class="text-white font-semibold text-2xl text-center mb-5">To continue the process please complete your payment</h3>
       @endif
    @endif
 
@@ -36,8 +36,8 @@
         \App\Concerns\Enums\Status::FINISHED->value,
         \App\Concerns\Enums\Status::PENDING_CORRECT_DATA->value
     ]))
-        <h3 class="text-white font-semibold text-3xl text-center mb-5">Want to use our complimentary shuttle service?</h3>
-        <p class="text-white text-center">Don’t forget to let us know your travel and accommodation arrangements</p>
+        <h3 class="text-white font-semibold text-3xl text-center mb-3">Want to use our complimentary shuttle service?</h3>
+        <p class="text-white text-center mb-5">Don’t forget to let us know your travel and accommodation arrangements</p>
    @endif
 
     <div class="progress" :aria-valuenow="currentVal" :aria-valuemin="minVal" :aria-valuemax="maxVal">

@@ -7,6 +7,7 @@ use App\Concerns\Enums\Status;
 use App\Concerns\Enums\Types;
 use App\Filament\Resources\Event\OrderResource\Pages;
 use App\Filament\Resources\Event\OrderResource\RelationManagers;
+use App\Mail\PaymentSuccess;
 use App\Models\Order;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
@@ -23,7 +24,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Mail;
 
 class OrderResource extends Resource
 {
@@ -243,13 +244,10 @@ class OrderResource extends Resource
                         ->modalDescription('Una vez que se confirme esta acción, el usuario pasará al estado Pendiente de aprobación de datos.')
                         ->modalSubmitActionLabel('Confirmar')
                         ->action(function (Order $order):void {
-                            $order->update([
-                                'status' => Status::PAID->value
-                            ]);
-                            $order->user->update([
-                                'status' => Status::PENDING_APPROVAL_DATA->value
-                            ]);
-                        })
+                            $order->update(['status' => Status::PAID->value]);
+                            $order->user->update(['status' => Status::PENDING_APPROVAL_DATA->value]);
+                            Mail::to($order->user->user['email'])->send(new PaymentSuccess($order->user));
+                        })->visible(fn(Order $order): bool => $order['payment_method'] === PaymentMethods::BANK_TRANSFER->value),
                 ])
             ])
             ->bulkActions([
