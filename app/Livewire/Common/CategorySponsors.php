@@ -11,7 +11,7 @@ class CategorySponsors extends Component {
     public $id;
 
     public function mount($sponsors, $id) {
-        $this->sponsors = collect($sponsors)->chunk(8);
+        $this->sponsors = $sponsors;
         $this->id = $id;
     }
 
