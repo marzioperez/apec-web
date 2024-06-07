@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Event;
 
+use App\Actions\Refund;
 use App\Concerns\Enums\PaymentMethods;
 use App\Concerns\Enums\Status;
 use App\Concerns\Enums\Types;
@@ -248,6 +249,43 @@ class OrderResource extends Resource
                             $order->user->update(['status' => Status::PENDING_APPROVAL_DATA->value]);
                             Mail::to($order->user->user['email'])->send(new PaymentSuccess($order->user));
                         })->visible(fn(Order $order): bool => $order['payment_method'] === PaymentMethods::BANK_TRANSFER->value),
+                    Tables\Actions\Action::make('revert-transfer')
+                        ->icon('heroicon-o-check-circle')
+                        ->color('warning')
+                        ->label('Revertir pago')
+                        ->requiresConfirmation()
+                        ->modalHeading('¿Revertir pago?')
+                        ->modalDescription('Una vez que se confirme esta acción, el usuario pasará al estado Pendiente de pago y se eliminará la información de su comprobante.')
+                        ->modalSubmitActionLabel('Confirmar')
+                        ->action(function (Order $order):void {
+                            $order->update([
+                                'status' => Status::UNPAID->value,
+                                'payment_reference_name' => null,
+                                'payment_reference_last_name' => null,
+                                'payment_reference_phone' => null,
+                                'payment_reference_email' => null,
+                                'payment_voucher' => null
+                            ]);
+                            $order->user->update(['status' => Status::UNPAID->value]);
+                        })->visible(fn(Order $order): bool => $order['payment_method'] === PaymentMethods::BANK_TRANSFER->value && $order['status'] === Status::PAID->value),
+                    Tables\Actions\Action::make('revert-card')
+                        ->icon('heroicon-o-check-circle')
+                        ->color('warning')
+                        ->label('Revertir pago')
+                        ->requiresConfirmation()
+                        ->modalHeading('¿Revertir pago?')
+                        ->modalDescription('Una vez que se confirme esta acción, el usuario pasará al estado Pendiente de pago y se realizará la devolución de su dinero en Culqi.')
+                        ->modalSubmitActionLabel('Confirmar')
+                        ->action(function (Order $order):void {
+                            $refund = Refund::run($order);
+                            if ($refund->status === "completa") {
+                                $order->update([
+                                    'status' => Status::UNPAID->value,
+                                    'culqi_id' => null
+                                ]);
+                                $order->user->update(['status' => Status::UNPAID->value]);
+                            }
+                        })->visible(fn(Order $order): bool => $order['payment_method'] === PaymentMethods::CREDIT_CARD->value && $order['status'] === Status::PAID->value),
                 ])
             ])
             ->bulkActions([
