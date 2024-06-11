@@ -33,7 +33,11 @@
     @if(in_array($user['status'], [
         \App\Concerns\Enums\Status::PENDING_APPROVAL_DATA->value,
         \App\Concerns\Enums\Status::SEND_TO_CHANCELLERY->value,
-        \App\Concerns\Enums\Status::FINISHED->value,
+        \App\Concerns\Enums\Status::ERROR_IN_CHANCELLERY->value,
+        \App\Concerns\Enums\Status::PENDING_ACCREDITATION->value,
+        \App\Concerns\Enums\Status::OBSERVED_ACCREDITATION->value,
+        \App\Concerns\Enums\Status::CANCEL_ACCREDITATION->value,
+        \App\Concerns\Enums\Status::ACCREDITED->value,
         \App\Concerns\Enums\Status::PENDING_CORRECT_DATA->value
     ]))
         <h3 class="text-white font-semibold text-3xl text-center mb-3">Want to use our complimentary shuttle service?</h3>
@@ -51,7 +55,11 @@
         @endif
 
         @if(in_array($user['status'], [
-            \App\Concerns\Enums\Status::FINISHED->value,
+            \App\Concerns\Enums\Status::ERROR_IN_CHANCELLERY->value,
+            \App\Concerns\Enums\Status::PENDING_ACCREDITATION->value,
+            \App\Concerns\Enums\Status::OBSERVED_ACCREDITATION->value,
+            \App\Concerns\Enums\Status::CANCEL_ACCREDITATION->value,
+            \App\Concerns\Enums\Status::ACCREDITED->value,
             \App\Concerns\Enums\Status::SEND_TO_CHANCELLERY->value
         ]))
             <div class="flex justify-center">
@@ -73,7 +81,11 @@
         @if(in_array($user['status'], [
             \App\Concerns\Enums\Status::PENDING_APPROVAL_DATA->value,
             \App\Concerns\Enums\Status::SEND_TO_CHANCELLERY->value,
-            \App\Concerns\Enums\Status::FINISHED->value,
+            \App\Concerns\Enums\Status::ERROR_IN_CHANCELLERY->value,
+            \App\Concerns\Enums\Status::PENDING_ACCREDITATION->value,
+            \App\Concerns\Enums\Status::OBSERVED_ACCREDITATION->value,
+            \App\Concerns\Enums\Status::CANCEL_ACCREDITATION->value,
+            \App\Concerns\Enums\Status::ACCREDITED->value,
             \App\Concerns\Enums\Status::PENDING_CORRECT_DATA->value
         ]))
             <a href="{{route('hotel')}}" class="btn btn-primary">Complete flight and  booking accomodation</a>

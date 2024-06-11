@@ -14,6 +14,11 @@ enum Status: string {
     case PAID = 'Pagada';
     case PAYMENT_REVIEW = 'Revisión de pago';
     case SEND_TO_CHANCELLERY = 'Enviado a cancillería';
-    case FINISHED = 'Finalizado';
+    case ERROR_IN_CHANCELLERY = 'Error con cancillería';
+
+    case PENDING_ACCREDITATION = 'Pendiente de acreditación';
+    case OBSERVED_ACCREDITATION = 'Acreditación observada';
+    case CANCEL_ACCREDITATION = 'Acreditación cancelada';
+    case ACCREDITED = 'Acreditado';
 
 }

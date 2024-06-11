@@ -79,7 +79,11 @@
                              x-transition.origin.top.left>
                             <a href="{{route('progress')}}" class="block px-3 py-1 text-sm leading-6" role="menuitem" tabindex="-1" id="user-menu-item-1">Register</a>
                             @if(in_array(auth()->user()->status, [
-                                \App\Concerns\Enums\Status::FINISHED->value,
+                                \App\Concerns\Enums\Status::ERROR_IN_CHANCELLERY->value,
+                                \App\Concerns\Enums\Status::PENDING_ACCREDITATION->value,
+                                \App\Concerns\Enums\Status::OBSERVED_ACCREDITATION->value,
+                                \App\Concerns\Enums\Status::CANCEL_ACCREDITATION->value,
+                                \App\Concerns\Enums\Status::ACCREDITED->value,
                                 \App\Concerns\Enums\Status::SEND_TO_CHANCELLERY->value,
                                 \App\Concerns\Enums\Status::PENDING_APPROVAL_DATA->value,
                                 \App\Concerns\Enums\Status::PAYMENT_REVIEW->value,
@@ -87,7 +91,11 @@
                                 <a href="{{route('hotel')}}" class="block px-3 py-1 text-sm leading-6" role="menuitem" tabindex="-1" id="user-menu-item-1">Flight and hotel</a>
                             @endif
                             @if(in_array(auth()->user()->status, [
-                                \App\Concerns\Enums\Status::FINISHED->value,
+                                \App\Concerns\Enums\Status::ERROR_IN_CHANCELLERY->value,
+                                \App\Concerns\Enums\Status::PENDING_ACCREDITATION->value,
+                                \App\Concerns\Enums\Status::OBSERVED_ACCREDITATION->value,
+                                \App\Concerns\Enums\Status::CANCEL_ACCREDITATION->value,
+                                \App\Concerns\Enums\Status::ACCREDITED->value,
                                 \App\Concerns\Enums\Status::SEND_TO_CHANCELLERY->value
                             ]))
                                 <a href="{{route('qr')}}" class="block px-3 py-1 text-sm leading-6" role="menuitem" tabindex="-1" id="user-menu-item-1">My QR</a>

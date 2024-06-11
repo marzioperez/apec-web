@@ -17,7 +17,11 @@ class Index extends Component {
         if (in_array($user['status'], [
             Status::PENDING_APPROVAL_DATA->value,
             Status::UNPAID->value,
-            Status::FINISHED->value,
+            Status::ERROR_IN_CHANCELLERY->value,
+            Status::PENDING_ACCREDITATION->value,
+            Status::OBSERVED_ACCREDITATION->value,
+            Status::CANCEL_ACCREDITATION->value,
+            Status::ACCREDITED->value,
             Status::SEND_TO_CHANCELLERY->value
         ])) {
             $this->user = $user;

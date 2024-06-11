@@ -134,6 +134,10 @@ class User extends Authenticatable {
 
         'lock_fields',
 
+        'chancellery_code',
+        'chancellery_sent_response',
+        'chancellery_receive_response',
+
         'parent_id'
     ];
 
@@ -160,6 +164,8 @@ class User extends Authenticatable {
             'send_invitation_to_staff' => 'boolean',
             'send_invitation_to_companion' => 'boolean',
             'require_special_assistance' => 'boolean',
+            'chancellery_sent_response' => 'json',
+            'chancellery_receive_response' => 'json'
         ];
     }
 

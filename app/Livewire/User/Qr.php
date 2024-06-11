@@ -13,7 +13,11 @@ class Qr extends Component {
     public function mount() {
         $user = auth()->user();
         if (in_array($user['status'], [
-            Status::FINISHED->value,
+            Status::ERROR_IN_CHANCELLERY->value,
+            Status::PENDING_ACCREDITATION->value,
+            Status::OBSERVED_ACCREDITATION->value,
+            Status::CANCEL_ACCREDITATION->value,
+            Status::ACCREDITED->value,
             Status::SEND_TO_CHANCELLERY->value
         ])) {
             $this->user = $user;

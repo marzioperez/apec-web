@@ -67,12 +67,13 @@ class SynSGEParameters extends Command {
     }
 
     public function handle() {
-        $this->base_request('evento', 'EVENT');
+        // $this->base_request('evento', 'EVENT');
         $event_code = Param::where('group', 'EVENT')->first()->value;
-        $this->base_request('titulo', 'TITLES', ['CodEvento' => $event_code]);
-        $this->base_request('genero', 'GENDERS', ['CodEvento' => $event_code]);
-        $this->base_request('tipodocumento', 'DOCUMENTS', ['CodEvento' => $event_code]);
-        $this->base_request('categoria', 'CATEGORIES', ['CodEvento' => $event_code]);
-        $this->economies(['CodEvento' => $event_code]);
+        $this->base_request('estado', 'STATUS', ['CodEvento' => $event_code]);
+//        $this->base_request('titulo', 'TITLES', ['CodEvento' => $event_code]);
+//        $this->base_request('genero', 'GENDERS', ['CodEvento' => $event_code]);
+//        $this->base_request('tipodocumento', 'DOCUMENTS', ['CodEvento' => $event_code]);
+//        $this->base_request('categoria', 'CATEGORIES', ['CodEvento' => $event_code]);
+//        $this->economies(['CodEvento' => $event_code]);
     }
 }

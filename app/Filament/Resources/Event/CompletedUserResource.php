@@ -321,6 +321,11 @@ class CompletedUserResource extends Resource
                     Status::SEND_TO_CHANCELLERY->value,
                     Status::PAYMENT_REVIEW->value,
                     Status::PENDING_CORRECT_DATA->value,
+                    Status::ERROR_IN_CHANCELLERY->value,
+                    Status::PENDING_ACCREDITATION->value,
+                    Status::OBSERVED_ACCREDITATION->value,
+                    Status::CANCEL_ACCREDITATION->value,
+                    Status::ACCREDITED->value,
                 ])
             )
             ->columns([
@@ -328,7 +333,14 @@ class CompletedUserResource extends Resource
                 TextColumn::make('last_name')->label('Apellidos')->searchable(),
                 TextColumn::make('email')->label('Email'),
                 TextColumn::make('type')->label('Tipo'),
-                TextColumn::make('status')->label('Estado')->badge()
+                TextColumn::make('status')->label('Estado')->badge()->color(fn (string $state): string => match ($state) {
+                    Status::PENDING_ACCREDITATION->value => 'success',
+                    Status::OBSERVED_ACCREDITATION->value => 'success',
+                    Status::CANCEL_ACCREDITATION->value => 'danger',
+                    Status::ACCREDITED->value => 'success',
+                    Status::ERROR_IN_CHANCELLERY->value => 'danger',
+                    default => 'primary'
+                })
             ])
             ->filters([
                 SelectFilter::make('type')->label('Tipo')
@@ -352,18 +364,15 @@ class CompletedUserResource extends Resource
                         ->modalDescription('Una vez que se confirme esta acción, el usuario recibirá su código QR de forma automática. Así como el envío de sus datos hacia Cancillería.')
                         ->modalSubmitActionLabel('Confirmar')
                         ->action(function (User $user):void {
+                            $qr = GenerateQrCode::run($user['code']);
+                            $user->update(['qr' => $qr]);
+
                             if (in_array($user['type'], [
                                 Types::PARTICIPANT->value,
                                 Types::STAFF->value,
                                 Types::COMPANION->value,
                                 Types::VIP->value
                             ])) {
-                                $user->update(['status' => Status::SEND_TO_CHANCELLERY->value]);
-                                $qr = GenerateQrCode::run($user['code']);
-                                $user->update([
-                                    'status' => Status::SEND_TO_CHANCELLERY->value,
-                                    'qr' => $qr
-                                ]);
                                 Mail::to($user['email'])->send(new CompleteDataSuccess($user));
                             }
 
@@ -372,16 +381,10 @@ class CompletedUserResource extends Resource
                                 Types::FREE_PASS_COMPANION->value,
                                 Types::FREE_PASS_STAFF->value
                             ])) {
-                                $qr = GenerateQrCode::run($user['code']);
-                                $user->update([
-                                    'status' => Status::SEND_TO_CHANCELLERY->value,
-                                    'qr' => $qr
-                                ]);
                                 Mail::to($user['email'])->send(new CompleteDataPassFree($user));
                             }
 
-                            // Todo: Implementar lógica para enviar datos a Cancillería
-//                            SendUserToChancellery::run($user);
+                            SendUserToChancellery::run($user);
                         })->visible(fn(User $user): bool => $user['status'] === Status::PENDING_APPROVAL_DATA->value),
                     Tables\Actions\Action::make('observe')
                         ->icon('heroicon-o-eye')
