@@ -38,6 +38,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Mail;
+use ValentinMorice\FilamentJsonColumn\FilamentJsonColumn;
 
 class CompletedUserResource extends Resource
 {
@@ -307,6 +308,10 @@ class CompletedUserResource extends Resource
                         ]),
                         Textarea::make('hotel_details')->label('Detalle')->columnSpanFull(),
                     ]),
+                    Tab::make('Información de Cancillería')->schema([
+                        FilamentJsonColumn::make('chancellery_sent_response')->viewerOnly()->label('Respuesta de Cancillería luego de enviar los datos')->columnSpanFull(),
+                        FilamentJsonColumn::make('chancellery_receive_response')->viewerOnly()->label('Datos enviados hacia el Webhook por parte de Cancillería')->columnSpanFull(),
+                    ])
                 ])->columnSpanFull()
             ]);
     }

@@ -21,6 +21,7 @@
         "spatie/eloquent-sortable": "^4.3",
         "spatie/laravel-settings": "^3.3",
         "spatie/laravel-sluggable": "^3.6",
+        "valentin-morice/filament-json-column": "^1.3",
         "vildanbina/laravel-model-json": "^2.0"
     },
     "require-dev": {
