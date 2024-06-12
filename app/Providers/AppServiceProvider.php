@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use Filament\Support\Assets\Css;
+use Filament\Support\Facades\FilamentAsset;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Component;
 
@@ -24,5 +27,8 @@ class AppServiceProvider extends ServiceProvider
             $this->dispatch('toast', message:$message, title: $title, type: $type);
         });
         VerifyCsrfToken::except(['webhook']);
+        FilamentAsset::register([
+            Css::make('back', __DIR__.'/../../resources/css/back.css'),
+        ]);
     }
 }

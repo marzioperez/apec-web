@@ -236,8 +236,8 @@ class CompletedUserResource extends Resource
                         ])->schema([
                             TextInput::make('badge_name')->label('Nombre')->required()->columnSpan(6),
                             TextInput::make('badge_last_name')->label('Apellidos')->required()->columnSpan(6),
-                            Forms\Components\FileUpload::make('badge_photo')->label('Foto')->required()->disk('badges')->downloadable()->openable()->columnSpanFull(),
-                            Forms\Components\FileUpload::make('identity_document')->disk('ids')->label('Documento de identidad')->required()->downloadable()->openable()->columnSpanFull(),
+                            Forms\Components\FileUpload::make('badge_photo')->label('Foto')->disk('badges')->downloadable()->openable()->columnSpanFull(),
+                            Forms\Components\FileUpload::make('identity_document')->disk('ids')->label('Documento de identidad')->downloadable()->openable()->columnSpanFull(),
                         ])
                     ]),
                     Tab::make('Información de vuelo')->schema([
@@ -307,6 +307,9 @@ class CompletedUserResource extends Resource
                             ])->columnSpan(6)
                         ]),
                         Textarea::make('hotel_details')->label('Detalle')->columnSpanFull(),
+                    ]),
+                    Tab::make('QR')->schema([
+                        Forms\Components\FileUpload::make('qr')->label('Código QR')->disk('qrs')->downloadable()->openable()->columnSpanFull(),
                     ]),
                     Tab::make('Información de Cancillería')->schema([
                         FilamentJsonColumn::make('chancellery_sent_response')->viewerOnly()->label('Respuesta de Cancillería luego de enviar los datos')->columnSpanFull(),
