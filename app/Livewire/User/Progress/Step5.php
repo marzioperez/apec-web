@@ -108,6 +108,12 @@ class Step5 extends Component {
             Types::FREE_PASS_PARTICIPANT->value,
             Types::FREE_PASS_COMPANION->value,
             Types::FREE_PASS_STAFF->value,
+            Types::STAFF_CP->value,
+            Types::SECURITY->value,
+            Types::PERSONAL_SECURITY->value,
+            Types::SUPPLIER->value,
+            Types::LIAISON->value,
+            Types::EXHIBITOR->value,
         ])) {
             Mail::to($this->user['email'])->send(new PaymentSuccess($this->user));
             $this->user->update(['status' => Status::PENDING_APPROVAL_DATA->value]);

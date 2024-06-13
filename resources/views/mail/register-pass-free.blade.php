@@ -8,9 +8,9 @@
     <div style="text-align: left; padding: 0 44px 44px;">
         <p style="font-size: 14px; margin-bottom: 10px;">Dear {{$user['name']}},</p>
 
-        <p style="font-size: 14px;">We are delighted to inform you that your registration for the APEC CEO Summit 2024 has been successfully processed. Please remember to bring your passport to collect your badge before the event.</p>
+        <p style="font-size: 14px;">We are delighted to inform you that you have been invited to attend the APEC CEO Summit 2024, the premier business event in the Asia-Pacific.</p>
 
-        <p style="font-size: 14px;">You now got access to new information in our website, including the accommodation alternatives and the option of sharing your flight details. If you would like to make use of our complimentary transfer service during the event, we highly encourage you to stay at one of the designated hotels and let us know your complete travel arrangements.</p>
+        <p style="font-size: 14px;">This year's Summit, taking place in Lima, Peru, from November 13<sup>th</sup> to 15<sup>th</sup>, promises to be an insightful gathering of global leaders from business, government, and academia, converging to discuss pivotal issues shaping the Asia-Pacific region and beyond.</p>
 
         <p style="font-size: 14px;">The Summit will offer a unique platform for you to connect with peers, explore innovative ideas, and foster strategic partnerships.</p>
 
@@ -23,11 +23,13 @@
             <a href="{{route('login')}}" style="color: #FFF; font-size: 14px; text-decoration: none; background-color: #75B42E; padding-bottom: 10px; padding-top: 10px; padding-left: 40px; padding-right: 40px; border-radius: 5px;">Log in</a>
         </div>
 
-        <p style="font-size: 14px;">We will be in touch with you to share the latest updates on the event. For more information, please visit our event website.</p>
+        <p style="font-size: 14px;">Upon logging in, you will access the registration system. Once your registration is complete and paid, you'll also get access to the information about the Summit agenda, venue, accommodation options, and other logistical aspects to assist with your planning.</p>
 
-        <p style="font-size: 14px; margin-bottom: 20px;">If you have any questions, feel free to contact us at <a href="mailto:registration@apecceosummit2024.com" style="color: #00A2F3;">registration@apecceosummit2024.com</a>.</p>
+        <p style="font-size: 14px;">Should you have any questions or require additional information, please do not hesitate to contact us at <a href="mailto:registration@apecceosummit2024.com" style="color: #00A2F3;">registration@apecceosummit2024.com</a>.</p>
 
-        <p style="font-size: 14px;">Warm regards,<br>
+        <p style="font-size: 14px; margin-bottom: 20px;">Our team is dedicated to ensuring that you have all the support you need for a productive and enjoyable experience at the Summit.</p>
+
+        <p style="font-size: 14px;">Sincerely<br>
             The APEC CEO Summit 2024 Host Committee</p>
     </div>
 

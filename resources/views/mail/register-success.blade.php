@@ -25,7 +25,7 @@
 
         <p style="font-size: 14px; margin-bottom: 10px;">If you have any questions or need additional information, please get in touch with us at <a href="mailto:registration@apecceosummit2024.com" style="color: #00A2F3;">registration@apecceosummit2024.com</a>.<p>
 
-        <p style="font-size: 14px; margin-bottom: 10px;">We are here to ensure you have a productive and enjoyable experience at the Summit.</p>
+        <p style="font-size: 14px; margin-bottom: 10px;">We are here to ensure you have a productive and enjoyable experience at the Summit!</p>
 
         <p style="font-size: 14px;">Yours sincerely,<br>
             The APEC CEO Summit 2024 Host Committee</p>

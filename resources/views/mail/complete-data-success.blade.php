@@ -22,7 +22,7 @@
         <p style="font-size: 14px; text-align: center; margin-bottom: 20px;">For more information you can visit us on the event <a href="{{config('app.url')}}" target="_blank" style="color: #00A2F3;">website</a>.
             <br>If you have any questions, feel free to contact us at <a href="mailto:registration@apecceosummit2024.com" style="color: #00A2F3;">registration@apecceosummit2024.com</a></p>
 
-        <p style="font-size: 14px;">Best regards,<br>
+        <p style="font-size: 14px;">Warm regards,<br>
             The APEC CEO Summit 2024 Host Committee</p>
     </div>
 

@@ -18,7 +18,13 @@ class Index extends Component {
             Types::STAFF->value,
             Types::STAFF_CP->value,
             Types::COMPANION->value,
-            Types::FREE_PASS_COMPANION->value
+            Types::FREE_PASS_COMPANION->value,
+            Types::FREE_PASS_STAFF->value,
+            Types::SECURITY->value,
+            Types::PERSONAL_SECURITY->value,
+            Types::SUPPLIER->value,
+            Types::LIAISON->value,
+            Types::EXHIBITOR->value
         ])) {
             $this->redirect(route('guest-progress'));
         }
