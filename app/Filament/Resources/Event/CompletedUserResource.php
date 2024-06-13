@@ -337,10 +337,10 @@ class CompletedUserResource extends Resource
                 ])
             )
             ->columns([
-                TextColumn::make('name')->label('Nombres')->searchable(),
-                TextColumn::make('last_name')->label('Apellidos')->searchable(),
-                TextColumn::make('email')->label('Email'),
-                TextColumn::make('type')->label('Tipo'),
+                TextColumn::make('name')->label('Nombres')->searchable()->sortable(),
+                TextColumn::make('last_name')->label('Apellidos')->searchable()->sortable(),
+                TextColumn::make('email')->label('Email')->searchable()->sortable(),
+                TextColumn::make('type')->label('Tipo')->sortable(),
                 TextColumn::make('status')->label('Estado')->badge()->color(fn (string $state): string => match ($state) {
                     Status::PENDING_ACCREDITATION->value => 'success',
                     Status::OBSERVED_ACCREDITATION->value => 'success',
@@ -348,7 +348,8 @@ class CompletedUserResource extends Resource
                     Status::ACCREDITED->value => 'success',
                     Status::ERROR_IN_CHANCELLERY->value => 'danger',
                     default => 'primary'
-                })
+                }),
+                TextColumn::make('created_at')->label('Fecha de registro')->date('d/m/Y H:i')->sortable(),
             ])
             ->filters([
                 SelectFilter::make('type')->label('Tipo')

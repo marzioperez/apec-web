@@ -107,10 +107,11 @@ class UserResource extends Resource {
                 ])
             )
             ->columns([
-                TextColumn::make('name')->label('Nombres')->searchable(),
-                TextColumn::make('last_name')->label('Apellidos')->searchable(),
-                TextColumn::make('email')->label('Email')->searchable(),
-                TextColumn::make('type')->label('Tipo'),
+                TextColumn::make('name')->label('Nombres')->searchable()->sortable(),
+                TextColumn::make('last_name')->label('Apellidos')->searchable()->sortable(),
+                TextColumn::make('email')->label('Email')->searchable()->sortable(),
+                TextColumn::make('type')->label('Tipo')->sortable(),
+                TextColumn::make('created_at')->label('Fecha de registro')->date('d/m/Y H:i')->sortable(),
                 TextColumn::make('status')->label('Estado')->badge()
                     ->color(fn (string $state): string => match ($state) {
                         Status::CONFIRMED->value => 'success',
@@ -123,11 +124,23 @@ class UserResource extends Resource {
                 SelectFilter::make('type')->label('Tipo')
                     ->multiple()
                     ->options([
+                        Types::PARTICIPANT->value => Types::PARTICIPANT->value,
                         Types::COMPANION->value => Types::COMPANION->value,
                         Types::STAFF->value => Types::STAFF->value,
+                        Types::FREE_PASS_PARTICIPANT->value => Types::FREE_PASS_PARTICIPANT->value,
                         Types::FREE_PASS_COMPANION->value => Types::FREE_PASS_COMPANION->value,
                         Types::FREE_PASS_STAFF->value => Types::FREE_PASS_STAFF->value,
-                    ])
+                        Types::VIP->value => Types::VIP->value,
+                        Types::STAFF_CP->value => Types::STAFF_CP->value,
+                        Types::SUPPLIER->value => Types::SUPPLIER->value,
+                        Types::PERSONAL_SECURITY->value => Types::PERSONAL_SECURITY->value,
+                        Types::SECURITY->value => Types::SECURITY->value,
+                        Types::LIAISON->value => Types::LIAISON->value,
+                        Types::EXHIBITOR->value => Types::EXHIBITOR->value,
+                    ]),
+                SelectFilter::make('economy')->label('Economía')
+                    ->multiple()
+                    ->options(Economy::all()->pluck('name', 'id')),
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([

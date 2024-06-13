@@ -23,6 +23,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Mail;
@@ -231,7 +232,13 @@ class OrderResource extends Resource
                 TextColumn::make('created_at')->date('d/m/Y H:i')->label('Fecha de registro'),
             ])
             ->filters([
-                //
+                SelectFilter::make('status')->label('Estado')
+                    ->multiple()
+                    ->options([
+                        Status::PAID->value => Status::PAID->value,
+                        Status::UNPAID->value => Status::UNPAID->value,
+                        Status::PAYMENT_REVIEW->value => Status::PAYMENT_REVIEW->value,
+                    ]),
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([

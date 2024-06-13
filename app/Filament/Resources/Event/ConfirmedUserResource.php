@@ -8,6 +8,7 @@ use App\Concerns\Enums\Titles;
 use App\Concerns\Enums\Types;
 use App\Filament\Resources\Event\ConfirmedUserResource\Pages;
 use App\Filament\Resources\Event\ConfirmedUserResource\RelationManagers;
+use App\Models\Economy;
 use App\Models\Param;
 use App\Models\User;
 use Filament\Forms;
@@ -305,22 +306,34 @@ class ConfirmedUserResource extends Resource
                 $query->where('status', Status::CONFIRMED->value)
             )
             ->columns([
-                TextColumn::make('name')->label('Nombres')->searchable(),
-                TextColumn::make('last_name')->label('Apellidos')->searchable(),
-                TextColumn::make('email')->label('Email'),
-                TextColumn::make('type')->label('Tipo'),
-                TextColumn::make('register_progress')->label('Progreso')->badge()->color('info')->suffix('%'),
+                TextColumn::make('name')->label('Nombres')->searchable()->sortable(),
+                TextColumn::make('last_name')->label('Apellidos')->searchable()->sortable(),
+                TextColumn::make('email')->label('Email')->searchable()->sortable(),
+                TextColumn::make('type')->label('Tipo')->sortable(),
+                TextColumn::make('register_progress')->label('Progreso')->badge()->color('info')->suffix('%')->sortable(),
+                TextColumn::make('created_at')->label('Fecha de registro')->date('d/m/Y H:i')->sortable(),
             ])
             ->filters([
                 SelectFilter::make('type')->label('Tipo')
                     ->multiple()
                     ->options([
+                        Types::PARTICIPANT->value => Types::PARTICIPANT->value,
                         Types::COMPANION->value => Types::COMPANION->value,
                         Types::STAFF->value => Types::STAFF->value,
+                        Types::FREE_PASS_PARTICIPANT->value => Types::FREE_PASS_PARTICIPANT->value,
                         Types::FREE_PASS_COMPANION->value => Types::FREE_PASS_COMPANION->value,
                         Types::FREE_PASS_STAFF->value => Types::FREE_PASS_STAFF->value,
                         Types::VIP->value => Types::VIP->value,
-                    ])
+                        Types::STAFF_CP->value => Types::STAFF_CP->value,
+                        Types::SUPPLIER->value => Types::SUPPLIER->value,
+                        Types::PERSONAL_SECURITY->value => Types::PERSONAL_SECURITY->value,
+                        Types::SECURITY->value => Types::SECURITY->value,
+                        Types::LIAISON->value => Types::LIAISON->value,
+                        Types::EXHIBITOR->value => Types::EXHIBITOR->value,
+                    ]),
+                SelectFilter::make('economy')->label('Economía')
+                    ->multiple()
+                    ->options(Economy::all()->pluck('name', 'id')),
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
