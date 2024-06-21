@@ -83,7 +83,6 @@ class SendUserToChancellery {
             'ArchivoFoto' => "data:image/{$user['badge_extension']};base64,". base64_encode(file_get_contents(storage_path('app/public/badges/' . $user['badge_photo']))),
             'ExtArchivoFoto' => strtoupper($user['badge_extension'])
         ];
-        dd($body);
 
         Storage::disk('sends')->put("send-{$user['id']}.json", json_encode($body));
         try {
