@@ -30,7 +30,7 @@
                                         <input type="checkbox" name="filters" id="{{$value}}" wire:model.live="filters" value="{{$value}}">
                                         <label class="fi-fo-field-wrp-label inline-flex items-center gap-x-3" for="{{$value}}">
                                             <span class="text-sm font-medium leading-6 text-gray-950 dark:text-white">
-                                                {{$label}}<sup class="text-danger-600 dark:text-danger-400 font-medium">*</sup>
+                                                {{$label}}
                                             </span>
                                         </label>
                                     </div>

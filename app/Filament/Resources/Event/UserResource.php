@@ -111,6 +111,7 @@ class UserResource extends Resource {
                 TextColumn::make('last_name')->label('Apellidos')->searchable()->sortable(),
                 TextColumn::make('email')->label('Email')->searchable()->sortable(),
                 TextColumn::make('type')->label('Tipo')->sortable(),
+                TextColumn::make('rel_economy.name')->label('Economía')->sortable(),
                 TextColumn::make('created_at')->label('Fecha de registro')->date('d/m/Y H:i')->sortable(),
                 TextColumn::make('status')->label('Estado')->badge()
                     ->color(fn (string $state): string => match ($state) {
