@@ -45,4 +45,30 @@
             </div>
         </x-slot:body>
     </x-modal>
+
+    <x-modal name="modal-status-ok">
+        <x-slot:body>
+            <button type="button" class="absolute z-30 top-3 right-3" x-data x-on:click="$dispatch('close-modal')">
+                <svg class="fill-gray-400" height="10px" width="10px" viewBox="0 0 460.775 460.775" xml:space="preserve">
+                    <path d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55
+	c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55
+	c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505
+	c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55
+	l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719
+	c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"/>
+                </svg>
+            </button>
+            <div class="flex justify-center mb-3">
+                <svg width="62" height="62" viewBox="0 0 82 82" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="13" y="15" width="46" height="42" fill="white"/>
+                    <path d="M41 0C18.3563 0 0 18.3563 0 41C0 63.6437 18.3563 82 41 82C63.6437 82 82 63.6437 82 41C82 18.3563 63.6437 0 41 0ZM58.5921 19.2037L67.1104 27.722L40.5045 54.3331L32.0362 62.7963L23.5179 54.278L14.8895 45.6445L23.3528 37.1812L31.9812 45.8146L58.5921 19.2037Z" fill="#009600"/>
+                </svg>
+            </div>
+            <div class="text-center">
+                <h1 class="font-bold text-lg mb-3">Your password has been successfully reset.</h1>
+                <div class="mb-5">Please check your email.</div>
+                <a href="{{route('login')}}" class="btn btn-primary">Go to login</a>
+            </div>
+        </x-slot:body>
+    </x-modal>
 </div>

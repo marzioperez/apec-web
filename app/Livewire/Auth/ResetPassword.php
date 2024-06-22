@@ -28,7 +28,8 @@ class ResetPassword extends Component {
             $new_password = Str::slug($exists->phone);
             $exists->update(['password' => $new_password]);
             Mail::to($this->email)->send(new \App\Mail\ResetPassword($exists, $new_password));
-            $this->toast('Your password has been successfully reset. Please check your email.');
+            // $this->toast('Your password has been successfully reset. Please check your email.');
+            $this->dispatch('open-modal', name: 'modal-status-ok');
         } else {
             $this->dispatch('open-modal', name: 'modal-status-error');
         }
