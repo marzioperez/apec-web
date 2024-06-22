@@ -17,6 +17,8 @@ class Users extends Component {
 
     public function mount() {
         $this->fields = [
+            ['label' => 'Tipo de usuario', 'value' => 'type'],
+            ['label' => 'Estado de usuario', 'value' => 'status'],
             ['label' => 'Título', 'value' => 'title_name'],
             ['label' => 'Nombres', 'value' => 'name'],
             ['label' => 'Apellido', 'value' => 'last_name'],
@@ -54,73 +56,60 @@ class Users extends Component {
             ['label' => 'Detalles de alergias', 'value' => 'allergy_details'],
             ['label' => 'Vacunas', 'value' => 'vaccines'],
 
-            'medical_others',
-            'medical_treatment',
-            'medical_treatment_details',
-            'taking_any_medication',
-            'chemical_name',
-            'brand_trade_name',
-            'dosis',
-            'frequency',
-//
-//            'dr_name',
-//            'dr_last_name',
-//            'dr_number',
-//            'dr_email',
-//
-//            'insurance_company',
-//            'insurance_id_number',
-//            'insurance_phone',
-//            'insurance_other_specifications',
-//
-//            'badge_name',
-//            'badge_last_name',
-//            'badge_photo',
-//            'badge_extension',
-//            'identity_document',
-//            'identity_extension',
-//
-//            // Información de asistente (Opcional)
-//            'attendee_name',
-//            'attendee_email',
-//            'send_copy_of_registration',
-//            'accept_terms_and_conditions',
-//
-//            // QR
-//            'qr',
-//
-//            'observation',
-//            'amount',
-//
-//            'arrived_air_line',
-//            'arrived_origin',
-//            'arrived_flight_number',
-//            'arrived_date',
-//            'arrived_time',
-//
-//            'exit_air_line',
-//            'exit_destination',
-//            'exit_flight_number',
-//            'exit_date',
-//            'exit_time',
-//
-//            'flight_contact_number',
-//            'flight_free_transportation',
-//            'flight_details',
-//            'flight_email_sent',
-//            'flight_hotel_step',
-//
-//            'hotel_name',
-//            'hotel_room',
-//            'hotel_price',
-//            'hotel_conditions_and_payment',
-//            'hotel_check_in_date',
-//            'hotel_check_in_hour',
-//            'hotel_check_out_date',
-//            'hotel_check_out_hour',
-//            'hotel_details',
-//
-//            'chancellery_code',
+            ['label' => 'Tratamiento médico', 'value' => 'medical_treatment'],
+            ['label' => 'Detalle tratamiento mécido', 'value' => 'medical_treatment_details'],
+            ['label' => 'Otros datos médicos', 'value' => 'medical_others'],
+            ['label' => 'Toma alguna medicación', 'value' => 'taking_any_medication'],
+            ['label' => 'Nombre químico', 'value' => 'chemical_name'],
+            ['label' => 'Nombre comercial', 'value' => 'brand_trade_name'],
+            ['label' => 'Dosis', 'value' => 'dosis'],
+            ['label' => 'Frecuencia', 'value' => 'frequency'],
+
+            ['label' => 'Nombre del doctor', 'value' => 'dr_name'],
+            ['label' => 'Apellido del doctor', 'value' => 'dr_last_name'],
+            ['label' => 'Nro. del doctor', 'value' => 'dr_number'],
+            ['label' => 'Email del doctor', 'value' => 'dr_email'],
+
+            ['label' => 'Compañía de seguros', 'value' => 'insurance_company'],
+            ['label' => 'ID de seguro', 'value' => 'insurance_id_number'],
+            ['label' => 'Teléfono de seguro', 'value' => 'insurance_phone'],
+            ['label' => 'Otras datos del seguro', 'value' => 'insurance_other_specifications'],
+
+            ['label' => 'Nombre para Badge', 'value' => 'badge_name'],
+            ['label' => 'Apellido para Badge', 'value' => 'badge_last_name'],
+
+            ['label' => 'Nombre asistente', 'value' => 'attendee_name'],
+            ['label' => 'Email asistente', 'value' => 'attendee_email'],
+
+            ['label' => 'Monto a pagar', 'value' => 'amount'],
+
+            ['label' => 'Llegada - Línea aérea',  'value' => 'arrived_air_line'],
+            ['label' => 'Llegada - Origen',  'value' => 'arrived_origin'],
+            ['label' => 'Llegada - Número de vuelo',  'value' => 'arrived_flight_number'],
+            ['label' => 'Llegada - Fecha',  'value' => 'arrived_date'],
+            ['label' => 'Llegada - Hora',  'value' => 'arrived_time'],
+
+            ['label' => 'Salida - Línea aérea',  'value' => 'exit_air_line'],
+            ['label' => 'Salida - Destino',  'value' => 'exit_destination'],
+            ['label' => 'Salida - Número de vuelo',  'value' => 'exit_flight_number'],
+            ['label' => 'Salida - Fecha',  'value' => 'exit_date'],
+            ['label' => 'Salida - Hora',  'value' => 'exit_time'],
+
+            ['label' => 'Vuelo - Número de contacto', 'value' => 'flight_contact_number'],
+            ['label' => 'Vuelo - Requiere transporte gratuito', 'value' => 'flight_free_transportation_name'],
+            ['label' => 'Vuelo - Detalles', 'value' => 'flight_details'],
+
+            ['label' => 'Nombre de hotel', 'value' => 'hotel_name'],
+            ['label' => 'Número de habitación', 'value' => 'hotel_room'],
+            ['label' => 'Precio hotel', 'value' => 'hotel_price'],
+            ['label' => 'Condiciones y pago de hotel', 'value' => 'hotel_conditions_and_payment'],
+            ['label' => 'Fecha de Check in', 'value' => 'hotel_check_in_date'],
+            ['label' => 'Hora de Check in', 'value' => 'hotel_check_in_hour'],
+            ['label' => 'Fecha de Check out', 'value' => 'hotel_check_out_date'],
+            ['label' => 'Hora de Check out', 'value' => 'hotel_check_out_hour'],
+            ['label' => 'Detalle de hotel', 'value' => 'hotel_details'],
+
+            ['label' => 'Código de cancillería', 'value' => 'chancellery_code'],
         ];
     }
 

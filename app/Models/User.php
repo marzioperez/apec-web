@@ -196,6 +196,10 @@ class User extends Authenticatable {
         return ($this->allergies ? 'Si' : 'No');
     }
 
+    public function getFlightFreeTransportationNameAttribute() :string {
+        return ($this->flight_free_transportation ? 'Si' : 'No');
+    }
+
     public function parent(): HasOne {
         return $this->hasOne(User::class, 'id', 'parent_id');
     }
