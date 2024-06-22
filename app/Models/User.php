@@ -200,6 +200,10 @@ class User extends Authenticatable {
         return ($this->flight_free_transportation ? 'Si' : 'No');
     }
 
+    public function getCreatedAtFormatAttribute() {
+        return $this->created_at->format('d/m/Y H:i');
+    }
+
     public function parent(): HasOne {
         return $this->hasOne(User::class, 'id', 'parent_id');
     }

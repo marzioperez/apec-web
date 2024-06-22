@@ -5,6 +5,7 @@ namespace App\Livewire\Report;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 use function PHPUnit\Framework\isFalse;
 
 class Users extends Component {
@@ -17,6 +18,7 @@ class Users extends Component {
 
     public function mount() {
         $this->fields = [
+            ['label' => 'Fecha de registro', 'value' => 'created_at_format'],
             ['label' => 'Tipo de usuario', 'value' => 'type'],
             ['label' => 'Estado de usuario', 'value' => 'status'],
             ['label' => 'Título', 'value' => 'title_name'],
@@ -125,6 +127,10 @@ class Users extends Component {
                 $this->columns = $columns;
             }
         }
+    }
+
+    public function export() {
+        return Excel::download(new \App\Exports\Users($this->columns, $this->filters), 'users.xlsx');
     }
 
     public function render() {
