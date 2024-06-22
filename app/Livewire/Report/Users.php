@@ -4,67 +4,64 @@ namespace App\Livewire\Report;
 
 use App\Models\User;
 use Livewire\Component;
+use Livewire\WithPagination;
+use function PHPUnit\Framework\isFalse;
 
 class Users extends Component {
 
+    use WithPagination;
+
     public $fields = [];
-    public $users = [];
     public $filters = [];
     public $columns = [];
 
     public function mount() {
         $this->fields = [
-            ['title' => 'Título'],
-            ['name' => 'Nombres'],
-            ['last_name' => 'Apellido'],
-            ['email' => 'Email'],
-            ['gender' => 'Sexo'],
-            ['document_type' => 'Tipo de document'],
-            ['document_number' => 'Número de documento'],
-            ['business' => 'Empresa'],
-            ['economy' => 'Economía'],
-            ['other_economy' => 'Otra economía'],
-            ['business_description' => 'Descripción de la empresa'],
-            ['business_email' => 'Email de la empresa'],
-            ['role' => 'Cargo'],
-            ['area' => 'Área'],
-            ['address' => 'Dirección'],
-            ['city' => 'Ciudad'],
-            ['zip_code' => 'Código ZIP'],
-            ['business_phone_number' => 'Teléfono empresa'],
-            ['biography' => 'Biografía'],
-            ['phone' => 'Celular'],
+            ['label' => 'Título', 'value' => 'title_name'],
+            ['label' => 'Nombres', 'value' => 'name'],
+            ['label' => 'Apellido', 'value' => 'last_name'],
+            ['label' => 'Email', 'value' => 'email'],
+            ['label' => 'Sexo', 'value' => 'gender_name'],
+            ['label' => 'Tipo de documento', 'value' => 'document_type_name'],
+            ['label' => 'Número de documento', 'value' => 'document_number'],
+            ['label' => 'Empresa', 'value' => 'business'],
+            ['label' => 'Economía', 'value' => 'economy_name'],
+            ['label' => 'Otra economía', 'value' => 'other_economy'],
+            ['label' => 'Descripción de la empresa', 'value' => 'business_description'],
+            ['label' => 'Email de la empresa', 'value' => 'business_email'],
+            ['label' => 'Cargo', 'value' => 'role'],
+            ['label' => 'Área', 'value' => 'area'],
+            ['label' => 'Dirección', 'value' => 'address'],
+            ['label' => 'Ciudad', 'value' => 'city'],
+            ['label' => 'Código ZIP', 'value' => 'zip_code'],
+            ['label' => 'Teléfono empresa', 'value' => 'business_phone_number'],
+            ['label' => 'Biografía', 'value' => 'biography'],
+            ['label' => 'Celular', 'value' => 'phone'],
 
-            ['date_of_issue' => 'Fecha de emisión'],
-            ['place_of_issue' => 'Lugar de emisión'],
-            ['date_of_birth' => 'Fecha de nacimiento'],
-            ['nationality' => 'Nacionalidad'],
-            ['city_of_permanent_residency' => 'Ciudad de residencia'],
+            ['label' => 'Fecha de emisión', 'value' => 'date_of_issue'],
+            ['label' => 'Lugar de emisión', 'value' => 'place_of_issue'],
+            ['label' => 'Fecha de nacimiento', 'value' => 'date_of_birth'],
+            ['label' => 'Nacionalidad', 'value' => 'nationality'],
+            ['label' => 'Ciudad de residencia', 'value' => 'city_of_permanent_residency'],
 
-            ['types_of_food' => 'Tipo de comida'],
-            ['require_special_assistance' => 'Requiere asistencia especial'],
-            ['special_assistance_details' => 'Detalle de asistencia especial'],
-            ['food_allergies' => 'Alergias a los alimentos'],
+            ['label' => 'Tipo de comida', 'value' => 'types_of_food'],
+            ['label' => 'Requiere asistencia especial', 'value' => 'require_special_assistance'],
+            ['label' => 'Detalle de asistencia especial', 'value' => 'special_assistance_details'],
+            ['label' => 'Alergias a los alimentos', 'value' => 'food_allergies'],
 
-            ['with_companion' => 'Lleva acompañante'],
-            ['companion_free' => 'Acompañante gratis'],
-            ['companion_amount' => 'Monto acompañante'],
-            ['with_staff' => 'Lleva Staffer'],
-            ['staff_free' => 'Staffer gratis'],
-            ['staff_amount' => 'Monto Staffer'],
+            ['label' => 'Tipo de sangre', 'value' => 'blood_type'],
+            ['label' => 'Alergias', 'value' => 'allergies_name'],
+            ['label' => 'Detalles de alergias', 'value' => 'allergy_details'],
+            ['label' => 'Vacunas', 'value' => 'vaccines'],
 
-            ['blood_type' => 'Tipo de sangre'],
-            ['allergies' => 'Alergias'],
-            ['allergy_details' => 'Detalles de alergias'],
-            ['vaccines' => 'Vacunas'],
-//            'medical_others',
-//            'medical_treatment',
-//            'medical_treatment_details',
-//            'taking_any_medication',
-//            'chemical_name',
-//            'brand_trade_name',
-//            'dosis',
-//            'frequency',
+            'medical_others',
+            'medical_treatment',
+            'medical_treatment_details',
+            'taking_any_medication',
+            'chemical_name',
+            'brand_trade_name',
+            'dosis',
+            'frequency',
 //
 //            'dr_name',
 //            'dr_last_name',
@@ -128,19 +125,34 @@ class Users extends Component {
     }
 
     public function process(): void {
-        $this->users = User::select($this->filters)->get()->toArray();
-        $columns = [];
-        foreach ($this->fields as $field) {
-            foreach ($field as $key => $value) {
-                if (in_array($key, $this->filters)) {
-                    $columns[] = $value;
+        if (count($this->filters) > 0) {
+            $columns = [];
+            foreach ($this->filters as $filter) {
+                foreach ($this->fields as $field) {
+                    if ($field['value'] === $filter) {
+                        $columns[] = $field;
+                    }
                 }
+                $this->columns = $columns;
             }
         }
-        $this->columns = $columns;
     }
 
     public function render() {
-        return view('livewire.report.users');
+        $users = [];
+        if (count($this->columns) > 0) {
+            $columns = [];
+            foreach ($this->filters as $filter) {
+                foreach ($this->fields as $field) {
+                    if ($field['value'] === $filter) {
+                        $columns[] = $field;
+                    }
+                }
+                $this->columns = $columns;
+            }
+            $model = User::query();
+            $users = $model->paginate(10);
+        }
+        return view('livewire.report.users', ['users' => $users]);
     }
 }

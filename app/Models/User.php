@@ -173,6 +173,29 @@ class User extends Authenticatable {
         return html_entity_decode(trim($this->name . ' ' . $this->last_name));
     }
 
+    public function getEconomyNameAttribute() :string {
+        return ($this->economy ? $this->rel_economy->name : '-');
+    }
+
+    public function getTitleNameAttribute() :string {
+        $param = Param::find($this->title);
+        return ($param ? $param->name : '-');
+    }
+
+    public function getGenderNameAttribute() :string {
+        $param = Param::find($this->gender);
+        return ($param ? $param->name : '-');
+    }
+
+    public function getDocumentTypeNameAttribute() :string {
+        $param = Param::find($this->document_type);
+        return ($param ? $param->name : '-');
+    }
+
+    public function getAllergiesNameAttribute() :string {
+        return ($this->allergies ? 'Si' : 'No');
+    }
+
     public function parent(): HasOne {
         return $this->hasOne(User::class, 'id', 'parent_id');
     }

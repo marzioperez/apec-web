@@ -1,7 +1,7 @@
 <div class="grid flex-1 auto-cols-fr gap-y-8">
 
     <div style="--cols-default: repeat(12, minmax(0, 1fr));" class="grid grid-cols-[--cols-default] fi-fo-component-ctn gap-6">
-        <div style="--col-span-default: span 4 / span 4;" class="col-[--col-span-default]">
+        <div style="--col-span-default: span 3 / span 3" class="col-[--col-span-default]">
             <section class="fi-section rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10" id="data.datos-de-formulario">
                 <header class="fi-section-header flex flex-col gap-3 px-6 py-4">
                     <div class="flex items-center gap-3">
@@ -14,23 +14,13 @@
                 <div class="fi-section-content-ctn border-t border-gray-200 dark:border-white/10">
                     <div class="fi-section-content p-6" style="height: 400px; overflow-y: scroll;">
                         @foreach($fields as $field)
-                            @php
-                                $label = null;
-                                $value = null;
-                            @endphp
-                            @foreach($field as $f => $fld)
-                                @php
-                                    $label = $fld;
-                                    $value = $f;
-                                @endphp
-                            @endforeach
                             <div data-field-wrapper="" class="fi-fo-field-wrp">
                                 <div class="grid gap-y-2">
-                                    <div class="flex items-center gap-x-3 ">
-                                        <input type="checkbox" name="filters" id="{{$value}}" wire:model.live="filters" value="{{$value}}">
-                                        <label class="fi-fo-field-wrp-label inline-flex items-center gap-x-3" for="{{$value}}">
+                                    <div class="flex gap-x-3 ">
+                                        <input type="checkbox" name="filters" id="{{$field['value']}}" wire:model.live="filters" value="{{$field['value']}}">
+                                        <label class="fi-fo-field-wrp-label inline-flex items-center gap-x-3" for="{{$field['value']}}">
                                             <span class="text-sm font-medium leading-6 text-gray-950 dark:text-white">
-                                                {{$label}}
+                                                {{$field['label']}}
                                             </span>
                                         </label>
                                     </div>
@@ -55,8 +45,8 @@
             </div>
         </div>
 
-        <div style="--col-span-default: span 8 / span 8;" class="col-[--col-span-default]">
-            @if(empty($users))
+        <div style="--col-span-default: span 9 / span 9;" class="col-[--col-span-default]">
+            @if(empty($columns))
                 <div class="fi-ta-content relative divide-y divide-gray-200 overflow-x-auto dark:divide-white/10 dark:border-t-white/10 !border-t-0">
                     <div class="fi-ta-empty-state px-6 py-12">
                         <div class="fi-ta-empty-state-content mx-auto grid max-w-lg justify-items-center text-center">
@@ -80,20 +70,22 @@
                                     @foreach($columns as $column)
                                         <th class="fi-ta-header-cell px-3 py-3.5 sm:first-of-type:ps-6 sm:last-of-type:pe-6 fi-table-header-cell-name">
                                             <span class="group flex w-full items-center gap-x-1 whitespace-nowrap justify-start">
-                                                <span class="fi-ta-header-cell-label text-sm font-semibold text-gray-950 dark:text-white">{{$column}}</span>
+                                                <span class="fi-ta-header-cell-label text-sm font-semibold text-gray-950 dark:text-white">
+                                                    {{$column['label']}}
+                                                </span>
                                             </span>
                                         </th>
                                     @endforeach
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200 whitespace-nowrap dark:divide-white/5">
-                                @foreach($this->users as $user)
+                                @foreach($users as $user)
                                     <tr class="fi-ta-row [@media(hover:hover)]:transition [@media(hover:hover)]:duration-75 hover:bg-gray-50 dark:hover:bg-white/5">
-                                        @foreach ($user as $key => $value)
+                                        @foreach ($filters as $filter)
                                             <td class="fi-ta-header-cell px-3 py-3.5 sm:first-of-type:ps-6 sm:last-of-type:pe-6 fi-table-header-cell-name">
                                                 <span class="group flex w-full items-center gap-x-1 whitespace-nowrap justify-start">
                                                     <span class="fi-ta-header-cell-label text-sm text-gray-950 dark:text-white">
-                                                        {{$value}}
+                                                        {{$user[$filter]}}
                                                     </span>
                                                 </span>
                                             </td>
@@ -104,6 +96,9 @@
                         </table>
                     </div>
                 </div>
+                @if(count($users) > 0)
+                    <div class="mt-6">{{$users->links()}}</div>
+                @endif
             @endif
         </div>
     </div>
