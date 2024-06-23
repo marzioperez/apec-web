@@ -5,11 +5,13 @@ namespace App\Filament\Widgets;
 use App\Concerns\Enums\Status;
 use App\Models\Order;
 use App\Models\User;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
-class StatsOverview extends BaseWidget
-{
+class StatsOverview extends BaseWidget {
+
+    use HasWidgetShield;
     protected function getStats(): array {
         $total_users = User::all()->count();
         $pending_approve_users = User::where('status', Status::PENDING_APPROVAL_DATA)->get()->count();

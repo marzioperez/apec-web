@@ -4,12 +4,15 @@ namespace App\Filament\Widgets;
 
 use App\Concerns\Enums\Status;
 use App\Models\Order;
+use BezhanSalleh\FilamentShield\Traits\HasWidgetShield;
 use Carbon\Carbon;
 use Filament\Widgets\ChartWidget;
 use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;
 
 class OrdersChart extends ChartWidget {
+
+    use HasWidgetShield;
     protected static ?string $heading = "Ingresos obtenidos durante el año";
     protected int | string | array $columnSpan = 'full';
     protected static ?string $maxHeight = '200px';
