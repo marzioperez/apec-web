@@ -20,6 +20,7 @@
         "@ksedline/turnjs": "^0.1.0",
         "@splidejs/splide": "^4.1.4",
         "flatpickr": "^4.6.13",
-        "pikaday": "^1.8.2"
+        "pikaday": "^1.8.2",
+        "qr-scanner": "^1.4.2"
     }
 }
