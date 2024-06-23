@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\Admin;
-use App\Models\Hotel;
+use App\Models\CategorySponsor;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class HotelPolicy
+class CategorySponsorPolicy
 {
     use HandlesAuthorization;
 
@@ -15,15 +15,15 @@ class HotelPolicy
      */
     public function viewAny(Admin $admin): bool
     {
-        return $admin->can('view_any_event::hotel');
+        return $admin->can('view_any_event::category::sponsor');
     }
 
     /**
      * Determine whether the admin can view the model.
      */
-    public function view(Admin $admin, Hotel $hotel): bool
+    public function view(Admin $admin, CategorySponsor $categorySponsor): bool
     {
-        return $admin->can('view_event::hotel');
+        return $admin->can('view_event::category::sponsor');
     }
 
     /**
@@ -31,23 +31,23 @@ class HotelPolicy
      */
     public function create(Admin $admin): bool
     {
-        return $admin->can('create_event::hotel');
+        return $admin->can('create_event::category::sponsor');
     }
 
     /**
      * Determine whether the admin can update the model.
      */
-    public function update(Admin $admin, Hotel $hotel): bool
+    public function update(Admin $admin, CategorySponsor $categorySponsor): bool
     {
-        return $admin->can('update_event::hotel');
+        return $admin->can('update_event::category::sponsor');
     }
 
     /**
      * Determine whether the admin can delete the model.
      */
-    public function delete(Admin $admin, Hotel $hotel): bool
+    public function delete(Admin $admin, CategorySponsor $categorySponsor): bool
     {
-        return $admin->can('delete_event::hotel');
+        return $admin->can('delete_event::category::sponsor');
     }
 
     /**
@@ -55,13 +55,13 @@ class HotelPolicy
      */
     public function deleteAny(Admin $admin): bool
     {
-        return $admin->can('delete_any_event::hotel');
+        return $admin->can('delete_any_event::category::sponsor');
     }
 
     /**
      * Determine whether the admin can permanently delete.
      */
-    public function forceDelete(Admin $admin, Hotel $hotel): bool
+    public function forceDelete(Admin $admin, CategorySponsor $categorySponsor): bool
     {
         return $admin->can('{{ ForceDelete }}');
     }
@@ -77,9 +77,9 @@ class HotelPolicy
     /**
      * Determine whether the admin can restore.
      */
-    public function restore(Admin $admin, Hotel $hotel): bool
+    public function restore(Admin $admin, CategorySponsor $categorySponsor): bool
     {
-        return $admin->can('restore_event::hotel');
+        return $admin->can('restore_event::category::sponsor');
     }
 
     /**
@@ -87,15 +87,15 @@ class HotelPolicy
      */
     public function restoreAny(Admin $admin): bool
     {
-        return $admin->can('restore_any_event::hotel');
+        return $admin->can('restore_any_event::category::sponsor');
     }
 
     /**
      * Determine whether the admin can replicate.
      */
-    public function replicate(Admin $admin, Hotel $hotel): bool
+    public function replicate(Admin $admin, CategorySponsor $categorySponsor): bool
     {
-        return $admin->can('replicate_event::hotel');
+        return $admin->can('replicate_event::category::sponsor');
     }
 
     /**
@@ -103,6 +103,6 @@ class HotelPolicy
      */
     public function reorder(Admin $admin): bool
     {
-        return $admin->can('reorder_event::hotel');
+        return $admin->can('reorder_event::category::sponsor');
     }
 }

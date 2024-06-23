@@ -4,41 +4,105 @@ namespace App\Policies;
 
 use App\Models\Admin;
 use App\Models\Post;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PostPolicy
 {
+    use HandlesAuthorization;
+
     /**
-     * Determine whether the user can view any models.
+     * Determine whether the admin can view any models.
      */
-    public function viewAny(Admin $admin): bool {
+    public function viewAny(Admin $admin): bool
+    {
         return $admin->can('view_any_c::m::s::post');
     }
 
     /**
-     * Determine whether the user can view the model.
+     * Determine whether the admin can view the model.
      */
-    public function view(Admin $admin, Post $post): bool {
+    public function view(Admin $admin, Post $post): bool
+    {
         return $admin->can('view_c::m::s::post');
     }
 
     /**
-     * Determine whether the user can create models.
+     * Determine whether the admin can create models.
      */
-    public function create(Admin $admin): bool {
+    public function create(Admin $admin): bool
+    {
         return $admin->can('create_c::m::s::post');
     }
 
     /**
-     * Determine whether the user can update the model.
+     * Determine whether the admin can update the model.
      */
-    public function update(Admin $admin, Post $post): bool {
+    public function update(Admin $admin, Post $post): bool
+    {
         return $admin->can('update_c::m::s::post');
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * Determine whether the admin can delete the model.
      */
-    public function delete(Admin $admin, Post $post): bool {
+    public function delete(Admin $admin, Post $post): bool
+    {
         return $admin->can('delete_c::m::s::post');
+    }
+
+    /**
+     * Determine whether the admin can bulk delete.
+     */
+    public function deleteAny(Admin $admin): bool
+    {
+        return $admin->can('delete_any_c::m::s::post');
+    }
+
+    /**
+     * Determine whether the admin can permanently delete.
+     */
+    public function forceDelete(Admin $admin, Post $post): bool
+    {
+        return $admin->can('{{ ForceDelete }}');
+    }
+
+    /**
+     * Determine whether the admin can permanently bulk delete.
+     */
+    public function forceDeleteAny(Admin $admin): bool
+    {
+        return $admin->can('{{ ForceDeleteAny }}');
+    }
+
+    /**
+     * Determine whether the admin can restore.
+     */
+    public function restore(Admin $admin, Post $post): bool
+    {
+        return $admin->can('restore_c::m::s::post');
+    }
+
+    /**
+     * Determine whether the admin can bulk restore.
+     */
+    public function restoreAny(Admin $admin): bool
+    {
+        return $admin->can('restore_any_c::m::s::post');
+    }
+
+    /**
+     * Determine whether the admin can replicate.
+     */
+    public function replicate(Admin $admin, Post $post): bool
+    {
+        return $admin->can('replicate_c::m::s::post');
+    }
+
+    /**
+     * Determine whether the admin can reorder.
+     */
+    public function reorder(Admin $admin): bool
+    {
+        return $admin->can('reorder_c::m::s::post');
     }
 }
