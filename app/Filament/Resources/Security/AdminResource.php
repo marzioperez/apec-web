@@ -8,6 +8,7 @@ use App\Models\Admin;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Pages\Page;
@@ -51,6 +52,7 @@ class AdminResource extends Resource {
                             ->dehydrated(fn($state) => filled($state))
                             ->required(fn(Page $livewire) => ($livewire instanceof CreateRecord))
                             ->label('Contraseña')->columnSpan(6),
+                        Select::make('roles')->multiple()->relationship('roles', 'name')->columnSpanFull()
                     ])
                 ])
             ]);
