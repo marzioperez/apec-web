@@ -1,3 +1,3 @@
 <x-filament-panels::page>
-    <livewire:common.qr-reader />
+    <livewire:event.reader.index />
 </x-filament-panels::page>

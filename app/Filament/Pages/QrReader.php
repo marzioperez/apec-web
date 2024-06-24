@@ -8,6 +8,7 @@ use Filament\Pages\Page;
 class QrReader extends Page {
 
     use HasPageShield;
+    public $user;
 
     protected static ?string $navigationIcon = 'heroicon-o-camera';
     protected static string $view = 'filament.pages.qr-reader';
