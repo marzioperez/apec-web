@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class SearchByDocument extends Component {
 
-    public $document_number = "47804233";
+    public $document_number;
 
     public function process_document_number() {
         if ($this->document_number) {
