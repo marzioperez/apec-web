@@ -17,6 +17,8 @@ class SearchByDocument extends Component {
             if ($user) {
                 $user->update(['status' => Status::ACCREDITED->value]);
                 $this->dispatch('set-user', user: $user);
+            } else {
+                $this->dispatch('set-error', message: "No existe información de algún participante con el número de documento: {$this->document_number}.");
             }
         }
     }

@@ -37,4 +37,13 @@
             <livewire:event.reader.qr-reader />
         </x-slot>
     </x-filament::modal>
+
+    <x-filament::modal id="modal-error" icon="heroicon-o-x-circle" width="xl" alignment="center">
+        <x-slot name="heading">Ocurrió un error</x-slot>
+        <x-slot name="description">
+            <div style="padding-bottom: 25px;">
+                {{$error_message}}
+            </div>
+        </x-slot>
+    </x-filament::modal>
 </div>
