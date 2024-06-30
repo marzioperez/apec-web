@@ -58,7 +58,7 @@
                         <div class="form-group">
                             <label for="phone">Mobile*</label>
                             <div class="form-field">
-                                <input type="text" id="phone" name="phone" wire:model="data.phone" :disabled="{{$lock_fields}}" />
+                                <input type="text" id="phone" name="phone" placeholder="Ex.: +51 999 999 999" x-mask="+999999999999999" wire:model="data.phone" :disabled="{{$lock_fields}}" />
                                 @error('data.phone') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>

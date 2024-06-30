@@ -39,8 +39,14 @@ class UserResource extends Resource {
     protected static ?int $navigationSort = 12;
 
 
-    public static function form(Form $form): Form
-    {
+    public static function form(Form $form): Form {
+        $economies = Economy::all();
+        $economies_items = [];
+        foreach ($economies as $economie) {
+            $economies_items[$economie->id] = $economie->name;
+        }
+        $economies_items[] = ['other' => 'Otra economía'];
+
         return $form
             ->schema([
                 Tabs::make()->tabs([
@@ -57,7 +63,7 @@ class UserResource extends Resource {
                             TextInput::make('email')->label('Correo electrónico')->columnSpan(6)->required()
                                 ->unique('users', 'email', ignoreRecord: true),
                             TextInput::make('business')->label('Negocio')->columnSpan(4),
-                            Select::make('economy')->options(Economy::all()->pluck('name', 'id'))->label('Economía')->columnSpan(4),
+                            Select::make('economy')->options($economies_items)->label('Economía')->columnSpan(4),
                             TextInput::make('other_economy')->label('Otra economía')->columnSpan(4),
                             TextInput::make('role')->label('Rol')->columnSpan(4),
                             Select::make('type')->label('Tipo')->options([

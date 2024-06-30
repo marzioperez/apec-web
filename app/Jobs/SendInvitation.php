@@ -50,6 +50,9 @@ class SendInvitation implements ShouldQueue
                 $user->save();
 
                 Mail::to($this->data['email'])->send(new RegisterPassFree($user, $new_password));
+                if ($this->data['email_secundario']) {
+                    Mail::to($this->data['email_secundario'])->send(new RegisterPassFree($user, $new_password));
+                }
             }
         }
     }

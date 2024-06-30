@@ -68,7 +68,7 @@
                         <div class="form-group">
                             <label for="payment_reference_phone">Phone Number*</label>
                             <div class="form-field">
-                                <input type="text" id="payment_reference_phone" name="payment_reference_phone" wire:model="data.payment_reference_phone" />
+                                <input type="text" id="payment_reference_phone" name="payment_reference_phone" placeholder="Ex.: +51 999 999 999" x-mask="+999999999999999" wire:model="data.payment_reference_phone" />
                                 @error('data.payment_reference_phone') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>

@@ -48,7 +48,9 @@ class Order extends Model {
 
         'amount',
         'culqi_id',
-        'status'
+        'status',
+        'voucher_status',
+        'voucher_comment'
     ];
 
     protected $casts = [

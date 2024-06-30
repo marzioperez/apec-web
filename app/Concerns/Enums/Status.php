@@ -20,5 +20,8 @@ enum Status: string {
     case OBSERVED_ACCREDITATION = 'Acreditación observada';
     case CANCEL_ACCREDITATION = 'Acreditación cancelada';
     case ACCREDITED = 'Acreditado';
+    case PENDING = "Pendiente";
+    case EMITTED = "Emitido";
+    case OBSERVED = "Observado";
 
 }

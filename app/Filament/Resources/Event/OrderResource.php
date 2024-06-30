@@ -8,20 +8,25 @@ use App\Concerns\Enums\Status;
 use App\Concerns\Enums\Types;
 use App\Filament\Resources\Event\OrderResource\Pages;
 use App\Filament\Resources\Event\OrderResource\RelationManagers;
+use App\Mail\CompleteDataFailed;
 use App\Mail\PaymentSuccess;
 use App\Models\Order;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -211,7 +216,10 @@ class OrderResource extends Resource
                                 ])
                             ])->hidden(fn(Forms\Get $get) => $get('payment_method') === PaymentMethods::CREDIT_CARD->value),
                         ])
-                    ])
+                    ]),
+                    Tab::make('Observación comprobante')->schema([
+                        Forms\Components\Textarea::make('voucher_comment')->label('Comentario')->columnSpanFull()
+                    ]),
                 ])->columnSpanFull()->activeTab(2)
             ]);
     }
@@ -229,6 +237,11 @@ class OrderResource extends Resource
                     Status::UNPAID->value => 'warning',
                     default => 'primary'
                 }),
+                TextColumn::make('voucher_status')->searchable()->label('Estado del comprobante')->badge()->color(fn (string $state): string => match ($state) {
+                    Status::EMITTED->value => 'success',
+                    Status::OBSERVED->value => 'warning',
+                    default => 'primary'
+                }),
                 TextColumn::make('created_at')->date('d/m/Y H:i')->label('Fecha de registro'),
             ])
             ->filters([
@@ -239,11 +252,18 @@ class OrderResource extends Resource
                         Status::UNPAID->value => Status::UNPAID->value,
                         Status::PAYMENT_REVIEW->value => Status::PAYMENT_REVIEW->value,
                     ]),
+                SelectFilter::make('voucher_status')->label('Comprobante')
+                    ->multiple()
+                    ->options([
+                        Status::PENDING->value => Status::PENDING->value,
+                        Status::EMITTED->value => Status::EMITTED->value,
+                        Status::OBSERVED->value => Status::OBSERVED->value,
+                    ]),
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([
                     Tables\Actions\ViewAction::make()->label('Ver'),
-                    Tables\Actions\Action::make('confirm')
+                    Action::make('confirm')
                         ->icon('heroicon-o-check-circle')
                         ->color('success')
                         ->label('Confirmar')
@@ -256,9 +276,36 @@ class OrderResource extends Resource
                             $order->user->update(['status' => Status::PENDING_APPROVAL_DATA->value]);
                             Mail::to($order->user->user['email'])->send(new PaymentSuccess($order->user));
                         })->visible(fn(Order $order): bool => $order['payment_method'] === PaymentMethods::BANK_TRANSFER->value),
-                    Tables\Actions\Action::make('revert-transfer')
+                    Action::make('emitted')
                         ->icon('heroicon-o-check-circle')
+                        ->color('success')
+                        ->label('Comprobante emitido')
+                        ->requiresConfirmation()
+                        ->modalHeading('¿Confirmar pago?')
+                        ->modalDescription('Confirme que la empresa ha emitido el comprobante al participante.')
+                        ->modalSubmitActionLabel('Confirmar')
+                        ->action(function (Order $order):void {
+                            $order->update(['voucher_status' => Status::EMITTED->value]);
+                        })->visible(fn(Order $order): bool => $order['voucher_status'] === Status::PENDING->value || $order['voucher_status'] === Status::OBSERVED->value),
+                    Action::make('observe')
+                        ->icon('heroicon-o-eye')
                         ->color('warning')
+                        ->label('Comprobante observado')
+                        ->modalHeading('Comentario de comprobante')
+                        ->modalDescription('Ingrese el comentario del comprobante')
+                        ->form([
+                            Forms\Components\Textarea::make('voucher_comment')->label('Observación')->required()->columnSpanFull(),
+                        ])
+                        ->modalSubmitActionLabel('Aceptar')
+                        ->action(function (array $data, Order $order):void {
+                            $order->update([
+                                'voucher_status' => Status::OBSERVED->value,
+                                'voucher_comment' => $data['voucher_comment']
+                            ]);
+                        })->visible(fn(Order $order): bool => $order['voucher_status'] === Status::PENDING->value),
+                    Action::make('revert-transfer')
+                        ->icon('heroicon-o-arrow-path')
+                        ->color('danger')
                         ->label('Revertir pago')
                         ->requiresConfirmation()
                         ->modalHeading('¿Revertir pago?')
@@ -275,9 +322,9 @@ class OrderResource extends Resource
                             ]);
                             $order->user->update(['status' => Status::UNPAID->value]);
                         })->visible(fn(Order $order): bool => $order['payment_method'] === PaymentMethods::BANK_TRANSFER->value && $order['status'] === Status::PAID->value),
-                    Tables\Actions\Action::make('revert-card')
-                        ->icon('heroicon-o-check-circle')
-                        ->color('warning')
+                    Action::make('revert-card')
+                        ->icon('heroicon-o-arrow-path')
+                        ->color('danger')
                         ->label('Revertir pago')
                         ->requiresConfirmation()
                         ->modalHeading('¿Revertir pago?')

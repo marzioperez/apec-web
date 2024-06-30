@@ -174,7 +174,15 @@ class User extends Authenticatable {
     }
 
     public function getEconomyNameAttribute() :string {
-        return ($this->economy ? $this->rel_economy->name : '-');
+        $economy = "-";
+        if ($this->economy) {
+            if ($this->economy === 'other') {
+                $economy = "Otra economía";
+            } else {
+                $economy = $this->rel_economy->name;
+            }
+        }
+        return $economy;
     }
 
     public function getTitleNameAttribute() :string {

@@ -90,7 +90,7 @@
                             <div class="form-group">
                                 <label for="phone_number">Mobile*</label>
                                 <div class="form-field">
-                                    <input type="text" id="phone_number" name="phone_number" placeholder="Ex.: +51 999 999 999" wire:model="phone_number" />
+                                    <input type="text" id="phone_number" name="phone_number" placeholder="Ex.: +51 999 999 999" x-mask="+999999999999999" wire:model="phone_number" />
                                     @error('phone_number') <span class="validation-error">{{ $message }}</span> @enderror
                                 </div>
                             </div>
