@@ -16,6 +16,7 @@ class Webhook {
         if ($request->hasHeader('php-auth-user') && $request->hasHeader('php-auth-pw')) {
             if ($request->header('php-auth-user') === "sge" && $request->header('php-auth-pw') === "1a2b3c4f5d") {
                 $data = $request->all();
+                Storage::disk('sends')->put("received-" . time() . ".json", json_encode($data));
                 if (isset($data['codRegistro'])) {
                     $user = User::where('chancellery_code', $data['codRegistro'])->first();
                     if ($user) {
