@@ -62,7 +62,7 @@ class SendUserToChancellery {
         $category = Param::where('group', "CATEGORIES")->where('name', $category_name)->first();
 
         $body = [
-            'CodRegistro' => '',
+            'CodRegistro' => ($user['chancellery_code'] ? $user['chancellery_code'] : ''),
             'CodEvento' => $event_code,
             'CodTitulo' => $title_code,
             'Nombres' => $user['name'],

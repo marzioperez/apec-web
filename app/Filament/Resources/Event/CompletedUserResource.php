@@ -395,6 +395,17 @@ class CompletedUserResource extends Resource
 
                             SendUserToChancellery::run($user);
                         })->visible(fn(User $user): bool => $user['status'] === Status::PENDING_APPROVAL_DATA->value),
+                    Tables\Actions\Action::make('re-confirm')
+                        ->icon('heroicon-o-check-circle')
+                        ->color('warning')
+                        ->label('Reenviar datos')
+                        ->requiresConfirmation()
+                        ->modalHeading('¿Reenviar a Cancillería?')
+                        ->modalDescription('Una vez que se confirme esta acción, los datos del usuario serán enviados hacia Cancillería.')
+                        ->modalSubmitActionLabel('Confirmar')
+                        ->action(function (User $user):void {
+                            SendUserToChancellery::run($user);
+                        })->visible(fn(User $user): bool => $user['status'] === Status::OBSERVED_ACCREDITATION->value),
                     Tables\Actions\Action::make('observe')
                         ->icon('heroicon-o-eye')
                         ->color('warning')
