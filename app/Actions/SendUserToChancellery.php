@@ -22,7 +22,6 @@ class SendUserToChancellery {
         $document_type_code = Param::where('id', $user['document_type'])->first()->value;
         $economy_code = Economy::where('id', $user['economy'])->first()->sge_code;
 
-        $category_name = null;
         switch ($user['type']) {
             case (Types::VIP->value):
             case (Types::PARTICIPANT->value):

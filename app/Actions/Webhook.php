@@ -16,13 +16,13 @@ class Webhook {
         if ($request->hasHeader('php-auth-user') && $request->hasHeader('php-auth-pw')) {
             if ($request->header('php-auth-user') === "sge" && $request->header('php-auth-pw') === "1a2b3c4f5d") {
                 $data = $request->all();
-                if (isset($data['CodRegistro'])) {
-                    $user = User::where('chancellery_code', $data['CodRegistro'])->first();
+                if (isset($data['codRegistro'])) {
+                    $user = User::where('chancellery_code', $data['codRegistro'])->first();
                     if ($user) {
                         Storage::disk('sends')->put("received-{$user['id']}.json", json_encode($data));
                         $user->update(['chancellery_receive_response' => $data]);
-                        if (isset($data['CodEstado'])) {
-                            $param = Param::where('group', 'STATUS')->where('value', $data['CodEstado'])->first();
+                        if (isset($data['codEstado'])) {
+                            $param = Param::where('group', 'STATUS')->where('value', $data['codEstado'])->first();
                             if ($param) {
                                 if ($param['name'] === 'Approved') {
                                     $user->update(['status' => Status::PENDING_ACCREDITATION->value]);
