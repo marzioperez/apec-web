@@ -70,7 +70,7 @@ class SendUserToChancellery {
             'CodGenero' => $gender_code,
             'Nacionalidad' => $user['nationality'],
             'CodTipoDocumento' => $document_type_code,
-            'NumDocumento' => "47804236",
+            'NumDocumento' => $user['document_number'],
             'CodEconomia' => $economy_code,
             'Organizacion' => $user['business'],
             'Cargo' => $user['role'],
