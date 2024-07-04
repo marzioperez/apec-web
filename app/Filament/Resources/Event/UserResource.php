@@ -105,13 +105,6 @@ class UserResource extends Resource {
     public static function table(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(fn(Builder $query) =>
-                $query->whereIn('status', [
-                    Status::DECLINED->value,
-                    Status::CONFIRMED->value,
-                    Status::PENDING_APPROVAL->value
-                ])
-            )
             ->columns([
                 TextColumn::make('name')->label('Nombres')->searchable()->sortable(),
                 TextColumn::make('last_name')->label('Apellidos')->searchable()->sortable(),
