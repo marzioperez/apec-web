@@ -41,10 +41,10 @@ class SendInvitation implements ShouldQueue
                 $user['phone'] = $this->data['telefono'];
                 $user['type'] = $this->data['tipo'];
                 $user['password'] = $new_password;
-                $user['companion_free'] = $this->data['acompanante_free'] === 'Si';
+                $user['companion_free'] = strtoupper($this->data['acompanante_free']) === 'SI';
                 $user['companion_amount'] = $this->data['monto_acompanante'];
                 $user['amount'] = $this->data['monto_participante'];
-                $user['staff_free'] = $this->data['staffer_free'] === 'Si';;
+                $user['staff_free'] = strtoupper($this->data['staffer_free']) === 'Si';
                 $user['staff_amount'] = $this->data['monto_staffer'];
                 $user['status'] = Status::CONFIRMED->value;
                 $user->save();
@@ -53,6 +53,11 @@ class SendInvitation implements ShouldQueue
                 if ($this->data['email_secundario']) {
                     Mail::to($this->data['email_secundario'])->send(new RegisterPassFree($user, $new_password));
                 }
+            } else {
+                $model->update([
+                    'companion_free' => strtoupper($this->data['acompanante_free']) === 'SI',
+                    'staff_free' => strtoupper($this->data['staffer_free']) === 'Si'
+                ]);
             }
         }
     }
