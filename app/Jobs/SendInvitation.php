@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Actions\GenerateCode;
 use App\Concerns\Enums\Status;
+use App\Concerns\Enums\Types;
 use App\Mail\RegisterPassFree;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
@@ -56,8 +57,28 @@ class SendInvitation implements ShouldQueue
             } else {
                 $model->update([
                     'companion_free' => strtoupper($this->data['acompanante_free']) === 'SI',
-                    'staff_free' => strtoupper($this->data['staffer_free']) === 'Si'
+                    'staff_free' => strtoupper($this->data['staffer_free']) === 'SI'
                 ]);
+
+                $companion_types = [
+                    Types::FREE_PASS_COMPANION->value,
+                    Types::COMPANION->value
+                ];
+                $companion = User::whereIn('type', $companion_types)->where('parent_id', $model['id'])->first();
+                if ($companion) {
+                    $companion_type = ($model['companion_free'] ? Types::FREE_PASS_COMPANION->value : Types::COMPANION->value);
+                    $companion->update(['type' => $companion_type]);
+                }
+
+                $staffer_types = [
+                    Types::FREE_PASS_STAFF->value,
+                    Types::STAFF->value
+                ];
+                $staffer = User::whereIn('type', $staffer_types)->where('parent_id', $model['id'])->first();
+                if ($staffer) {
+                    $staff_type = ($model['staff_free'] ? Types::FREE_PASS_STAFF->value : Types::STAFF->value);
+                    $staffer->update(['type' => $staff_type]);
+                }
             }
         }
     }
