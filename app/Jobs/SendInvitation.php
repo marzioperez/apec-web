@@ -37,7 +37,7 @@ class SendInvitation implements ShouldQueue
                 $user['last_name'] = $this->data['apellidos'];
                 $user['business'] = $this->data['empresa'];
                 $user['role'] = $this->data['cargo'];
-                $user['email'] = $this->data['email'];
+                $user['email'] = trim($this->data['email']);
                 $user['attendee_email'] = $this->data['email_secundario'];
                 $user['phone'] = $this->data['telefono'];
                 $user['type'] = $this->data['tipo'];
@@ -45,7 +45,7 @@ class SendInvitation implements ShouldQueue
                 $user['companion_free'] = strtoupper($this->data['acompanante_free']) === 'SI';
                 $user['companion_amount'] = $this->data['monto_acompanante'];
                 $user['amount'] = $this->data['monto_participante'];
-                $user['staff_free'] = strtoupper($this->data['staffer_free']) === 'Si';
+                $user['staff_free'] = strtoupper($this->data['staffer_free']) === 'SI';
                 $user['staff_amount'] = $this->data['monto_staffer'];
                 $user['status'] = Status::CONFIRMED->value;
                 $user->save();
