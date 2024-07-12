@@ -76,6 +76,19 @@ class UserResource extends Resource {
                                 Types::VIP->value => Types::VIP->value
                             ])->required()->columnSpan(4),
                             TextInput::make('amount')->label('Monto a pagar')->numeric()->columnSpan(4)->required(),
+
+                            Forms\Components\Section::make()->schema([
+                                Grid::make([
+                                    'default' => 1,
+                                    'sm' => 3,
+                                    'xl' => 12,
+                                    '2xl' => 12
+                                ])->schema([
+                                    TextInput::make('companion_amount')->label('Monto acompañante')->readOnly()->numeric()->columnSpan(6),
+                                    TextInput::make('staff_amount')->label('Monto Staffer')->readOnly()->numeric()->columnSpan(6),
+                                ])
+                            ])->columnSpanFull(),
+
                             Textarea::make('business_description')->label('Descripción de negocio')->columnSpanFull(),
                             Textarea::make('biography')->label('Biografía')->columnSpanFull(),
 
@@ -105,6 +118,7 @@ class UserResource extends Resource {
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn(Builder $query) => $query->orderBy('created_at', 'desc'))
             ->columns([
                 TextColumn::make('name')->label('Nombres')->searchable()->sortable(),
                 TextColumn::make('last_name')->label('Apellidos')->searchable()->sortable(),

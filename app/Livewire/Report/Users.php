@@ -15,6 +15,7 @@ class Users extends Component {
     public $fields = [];
     public $filters = [];
     public $columns = [];
+    public $check_all = false;
 
     public function mount() {
         $this->fields = [
@@ -131,6 +132,18 @@ class Users extends Component {
 
     public function export() {
         return Excel::download(new \App\Exports\Users($this->columns, $this->filters), 'users.xlsx');
+    }
+
+    public function updatedCheckAll() {
+        if ($this->check_all) {
+            $filters = [];
+            foreach ($this->fields as $field) {
+                $filters[] = $field['value'];
+            }
+            $this->filters = $filters;
+        } else {
+            $this->filters = [];
+        }
     }
 
     public function render() {

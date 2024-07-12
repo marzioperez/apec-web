@@ -49,6 +49,7 @@ class Order extends Model {
         'amount',
         'culqi_id',
         'status',
+        'payment_date',
         'voucher_status',
         'voucher_comment'
     ];

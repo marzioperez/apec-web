@@ -303,7 +303,7 @@ class ConfirmedUserResource extends Resource
     {
         return $table
             ->modifyQueryUsing(fn(Builder $query) =>
-                $query->where('status', Status::CONFIRMED->value)
+                $query->where('status', Status::CONFIRMED->value)->orderBy('created_at', 'desc')
             )
             ->columns([
                 TextColumn::make('name')->label('Nombres')->searchable()->sortable(),

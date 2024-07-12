@@ -13,6 +13,17 @@
 
                 <div class="fi-section-content-ctn border-t border-gray-200 dark:border-white/10">
                     <div class="fi-section-content p-6" style="height: 400px; overflow-y: scroll;">
+                        <div data-field-wrapper="" class="fi-fo-field-wrp">
+                            <div class="grid gap-y-2">
+                                <div class="flex gap-x-3 ">
+                                    <input type="checkbox" name="filters" id="all" wire:model.live="check_all">
+                                    <label class="fi-fo-field-wrp-label inline-flex items-center gap-x-3" for="all">
+                                        <span class="text-sm font-medium leading-6 text-gray-950 dark:text-white">Seleccionar todo</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
                         @foreach($fields as $field)
                             <div data-field-wrapper="" class="fi-fo-field-wrp">
                                 <div class="grid gap-y-2">

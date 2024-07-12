@@ -318,7 +318,7 @@ class AccreditedUserResource extends Resource
                 Status::OBSERVED_ACCREDITATION->value,
                 Status::CANCEL_ACCREDITATION->value,
                 Status::ACCREDITED->value,
-            ])
+            ])->orderBy('created_at', 'desc')
             )
             ->columns([
                 TextColumn::make('name')->label('Nombres')->searchable()->sortable(),

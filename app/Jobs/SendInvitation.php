@@ -57,7 +57,9 @@ class SendInvitation implements ShouldQueue
             } else {
                 $model->update([
                     'companion_free' => strtoupper($this->data['acompanante_free']) === 'SI',
-                    'staff_free' => strtoupper($this->data['staffer_free']) === 'SI'
+                    'staff_free' => strtoupper($this->data['staffer_free']) === 'SI',
+                    'companion_amount' => $this->data['monto_acompanante'],
+                    'staff_amount' => $this->data['monto_staffer']
                 ]);
 
                 $companion_types = [
@@ -67,7 +69,10 @@ class SendInvitation implements ShouldQueue
                 $companion = User::whereIn('type', $companion_types)->where('parent_id', $model['id'])->first();
                 if ($companion) {
                     $companion_type = ($model['companion_free'] ? Types::FREE_PASS_COMPANION->value : Types::COMPANION->value);
-                    $companion->update(['type' => $companion_type]);
+                    $companion->update([
+                        'type' => $companion_type,
+                        'amount' => $this->data['monto_acompanante']
+                    ]);
                 }
 
                 $staffer_types = [
@@ -77,7 +82,10 @@ class SendInvitation implements ShouldQueue
                 $staffer = User::whereIn('type', $staffer_types)->where('parent_id', $model['id'])->first();
                 if ($staffer) {
                     $staff_type = ($model['staff_free'] ? Types::FREE_PASS_STAFF->value : Types::STAFF->value);
-                    $staffer->update(['type' => $staff_type]);
+                    $staffer->update([
+                        'type' => $staff_type,
+                        'amount' => $this->data['monto_staffer']
+                    ]);
                 }
             }
         }

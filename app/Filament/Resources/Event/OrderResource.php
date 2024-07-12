@@ -200,6 +200,8 @@ class OrderResource extends Resource
 
                             TextInput::make('culqi_id')->label('ID de Culqi')->columnSpan(8)->disabled()->hidden(fn(Forms\Get $get) => $get('payment_method') === PaymentMethods::BANK_TRANSFER->value),
 
+                            Forms\Components\DatePicker::make('payment_date')->label('Fecha de pago')->columnSpan(4),
+
                             Fieldset::make('Datos de transferencia')->schema([
                                 Grid::make([
                                     'default' => 1,
@@ -220,7 +222,7 @@ class OrderResource extends Resource
                     Tab::make('Observación comprobante')->schema([
                         Forms\Components\Textarea::make('voucher_comment')->label('Comentario')->columnSpanFull()
                     ]),
-                ])->columnSpanFull()->activeTab(2)
+                ])->columnSpanFull()
             ]);
     }
 
@@ -242,7 +244,7 @@ class OrderResource extends Resource
                     Status::OBSERVED->value => 'warning',
                     default => 'primary'
                 }),
-                TextColumn::make('created_at')->date('d/m/Y H:i')->label('Fecha de registro'),
+                TextColumn::make('payment_date')->date('d/m/Y')->label('Fecha de pago'),
             ])
             ->filters([
                 SelectFilter::make('status')->label('Estado')

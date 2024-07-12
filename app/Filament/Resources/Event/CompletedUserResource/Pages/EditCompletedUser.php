@@ -53,6 +53,29 @@ class EditCompletedUser extends EditRecord
                     ]);
                     Mail::to($user['email'])->send(new CompleteDataFailed($user, $data['observation']));
                 })->visible(fn(User $user): bool => $user['status'] === Status::PENDING_APPROVAL_DATA->value),
+            Action::make('Habilitar campos')
+                ->icon('heroicon-o-eye')
+                ->color('warning')
+                ->label('Habilitar campos')
+                ->modalHeading('Habilitar campos')
+                ->modalDescription('Si activas los campos de Limpiar foto o documento de identidad, estos datos se eliminarán del usuario para que vuelva a subir dicha información. Si se activa la opción para Habilitar campos, dará paso a que el usuario pueda actualizar su información.')
+                ->form([
+                    Toggle::make('enable_photo')->label('Limpiar datos de foto')->columnSpanFull(),
+                    Toggle::make('enable_id')->label('Limpiar datos de documento de identidad')->columnSpanFull(),
+                    Toggle::make('enable_fields')->label('Habilitar campos')->columnSpanFull(),
+                ])
+                ->modalSubmitActionLabel('Aceptar')
+                ->action(function (array $data, User $user):void {
+                    if ($data['enable_photo']) {
+                        $user->update(['badge_photo' => null]);
+                    }
+                    if ($data['enable_id']) {
+                        $user->update(['identity_document' => null]);
+                    }
+                    $user->update([
+                        'lock_fields' => !$data['enable_fields']
+                    ]);
+                }),
             Action::make('Confirmar')
                 ->icon('heroicon-o-check-circle')
                 ->color('success')
