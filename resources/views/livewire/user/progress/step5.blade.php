@@ -162,7 +162,7 @@
                             @endphp
                             <livewire:common.file-upload
                                 wire:model="badge_photo"
-                                :rules="['image', 'mimes:png,jpeg', 'max:10420']"
+                                :rules="['image', 'mimes:png,jpeg,jpg', 'max:10420']"
                                 :key="'badge-photo'"
                                 :content="$photo_content"
                                 :emitter="'cover'"
