@@ -46,10 +46,12 @@ class EditCompletedUser extends EditRecord
                     if ($data['enable_id']) {
                         $user->update(['identity_document' => null]);
                     }
+                    if ($data['enable_fields']) {
+                        $user->update(['lock_fields' => false]);
+                    }
                     $user->update([
                         'status' => Status::PENDING_CORRECT_DATA->value,
-                        'observation' => $data['observation'],
-                        'lock_fields' => !$data['enable_fields']
+                        'observation' => $data['observation']
                     ]);
                     Mail::to($user['email'])->send(new CompleteDataFailed($user, $data['observation']));
                 })->visible(fn(User $user): bool => $user['status'] === Status::PENDING_APPROVAL_DATA->value),
@@ -72,9 +74,10 @@ class EditCompletedUser extends EditRecord
                     if ($data['enable_id']) {
                         $user->update(['identity_document' => null]);
                     }
-                    $user->update([
-                        'lock_fields' => !$data['enable_fields']
-                    ]);
+                    if ($data['enable_fields']) {
+                        $user->update(['lock_fields' => false]);
+                    }
+                    $user->update(['status' => Status::PENDING_CORRECT_DATA->value]);
                 }),
             Action::make('Confirmar')
                 ->icon('heroicon-o-check-circle')

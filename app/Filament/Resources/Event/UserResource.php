@@ -118,7 +118,7 @@ class UserResource extends Resource {
     public static function table(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(fn(Builder $query) => $query->orderBy('created_at', 'desc'))
+            ->defaultSort('created_at', 'desc')
             ->columns([
                 TextColumn::make('name')->label('Nombres')->searchable()->sortable(),
                 TextColumn::make('last_name')->label('Apellidos')->searchable()->sortable(),

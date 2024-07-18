@@ -313,13 +313,12 @@ class AccreditedUserResource extends Resource
     {
         return $table
             ->modifyQueryUsing(fn(Builder $query) =>
-            $query->whereIn('status', [
-                Status::PENDING_ACCREDITATION->value,
-                Status::OBSERVED_ACCREDITATION->value,
-                Status::CANCEL_ACCREDITATION->value,
-                Status::ACCREDITED->value,
-            ])->orderBy('created_at', 'desc')
-            )
+                $query->whereIn('status', [
+                    Status::PENDING_ACCREDITATION->value,
+                    Status::OBSERVED_ACCREDITATION->value,
+                    Status::CANCEL_ACCREDITATION->value,
+                    Status::ACCREDITED->value,
+                ]))->defaultSort('created_at', 'desc')
             ->columns([
                 TextColumn::make('name')->label('Nombres')->searchable()->sortable(),
                 TextColumn::make('last_name')->label('Apellidos')->searchable()->sortable(),

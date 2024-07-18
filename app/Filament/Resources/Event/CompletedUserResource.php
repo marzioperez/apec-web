@@ -334,8 +334,8 @@ class CompletedUserResource extends Resource
                     Status::OBSERVED_ACCREDITATION->value,
                     Status::CANCEL_ACCREDITATION->value,
                     Status::ACCREDITED->value,
-                ])->orderBy('created_at', 'desc')
-            )
+                ])
+            )->defaultSort('created_at', 'desc')
             ->columns([
                 TextColumn::make('name')->label('Nombres')->searchable()->sortable(),
                 TextColumn::make('last_name')->label('Apellidos')->searchable()->sortable(),
@@ -426,10 +426,12 @@ class CompletedUserResource extends Resource
                             if ($data['enable_id']) {
                                 $user->update(['identity_document' => null]);
                             }
+                            if ($data['enable_fields']) {
+                                $user->update(['lock_fields' => false]);
+                            }
                             $user->update([
                                 'status' => Status::PENDING_CORRECT_DATA->value,
-                                'observation' => $data['observation'],
-                                'lock_fields' => !$data['enable_fields']
+                                'observation' => $data['observation']
                             ]);
                             Mail::to($user['email'])->send(new CompleteDataFailed($user, $data['observation']));
                         })->visible(fn(User $user): bool => $user['status'] === Status::PENDING_APPROVAL_DATA->value),
@@ -452,9 +454,10 @@ class CompletedUserResource extends Resource
                             if ($data['enable_id']) {
                                 $user->update(['identity_document' => null]);
                             }
-                            $user->update([
-                                'lock_fields' => !$data['enable_fields']
-                            ]);
+                            if ($data['enable_fields']) {
+                                $user->update(['lock_fields' => false]);
+                            }
+                            $user->update(['status' => Status::PENDING_CORRECT_DATA->value]);
                         }),
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
