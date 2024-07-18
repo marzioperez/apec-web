@@ -11,7 +11,7 @@ enum Types: string {
     case STAFF_CP = 'Staff';
     case FREE_PASS_PARTICIPANT = 'Participante pase libre';
     case FREE_PASS_COMPANION = 'Acompañante pase libre';
-    case FREE_PASS_STAFF = 'Staff pase libre';
+    case FREE_PASS_STAFF = 'Staffer pase libre';
 
     case SUPPLIER = 'Proveedor';
     case PERSONAL_SECURITY = 'Personal de seguridad';
