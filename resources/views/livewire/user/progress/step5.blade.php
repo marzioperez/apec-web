@@ -185,6 +185,9 @@
                                     \App\Concerns\Enums\Types::FREE_PASS_COMPANION->value,
                                     \App\Concerns\Enums\Types::FREE_PASS_STAFF->value,
                                 ]))
+                                    @if($user['status'] === \App\Concerns\Enums\Status::PENDING_CORRECT_DATA->value)
+                                        <button type="submit" class="btn btn-primary">Save</button>
+                                    @endif
                                     @if(in_array($user['status'], [
                                         \App\Concerns\Enums\Status::CONFIRMED->value,
                                         \App\Concerns\Enums\Status::PAYMENT_REVIEW->value
