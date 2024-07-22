@@ -3,7 +3,6 @@
 namespace App\Livewire\User\Order;
 
 use App\Actions\Charge3DS;
-use App\Actions\GenerateQrCode;
 use App\Concerns\Enums\PaymentMethods;
 use App\Concerns\Enums\Status;
 use App\Mail\PaymentBankTransfer;
@@ -104,6 +103,7 @@ class Step2 extends Component {
             } else {
                 $this->order->update([
                     'status' => Status::PAID->value,
+                    'payment_date' => now(),
                     'culqi_id' => $data['data']['id']
                 ]);
                 $this->order->user->update([

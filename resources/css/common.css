@@ -69,3 +69,21 @@ body {
 .custom-arrows-splide .splide__arrow.splide__arrow--next {
     @apply -right-7;
 }
+
+.loading {
+    @apply mx-auto h-[50px] w-[50px] flex justify-center items-center rounded-full flex-col cursor-progress;
+    border-top: 5px solid #75B42E;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid #75B42E;
+    border-right: 5px solid transparent;
+    animation: loading 1s linear infinite;
+}
+
+@keyframes loading {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

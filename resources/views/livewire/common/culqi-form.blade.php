@@ -19,6 +19,13 @@
     ">
     <div id="culqi-container" class="h-[720px]"></div>
 
+    <div id="culqi-loader" class="flex justify-center" style="display: none;">
+        <div>
+            <div class="loading mb-3"></div>
+            <span class="text-center">Cargando...</span>
+        </div>
+    </div>
+
     <div class="rounded-md bg-red-50 p-4 mt-3" x-show="error">
         <div class="flex">
             <div class="flex-shrink-0">
@@ -64,6 +71,8 @@
             paymentMethodsSort: Object.keys(paymentMethods), // las opciones se ordenan según se configuren en paymentMethods
         }
 
+        let loader = document.getElementById('culqi-loader');
+
         const appearance = {
             theme: "default",
             hiddenCulqiLogo: false,
@@ -97,6 +106,7 @@
             if (Culqi.token) {
                 const token_id = Culqi.token.id;
                 Culqi.close();
+                loader.style.display = loader.style.display === 'none' ? '' : 'none';
                 window.dispatchEvent(new CustomEvent('get-token', {detail: {token: token_id}}));
             } else if (Culqi.order) {
                 Culqi.close();
