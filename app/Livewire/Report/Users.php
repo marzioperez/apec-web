@@ -6,7 +6,6 @@ use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Maatwebsite\Excel\Facades\Excel;
-use function PHPUnit\Framework\isFalse;
 
 class Users extends Component {
 
@@ -125,8 +124,8 @@ class Users extends Component {
                         $columns[] = $field;
                     }
                 }
-                $this->columns = $columns;
             }
+            $this->columns = $columns;
         }
     }
 
