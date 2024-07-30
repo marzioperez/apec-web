@@ -8,20 +8,20 @@
                 <div wire:ignore x-data="{
                     init() {
                         new Splide(this.$refs.category_sponsors, {
-                            perPage: 5,
-                            gap: 10,
                             arrows: false,
                             drag: false,
                             pagination: false,
                             destroy: true,
                             breakpoints: {
                                 1024: {
+                                    gap: 10,
                                     perPage: 3,
                                     drag: true,
                                     pagination: true,
                                     destroy: false
                                 },
                                 640: {
+                                    gap: 10,
                                     perPage: 2,
                                     drag: true,
                                     pagination: true,
@@ -37,7 +37,7 @@
                             <ul class="splide__list sm:!flex sm:justify-center sm:space-x-3">
                                 @foreach($categories as $c => $category)
                                     <li class="splide__slide flex items-center justify-center">
-                                        <button type="button" class="btn" x-on:click.prevent="category = {{$c}}" :class="category == {{$c}} ? 'btn-orange' : 'btn-orange-outline'">{{$category['name']}}</button>
+                                        <button type="button" class="btn sm:px-6 !px-3 sm:w-auto w-full" x-on:click.prevent="category = {{$c}}" :class="category == {{$c}} ? 'btn-orange' : 'btn-orange-outline'">{{$category['name']}}</button>
                                     </li>
                                 @endforeach
                             </ul>
