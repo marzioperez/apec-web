@@ -70,6 +70,14 @@ body {
     @apply -right-7;
 }
 
+.sponsors-carousel .splide__pagination {
+    @apply -bottom-6;
+}
+
+.sponsors-carousel .splide__pagination .splide__pagination__page.is-active{
+    @apply bg-white opacity-100 scale-100;
+}
+
 .loading {
     @apply mx-auto h-[50px] w-[50px] flex justify-center items-center rounded-full flex-col cursor-progress;
     border-top: 5px solid #75B42E;
