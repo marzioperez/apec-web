@@ -9,7 +9,15 @@
             <tr>
                 @foreach ($filters as $filter)
                     <td>
-                        {{$user[$filter]}}
+                        @if($filter === 'vaccines')
+                            @if(!is_null($user[$filter]))
+                                {{implode(', ', $user[$filter])}}
+                            @else
+                                -
+                            @endif
+                        @else
+                            {{$user[$filter]}}
+                        @endif
                     </td>
                 @endforeach
             </tr>
