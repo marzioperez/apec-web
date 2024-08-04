@@ -121,7 +121,7 @@
                                 <div class="form-group">
                                     <label for="companion.phone">Phone Number*</label>
                                     <div class="form-field">
-                                        <input type="text" id="companion.phone" name="companion.phone" wire:model="companion.phone" :disabled="{{$lock_fields}}" />
+                                        <input type="text" id="companion.phone" x-mask="+999999999999999" name="companion.phone" wire:model="companion.phone" :disabled="{{$lock_fields}}" />
                                         @error('companion.phone') <span class="validation-error">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
@@ -174,7 +174,7 @@
                                 <div class="form-group">
                                     <label for="staff.phone">Phone Number*</label>
                                     <div class="form-field">
-                                        <input type="text" id="staff.phone" name="staff.phone" wire:model="staff.phone" :disabled="{{$lock_fields}}" />
+                                        <input type="text" id="staff.phone" x-mask="+999999999999999" name="staff.phone" wire:model="staff.phone" :disabled="{{$lock_fields}}" />
                                         @error('staff.phone') <span class="validation-error">{{ $message }}</span> @enderror
                                     </div>
                                 </div>

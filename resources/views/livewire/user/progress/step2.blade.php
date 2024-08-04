@@ -52,7 +52,7 @@
                         <div class="form-group">
                             <label for="business_phone_number">Telephone*</label>
                             <div class="form-field">
-                                <input type="text" id="business_phone_number" name="business_phone_number" wire:model="data.business_phone_number" :disabled="{{$lock_fields}}" />
+                                <input type="text" id="business_phone_number" name="business_phone_number" x-mask="+999999999999999" wire:model="data.business_phone_number" :disabled="{{$lock_fields}}" />
                                 @error('data.business_phone_number') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>
                         </div>

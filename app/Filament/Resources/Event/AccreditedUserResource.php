@@ -6,6 +6,7 @@ use App\Concerns\Enums\Status;
 use App\Concerns\Enums\Types;
 use App\Filament\Resources\Event\AccreditedUserResource\Pages;
 use App\Filament\Resources\Event\AccreditedUserResource\RelationManagers;
+use App\Models\Economy;
 use App\Models\Param;
 use App\Models\User;
 use Filament\Forms;
@@ -338,12 +339,31 @@ class AccreditedUserResource extends Resource
                 SelectFilter::make('type')->label('Tipo')
                     ->multiple()
                     ->options([
+                        Types::PARTICIPANT->value => Types::PARTICIPANT->value,
                         Types::COMPANION->value => Types::COMPANION->value,
                         Types::STAFF->value => Types::STAFF->value,
+                        Types::FREE_PASS_PARTICIPANT->value => Types::FREE_PASS_PARTICIPANT->value,
                         Types::FREE_PASS_COMPANION->value => Types::FREE_PASS_COMPANION->value,
                         Types::FREE_PASS_STAFF->value => Types::FREE_PASS_STAFF->value,
                         Types::VIP->value => Types::VIP->value,
-                    ])
+                        Types::STAFF_CP->value => Types::STAFF_CP->value,
+                        Types::SUPPLIER->value => Types::SUPPLIER->value,
+                        Types::PERSONAL_SECURITY->value => Types::PERSONAL_SECURITY->value,
+                        Types::SECURITY->value => Types::SECURITY->value,
+                        Types::LIAISON->value => Types::LIAISON->value,
+                        Types::EXHIBITOR->value => Types::EXHIBITOR->value,
+                    ]),
+                SelectFilter::make('status')->label('Estado')
+                    ->multiple()
+                    ->options([
+                        Status::PENDING_ACCREDITATION->value => Status::PENDING_ACCREDITATION->value,
+                        Status::OBSERVED_ACCREDITATION->value => Status::OBSERVED_ACCREDITATION->value,
+                        Status::CANCEL_ACCREDITATION->value => Status::CANCEL_ACCREDITATION->value,
+                        Status::ACCREDITED->value => Status::ACCREDITED->value
+                    ]),
+                SelectFilter::make('economy')->label('Economía')
+                    ->multiple()
+                    ->options(Economy::all()->pluck('name', 'id')),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

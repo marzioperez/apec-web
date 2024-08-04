@@ -45,6 +45,11 @@ class FileUpload extends Component {
         ];
     }
 
+    protected $messages = [
+        '*.max' => 'The file exceeds the upload limit',
+        '*.mimes' => 'The uploaded file is not allowed',
+    ];
+
     public function updatedUpload(): void {
         $this->reset('error');
 
@@ -53,7 +58,6 @@ class FileUpload extends Component {
         } catch (ValidationException $e) {
             // If the upload validation fails, we trigger the following event
             $this->dispatch("{$this->uuid}:uploadError", $e->getMessage());
-
             return;
         }
 

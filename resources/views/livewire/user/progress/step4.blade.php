@@ -195,7 +195,7 @@
                             <div class="form-group">
                                 <label for="insurance_phone">Phone Number</label>
                                 <div class="form-field">
-                                    <input type="text" id="insurance_phone" name="insurance_phone" wire:model="data.insurance_phone" :disabled="{{$lock_fields}}" />
+                                    <input type="text" id="insurance_phone" x-mask="+999999999999999" name="insurance_phone" wire:model="data.insurance_phone" :disabled="{{$lock_fields}}" />
                                     @error('data.insurance_phone') <span class="validation-error">{{ $message }}</span> @enderror
                                 </div>
                             </div>

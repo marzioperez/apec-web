@@ -14,6 +14,7 @@ use App\Mail\CompleteDataFailed;
 use App\Mail\CompleteDataPassFree;
 use App\Mail\CompleteDataSuccess;
 use App\Mail\PaymentSuccess;
+use App\Models\Economy;
 use App\Models\Order;
 use App\Models\Param;
 use App\Models\User;
@@ -120,8 +121,8 @@ class CompletedUserResource extends Resource
                             TextInput::make('zip_code')->label('Código ZIP')->required()->columnSpan(2),
                             TextInput::make('business_phone_number')->label('Teléfono de empresa')->required()->columnSpan(3),
                             TextInput::make('business_email')->label('Email de empresa')->required()->columnSpan(4),
-                            TextInput::make('attendee_name')->label('Nombre de asistente')->required()->columnSpan(6),
-                            TextInput::make('attendee_email')->label('Email de asistente')->required()->columnSpan(6),
+                            TextInput::make('attendee_name')->label('Nombre de asistente')->columnSpan(6),
+                            TextInput::make('attendee_email')->label('Email de asistente')->columnSpan(6),
                         ])
                     ])->hidden(fn(Forms\Get $get) => in_array($get('type'), [
                         Types::COMPANION->value,
@@ -355,12 +356,37 @@ class CompletedUserResource extends Resource
                 SelectFilter::make('type')->label('Tipo')
                     ->multiple()
                     ->options([
+                        Types::PARTICIPANT->value => Types::PARTICIPANT->value,
                         Types::COMPANION->value => Types::COMPANION->value,
                         Types::STAFF->value => Types::STAFF->value,
+                        Types::FREE_PASS_PARTICIPANT->value => Types::FREE_PASS_PARTICIPANT->value,
                         Types::FREE_PASS_COMPANION->value => Types::FREE_PASS_COMPANION->value,
                         Types::FREE_PASS_STAFF->value => Types::FREE_PASS_STAFF->value,
                         Types::VIP->value => Types::VIP->value,
-                    ])
+                        Types::STAFF_CP->value => Types::STAFF_CP->value,
+                        Types::SUPPLIER->value => Types::SUPPLIER->value,
+                        Types::PERSONAL_SECURITY->value => Types::PERSONAL_SECURITY->value,
+                        Types::SECURITY->value => Types::SECURITY->value,
+                        Types::LIAISON->value => Types::LIAISON->value,
+                        Types::EXHIBITOR->value => Types::EXHIBITOR->value,
+                    ]),
+                SelectFilter::make('status')->label('Estado')
+                    ->multiple()
+                    ->options([
+                        Status::PENDING_APPROVAL_DATA->value => Status::PENDING_APPROVAL_DATA->value,
+                        Status::UNPAID->value => Status::UNPAID->value,
+                        Status::SEND_TO_CHANCELLERY->value => Status::SEND_TO_CHANCELLERY->value,
+                        Status::PAYMENT_REVIEW->value => Status::PAYMENT_REVIEW->value,
+                        Status::PENDING_CORRECT_DATA->value => Status::PENDING_CORRECT_DATA->value,
+                        Status::ERROR_IN_CHANCELLERY->value => Status::ERROR_IN_CHANCELLERY->value,
+                        Status::PENDING_ACCREDITATION->value => Status::PENDING_ACCREDITATION->value,
+                        Status::OBSERVED_ACCREDITATION->value => Status::OBSERVED_ACCREDITATION->value,
+                        Status::CANCEL_ACCREDITATION->value => Status::CANCEL_ACCREDITATION->value,
+                        Status::ACCREDITED->value => Status::ACCREDITED->value
+                    ]),
+                SelectFilter::make('economy')->label('Economía')
+                    ->multiple()
+                    ->options(Economy::all()->pluck('name', 'id')),
             ])
             ->actions([
                 Tables\Actions\ActionGroup::make([

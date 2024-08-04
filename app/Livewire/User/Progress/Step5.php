@@ -25,14 +25,7 @@ class Step5 extends Component {
     public bool $update_badge = true, $update_identity_document = true;
 
     protected $messages = [
-        '*.required' => 'Required field'
-    ];
-
-    protected $rules = [
-        'badge_name' => 'required',
-        'badge_last_name' => 'required',
-        'badge_photo' => 'required',
-        'identity_document' => 'required',
+        '*.required' => 'Required field',
     ];
 
     public function mount(User $user) {
@@ -68,7 +61,17 @@ class Step5 extends Component {
             Status::CONFIRMED->value,
             Status::PENDING_CORRECT_DATA->value
         ])) {
-            $this->validate();
+            $rules = [
+                'badge_name' => 'required',
+                'badge_last_name' => 'required'
+            ];
+            if (!$this->badge_photo) {
+                $rules['badge_photo'] = 'required|max_uploaded_file_size:2048';
+            }
+            if (!$this->identity_document_file) {
+                $rules['identity_document'] = 'required|max_uploaded_file_size:2048';
+            }
+            $this->validate($rules);
         }
 
         $current_user_status = $this->user['status'];

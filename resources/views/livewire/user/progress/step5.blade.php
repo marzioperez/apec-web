@@ -83,11 +83,12 @@
                                     $doc_content .= '</div>';
                                     $doc_content .= '<p class="text-center">Choose a file or drag & drop it here.<br>';
                                     $doc_content .= '<b>National:</b> DNI, <b>Foreigners:</b> Passport<br>';
-                                    $doc_content .= 'Only PDFs are accepted.</p>';
+                                    $doc_content .= 'Only PDFs are accepted<br>';
+                                    $doc_content .= 'Upload max file size is <b>2MB</b>.</p>';
                                 @endphp
                                 <livewire:common.file-upload
                                     wire:model="identity_document"
-                                    :rules="['mimes:pdf', 'max:10420']"
+                                    :rules="['file', 'mimes:pdf', 'max:2048']"
                                     :key="'identity-document'"
                                     :content="$doc_content"
                                 />
@@ -116,11 +117,12 @@
                                     $photo_content .= '</div>';
                                     $photo_content .= '<p class="text-center">Choose a file or drag & drop it here.<br>';
                                     $photo_content .= 'JPEG or PNG formats, 300 x 300 pixels. Background<br>';
-                                    $photo_content .= 'white. High resolution.</p>';
+                                    $photo_content .= 'white. High resolution<br>';
+                                    $photo_content .= 'Upload max file size is <b>2MB</b>.</p>';
                                 @endphp
                                     <livewire:common.file-upload
                                         wire:model="badge_photo"
-                                        :rules="['image', 'mimes:png,jpeg', 'max:10420']"
+                                        :rules="['image', 'mimes:png,jpeg', 'max:2048']"
                                         :key="'badge-photo'"
                                         :content="$photo_content"
                                         :emitter="'cover'"
@@ -162,7 +164,7 @@
                             @endphp
                             <livewire:common.file-upload
                                 wire:model="badge_photo"
-                                :rules="['image', 'mimes:png,jpeg,jpg', 'max:10420']"
+                                :rules="['image', 'mimes:png,jpeg,jpg', 'max:1024']"
                                 :key="'badge-photo'"
                                 :content="$photo_content"
                                 :emitter="'cover'"
