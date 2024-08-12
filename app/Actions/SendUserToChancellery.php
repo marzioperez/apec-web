@@ -7,6 +7,7 @@ use App\Concerns\Enums\Types;
 use App\Models\Economy;
 use App\Models\Param;
 use App\Models\User;
+use App\Settings\GeneralSetting;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
@@ -21,6 +22,8 @@ class SendUserToChancellery {
         $gender_code = Param::where('id', $user['gender'])->first()->value;
         $document_type_code = Param::where('id', $user['document_type'])->first()->value;
         $economy_code = Economy::where('id', $user['economy'])->first()->sge_code;
+
+        $settings = new GeneralSetting();
 
         switch ($user['type']) {
             case (Types::VIP->value):
@@ -106,6 +109,8 @@ class SendUserToChancellery {
             }
 
         } catch (RequestException $exception) {
+            $settings->chancellery_api_status = false;
+            $settings->save();
             $this->error("Error: {$exception->getMessage()}");
         }
 

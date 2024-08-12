@@ -4,20 +4,17 @@ namespace App\Filament\Resources\Event;
 
 use App\Actions\GenerateQrCode;
 use App\Actions\SendUserToChancellery;
-use App\Concerns\Enums\Genders;
 use App\Concerns\Enums\Status;
-use App\Concerns\Enums\Titles;
 use App\Concerns\Enums\Types;
 use App\Filament\Resources\Event\CompletedUserResource\Pages;
 use App\Filament\Resources\Event\CompletedUserResource\RelationManagers;
 use App\Mail\CompleteDataFailed;
 use App\Mail\CompleteDataPassFree;
 use App\Mail\CompleteDataSuccess;
-use App\Mail\PaymentSuccess;
 use App\Models\Economy;
-use App\Models\Order;
 use App\Models\Param;
 use App\Models\User;
+use App\Settings\GeneralSetting;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Grid;
@@ -32,6 +29,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -399,27 +397,38 @@ class CompletedUserResource extends Resource
                         ->modalDescription('Una vez que se confirme esta acción, el usuario recibirá su código QR de forma automática. Así como el envío de sus datos hacia Cancillería.')
                         ->modalSubmitActionLabel('Confirmar')
                         ->action(function (User $user):void {
-                            $qr = GenerateQrCode::run($user['code']);
-                            $user->update(['qr' => $qr]);
+                            $settings = new GeneralSetting();
+                            $api_status = $settings->chancellery_api_status;
 
-                            if (in_array($user['type'], [
-                                Types::PARTICIPANT->value,
-                                Types::STAFF->value,
-                                Types::COMPANION->value,
-                                Types::VIP->value
-                            ])) {
-                                Mail::to($user['email'])->send(new CompleteDataSuccess($user));
+                            if ($api_status) {
+                                $qr = GenerateQrCode::run($user['code']);
+                                $user->update(['qr' => $qr]);
+
+                                if (in_array($user['type'], [
+                                    Types::PARTICIPANT->value,
+                                    Types::STAFF->value,
+                                    Types::COMPANION->value,
+                                    Types::VIP->value
+                                ])) {
+                                    Mail::to($user['email'])->send(new CompleteDataSuccess($user));
+                                }
+
+                                if (in_array($user['type'], [
+                                    Types::FREE_PASS_PARTICIPANT->value,
+                                    Types::FREE_PASS_COMPANION->value,
+                                    Types::FREE_PASS_STAFF->value
+                                ])) {
+                                    Mail::to($user['email'])->send(new CompleteDataPassFree($user));
+                                }
+
+                                SendUserToChancellery::run($user);
+                            } else {
+                                Notification::make()
+                                    ->title('El API de Cancillería actualmente se encuentra inactiva.')
+                                    ->body('Comunícate con soporte o inténtalo de nuevo cuando el API se encuentre disponible.')
+                                    ->icon('heroicon-o-signal-slash')->color('danger')
+                                    ->send()->danger();
                             }
-
-                            if (in_array($user['type'], [
-                                Types::FREE_PASS_PARTICIPANT->value,
-                                Types::FREE_PASS_COMPANION->value,
-                                Types::FREE_PASS_STAFF->value
-                            ])) {
-                                Mail::to($user['email'])->send(new CompleteDataPassFree($user));
-                            }
-
-                            SendUserToChancellery::run($user);
                         })->visible(fn(User $user): bool => $user['status'] === Status::PENDING_APPROVAL_DATA->value),
                     Tables\Actions\Action::make('re-confirm')
                         ->icon('heroicon-o-check-circle')

@@ -10,10 +10,13 @@ class ListCompletedUsers extends ListRecords
 {
     protected static string $resource = CompletedUserResource::class;
 
-    protected function getHeaderActions(): array
-    {
+    protected function getHeaderActions(): array {
         return [
             Actions\CreateAction::make(),
         ];
+    }
+
+    protected function getHeaderWidgets(): array {
+        return [CompletedUserResource\Widgets\ChancelleryApiStatus::class];
     }
 }

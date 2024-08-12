@@ -9,6 +9,7 @@ use App\Filament\Resources\Event\CompletedUserResource;
 use App\Mail\CompleteDataFailed;
 use App\Mail\CompleteDataPassFree;
 use App\Mail\CompleteDataSuccess;
+use App\Mail\PaymentSuccess;
 use App\Models\Order;
 use App\Models\User;
 use Filament\Actions;
@@ -122,11 +123,79 @@ class EditCompletedUser extends EditRecord
         ];
     }
 
+    protected function beforeSave(): void {
+        $current_type = $this->record->type;
+        $new_type = $this->data['type'];
+
+        // Si el tipo de usuario actual es diferente al nuevo
+        if ($current_type !== $new_type) {
+            // Obtenemos los tipos de usuario que pagan
+            $payment_types = [
+                Types::PARTICIPANT->value,
+                Types::VIP->value,
+                Types::COMPANION->value,
+                Types::STAFF->value
+            ];
+
+            // Obtenemos los tipos de usuario que NO pagan
+            $no_payment_types = [
+                Types::STAFF_CP->value,
+                Types::FREE_PASS_PARTICIPANT->value,
+                Types::FREE_PASS_COMPANION->value,
+                Types::FREE_PASS_STAFF->value
+            ];
+
+            // Si el usuario tiene el tipo de Paga
+            if (in_array($current_type, $payment_types)) {
+                // Si el usuario va a pasar a un tipo de usuario que NO Paga
+                if (in_array($new_type, $no_payment_types)) {
+                    // Si su estado es Pendiente de pago
+                    if (in_array($this->record->status, [
+                        Status::UNPAID->value,
+                        Status::PENDING_CORRECT_DATA->value,
+                        Status::PENDING_APPROVAL_DATA->value
+                    ])) {
+                        // Eliminamos el pedido en caso exista
+                        $order = Order::where('user_id', $this->record->id)->get()->first();
+                        if ($order) {
+                            $order->delete();
+                        }
+                        // Enviamos el mail respectivo cuando ese tipo de usuario finaliza el proceso
+                        $user = User::find($this->record->id);
+                        Mail::to($this->record->email)->send(new PaymentSuccess($user));
+                        $user->update(['status' => Status::PENDING_APPROVAL_DATA->value]);
+                    }
+                }
+            }
+
+            // Si el usuario tiene el tipo de No paga
+            if (in_array($current_type, $no_payment_types)) {
+                // Si el usuario va a pasar a un tipo de usuario que Paga
+                if (in_array($new_type, $payment_types)) {
+                    // Si su estado es Pendiente de aprobación de datos
+                    if (in_array($this->record->status, [
+                        Status::PENDING_APPROVAL_DATA->value,
+                        Status::PENDING_CORRECT_DATA->value
+                    ])) {
+                        // Creamos el pedido con el monto asignado al usuario
+                        Order::create([
+                            'user_id' => $this->record->id,
+                            'token' => md5($this->record->code),
+                            'amount' => $this->record->amount
+                        ]);
+                        $user = User::find($this->record->id);
+                        $user->update(['status' => Status::UNPAID->value]);
+                    }
+                }
+            }
+        }
+    }
+
     protected function afterSave(): void {
         $order = Order::where('user_id', $this->record->id)->get()->first();
         if ($order) {
             if ($order['status'] === Status::UNPAID->value) {
-                $order->update(['amount' => $this->record->amount,]);
+                $order->update(['amount' => $this->record->amount]);
             }
         }
     }

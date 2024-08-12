@@ -78,7 +78,8 @@ class Step5 extends Component {
         $this->user->update([
             'register_progress' => 100,
             'badge_name' => $this->badge_name,
-            'badge_last_name' => $this->badge_last_name
+            'badge_last_name' => $this->badge_last_name,
+            'lock_fields' => true
         ]);
         if($this->update_badge) {
             if ($this->badge_photo) {
