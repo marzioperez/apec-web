@@ -247,6 +247,7 @@ class OrderResource extends Resource
                 TextColumn::make('payment_date')->date('d/m/Y')->label('Fecha de pago'),
             ])
             ->filters([
+                Tables\Filters\TrashedFilter::make(),
                 SelectFilter::make('status')->label('Estado')
                     ->multiple()
                     ->options([
@@ -342,11 +343,13 @@ class OrderResource extends Resource
                                 $order->user->update(['status' => Status::UNPAID->value]);
                             }
                         })->visible(fn(Order $order): bool => $order['payment_method'] === PaymentMethods::CREDIT_CARD->value && $order['status'] === Status::PAID->value),
+                    Tables\Actions\RestoreAction::make()
                 ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make()
                 ]),
             ]);
     }

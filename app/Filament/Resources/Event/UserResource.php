@@ -135,6 +135,7 @@ class UserResource extends Resource {
                     }),
             ])
             ->filters([
+                Tables\Filters\TrashedFilter::make(),
                 SelectFilter::make('type')->label('Tipo')
                     ->multiple()
                     ->options([
@@ -188,11 +189,13 @@ class UserResource extends Resource {
                         })->visible(fn(User $user): bool => $user['status'] === Status::PENDING_APPROVAL->value),
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
+                    Tables\Actions\RestoreAction::make()
                 ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make()
                 ]),
             ]);
     }
