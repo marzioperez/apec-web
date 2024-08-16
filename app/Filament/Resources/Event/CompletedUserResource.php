@@ -351,6 +351,7 @@ class CompletedUserResource extends Resource
                 TextColumn::make('created_at')->label('Fecha de registro')->date('d/m/Y H:i')->sortable(),
             ])
             ->filters([
+                Tables\Filters\TrashedFilter::make(),
                 SelectFilter::make('type')->label('Tipo')
                     ->multiple()
                     ->options([
@@ -496,11 +497,13 @@ class CompletedUserResource extends Resource
                         }),
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
+                    Tables\Actions\RestoreAction::make()
                 ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\RestoreBulkAction::make()
                 ]),
             ]);
     }
