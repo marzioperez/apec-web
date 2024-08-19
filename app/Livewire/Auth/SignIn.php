@@ -28,10 +28,15 @@ class SignIn extends Component {
             'status' => [
                 Status::CONFIRMED->value,
                 Status::PENDING_APPROVAL_DATA->value,
-                Status::UNPAID->value,
-                Status::SEND_TO_CHANCELLERY->value,
                 Status::PENDING_CORRECT_DATA,
-                Status::PAYMENT_REVIEW
+                Status::UNPAID->value,
+                Status::PAYMENT_REVIEW->value,
+                Status::SEND_TO_CHANCELLERY->value,
+                Status::ERROR_IN_CHANCELLERY->value,
+                Status::PENDING_ACCREDITATION->value,
+                Status::OBSERVED_ACCREDITATION->value,
+                Status::CANCEL_ACCREDITATION->value,
+                Status::ACCREDITED->value,
             ]
         ], $this->remember_me)) {
             if (in_array(auth()->user()->type, [
