@@ -231,10 +231,10 @@ class OrderResource extends Resource
         return $table
             ->modifyQueryUsing(fn(Builder $query) => $query->whereHas('user'))
             ->columns([
-                TextColumn::make('user.name')->searchable()->label('Nombre'),
-                TextColumn::make('user.last_name')->searchable()->label('Apellidos'),
+                TextColumn::make('user.name')->searchable()->label('Nombre')->copyable(),
+                TextColumn::make('user.last_name')->searchable()->label('Apellidos')->copyable(),
                 TextColumn::make('payment_method')->searchable()->label('Método de pago'),
-                TextColumn::make('culqi_id')->searchable()->label('Culqi ID'),
+                TextColumn::make('culqi_id')->searchable()->label('Culqi ID')->copyable(),
                 TextColumn::make('status')->searchable()->label('Estado')->badge()->color(fn (string $state): string => match ($state) {
                     Status::PAID->value => 'success',
                     Status::UNPAID->value => 'warning',
