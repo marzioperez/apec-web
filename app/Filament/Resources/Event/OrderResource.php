@@ -234,11 +234,13 @@ class OrderResource extends Resource
                 TextColumn::make('user.name')->searchable()->label('Nombre'),
                 TextColumn::make('user.last_name')->searchable()->label('Apellidos'),
                 TextColumn::make('payment_method')->searchable()->label('Método de pago'),
+                TextColumn::make('culqi_id')->searchable()->label('Culqi ID'),
                 TextColumn::make('status')->searchable()->label('Estado')->badge()->color(fn (string $state): string => match ($state) {
                     Status::PAID->value => 'success',
                     Status::UNPAID->value => 'warning',
                     default => 'primary'
                 }),
+
                 TextColumn::make('voucher_status')->searchable()->label('Estado del comprobante')->badge()->color(fn (string $state): string => match ($state) {
                     Status::EMITTED->value => 'success',
                     Status::OBSERVED->value => 'warning',
