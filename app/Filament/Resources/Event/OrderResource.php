@@ -279,7 +279,7 @@ class OrderResource extends Resource
                         ->action(function (Order $order):void {
                             $order->update(['status' => Status::PAID->value]);
                             $order->user->update(['status' => Status::PENDING_APPROVAL_DATA->value]);
-                            Mail::to($order->user->user['email'])->send(new PaymentSuccess($order->user));
+                            Mail::to($order->user['email'])->send(new PaymentSuccess($order->user));
                         })->visible(fn(Order $order): bool => $order['payment_method'] === PaymentMethods::BANK_TRANSFER->value),
                     Action::make('emitted')
                         ->icon('heroicon-o-check-circle')

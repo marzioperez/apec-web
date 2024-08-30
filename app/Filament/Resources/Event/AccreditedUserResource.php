@@ -319,10 +319,10 @@ class AccreditedUserResource extends Resource
                                 'xl' => 12,
                                 '2xl' => 12
                             ])->schema([
-                                TextInput::make('name')->label('Nombre')->required()->columnSpan(6),
-                                TextInput::make('last_name')->label('Apellidos')->required()->columnSpan(6),
-                                TextInput::make('phone')->label('Celular')->required()->columnSpan(6),
-                                TextInput::make('email')->label('Email')->required()->columnSpan(6)
+                                TextInput::make('name')->label('Nombre')->readOnly()->columnSpan(6),
+                                TextInput::make('last_name')->label('Apellidos')->readOnly()->columnSpan(6),
+                                TextInput::make('phone')->label('Celular')->readOnly()->columnSpan(6),
+                                TextInput::make('email')->label('Email')->readOnly()->columnSpan(6)
                             ])
                         ])->relationship('parent')->hidden(fn(Forms\Get $get) => in_array($get('type'), [
                             Types::PARTICIPANT->value,
