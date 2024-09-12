@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use App\Settings\GeneralSetting;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Toggle;
@@ -30,7 +31,17 @@ class ManageSettings extends SettingsPage
                         'xl' => 12,
                         '2xl' => 12
                     ])->schema([
-                        Toggle::make('chancellery_api_status')->label('Estado del API de Cancillería')->columnSpanFull()
+                        Toggle::make('chancellery_api_status')->label('Estado del API de Cancillería')->columnSpanFull(),
+                    ])
+                ]),
+                Section::make()->schema([
+                    Grid::make([
+                        'default' => 1,
+                        'sm' => 3,
+                        'xl' => 12,
+                        '2xl' => 12
+                    ])->schema([
+                        FileUpload::make('abac_file')->label('Archivo ABAC')->required()->preserveFilenames()->disk('public_files')->columnSpanFull(),
                     ])
                 ])
             ]);
