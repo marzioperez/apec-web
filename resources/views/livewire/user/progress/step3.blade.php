@@ -24,7 +24,6 @@
                                     <option value="">Select...</option>
                                     <option value="Vegetarian">Vegetarian</option>
                                     <option value="Vegan">Vegan</option>
-                                    <option value="Kosher">Kosher</option>
                                 </select>
                                 @error('types_of_food') <span class="validation-error">{{ $message }}</span> @enderror
                             </div>

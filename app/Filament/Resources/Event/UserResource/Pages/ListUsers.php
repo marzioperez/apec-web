@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Event\UserResource\Pages;
 
 use App\Concerns\Enums\Status;
 use App\Filament\Resources\Event\UserResource;
+use App\Imports\UpdatePasswordUsers;
 use App\Imports\Users;
 use Filament\Actions;
 use Filament\Forms\Components\FileUpload;
@@ -28,6 +29,18 @@ class ListUsers extends ListRecords {
                 ])
                 ->action(function(array $data): void {
                     Excel::import(new Users(), storage_path("app/public/{$data['file']}"));
+                    if(Storage::exists("public/{$data['file']}")) {
+                        sleep(2);
+                        Storage::delete("public/{$data['file']}");
+                    }
+                    $this->redirect('/admin/event/users');
+                }),
+            Actions\Action::make('import-update-password')->label('Actualizar credenciales')->color('gray')
+                ->form([
+                    FileUpload::make('file')->label('Archivo')
+                ])
+                ->action(function(array $data): void {
+                    Excel::import(new UpdatePasswordUsers(), storage_path("app/public/{$data['file']}"));
                     if(Storage::exists("public/{$data['file']}")) {
                         sleep(2);
                         Storage::delete("public/{$data['file']}");

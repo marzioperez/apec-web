@@ -44,6 +44,13 @@ class AccreditedUserResource extends Resource
     protected static ?int $navigationSort = 15;
 
     public static function form(Form $form): Form {
+        $economies = Economy::all();
+        $economies_items = [];
+        foreach ($economies as $economie) {
+            $economies_items[$economie->id] = $economie->name;
+        }
+        $economies_items[] = ['other' => 'Otra economía'];
+
         $params = Param::all();
         $titles = [];
         $genders = [];
@@ -88,6 +95,8 @@ class AccreditedUserResource extends Resource
                             TextInput::make('document_number')->label('Número de documento')->required()->columnSpan(3),
                             TextInput::make('email')->label('Email')->required()->unique('users', 'email', ignoreRecord: true)->columnSpan(3),
                             TextInput::make('phone')->label('Celular')->columnSpan(3)->required(),
+                            Select::make('economy')->options($economies_items)->label('Economía')->columnSpan(3),
+                            TextInput::make('other_economy')->label('Otra economía')->columnSpan(3),
                             DatePicker::make('date_of_issue')->label('Fecha de emisión')->columnSpan(3),
                             TextInput::make('place_of_issue')->label('Lugar de emisión')->required()->columnSpan(3),
                             DatePicker::make('date_of_birth')->label('Fecha de nacimiento')->columnSpan(3),
