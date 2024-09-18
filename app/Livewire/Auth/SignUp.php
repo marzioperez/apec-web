@@ -7,6 +7,7 @@ use App\Mail\Register;
 use App\Models\Economy;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 class SignUp extends Component {
@@ -56,10 +57,17 @@ class SignUp extends Component {
 
     public function process_step_2 (): void {
         $messages = [
-            '*.accept' => 'Accept terms and conditions'
+            '*.accepted' => 'Accept terms and conditions',
+            '*.required_if' => 'Required field',
+            '*.email' => 'Incorrect email format'
         ];
 
         $rules = [
+            'attendee_name' => 'required_if:send_copy_of_registration,true',
+            'attendee_email' => [
+                'required_if:send_copy_of_registration,true',
+                Rule::when($this->send_copy_of_registration, ['email'])
+            ],
             'accept_terms_and_conditions' => 'accepted'
         ];
 
