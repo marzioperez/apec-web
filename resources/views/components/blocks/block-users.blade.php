@@ -5,7 +5,7 @@
         <div class="text-white mb-5">{!! $data['content'] !!}</div>
         @if($data['file'])
             <div class="flex justify-center">
-                <a href="{{url('storage/web/', $data['file'])}}" target="_blank" class="btn btn-primary">{{$data['text_button']}}</a>
+                <a href="{{url('storage/web', $data['file'])}}" target="_blank" class="btn btn-primary">{{$data['text_button']}}</a>
             </div>
         @endif
     </div>
