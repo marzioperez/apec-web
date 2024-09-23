@@ -232,5 +232,10 @@
             <livewire:common.news :data="$block['data']" />
         @endif
 
+        @if($block['type'] === 'block-users')
+            @if(auth()->check())
+                <x-blocks.block-users :data="$block['data']" />
+            @endif
+        @endif
     @endforeach
 </div>

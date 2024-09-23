@@ -204,6 +204,18 @@ class PageResource extends Resource {
                                 Block::make('block-4')->label('Bloque de texto')->schema([
                                     RichEditor::make('content')->label('Contenido')->columnSpanFull()
                                 ]),
+                                Block::make('block-users')->label('Bloque de aviso para usuarios')->schema([
+                                    Tabs::make()->tabs([
+                                        Tab::make('Contenido')->schema([
+                                            TextInput::make('title')->label('Título')->columnSpanFull(),
+                                            RichEditor::make('content')->label('Contenido')->columnSpanFull(),
+                                        ]),
+                                        Tab::make('Archivo')->schema([
+                                            FileUpload::make('file')->label('Archivo PDF')->preserveFilenames()->disk('web')->columnSpanFull(),
+                                            TextInput::make('text_button')->label('Texto de botón')->columnSpanFull(),
+                                        ]),
+                                    ])
+                                ]),
                             ])->collapsed()->cloneable(),
                     ])->columnSpan(8),
                     Section::make('Ajustes')->schema([
