@@ -207,7 +207,7 @@ class UserResource extends Resource {
                         ->modalSubmitActionLabel('Confirmar')
                         ->action(function($records) {
                             foreach ($records as $record) {
-                                ConfirmUser::dispatch($record);
+                                ConfirmUser::dispatch($record)->onQueue('apec-sqs');
                             }
                             Notification::make()->body('Los usuarios seleccionados han pasado a la cola de procesamiento, en los próximos minutos serán confirmados y notificados vía correo electrónico.')->info()->send();
                         }),
@@ -221,7 +221,7 @@ class UserResource extends Resource {
                         ->modalSubmitActionLabel('Rechazar')
                         ->action(function($records) {
                             foreach ($records as $record) {
-                                DeclineUser::dispatch($record);
+                                DeclineUser::dispatch($record)->onQueue('apec-sqs');
                             }
                             Notification::make()->body('Los usuarios seleccionados han pasado a la cola de procesamiento, en los próximos minutos serán rechazados y notificados vía correo electrónico.')->info()->send();
                         }),
