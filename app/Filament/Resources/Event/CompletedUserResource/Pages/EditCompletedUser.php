@@ -123,7 +123,7 @@ class EditCompletedUser extends EditRecord
         ];
     }
 
-    /*protected function beforeSave(): void {
+    protected function beforeSave(): void {
         $current_type = $this->record->type;
         $new_type = $this->data['type'];
 
@@ -189,14 +189,14 @@ class EditCompletedUser extends EditRecord
                 }
             }
         }
-    }*/
+    }
 
-//    protected function afterSave(): void {
-//        $order = Order::where('user_id', $this->record->id)->get()->first();
-//        if ($order) {
-//            if ($order['status'] === Status::UNPAID->value) {
-//                $order->update(['amount' => $this->record->amount]);
-//            }
-//        }
-//    }
+    protected function afterSave(): void {
+        $order = Order::where('user_id', $this->record->id)->get()->first();
+        if ($order) {
+            if ($order['status'] === Status::UNPAID->value) {
+                $order->update(['amount' => $this->record->amount]);
+            }
+        }
+    }
 }

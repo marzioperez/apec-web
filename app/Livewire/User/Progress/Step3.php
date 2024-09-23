@@ -8,6 +8,7 @@ use App\Concerns\Enums\Types;
 use App\Mail\InviteCompanion;
 use App\Mail\InviteStaff;
 use App\Models\User;
+use App\Settings\GeneralSetting;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
@@ -19,6 +20,7 @@ class Step3 extends Component {
     public User $user;
     public $quantity = 5, $current = 3, $complete = 2;
     public $lock_fields = false;
+    public $check_out_file = null;
 
     public $companion = [
         'name',
@@ -42,6 +44,9 @@ class Step3 extends Component {
     ];
 
     public function mount(User $user, $quantity = 5, $current = 3, $complete = 2) {
+        $settings = new GeneralSetting();
+        $this->check_out_file = $settings->check_out_file;
+
         $this->user = $user;
         $this->lock_fields = $user['lock_fields'];
         $this->quantity = $quantity;

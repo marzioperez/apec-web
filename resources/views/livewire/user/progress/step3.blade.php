@@ -89,7 +89,7 @@
                                         (US$ {{number_format($user['companion_amount'])}})
                                     @endif
                                 </label>
-                                <div class="form-field flex space-x-6">
+                                <div class="form-field flex space-x-6 items-center">
                                     <div class="flex items-center gap-x-3">
                                         <input id="with_companion_yes" name="with_companion" type="radio" wire:model="with_companion" value="yes" @change="with_companion = 'yes'" :disabled="{{$lock_fields}}" />
                                         <label for="with_companion_yes">Yes</label>
@@ -98,6 +98,9 @@
                                         <input id="with_companion_no" name="with_companion" type="radio" wire:model="with_companion" value="no" @change="with_companion = 'no'" :disabled="{{$lock_fields}}" />
                                         <label for="with_companion_no">No</label>
                                     </div>
+                                    @if($check_out_file)
+                                        <a href="{{asset($check_out_file)}}" target="_blank" class="btn btn-primary">Check out the program</a>
+                                    @endif
                                 </div>
                             </div>
 
