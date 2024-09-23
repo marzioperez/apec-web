@@ -191,12 +191,12 @@ class EditCompletedUser extends EditRecord
         }
     }*/
 
-    protected function afterSave(): void {
-        $order = Order::where('user_id', $this->record->id)->get()->first();
-        if ($order) {
-            if ($order['status'] === Status::UNPAID->value) {
-                $order->update(['amount' => $this->record->amount]);
-            }
-        }
-    }
+//    protected function afterSave(): void {
+//        $order = Order::where('user_id', $this->record->id)->get()->first();
+//        if ($order) {
+//            if ($order['status'] === Status::UNPAID->value) {
+//                $order->update(['amount' => $this->record->amount]);
+//            }
+//        }
+//    }
 }
