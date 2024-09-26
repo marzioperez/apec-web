@@ -7,7 +7,7 @@
             <div class="sm:grid grid-cols-12">
                 <div class="col-span-8">
                     <div class="flex justify-center">
-                        <a href="{{url('storage/web', $data['file'])}}" target="_blank" class="btn btn-primary">{{$data['text_button']}}</a>
+                        <a href="{{url('storage/web', $data['file'])}}" target="_blank" class="btn btn-blue">{{$data['text_button']}}</a>
                     </div>
                 </div>
             </div>
