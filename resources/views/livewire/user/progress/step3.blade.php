@@ -99,7 +99,7 @@
                                         <label for="with_companion_no">No</label>
                                     </div>
                                     @if($check_out_file)
-                                        <a href="{{asset($check_out_file)}}" target="_blank" class="btn btn-primary">Check out the program</a>
+                                        <a href="{{asset($check_out_file)}}" target="_blank" class="text-blue underline text-sm">Check out the program</a>
                                     @endif
                                 </div>
                             </div>
