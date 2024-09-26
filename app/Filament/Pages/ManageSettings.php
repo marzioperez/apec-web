@@ -41,7 +41,7 @@ class ManageSettings extends SettingsPage
                         'xl' => 12,
                         '2xl' => 12
                     ])->schema([
-                        FileUpload::make('abac_file')->label('Archivo ABAC')->required()->preserveFilenames()->disk('public_files')->columnSpanFull(),
+                        FileUpload::make('abac_file')->label('Archivo ABAC')->preserveFilenames()->disk('public_files')->columnSpanFull(),
                     ])
                 ]),
                 Section::make()->schema([
@@ -51,7 +51,7 @@ class ManageSettings extends SettingsPage
                         'xl' => 12,
                         '2xl' => 12
                     ])->schema([
-                        FileUpload::make('check_out_file')->label('Archivo Check out')->required()->preserveFilenames()->disk('public_files')->columnSpanFull(),
+                        FileUpload::make('check_out_file')->label('Archivo Check out')->preserveFilenames()->disk('public_files')->columnSpanFull(),
                     ])
                 ])
             ]);
