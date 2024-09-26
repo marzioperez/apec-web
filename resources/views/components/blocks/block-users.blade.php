@@ -4,8 +4,12 @@
         <h3 class="text-white font-semibold text-3xl mb-3">{{$data['title']}}</h3>
         <div class="text-white mb-5">{!! $data['content'] !!}</div>
         @if($data['file'])
-            <div class="flex justify-center">
-                <a href="{{url('storage/web', $data['file'])}}" target="_blank" class="btn btn-primary">{{$data['text_button']}}</a>
+            <div class="sm:grid grid-cols-12">
+                <div class="col-span-8">
+                    <div class="flex justify-center">
+                        <a href="{{url('storage/web', $data['file'])}}" target="_blank" class="btn btn-primary">{{$data['text_button']}}</a>
+                    </div>
+                </div>
             </div>
         @endif
     </div>
