@@ -28,6 +28,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\View;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
@@ -328,7 +329,9 @@ class CompletedUserResource extends Resource
                         FilamentJsonColumn::make('chancellery_sent_response')->viewerOnly()->label('Respuesta de Cancillería luego de enviar los datos')->columnSpanFull(),
                         FilamentJsonColumn::make('chancellery_receive_response')->viewerOnly()->label('Datos enviados hacia el Webhook por parte de Cancillería')->columnSpanFull(),
                     ]),
-
+                    Tab::make('Invitado por')->schema([
+                        View::make('filament.event.invited-by')
+                    ])
                 ])->columnSpanFull()
             ]);
     }

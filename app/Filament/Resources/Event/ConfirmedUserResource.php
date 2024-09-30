@@ -23,6 +23,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\View;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -310,26 +311,7 @@ class ConfirmedUserResource extends Resource
                         Textarea::make('hotel_details')->label('Detalle')->columnSpanFull(),
                     ]),
                     Tab::make('Invitado por')->schema([
-                        Section::make('')->schema([
-                            Grid::make([
-                                'default' => 1,
-                                'sm' => 3,
-                                'xl' => 12,
-                                '2xl' => 12
-                            ])->schema([
-                                TextInput::make('name')->label('Nombre')->readOnly()->columnSpan(6),
-                                TextInput::make('last_name')->label('Apellidos')->readOnly()->columnSpan(6),
-                                TextInput::make('phone')->label('Celular')->readOnly()->columnSpan(6),
-                                TextInput::make('email')->label('Email')->readOnly()->columnSpan(6)
-                            ])
-                        ])->relationship('parent')->hidden(fn(Forms\Get $get) => in_array($get('type'), [
-                            Types::PARTICIPANT->value,
-                            Types::FREE_PASS_PARTICIPANT->value,
-                            Types::SECURITY->value,
-                            Types::EXHIBITOR->value,
-                            Types::LIAISON->value,
-                            Types::VIP->value
-                        ]))
+                        View::make('filament.event.invited-by')
                     ])
                 ])->columnSpanFull()
             ]);
