@@ -137,7 +137,43 @@ class CompletedUserResource extends Resource
                         Types::FREE_PASS_STAFF->value,
                         Types::FREE_PASS_COMPANION->value
                     ])),
-                    
+                    Tab::make('Requisitos especiales')->schema([
+                        Forms\Components\Section::make([
+                            Select::make('types_of_food')->label('Tipo de dieta')->options([
+                                'Vegetarian' => 'Vegetariana',
+                                'Vegan' => 'Vegana',
+                                'Kosher' => 'Comestible según la ley judía'
+                            ])->columnSpanFull(),
+                            Textarea::make('require_special_assistance')->label('¿Necesita alguna asistencia especial para participar?')->columnSpanFull()
+                        ])->compact()->columnSpanFull(),
+                        Repeater::make('guests')->relationship('guests')
+                            ->label('Invitados')->addable(false)
+                            ->schema([
+                                Grid::make([
+                                    'default' => 1,
+                                    'sm' => 3,
+                                    'xl' => 12,
+                                    '2xl' => 12
+                                ])->schema([
+                                    Select::make('type')->label('Tipo')->options([
+                                        Types::COMPANION->value => Types::COMPANION->value,
+                                        Types::STAFF->value => Types::STAFF->value,
+                                        Types::FREE_PASS_COMPANION->value => Types::FREE_PASS_COMPANION->value,
+                                        Types::FREE_PASS_STAFF->value => Types::FREE_PASS_STAFF->value,
+                                    ])->required()->columnSpan(4)->live(),
+                                    TextInput::make('name')->label('Nombre')->required()->columnSpan(4),
+                                    TextInput::make('last_name')->label('Apellidos')->required()->columnSpan(4),
+                                    TextInput::make('phone')->label('Celular')->required()->columnSpan(4),
+                                    TextInput::make('email')->label('Email')->required()->columnSpan(4),
+                                    TextInput::make('amount')->label('Monto a pagar')->numeric()->required()->columnSpan(4)
+                                ])
+                            ])->itemLabel(fn (array $state): ?string => $state['type'] ?? null)->hidden(fn(Forms\Get $get) => in_array($get('type'), [
+                                Types::COMPANION->value,
+                                Types::STAFF->value,
+                                Types::FREE_PASS_STAFF->value,
+                                Types::FREE_PASS_COMPANION->value
+                            ]))
+                    ]),
                     Tab::make('Información médica')->schema([
                         Grid::make([
                             'default' => 1,
@@ -292,28 +328,7 @@ class CompletedUserResource extends Resource
                         FilamentJsonColumn::make('chancellery_sent_response')->viewerOnly()->label('Respuesta de Cancillería luego de enviar los datos')->columnSpanFull(),
                         FilamentJsonColumn::make('chancellery_receive_response')->viewerOnly()->label('Datos enviados hacia el Webhook por parte de Cancillería')->columnSpanFull(),
                     ]),
-                    Tab::make('Invitado por')->schema([
-                        Section::make('')->schema([
-                            Grid::make([
-                                'default' => 1,
-                                'sm' => 3,
-                                'xl' => 12,
-                                '2xl' => 12
-                            ])->schema([
-                                TextInput::make('name')->label('Nombre')->readOnly()->columnSpan(6),
-                                TextInput::make('last_name')->label('Apellidos')->readOnly()->columnSpan(6),
-                                TextInput::make('phone')->label('Celular')->readOnly()->columnSpan(6),
-                                TextInput::make('email')->label('Email')->readOnly()->columnSpan(6)
-                            ])
-                        ])->relationship('parent')->hidden(fn(Forms\Get $get) => in_array($get('type'), [
-                            Types::PARTICIPANT->value,
-                            Types::FREE_PASS_PARTICIPANT->value,
-                            Types::SECURITY->value,
-                            Types::EXHIBITOR->value,
-                            Types::LIAISON->value,
-                            Types::VIP->value
-                        ]))
-                    ])
+
                 ])->columnSpanFull()
             ]);
     }
