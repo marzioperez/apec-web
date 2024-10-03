@@ -11,7 +11,35 @@
                     </div>
                 </header>
 
-                <div class="fi-section-content-ctn border-t border-gray-200 dark:border-white/10">
+                <div class="fi-section-content-ctn border-t border-gray-200 dark:border-white/10 p-6">
+                    <div class="mb-4">
+                        <div class="flex items-center justify-between gap-x-3 ">
+                            <label class="fi-fo-field-wrp-label inline-flex items-center gap-x-3" for="data.date">
+                                <span class="text-sm font-medium leading-6 text-gray-950 dark:text-white">Desde</span>
+                            </label>
+                        </div>
+                        <div class="fi-input-wrp flex rounded-lg shadow-sm ring-1 transition duration-75 bg-white dark:bg-white/5 [&:not(:has(.fi-ac-action:focus))]:focus-within:ring-2 ring-gray-950/10 dark:ring-white/20 [&:not(:has(.fi-ac-action:focus))]:focus-within:ring-primary-600 dark:[&:not(:has(.fi-ac-action:focus))]:focus-within:ring-primary-500">
+                            <div class="min-w-0 flex-1">
+                                <input class="fi-input block w-full border-none py-1.5 text-base text-gray-950 transition duration-75 placeholder:text-gray-400 focus:ring-0 disabled:text-gray-500 disabled:[-webkit-text-fill-color:theme(colors.gray.500)] disabled:placeholder:[-webkit-text-fill-color:theme(colors.gray.400)] dark:text-white dark:placeholder:text-gray-500 dark:disabled:text-gray-400 dark:disabled:[-webkit-text-fill-color:theme(colors.gray.400)] dark:disabled:placeholder:[-webkit-text-fill-color:theme(colors.gray.500)] sm:text-sm sm:leading-6 bg-white/0 ps-3 pe-3" type="date" name="start_date" wire:model="start_date" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="flex items-center justify-between gap-x-3 ">
+                            <label class="fi-fo-field-wrp-label inline-flex items-center gap-x-3" for="data.date">
+                                <span class="text-sm font-medium leading-6 text-gray-950 dark:text-white">Hasta</span>
+                            </label>
+                        </div>
+                        <div class="fi-section-content-ctn border-t border-gray-200 dark:border-white/10 ">
+                            <div class="fi-input-wrp flex rounded-lg shadow-sm ring-1 transition duration-75 bg-white dark:bg-white/5 [&:not(:has(.fi-ac-action:focus))]:focus-within:ring-2 ring-gray-950/10 dark:ring-white/20 [&:not(:has(.fi-ac-action:focus))]:focus-within:ring-primary-600 dark:[&:not(:has(.fi-ac-action:focus))]:focus-within:ring-primary-500">
+                                <div class="min-w-0 flex-1">
+                                    <input class="fi-input block w-full border-none py-1.5 text-base text-gray-950 transition duration-75 placeholder:text-gray-400 focus:ring-0 disabled:text-gray-500 disabled:[-webkit-text-fill-color:theme(colors.gray.500)] disabled:placeholder:[-webkit-text-fill-color:theme(colors.gray.400)] dark:text-white dark:placeholder:text-gray-500 dark:disabled:text-gray-400 dark:disabled:[-webkit-text-fill-color:theme(colors.gray.400)] dark:disabled:placeholder:[-webkit-text-fill-color:theme(colors.gray.500)] sm:text-sm sm:leading-6 bg-white/0 ps-3 pe-3" type="date" name="end_date" wire:model="end_date" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="fi-section-content p-6" style="height: 400px; overflow-y: scroll;">
                         <div data-field-wrapper="" class="fi-fo-field-wrp">
                             <div class="grid gap-y-2">

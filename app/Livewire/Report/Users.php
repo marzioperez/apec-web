@@ -15,6 +15,7 @@ class Users extends Component {
     public $filters = [];
     public $columns = [];
     public $check_all = false;
+    public $start_date = null, $end_date = null;
 
     public function mount() {
         $this->fields = [
@@ -130,7 +131,7 @@ class Users extends Component {
     }
 
     public function export() {
-        return Excel::download(new \App\Exports\Users($this->columns, $this->filters), 'users.xlsx');
+        return Excel::download(new \App\Exports\Users($this->columns, $this->filters, $this->start_date, $this->end_date), 'users.xlsx');
     }
 
     public function updatedCheckAll() {
@@ -158,6 +159,7 @@ class Users extends Component {
                 $this->columns = $columns;
             }
             $model = User::query();
+            $model->whereBetween('created_at', [$this->start_date . ' 00:00:00', $this->end_date . ' 23:59:59']);
             $users = $model->paginate(10);
         }
         return view('livewire.report.users', ['users' => $users]);
