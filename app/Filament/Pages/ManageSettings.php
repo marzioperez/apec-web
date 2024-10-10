@@ -53,6 +53,16 @@ class ManageSettings extends SettingsPage
                     ])->schema([
                         FileUpload::make('check_out_file')->label('Archivo Check out')->preserveFilenames()->disk('public_files')->columnSpanFull(),
                     ])
+                ]),
+                Section::make()->schema([
+                    Grid::make([
+                        'default' => 1,
+                        'sm' => 3,
+                        'xl' => 12,
+                        '2xl' => 12
+                    ])->schema([
+                        FileUpload::make('ceo_summit_file')->label('Archivo CEO Summit')->preserveFilenames()->disk('public_files')->columnSpanFull(),
+                    ])
                 ])
             ]);
     }

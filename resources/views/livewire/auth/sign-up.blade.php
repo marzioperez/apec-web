@@ -74,14 +74,14 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="email">Email*</label>
+                                <label for="email">Company email*</label>
                                 <div class="form-field">
                                     <input type="email" id="email" name="email" wire:model="email" />
                                     @error('email') <span class="validation-error">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="confirm_email">Confirm Email*</label>
+                                <label for="confirm_email">Confirm company email*</label>
                                 <div class="form-field">
                                     <input type="email" id="confirm_email" name="confirm_email" wire:model="confirm_email" />
                                     @error('confirm_email') <span class="validation-error">{{ $message }}</span> @enderror
