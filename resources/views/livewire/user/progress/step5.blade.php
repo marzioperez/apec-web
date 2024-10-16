@@ -34,21 +34,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="badge_name">Name(s)*</label>
-                            <div class="form-field">
-                                <input type="text" id="badge_name" name="name" wire:model="badge_name" x-model="badge_name" :disabled="{{$lock_fields}}" />
-                                @error('badge_name') <span class="validation-error">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="badge_last_name">Last Name(s)*</label>
-                            <div class="form-field">
-                                <input type="text" id="badge_last_name" name="badge_last_name" wire:model="badge_last_name" x-model="badge_last_name" :disabled="{{$lock_fields}}" />
-                                @error('badge_last_name') <span class="validation-error">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-
                         @if(in_array($user['status'], [
                             \App\Concerns\Enums\Status::PENDING_APPROVAL_DATA->value,
                             \App\Concerns\Enums\Status::UNPAID->value,

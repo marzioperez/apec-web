@@ -61,10 +61,6 @@ class Step5 extends Component {
             Status::CONFIRMED->value,
             Status::PENDING_CORRECT_DATA->value
         ])) {
-            $rules = [
-                'badge_name' => 'required',
-                'badge_last_name' => 'required'
-            ];
             if (!$this->badge_photo) {
                 $rules['badge_photo'] = 'required|max_uploaded_file_size:2048';
             }
