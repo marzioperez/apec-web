@@ -57,6 +57,7 @@ class Step5 extends Component {
     }
 
     public function process() {
+        $rules = [];
         if (in_array($this->user['status'], [
             Status::CONFIRMED->value,
             Status::PENDING_CORRECT_DATA->value
