@@ -112,6 +112,19 @@ class CompletedUserResource extends Resource
                             TextInput::make('nationality')->label('Nacionalidad')->columnSpan(3),
                             TextInput::make('city_of_permanent_residency')->label('Ciudad de residencia')->columnSpan(6),
                             TextInput::make('amount')->label('Monto a pagar')->numeric()->columnSpan(3)->required(),
+
+                            TextInput::make('business')->label('Empresa')->required()->columnSpan(4)->visible(fn(Forms\Get $get) => in_array($get('type'), [
+                                Types::COMPANION->value,
+                                Types::STAFF->value,
+                                Types::FREE_PASS_STAFF->value,
+                                Types::FREE_PASS_COMPANION->value
+                            ])),
+                            TextInput::make('role')->label('Rol')->columnSpan(4)->visible(fn(Forms\Get $get) => in_array($get('type'), [
+                                Types::COMPANION->value,
+                                Types::STAFF->value,
+                                Types::FREE_PASS_STAFF->value,
+                                Types::FREE_PASS_COMPANION->value
+                            ])),
                         ])
                     ]),
                     Tab::make('Información de la empresa')->schema([
@@ -191,7 +204,8 @@ class CompletedUserResource extends Resource
                                     'A-' => 'A-',
                                     'O-' => 'O-',
                                     'B-' => 'B-',
-                                    'AB-' => 'AB-'
+                                    'AB-' => 'AB-',
+                                    'N/A' => 'N/A'
                                 ])->columnSpan(3),
                             Toggle::make('allergies')->inline(false)->label('Alergias')->columnSpan(2),
                             Textarea::make('allergy_details')->label('Detalle')->columnSpanFull(),

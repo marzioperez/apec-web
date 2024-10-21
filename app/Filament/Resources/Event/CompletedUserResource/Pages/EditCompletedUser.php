@@ -132,6 +132,8 @@ class EditCompletedUser extends EditRecord
         $current_type = $this->record->type;
         $new_type = $this->data['type'];
 
+        $user = User::find($this->record->id);
+
         // Si el tipo de usuario actual es diferente al nuevo
         if ($current_type !== $new_type) {
             // Obtenemos los tipos de usuario que pagan
@@ -150,6 +152,37 @@ class EditCompletedUser extends EditRecord
                 Types::FREE_PASS_STAFF->value
             ];
 
+            // Obtenemos los usuarios de nivel 1
+            $level_1_types = [
+                Types::PARTICIPANT->value,
+                Types::VIP->value,
+                Types::FREE_PASS_PARTICIPANT->value
+            ];
+
+            // Obtenemos los usuarios de nivel 2
+            $level_2_types = [
+                Types::COMPANION->value,
+                Types::STAFF->value,
+                Types::FREE_PASS_COMPANION->value,
+                Types::FREE_PASS_STAFF->value
+            ];
+
+            // Si el usuario tiene el tipo de Nivel 1
+            if (in_array($current_type, $level_1_types)) {
+                // Si el usuario va a pasar a un tipo de usuario Nivel 2
+                if (in_array($new_type, $level_2_types)) {
+                    $user->update(['current_step' => 0]);
+                }
+            }
+
+            // Si el usuario tiene el tipo de Nivel 2
+            if (in_array($current_type, $level_2_types)) {
+                // Si el usuario va a pasar a un tipo de usuario Nivel 2
+                if (in_array($new_type, $level_1_types)) {
+                    $user->update(['current_step' => 0]);
+                }
+            }
+
             // Si el usuario tiene el tipo de Paga
             if (in_array($current_type, $payment_types)) {
                 // Si el usuario va a pasar a un tipo de usuario que NO Paga
@@ -166,7 +199,6 @@ class EditCompletedUser extends EditRecord
                             $order->delete();
                         }
                         // Enviamos el mail respectivo cuando ese tipo de usuario finaliza el proceso
-                        $user = User::find($this->record->id);
                         Mail::to($this->record->email)->send(new PaymentSuccess($user));
                         $user->update(['status' => Status::PENDING_APPROVAL_DATA->value]);
                     }

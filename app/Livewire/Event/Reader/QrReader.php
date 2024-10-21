@@ -15,7 +15,6 @@ class QrReader extends Component {
         $user = User::with('rel_economy')->where('code', $code)->first();
         sleep(1);
         if ($user) {
-            $user->update(['status' => Status::ACCREDITED->value]);
             $this->dispatch('set-user', user: $user);
         } else {
             $this->dispatch('set-error', message: "No se ha encontrado información de algún participante con el QR escaneado.");
