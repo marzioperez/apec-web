@@ -342,8 +342,14 @@ class AccreditedUserResource extends Resource
             ]);
     }
 
-    public static function table(Table $table): Table
-    {
+    public static function table(Table $table): Table {
+        $model_economies = Economy::all();
+        $economies = [];
+        foreach ($model_economies as $economy) {
+            $economies[$economy->id] = $economy->name;
+        }
+        $economies['other'] = 'Other';
+
         return $table
             ->modifyQueryUsing(fn(Builder $query) =>
                 $query->whereIn('status', [
@@ -396,7 +402,7 @@ class AccreditedUserResource extends Resource
                     ]),
                 SelectFilter::make('economy')->label('Economía')
                     ->multiple()
-                    ->options(Economy::all()->pluck('name', 'id')),
+                    ->options($economies),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
