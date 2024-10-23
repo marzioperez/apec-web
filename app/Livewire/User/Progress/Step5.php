@@ -62,13 +62,19 @@ class Step5 extends Component {
             Status::CONFIRMED->value,
             Status::PENDING_CORRECT_DATA->value
         ])) {
+            $validate = false;
             if (!$this->badge_photo) {
-                $rules['badge_photo'] = 'required|max_uploaded_file_size:2048';
+                $validate = true;
+                $rules['badge_photo'] = 'required|array|max_uploaded_file_size:2048';
             }
             if (!$this->identity_document_file) {
+                $validate = true;
                 $rules['identity_document'] = 'required|max_uploaded_file_size:2048';
             }
-            $this->validate($rules);
+
+            if ($validate) {
+                $this->validate($rules);
+            }
         }
 
         $current_user_status = $this->user['status'];
