@@ -8,8 +8,7 @@
                     </div>
                     <div>
                         <h3 class="text-primary-dark font-semibold mb-3 text-4xl uppercase">My QR</h3>
-                        <p class="text-white mb-3">Kindly ensure to bring your passport with you for badge collection. <br>
-                            Access all information related to the event using the QR code.</p>
+                        <p class="text-white mb-3">Kindly ensure to bring your passport with you for badge collection.</p>
 
                         <div class="my-8">
                             <img src="{{ config('app.url') . "/storage/qrs/{$user['qr']}" }}" class="rounded sm:w-[200px] w-full" />
