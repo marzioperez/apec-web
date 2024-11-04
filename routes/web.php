@@ -4,7 +4,10 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['middleware' => ['guest']], function () {
-    Route::get('/sign-up', \App\Livewire\Auth\SignUp::class)->name('sign-up');
+    // Route::get('/sign-up', \App\Livewire\Auth\SignUp::class)->name('sign-up');
+    Route::get('/sign-up', function (){
+        return redirect()->route('page');
+    })->name('sign-up');
     Route::get('/sign-in', \App\Livewire\Auth\SignIn::class)->name('login');
     Route::get('/reset-password', \App\Livewire\Auth\ResetPassword::class)->name('reset-password');
 });

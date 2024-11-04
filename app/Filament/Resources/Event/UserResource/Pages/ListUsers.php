@@ -6,8 +6,12 @@ use App\Concerns\Enums\Status;
 use App\Filament\Resources\Event\UserResource;
 use App\Imports\UpdatePasswordUsers;
 use App\Imports\Users;
+use App\Jobs\CloseRegisterUser;
+use App\Models\User;
 use Filament\Actions;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\ToggleButtons;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Storage;
@@ -46,7 +50,23 @@ class ListUsers extends ListRecords {
                         Storage::delete("public/{$data['file']}");
                     }
                     $this->redirect('/admin/event/users');
-                })
+                }),
+            Actions\Action::make('lock')->label('Bloquear actualización de datos')->color('info')
+                ->form([
+                    ToggleButtons::make('lock')->label('Bloquear campos?')->required()->boolean()->grouped()
+                ])
+                ->action(function(array $data): void {
+                    $users = User::all();
+                    $lock = (bool)$data['lock'];
+                    foreach ($users as $user) {
+                        CloseRegisterUser::dispatch($user, $lock);
+                    }
+                    Notification::make()
+                        ->title('Los campos se han ' . ($lock ? 'bloqueado' : 'habilitado'))
+                        ->body('Ahora todos los campos de actualización de datos se han ' . ($lock ? 'bloqueado' : 'habilitado') . '.')
+                        ->icon('heroicon-o-check')->color('success')
+                        ->send()->danger();
+                }),
         ];
     }
 
