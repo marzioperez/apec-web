@@ -196,6 +196,21 @@ class UserResource extends Resource {
                             $user->update(['status' => Status::DECLINED->value]);
                             Mail::to($user['email'])->send(new RegisterDeclined($user));
                         })->visible(fn(User $user): bool => $user['status'] === Status::PENDING_APPROVAL->value),
+
+                    Tables\Actions\Action::make('unlock-fields')
+                        ->icon('heroicon-o-eye')
+                        ->color('warning')
+                        ->label('Habilitar campos')
+                        ->action(function (array $data, User $user):void {
+                            $user->update(['lock_fields' => false]);
+                        })->visible(fn(User $user): bool => $user['lock_fields']),
+                    Tables\Actions\Action::make('lock-fields')
+                        ->icon('heroicon-o-eye-slash')
+                        ->color('danger')
+                        ->label('Bloquear campos')
+                        ->action(function (array $data, User $user):void {
+                            $user->update(['lock_fields' => true]);
+                        })->visible(fn(User $user): bool => !$user['lock_fields']),
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
                     Tables\Actions\RestoreAction::make()
