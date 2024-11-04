@@ -59,7 +59,7 @@ class ListUsers extends ListRecords {
                     $users = User::all();
                     $lock = (bool)$data['lock'];
                     foreach ($users as $user) {
-                        CloseRegisterUser::dispatch($user, $lock);
+                        CloseRegisterUser::dispatch($user, $lock)->onQueue('apec-sqs');
                     }
                     Notification::make()
                         ->title('Los campos se han ' . ($lock ? 'bloqueado' : 'habilitado'))
