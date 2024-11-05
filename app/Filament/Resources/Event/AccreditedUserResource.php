@@ -23,6 +23,7 @@ use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\View;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -405,12 +406,33 @@ class AccreditedUserResource extends Resource
                     ->options($economies),
             ])
             ->actions([
+                Tables\Actions\Action::make('accredited')
+                    ->label('Acreditar')
+                    ->color('success')
+                    ->action(function (User $user){
+                        $user->update(['status' => Status::ACCREDITED->value]);
+                        Notification::make()
+                            ->title('Usuario acreditado')
+                            ->body('El usuario ' . $user['first_name'] . ' ' . $user['last_name'] . ' ha sido acreditado.')
+                            ->icon('heroicon-o-check')->color('success')
+                            ->send();
+                    }),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\RestoreAction::make()
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\BulkAction::make('bulk-accredited')
+                        ->icon('heroicon-o-check-circle')
+                        ->color('success')
+                        ->label('Acreditar usuarios')
+                        ->action(function($records) {
+                            foreach ($records as $record) {
+                                $record->update(['status' => Status::ACCREDITED->value]);
+                            }
+                            Notification::make()->body('Los usuarios seleccionados han sido acreditados..')->icon('heroicon-o-check')->color('success')->send();
+                        }),
                     Tables\Actions\DeleteBulkAction::make(),
                     Tables\Actions\RestoreBulkAction::make()
                 ]),
