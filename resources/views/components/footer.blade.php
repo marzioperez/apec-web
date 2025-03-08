@@ -18,7 +18,14 @@
                 </div>
             </div>
             <div class="col-span-4 flex sm:justify-end justify-center items-center">
-                <diV>
+                <div>
+                    @if(auth()->guest())
+                        @if(request()->route()->uri !== "sign-up")
+                            <div class="flex justify-center">
+                                <a href="{{route('sign-up')}}" class="btn btn-secondary">Expression of interest</a>
+                            </div>
+                        @endif
+                    @endif
                     <div class="flex justify-center space-x-3 sm:mt-5 mt-6">
                         <a href="https://www.facebook.com/APECCEOSummits?mibextid=ZbWKwL" target="_blank" class="social-icon">
                             <i class="fa-brands fa-facebook-f"></i>
